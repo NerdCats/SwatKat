@@ -6,6 +6,7 @@ import android.widget.Toast;
 import co.gobd.tracker.model.tracker.Location;
 import co.gobd.tracker.model.tracker.TrackerLocation;
 import co.gobd.tracker.network.RestClient;
+import co.gobd.tracker.utility.DeviceUtility;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,7 +23,7 @@ public class TrackerService {
         double lng = location.getLongitude();
 
         String name = "GO-FETCH-ASSET";
-        String userId = "ASS001";
+        String userId = DeviceUtility.getDeviceIMEI(context);
         final String message = "Location updated";
 
         Location locationModel = new Location(lat, lng);

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import co.gobd.tracker.R;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     Button btnStart;
     Button btnStop;
+    TextView tvImei;
 
 
     @Override
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setAction("Action", null).show();
             }
         });
+
 
 
         btnStart = (Button) findViewById(R.id.btn_start);

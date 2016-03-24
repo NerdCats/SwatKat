@@ -28,5 +28,6 @@
             android:id="@+id/btn_stop"
             android:text="Stop service"
             style="@style/StopButtonStyle" />
+
     </RelativeLayout>
 </ScrollView>

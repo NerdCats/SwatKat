@@ -1,5 +1,7 @@
 package co.gobd.tracker.model.tracker;
 
+
+
 /**
  * Created by tonmoy on 23-Feb-16.
  */
@@ -12,6 +14,7 @@ public class TrackerLocation {
         this.location = location;
         this.name = name;
         this.user_id = user_id;
+
     }
 
     public void setLocation(Location location) {
