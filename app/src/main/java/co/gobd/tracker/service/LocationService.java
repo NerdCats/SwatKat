@@ -14,6 +14,8 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import co.gobd.tracker.utility.Constant;
+
 
 public class LocationService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
@@ -23,6 +25,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation;
+    private String clientId;
 
 
     public LocationService() {
@@ -44,6 +47,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         mGoogleApiClient.connect();
+        clientId = intent.getStringExtra(Constant.KEY_CLIENT_ID);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -111,7 +115,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
                 " " + mCurrentLocation.getProvider() + " " + mCurrentLocation.getAccuracy();
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
-        TrackerService.sendLocation(mCurrentLocation, getApplicationContext());
+        TrackerService.sendLocation(mCurrentLocation, getApplicationContext(), clientId );
     }
 
 

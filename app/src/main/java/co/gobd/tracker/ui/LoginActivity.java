@@ -1,5 +1,6 @@
 package co.gobd.tracker.ui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import co.gobd.tracker.R;
 import co.gobd.tracker.callback.LoginCallback;
 import co.gobd.tracker.service.LoginService;
+import co.gobd.tracker.utility.Constant;
 
 public class LoginActivity extends AppCompatActivity implements LoginCallback {
 
@@ -27,7 +29,10 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
     public void onLoginSuccess(String clientId) {
 
         Toast.makeText(getApplicationContext(),"Login Successful!",Toast.LENGTH_SHORT).show();
-
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(Constant.KEY_CLIENT_ID, clientId);
+        startActivity(intent);
+        finish();
 
     }
 

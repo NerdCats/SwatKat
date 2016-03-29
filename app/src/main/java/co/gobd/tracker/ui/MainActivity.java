@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.service.LocationService;
+import co.gobd.tracker.utility.Constant;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     public void startLocationService() {
         Intent intent = new Intent(this, LocationService.class);
+        String clientId = getIntent().getStringExtra(Constant.KEY_CLIENT_ID);
+        intent.putExtra(Constant.KEY_CLIENT_ID,clientId);
         startService(intent);
     }
 
