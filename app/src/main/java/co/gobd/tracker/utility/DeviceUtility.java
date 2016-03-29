@@ -1,6 +1,5 @@
 package co.gobd.tracker.utility;
 
-import android.accounts.AccountManager;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
