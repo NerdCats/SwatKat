@@ -32,17 +32,4 @@ public class TrackerLocation {
         this.asset_id = asset_id;
 
     }
-
-
-
-
-    @Override
-    public String toString() {
-
-        Gson iamgonnakilltareq = new Gson();
-
-        String killtareq = iamgonnakilltareq.toJson(this);
-
-        return killtareq;
-    }
 }
