@@ -115,6 +115,4 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     }
 
 
-
-
 }
