@@ -15,5 +15,6 @@ public interface LoginApi {
     @FormUrlEncoded
     @POST(ApiEndpoint.PATH_SIGNIN)
     Call<Login> login(@Field("userName") String userName, @Field("password") String password,
-                      @Field("grantType") String grantType, @Field("clientID")String clientId );
+                      @Field("grant_type") String grantType, @Field("client_Id") String clientId,
+                      @Field("client_secret") String clientSecret);
 }

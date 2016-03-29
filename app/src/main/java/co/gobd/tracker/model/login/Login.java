@@ -13,6 +13,8 @@ public class Login {
 
     private final String clientId = "GoFetchWebApp";
 
+    private final String clientSecret = "GoFetchDevDroidApp@gobd";
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -36,5 +38,9 @@ public class Login {
 
     public String getClientId() {
         return clientId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
     }
 }

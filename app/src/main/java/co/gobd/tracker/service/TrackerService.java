@@ -1,7 +1,11 @@
 package co.gobd.tracker.service;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import co.gobd.tracker.model.tracker.Location;
 import co.gobd.tracker.model.tracker.TrackerLocation;
@@ -21,13 +25,15 @@ public class TrackerService {
 
         double lat = location.getLatitude();
         double lng = location.getLongitude();
-
+        List<Double> coordinates = new ArrayList<Double>();
+        coordinates.add(lng);
+        coordinates.add(lat);
         String name = "GO-FETCH-ASSET";
         String userId = DeviceUtility.getDeviceIMEI(context);
         final String message = "Location updated";
 
-        Location locationModel = new Location(lat, lng);
-        TrackerLocation trackerLocation = new TrackerLocation(locationModel, name, userId);
+        Location point = new Location("Point", coordinates);
+        TrackerLocation trackerLocation = new TrackerLocation(point, userId);
 
         Call<Void> call = new RestClientPing().getTrackerApi().sendLocation(trackerLocation);
         call.enqueue(new Callback<Void>() {

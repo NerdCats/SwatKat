@@ -1,19 +1,17 @@
 package co.gobd.tracker.model.tracker;
 
+import java.util.List;
+
 /**
  * Created by tonmoy on 23-Feb-16.
  */
 public class Location {
-    private double lat;
-    private double lon;
 
-    public Location(double lat, double lon) {
-        this.lat = lat;
-        this.lon = lon;
-    }
+    private String type;
+    private List<Double> coordinates;
 
-    @Override
-    public String toString() {
-        return "Location [lon = " + lon + ", lat = " + lat + "]";
+    public Location(String type, List<Double> coordinates) {
+        this.type = type;
+        this.coordinates = coordinates;
     }
 }
