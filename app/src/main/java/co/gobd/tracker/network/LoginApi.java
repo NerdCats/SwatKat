@@ -1,6 +1,9 @@
 package co.gobd.tracker.network;
 
+import com.google.gson.JsonObject;
+
 import co.gobd.tracker.config.ApiEndpoint;
+import co.gobd.tracker.model.login.AccessToken;
 import co.gobd.tracker.model.login.Login;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -14,7 +17,7 @@ public interface LoginApi {
 
     @FormUrlEncoded
     @POST(ApiEndpoint.PATH_SIGNIN)
-    Call<Login> login(@Field("userName") String userName, @Field("password") String password,
-                      @Field("grant_type") String grantType, @Field("client_Id") String clientId,
-                      @Field("client_secret") String clientSecret);
+    Call<AccessToken> login(@Field("userName") String userName, @Field("password") String password,
+                            @Field("grant_type") String grantType, @Field("client_Id") String clientId,
+                            @Field("client_secret") String clientSecret);
 }

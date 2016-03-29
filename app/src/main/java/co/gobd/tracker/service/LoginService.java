@@ -3,7 +3,7 @@ package co.gobd.tracker.service;
 import android.util.Log;
 
 import co.gobd.tracker.callback.LoginCallback;
-import co.gobd.tracker.model.login.Login;
+import co.gobd.tracker.model.login.AccessToken;
 import co.gobd.tracker.network.LoginApi;
 import co.gobd.tracker.network.RestClientLogin;
 import co.gobd.tracker.utility.Constant;
@@ -17,7 +17,9 @@ import retrofit2.Response;
  */
 public class LoginService {
 
+    private static final String TAG = "LoginService";
     LoginCallback loginCallback;
+    AccessToken accessToken;
 
     public LoginService(LoginCallback loginCallback) {
 
@@ -28,17 +30,22 @@ public class LoginService {
 
         LoginApi loginApi = new RestClientLogin().getLoginApi();
 
-        Call<Login> call = loginApi.login(uname, pass, Constant.grantType, Constant.clientId, Constant.clientSecret);
-        call.enqueue(new Callback<Login>() {
+        Call<AccessToken> call = loginApi.login(uname, pass, Constant.grantType, Constant.clientId, Constant.clientSecret);
+        call.enqueue(new Callback<AccessToken>() {
             @Override
-            public void onResponse(Call<Login> call, Response<Login> response) {
-                if(response.isSuccess()) {
-                    Log.i("TOKEN", response.body().toString());
+            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                if (response.isSuccess()) {
+                    try {
+                        String accessToken = response.body().getAccessToken();
+                        Log.i(TAG, accessToken);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<Login> call, Throwable t) {
+            public void onFailure(Call<AccessToken> call, Throwable t) {
 
             }
         });
