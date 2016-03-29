@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 import co.gobd.tracker.model.tracker.Location;
 import co.gobd.tracker.model.tracker.TrackerLocation;
-import co.gobd.tracker.network.RestClient;
+import co.gobd.tracker.network.RestClientPing;
 import co.gobd.tracker.utility.DeviceUtility;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +29,7 @@ public class TrackerService {
         Location locationModel = new Location(lat, lng);
         TrackerLocation trackerLocation = new TrackerLocation(locationModel, name, userId);
 
-        Call<Void> call = new RestClient().getTrackerApi().sendLocation(trackerLocation);
+        Call<Void> call = new RestClientPing().getTrackerApi().sendLocation(trackerLocation);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

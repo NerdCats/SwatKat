@@ -9,9 +9,9 @@ public class Login {
 
     private String password;
 
-    private String grantType;
+    private final String grantType = "password";
 
-    private String clientId;
+    private final String clientId = "GoFetchWebApp";
 
     public void setUserName(String userName) {
         this.userName = userName;
@@ -29,16 +29,9 @@ public class Login {
         return password;
     }
 
-    public void setGrantType(String grantType) {
-        this.grantType = grantType;
-    }
 
     public String getGrantType() {
         return grantType;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
     }
 
     public String getClientId() {

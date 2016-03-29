@@ -7,14 +7,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by tonmoy on 27-Dec-15.
+ * Created by fahad on 29-Mar-16.
  */
-public class RestClient {
-    private TrackerApi trackerApi;
+public class RestClientLogin {
 
-    public RestClient() {
+    private LoginApi loginApi;
 
-        // To check request log
+    public RestClientLogin() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -22,16 +21,13 @@ public class RestClient {
         httpClient.addInterceptor(interceptor);
 
         Retrofit client = new Retrofit.Builder()
-                .baseUrl(ApiEndpoint.BASE_URL)
+                .baseUrl(ApiEndpoint.PATH_LOGIN_BASE_URL)
                 .client(httpClient.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        trackerApi = client.create(TrackerApi.class);
+        loginApi = client.create(LoginApi.class);
     }
 
-
-    public TrackerApi getTrackerApi() {
-        return trackerApi;
-    }
+    public LoginApi getLoginApi() { return loginApi; }
 }
