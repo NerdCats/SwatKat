@@ -20,7 +20,7 @@ public class LoginService {
 
     private static final String TAG = "LoginService";
     LoginCallback loginCallback;
-    AccessToken accessToken;
+
 
     public LoginService(LoginCallback loginCallback) {
 
@@ -44,15 +44,16 @@ public class LoginService {
                         tokenCall.enqueue(new Callback<User>() {
                             @Override
                             public void onResponse(Call<User> call, Response<User> response) {
-                                if(response.isSuccess()){
+                                if (response.isSuccess()) {
                                     try {
                                         String clientId = response.body().getId();
-                                        Log.i(TAG, clientId);
+                                        if (clientId != null) {
+                                            loginCallback.onLoginSuccess(clientId);
+                                        }
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
                                 }
-
                             }
 
                             @Override
@@ -63,6 +64,9 @@ public class LoginService {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                }
+                else{
+                    loginCallback.onLoginFailure();
                 }
             }
 

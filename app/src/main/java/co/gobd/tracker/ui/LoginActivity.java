@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.callback.LoginCallback;
@@ -23,12 +24,17 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
 
 
     @Override
-    public void onLoginSuccess(String accessToken) {
+    public void onLoginSuccess(String clientId) {
+
+        Toast.makeText(getApplicationContext(),"Login Successful!",Toast.LENGTH_SHORT).show();
+
 
     }
 
     @Override
     public void onLoginFailure() {
+
+        Toast.makeText(getApplicationContext(),"Login Failed!",Toast.LENGTH_SHORT).show();
 
     }
 
