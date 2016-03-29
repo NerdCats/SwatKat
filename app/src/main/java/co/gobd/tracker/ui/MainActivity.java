@@ -41,8 +41,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnStart = (Button) findViewById(R.id.btn_start);
         btnStop = (Button) findViewById(R.id.btn_stop);
 
+
         btnStart.setOnClickListener(this);
         btnStop.setOnClickListener(this);
+
 
     }
 
@@ -121,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this, LocationService.class);
         stopService(intent);
     }
+
 
     @Override
     public void onClick(View v) {

@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+//client_Id=  GoFetchDevDroidApp   &client_secret=   GoFetchDevDroidApp%40gobd
 
 /**
  * Created by tonmoy on 27-Dec-15.

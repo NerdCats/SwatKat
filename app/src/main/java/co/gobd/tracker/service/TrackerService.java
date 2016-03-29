@@ -25,10 +25,9 @@ public class TrackerService {
 
         double lat = location.getLatitude();
         double lng = location.getLongitude();
-        List<Double> coordinates = new ArrayList<Double>();
+        List<Double> coordinates = new ArrayList<>();
         coordinates.add(lng);
         coordinates.add(lat);
-        String name = "GO-FETCH-ASSET";
         String userId = DeviceUtility.getDeviceIMEI(context);
         final String message = "Location updated";
 
