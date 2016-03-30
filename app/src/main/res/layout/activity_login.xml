@@ -37,6 +37,7 @@
         android:text="SIGN IN"
         android:onClick="onLoginButtonClick"
         android:id="@+id/button"
+        android:ems="10"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="86dp" />
