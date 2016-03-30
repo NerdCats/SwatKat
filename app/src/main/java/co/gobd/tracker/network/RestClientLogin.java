@@ -13,7 +13,7 @@ public class RestClientLogin {
 
     private LoginApi loginApi;
 
-    //FIXME: rest client should be only one. this is total shit!
+    //FIXME: rest client should be only one.
     public RestClientLogin() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

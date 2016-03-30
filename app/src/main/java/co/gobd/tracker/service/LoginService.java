@@ -37,9 +37,10 @@ public class LoginService {
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                 if (response.isSuccess()) {
                     try {
+                        //// FIXME: this shouldn't be nested like this. need to figure out an another way
                         String accessToken = response.body().getAccessToken();
                         Log.i(TAG, accessToken);
-                        final String bearer = "bearer "+accessToken; //FIXME: dumb code
+                        final String bearer = "bearer "+accessToken;
                         Call<User> tokenCall = loginApi.sendToken(bearer);
                         tokenCall.enqueue(new Callback<User>() {
                             @Override

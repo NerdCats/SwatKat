@@ -29,14 +29,6 @@
             android:text="Stop service"
             style="@style/StopButtonStyle" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="GO! BACK"
-            android:id="@+id/goback"
-            android:layout_below="@+id/btn_stop"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="103dp" />
 
     </RelativeLayout>
 </ScrollView>

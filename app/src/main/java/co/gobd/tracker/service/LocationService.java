@@ -48,7 +48,9 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     public int onStartCommand(Intent intent, int flags, int startId) {
         mGoogleApiClient.connect();
         clientId = intent.getStringExtra(Constant.KEY_CLIENT_ID);
-        return super.onStartCommand(intent, flags, startId);
+        //return super.onStartCommand(intent, flags, startId);
+
+        return START_STICKY;
     }
 
     @Override
