@@ -41,7 +41,7 @@ public class LoginService {
                         //// FIXME: this shouldn't be nested like this. need to figure out an another way
                         String accessToken = response.body().getAccessToken();
                         Log.i(TAG, accessToken);
-                        final String bearer = "bearer "+accessToken;
+                        final String bearer = "bearer " + accessToken;
                         Call<User> tokenCall = loginApi.sendToken(bearer);
                         tokenCall.enqueue(new Callback<User>() {
                             @Override
@@ -65,8 +65,7 @@ public class LoginService {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
-                else{
+                } else {
                     loginCallback.onLoginFailure();
                 }
             }

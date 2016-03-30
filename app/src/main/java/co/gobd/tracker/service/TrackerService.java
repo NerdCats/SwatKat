@@ -1,7 +1,6 @@
 package co.gobd.tracker.service;
 
 import android.content.Context;
-import android.graphics.Point;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.List;
 import co.gobd.tracker.model.tracker.Location;
 import co.gobd.tracker.model.tracker.TrackerLocation;
 import co.gobd.tracker.network.RestClientPing;
-import co.gobd.tracker.utility.DeviceUtility;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

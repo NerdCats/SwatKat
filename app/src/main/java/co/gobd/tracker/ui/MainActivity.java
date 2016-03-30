@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import co.gobd.tracker.R;
@@ -24,11 +23,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     Button btnStart;
     Button btnStop;
-    TextView tvImei;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -36,17 +34,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         checkLocationStatus();
 
-
         btnStart = (Button) findViewById(R.id.btn_start);
         btnStop = (Button) findViewById(R.id.btn_stop);
-
 
         btnStart.setOnClickListener(this);
         btnStop.setOnClickListener(this);
 
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,12 +67,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Checks if GPS is enabled or not.
      */
-    public void checkLocationStatus(){
+    public void checkLocationStatus() {
         Log.i(LOG_TAG, "Checking GPS Status");
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             Toast.makeText(this, "Location is enabled", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             showGPSDisabledAlertToUser();
         }
     }
@@ -87,13 +81,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Alert Dialog to enable GPS
      */
 
-    public void showGPSDisabledAlertToUser(){
+    public void showGPSDisabledAlertToUser() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("Location is disabled in your device. Would you like to enable it?")
                 .setCancelable(false)
                 .setPositiveButton("Enable",
-                        new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog, int id){
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
                                 Intent callGPSSettingIntent = new Intent(
                                         android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                 startActivity(callGPSSettingIntent);
@@ -116,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void startLocationService() {
         Intent intent = new Intent(this, LocationService.class);
         String clientId = getIntent().getStringExtra(Constant.KEY_CLIENT_ID);
-        intent.putExtra(Constant.KEY_CLIENT_ID,clientId);
+        intent.putExtra(Constant.KEY_CLIENT_ID, clientId);
         startService(intent);
     }
 

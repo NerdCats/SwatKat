@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
     @Override
     public void onLoginSuccess(String clientId) {
 
-        Toast.makeText(getApplicationContext(),"Login Successful!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(Constant.KEY_CLIENT_ID, clientId);
         startActivity(intent);
@@ -38,11 +38,11 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
     @Override
     public void onLoginFailure() {
 
-        Toast.makeText(getApplicationContext(),"Login Failed!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Login Failed!", Toast.LENGTH_SHORT).show();
 
     }
 
-    public void onLoginButtonClick(View view){
+    public void onLoginButtonClick(View view) {
 
         unameText = (EditText) findViewById(R.id.etUsername);
         String userName = unameText.getText().toString();

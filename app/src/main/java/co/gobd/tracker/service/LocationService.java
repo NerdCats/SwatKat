@@ -48,9 +48,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     public int onStartCommand(Intent intent, int flags, int startId) {
         mGoogleApiClient.connect();
         clientId = intent.getStringExtra(Constant.KEY_CLIENT_ID);
-        //return super.onStartCommand(intent, flags, startId);
-
-        return START_STICKY;
+        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
@@ -117,7 +115,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
                 " " + mCurrentLocation.getProvider() + " " + mCurrentLocation.getAccuracy();
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
-        TrackerService.sendLocation(mCurrentLocation, getApplicationContext(), clientId );
+        TrackerService.sendLocation(mCurrentLocation, getApplicationContext(), clientId);
     }
 
 
