@@ -16,13 +16,13 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
 
     private EditText unameText;
     private EditText upassText;
-    Intent Save;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Save = new Intent(this, MainActivity.class);
+        intent = new Intent(this, MainActivity.class);
     }
 
 
@@ -30,8 +30,8 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
     public void onLoginSuccess(String clientId) {
 
         Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
-        Save.putExtra(Constant.KEY_CLIENT_ID, clientId);
-        startActivity(Save);
+        intent.putExtra(Constant.KEY_CLIENT_ID, clientId);
+        startActivity(intent);
         finish();
 
     }
