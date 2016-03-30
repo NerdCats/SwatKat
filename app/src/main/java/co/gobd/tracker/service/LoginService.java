@@ -16,6 +16,7 @@ import retrofit2.Response;
 /**
  * Created by fahad on 28-Mar-16.
  */
+
 public class LoginService {
 
     private static final String TAG = "LoginService";
@@ -56,7 +57,6 @@ public class LoginService {
                                     }
                                 }
                             }
-
                             @Override
                             public void onFailure(Call<User> call, Throwable t) {
 
@@ -70,7 +70,6 @@ public class LoginService {
                     loginCallback.onLoginFailure();
                 }
             }
-
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
 
