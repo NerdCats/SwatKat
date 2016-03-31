@@ -11,6 +11,7 @@ import co.gobd.tracker.R;
 import co.gobd.tracker.callback.LoginCallback;
 import co.gobd.tracker.service.LoginService;
 import co.gobd.tracker.utility.Constant;
+import co.gobd.tracker.utility.SessionManager;
 
 public class LoginActivity extends AppCompatActivity implements LoginCallback {
 
@@ -18,10 +19,15 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
     private EditText upassText;
     Intent intent;
 
+    //SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //sessionManager = new SessionManager(getApplicationContext());
+
         intent = new Intent(this, MainActivity.class);
     }
 
@@ -29,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
     @Override
     public void onLoginSuccess(String clientId) {
 
+        //sessionManager.createLoginSession("GOFetchAsset", "gofetch@gobd.co");
         Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
         intent.putExtra(Constant.KEY_CLIENT_ID, clientId);
         startActivity(intent);
