@@ -1,20 +1,31 @@
-package co.gobd.tracker.network;
+package co.gobd.tracker.di.module;
+
+import javax.inject.Singleton;
 
 import co.gobd.tracker.config.ApiEndpoint;
+import co.gobd.tracker.network.TrackerApi;
+import dagger.Module;
+import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-//client_Id=  GoFetchDevDroidApp   &client_secret=   GoFetchDevDroidApp%40gobd
 
 /**
- * Created by tonmoy on 27-Dec-15.
+ * Created by tonmoy on 07-Apr-16.
  */
-public class RestClientPing {
-    private TrackerApi trackerApi;
+@Module
+public class ApiModule {
 
-    public RestClientPing() {
+    @Provides
+    @Singleton
+    public TrackerApi providesTrackerApi(Retrofit retrofit) {
+        return retrofit.create(TrackerApi.class);
+    }
 
+    @Provides
+    @Singleton
+    public Retrofit providesRetrofit() {
         // To check request log
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -28,11 +39,6 @@ public class RestClientPing {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        trackerApi = client.create(TrackerApi.class);
-    }
-
-
-    public TrackerApi getTrackerApi() {
-        return trackerApi;
+        return client;
     }
 }

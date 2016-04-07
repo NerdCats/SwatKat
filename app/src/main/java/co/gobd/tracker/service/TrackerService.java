@@ -6,9 +6,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import co.gobd.tracker.di.InjectHelper;
 import co.gobd.tracker.model.tracker.Location;
 import co.gobd.tracker.model.tracker.TrackerLocation;
-import co.gobd.tracker.network.RestClientPing;
+import co.gobd.tracker.network.TrackerApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,7 +22,14 @@ import retrofit2.Response;
  */
 public class TrackerService {
 
-    public static void sendLocation(android.location.Location location, final Context context, String clientId) {
+    @Inject
+    TrackerApi trackerApi;
+
+    public TrackerService() {
+        InjectHelper.getApiComponent().inject(this);
+    }
+
+    public void sendLocation(android.location.Location location, final Context context, String clientId) {
 
         double lat = location.getLatitude();
         double lng = location.getLongitude();
@@ -32,7 +42,7 @@ public class TrackerService {
         Location point = new Location("Point", coordinates);
         TrackerLocation trackerLocation = new TrackerLocation(point, userId);
 
-        Call<Void> call = new RestClientPing().getTrackerApi().sendLocation(trackerLocation);
+        Call<Void> call = trackerApi.sendLocation(trackerLocation);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

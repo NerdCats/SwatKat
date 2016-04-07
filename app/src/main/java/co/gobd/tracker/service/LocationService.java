@@ -18,7 +18,8 @@ import co.gobd.tracker.utility.Constant;
 
 
 public class LocationService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
-    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 300000;
+    //FIXME Change update interval to appropriate time
+    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 20000;
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
             UPDATE_INTERVAL_IN_MILLISECONDS / 2;
     private static final String LOG_TAG = LocationService.class.getSimpleName();
@@ -26,7 +27,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation;
     private String clientId;
-
+    private TrackerService trackerService;
 
     public LocationService() {
     }
@@ -40,7 +41,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i(LOG_TAG, "Location service started");
+        trackerService = new TrackerService();
         buildGoogleApiClient();
     }
 
@@ -115,7 +116,8 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
                 " " + mCurrentLocation.getProvider() + " " + mCurrentLocation.getAccuracy();
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
-        TrackerService.sendLocation(mCurrentLocation, getApplicationContext(), clientId);
+
+        trackerService.sendLocation(mCurrentLocation, getApplicationContext(), clientId);
     }
 
 
