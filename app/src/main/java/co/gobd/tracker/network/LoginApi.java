@@ -1,7 +1,5 @@
 package co.gobd.tracker.network;
 
-import com.google.gson.JsonObject;
-
 import co.gobd.tracker.config.ApiEndpoint;
 import co.gobd.tracker.model.login.AccessToken;
 import co.gobd.tracker.model.user.User;
