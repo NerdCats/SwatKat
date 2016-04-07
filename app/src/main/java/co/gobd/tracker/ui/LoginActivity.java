@@ -6,17 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.app.ProgressDialog;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.callback.LoginCallback;
 import co.gobd.tracker.service.LoginService;
 import co.gobd.tracker.utility.Constant;
-import co.gobd.tracker.utility.SessionManager;
 
 public class LoginActivity extends AppCompatActivity implements LoginCallback {
 
     private EditText unameText;
     private EditText upassText;
+    ProgressDialog loadingCircle = null;
     Intent intent;
 
     //SessionManager sessionManager;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
     @Override
     public void onLoginSuccess(String clientId) {
 
+        loadingCircle.dismiss();
         //sessionManager.createLoginSession("GOFetchAsset", "gofetch@gobd.co");
         Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
         intent.putExtra(Constant.KEY_CLIENT_ID, clientId);
@@ -60,5 +62,10 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
 
         LoginService loginService = new LoginService(this);
         loginService.login(userName, password);
+        loadingCircle = new ProgressDialog(view.getContext());
+        loadingCircle.setCancelable(true);
+        loadingCircle.setMessage(Constant.message);
+        loadingCircle.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        loadingCircle.show();
     }
 }
