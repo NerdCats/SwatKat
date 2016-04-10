@@ -38,6 +38,8 @@ public class TokenService {
                             SessionManager.setAssetId(context, assetId);
                         }
 
+                        tokenCallback.onTokenSucces();
+
                     }catch(Exception e) {
                         e.printStackTrace();
                     }

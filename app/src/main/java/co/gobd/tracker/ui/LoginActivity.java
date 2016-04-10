@@ -1,5 +1,6 @@
 package co.gobd.tracker.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,28 +19,26 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
     private EditText unameText;
     private EditText upassText;
     ProgressDialog loadingCircle = null;
-    Intent intent;
 
-    //SessionManager sessionManager;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //sessionManager = new SessionManager(getApplicationContext());
+        context = getApplicationContext();
 
-        intent = new Intent(this, MainActivity.class);
+
     }
 
 
     @Override
-    public void onLoginSuccess(String clientId) {
+    public void onLoginSuccess() {
 
         loadingCircle.dismiss();
-        //sessionManager.createLoginSession("GOFetchAsset", "gofetch@gobd.co");
         Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
-        intent.putExtra(Constant.KEY_CLIENT_ID, clientId);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
 
@@ -61,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
         String password = upassText.getText().toString();
 
         LoginService loginService = new LoginService(this);
-        loginService.login(userName, password);
+        loginService.login(userName, password, context);
         loadingCircle = new ProgressDialog(view.getContext());
         loadingCircle.setCancelable(true);
         loadingCircle.setMessage(Constant.message);
