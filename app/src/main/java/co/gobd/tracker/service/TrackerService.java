@@ -8,7 +8,7 @@ import java.util.List;
 
 import co.gobd.tracker.model.tracker.Location;
 import co.gobd.tracker.model.tracker.TrackerLocation;
-import co.gobd.tracker.network.RestClientPing;
+import co.gobd.tracker.network.LocationClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +32,7 @@ public class TrackerService {
         Location point = new Location("Point", coordinates);
         TrackerLocation trackerLocation = new TrackerLocation(point, userId);
 
-        Call<Void> call = new RestClientPing().getTrackerApi().sendLocation(trackerLocation);
+        Call<Void> call = new LocationClient().getLocationApi().sendLocation(trackerLocation);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

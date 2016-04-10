@@ -10,10 +10,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by tonmoy on 27-Dec-15.
  */
-public class RestClientPing {
-    private TrackerApi trackerApi;
+public class LocationClient {
+    private LocationApi locationApi;
 
-    public RestClientPing() {
+    public LocationClient() {
 
         // To check request log
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -28,11 +28,11 @@ public class RestClientPing {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        trackerApi = client.create(TrackerApi.class);
+        locationApi = client.create(LocationApi.class);
     }
 
 
-    public TrackerApi getTrackerApi() {
-        return trackerApi;
+    public LocationApi getLocationApi() {
+        return locationApi;
     }
 }

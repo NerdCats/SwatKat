@@ -11,10 +11,13 @@ import android.app.ProgressDialog;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.callback.LoginCallback;
+import co.gobd.tracker.callback.TokenCallback;
 import co.gobd.tracker.service.LoginService;
+import co.gobd.tracker.service.TokenService;
 import co.gobd.tracker.utility.Constant;
+import co.gobd.tracker.utility.SessionManager;
 
-public class LoginActivity extends AppCompatActivity implements LoginCallback {
+public class LoginActivity extends AppCompatActivity implements LoginCallback, TokenCallback {
 
     private EditText unameText;
     private EditText upassText;
@@ -36,11 +39,9 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
     @Override
     public void onLoginSuccess() {
 
-        loadingCircle.dismiss();
-        Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        String bearer = SessionManager.getBearer(context);
+        TokenService tokenService = new TokenService(this);
+        tokenService.getAssetId(bearer, context);
 
     }
 
@@ -66,5 +67,21 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback {
         loadingCircle.setMessage(Constant.message);
         loadingCircle.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         loadingCircle.show();
+    }
+
+    @Override
+    public void onTokenSucces() {
+
+        loadingCircle.dismiss();
+        Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
+    @Override
+    public void onTokenFailure() {
+
     }
 }
