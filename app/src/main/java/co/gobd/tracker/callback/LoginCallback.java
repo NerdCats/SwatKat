@@ -7,7 +7,7 @@ import co.gobd.tracker.model.login.AccessToken;
  */
 public interface LoginCallback {
 
-    void onLoginSuccess(String clientId);
+    void onLoginSuccess();
     void onLoginFailure();
 
 }
