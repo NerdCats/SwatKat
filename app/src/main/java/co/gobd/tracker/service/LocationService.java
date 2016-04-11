@@ -43,6 +43,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
         super.onCreate();
         Log.i(LOG_TAG, "Location service started");
         buildGoogleApiClient();
+        context = getApplicationContext();
     }
 
     @Override
