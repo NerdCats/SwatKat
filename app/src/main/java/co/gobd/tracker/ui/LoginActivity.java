@@ -95,5 +95,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, T
     @Override
     public void onTokenFailure() {
 
+        Toast.makeText(getApplicationContext(), "Login Failed!", Toast.LENGTH_SHORT).show();
+
     }
 }

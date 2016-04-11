@@ -30,6 +30,7 @@ public class TokenService {
                 if (response.isSuccess()){
                     try{
 
+                        //FIXME: Need to handle properly
                         String assetId = response.body().getId();
                         if (assetId!= null) {
                             tokenCallback.onTokenSucces(assetId);
@@ -40,6 +41,9 @@ public class TokenService {
                     }catch(Exception e) {
                         e.printStackTrace();
                     }
+                }
+                else{
+                    tokenCallback.onTokenFailure();
                 }
             }
 
