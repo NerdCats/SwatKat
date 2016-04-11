@@ -29,10 +29,13 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, T
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         context = getApplicationContext();
 
-
+        String assetId = SessionManager.getAssetId(context);
+        if(assetId!="default_asset_id"){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
 

@@ -22,6 +22,7 @@ public class SessionManager {
 
     }
 
+
     private static SharedPreferences getPrefs(Context context){
         return context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
