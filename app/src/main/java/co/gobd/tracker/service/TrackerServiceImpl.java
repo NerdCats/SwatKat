@@ -20,6 +20,7 @@ public class TrackerServiceImpl implements TrackerService {
 
     private Retrofit retrofit;
 
+    // Constructed by Dagger
     public TrackerServiceImpl(Retrofit retrofit) {
         this.retrofit = retrofit;
     }
