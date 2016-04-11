@@ -1,13 +1,10 @@
 package co.gobd.tracker.service;
 
-import android.content.Context;
-
 import co.gobd.tracker.callback.TokenCallback;
 import co.gobd.tracker.config.ApiEndpoint;
 import co.gobd.tracker.model.user.User;
 import co.gobd.tracker.network.AuthApi;
 import co.gobd.tracker.network.AuthClient;
-import co.gobd.tracker.utility.SessionManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.service.LocationService;
-import co.gobd.tracker.utility.Constant;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

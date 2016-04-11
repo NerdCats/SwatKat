@@ -1,7 +1,5 @@
 package co.gobd.tracker.callback;
 
-import co.gobd.tracker.model.login.AccessToken;
-
 /**
  * Created by fahad on 29-Mar-16.
  */

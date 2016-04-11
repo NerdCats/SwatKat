@@ -1,5 +1,6 @@
 package co.gobd.tracker.ui;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.app.ProgressDialog;
-
-import com.google.android.gms.fitness.data.Session;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.callback.LoginCallback;
