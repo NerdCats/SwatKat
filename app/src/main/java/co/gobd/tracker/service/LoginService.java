@@ -42,7 +42,7 @@ public class LoginService {
                         String accessToken = response.body().getAccessToken();
                         Log.i(TAG, accessToken);
                         final String bearer = "bearer " + accessToken;
-                        Call<User> tokenCall = loginApi.sendToken(bearer);
+                        Call<User> tokenCall = loginApi.getProfile(bearer);
                         tokenCall.enqueue(new Callback<User>() {
                             @Override
                             public void onResponse(Call<User> call, Response<User> response) {

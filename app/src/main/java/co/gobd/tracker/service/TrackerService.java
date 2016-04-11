@@ -1,60 +1,10 @@
 package co.gobd.tracker.service;
 
-import android.content.Context;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
-import co.gobd.tracker.di.InjectHelper;
-import co.gobd.tracker.model.tracker.Location;
-import co.gobd.tracker.model.tracker.TrackerLocation;
-import co.gobd.tracker.network.TrackerApi;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
+import co.gobd.tracker.callback.LocationCallback;
 
 /**
- * Created by tonmoy on 23-Feb-16.
+ * Created by tonmoy on 11-Apr-16.
  */
-public class TrackerService {
-
-    @Inject
-    TrackerApi trackerApi;
-
-    public TrackerService() {
-        InjectHelper.getApiComponent().inject(this);
-    }
-
-    public void sendLocation(android.location.Location location, final Context context, String clientId) {
-
-        double lat = location.getLatitude();
-        double lng = location.getLongitude();
-        List<Double> coordinates = new ArrayList<>();
-        coordinates.add(lng);
-        coordinates.add(lat);
-        String userId = clientId;
-        final String message = "Location updated";
-
-        Location point = new Location("Point", coordinates);
-        TrackerLocation trackerLocation = new TrackerLocation(point, userId);
-
-        Call<Void> call = trackerApi.sendLocation(trackerLocation);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccess()) {
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-
-            }
-        });
-    }
+public interface TrackerService {
+    void sendLocation(double latitude, double longitude, String assetId, LocationCallback callback);
 }

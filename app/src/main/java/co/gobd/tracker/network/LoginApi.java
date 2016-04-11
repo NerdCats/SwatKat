@@ -1,6 +1,6 @@
 package co.gobd.tracker.network;
 
-import co.gobd.tracker.config.ApiEndpoint;
+import co.gobd.tracker.config.BackendUrl;
 import co.gobd.tracker.model.login.AccessToken;
 import co.gobd.tracker.model.user.User;
 import retrofit2.Call;
@@ -16,12 +16,12 @@ import retrofit2.http.POST;
 public interface LoginApi {
 
     @FormUrlEncoded
-    @POST(ApiEndpoint.PATH_LOGIN)
+    @POST(BackendUrl.TaskCat.LOGIN)
     Call<AccessToken> login(@Field("userName") String userName, @Field("password") String password,
                             @Field("grant_type") String grantType, @Field("client_Id") String clientId,
                             @Field("client_secret") String clientSecret);
 
-    @GET(ApiEndpoint.PATH_ACCESS_TOKEN)
-    Call<User> sendToken(@Header("Authorization") String token);
+    @GET(BackendUrl.TaskCat.GET_PROFILE)
+    Call<User> getProfile(@Header("Authorization") String token);
 
 }
