@@ -23,7 +23,7 @@ public class TokenService {
         this.tokenCallback = tokenCallback;
     }
 
-    public void getAssetId(String bearer,final Context context){
+    public void getAssetId(String bearer){
         final AuthApi authApi = AuthClient.getApi(ApiEndpoint.PATH_LOGIN_BASE_URL, AuthApi.class);
 
         Call<User> call = authApi.sendToken(bearer);
@@ -35,10 +35,10 @@ public class TokenService {
 
                         String assetId = response.body().getId();
                         if (assetId!= null) {
-                            SessionManager.setAssetId(context, assetId);
+                            tokenCallback.onTokenSucces(assetId);
                         }
 
-                        tokenCallback.onTokenSucces();
+
 
                     }catch(Exception e) {
                         e.printStackTrace();

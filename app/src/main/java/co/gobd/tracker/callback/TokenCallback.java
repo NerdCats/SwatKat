@@ -5,6 +5,6 @@ package co.gobd.tracker.callback;
  */
 public interface TokenCallback {
 
-    void onTokenSucces();
+    void onTokenSucces(String assetId);
     void onTokenFailure();
 }

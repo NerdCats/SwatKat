@@ -31,7 +31,7 @@ public class LoginService {
         this.loginCallback = loginCallback;
     }
 
-    public void login(String uname, String pass,final Context context) {
+    public void login(String uname, String pass) {
 
         final AuthApi authApi = new AuthClient().getApi(ApiEndpoint.PATH_LOGIN_BASE_URL,
                 AuthApi.class);
@@ -47,11 +47,7 @@ public class LoginService {
                         String bearer = "bearer "+accessToken;
                         String refreshToken = response.body().getRefreshToken();
 
-                        SessionManager.setToken(context, accessToken);
-                        SessionManager.setBearer(context, bearer);
-                        SessionManager.setRefreshToken(context, refreshToken);
-
-                        loginCallback.onLoginSuccess();
+                        loginCallback.onLoginSuccess(accessToken, refreshToken, bearer);
 
                     } catch (Exception e) {
                         e.printStackTrace();

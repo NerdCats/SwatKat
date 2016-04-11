@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.app.ProgressDialog;
 
+import com.google.android.gms.fitness.data.Session;
+
 import co.gobd.tracker.R;
 import co.gobd.tracker.callback.LoginCallback;
 import co.gobd.tracker.callback.TokenCallback;
@@ -37,11 +39,22 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, T
 
 
     @Override
-    public void onLoginSuccess() {
+    public void onLoginSuccess(String accessToken, String refreshToken, String bearer) {
 
-        String bearer = SessionManager.getBearer(context);
+        unameText = (EditText) findViewById(R.id.etUsername);
+        String userName = unameText.getText().toString();
+
+        upassText = (EditText) findViewById(R.id.etPassword);
+        String password = upassText.getText().toString();
+
+        SessionManager.setUsername(context, userName);
+        SessionManager.setPassword(context, password);
+        SessionManager.setToken(context, accessToken);
+        SessionManager.setBearer(context, bearer);
+        SessionManager.setRefreshToken(context, refreshToken);
+
         TokenService tokenService = new TokenService(this);
-        tokenService.getAssetId(bearer, context);
+        tokenService.getAssetId(bearer);
 
     }
 
@@ -61,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, T
         String password = upassText.getText().toString();
 
         LoginService loginService = new LoginService(this);
-        loginService.login(userName, password, context);
+        loginService.login(userName, password);
         loadingCircle = new ProgressDialog(view.getContext());
         loadingCircle.setCancelable(true);
         loadingCircle.setMessage(Constant.message);
@@ -70,10 +83,11 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, T
     }
 
     @Override
-    public void onTokenSucces() {
+    public void onTokenSucces(String assetId) {
 
         loadingCircle.dismiss();
         Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
+        SessionManager.setAssetId(context, assetId);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
