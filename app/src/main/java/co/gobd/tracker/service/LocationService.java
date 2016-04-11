@@ -111,7 +111,6 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     public void onLocationChanged(Location location) {
 
         mCurrentLocation = location;
-
         String message = mCurrentLocation.getLatitude() + " " + mCurrentLocation.getLongitude() +
                 " " + mCurrentLocation.getProvider() + " " + mCurrentLocation.getAccuracy();
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();

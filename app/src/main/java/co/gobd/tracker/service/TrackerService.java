@@ -26,7 +26,7 @@ public class TrackerService {
         List<Double> coordinates = new ArrayList<>();
         coordinates.add(lng);
         coordinates.add(lat);
-        final String message = "Location updated";
+        final String message = "Location updated!";
 
         Location point = new Location("Point", coordinates);
         TrackerLocation trackerLocation = new TrackerLocation(point, assetId);
