@@ -1,6 +1,7 @@
 package co.gobd.tracker.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -14,18 +15,18 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-import co.gobd.tracker.utility.Constant;
+import co.gobd.tracker.utility.SessionManager;
 
 
 public class LocationService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
-    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 300000;
+    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 60000;
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
             UPDATE_INTERVAL_IN_MILLISECONDS / 2;
     private static final String LOG_TAG = LocationService.class.getSimpleName();
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation;
-    private String clientId;
+    Context context;
 
 
     public LocationService() {
@@ -42,12 +43,12 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
         super.onCreate();
         Log.i(LOG_TAG, "Location service started");
         buildGoogleApiClient();
+        context = getApplicationContext();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         mGoogleApiClient.connect();
-        clientId = intent.getStringExtra(Constant.KEY_CLIENT_ID);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -110,12 +111,12 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     public void onLocationChanged(Location location) {
 
         mCurrentLocation = location;
-
         String message = mCurrentLocation.getLatitude() + " " + mCurrentLocation.getLongitude() +
                 " " + mCurrentLocation.getProvider() + " " + mCurrentLocation.getAccuracy();
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
-        TrackerService.sendLocation(mCurrentLocation, getApplicationContext(), clientId);
+        String assetId = SessionManager.getAssetId(context);
+        TrackerService.sendLocation(mCurrentLocation, getApplicationContext(), assetId);
     }
 
 

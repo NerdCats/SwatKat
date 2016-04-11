@@ -5,16 +5,17 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+//client_Id=  GoFetchDevDroidApp   &client_secret=   GoFetchDevDroidApp%40gobd
 
 /**
- * Created by fahad on 29-Mar-16.
+ * Created by tonmoy on 27-Dec-15.
  */
-public class RestClientLogin {
+public class LocationClient {
+    private LocationApi locationApi;
 
-    private LoginApi loginApi;
+    public LocationClient() {
 
-    //FIXME: rest client should be only one.
-    public RestClientLogin() {
+        // To check request log
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -22,13 +23,16 @@ public class RestClientLogin {
         httpClient.addInterceptor(interceptor);
 
         Retrofit client = new Retrofit.Builder()
-                .baseUrl(ApiEndpoint.PATH_LOGIN_BASE_URL)
+                .baseUrl(ApiEndpoint.PATH_PING_BASE_URL)
                 .client(httpClient.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        loginApi = client.create(LoginApi.class);
+        locationApi = client.create(LocationApi.class);
     }
 
-    public LoginApi getLoginApi() { return loginApi; }
+
+    public LocationApi getLocationApi() {
+        return locationApi;
+    }
 }

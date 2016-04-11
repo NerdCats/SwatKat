@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 /**
  * Created by fahad on 28-Mar-16.
  */
-public interface LoginApi {
+public interface AuthApi {
 
     @FormUrlEncoded
     @POST(ApiEndpoint.PATH_LOGIN)
