@@ -6,7 +6,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "co.gobd.gorydeservice"
+        applicationId "co.gobd.tracker"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
