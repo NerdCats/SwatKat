@@ -9,12 +9,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by fahad on 29-Mar-16.
  */
-public class RestClientLogin {
+public class AuthClient {
 
-    private LoginApi loginApi;
+    public static <T> T getApi(String baseUrl, final Class<T> apiClass) {
 
-    //FIXME: rest client should be only one.
-    public RestClientLogin() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -22,13 +20,13 @@ public class RestClientLogin {
         httpClient.addInterceptor(interceptor);
 
         Retrofit client = new Retrofit.Builder()
-                .baseUrl(ApiEndpoint.PATH_LOGIN_BASE_URL)
+                .baseUrl(baseUrl)
                 .client(httpClient.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        loginApi = client.create(LoginApi.class);
-    }
+        T api = client.create(apiClass);
 
-    public LoginApi getLoginApi() { return loginApi; }
+        return api;
+    }
 }
