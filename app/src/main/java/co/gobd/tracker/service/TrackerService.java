@@ -7,4 +7,5 @@ import co.gobd.tracker.callback.LocationCallback;
  */
 public interface TrackerService {
     void sendLocation(double latitude, double longitude, String assetId, LocationCallback callback);
+
 }
