@@ -15,16 +15,11 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-
 import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.callback.LocationCallback;
-import co.gobd.tracker.utility.Constant;
-
-
-
 import co.gobd.tracker.utility.SessionManager;
 
 
@@ -146,8 +141,6 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
                     }
                 });
-
-
 
 
     }

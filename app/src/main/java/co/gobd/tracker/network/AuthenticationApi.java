@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 /**
  * Created by fahad on 28-Mar-16.
  */
-public interface AuthApi {
+public interface AuthenticationApi {
 
     @FormUrlEncoded
     @POST(BackendUrl.TaskCat.LOGIN)
@@ -22,6 +22,6 @@ public interface AuthApi {
                             @Field("client_secret") String clientSecret);
 
     @GET(BackendUrl.TaskCat.GET_PROFILE)
-    Call<User> getProfile(@Header("Authorization") String token);
+    Call<User> getUserProfile(@Header("Authorization") String token);
 
 }

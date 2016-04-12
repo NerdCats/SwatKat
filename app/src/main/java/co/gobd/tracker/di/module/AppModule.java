@@ -8,6 +8,8 @@ import android.preference.PreferenceManager;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import co.gobd.tracker.service.AuthenticationService;
+import co.gobd.tracker.service.AuthenticationServiceImpl;
 import co.gobd.tracker.service.TrackerService;
 import co.gobd.tracker.service.TrackerServiceImpl;
 import co.gobd.tracker.utility.Constant;
@@ -43,6 +45,12 @@ public class AppModule {
     @Singleton
     public TrackerService providesTrackerService(@Named(Constant.BackendName.SHADOW_CAT) Retrofit retrofit) {
         return new TrackerServiceImpl(retrofit);
+    }
+
+    @Provides
+    @Singleton
+    public AuthenticationService providesAuthenticationService(@Named(Constant.BackendName.TASK_CAT) Retrofit retrofit) {
+        return new AuthenticationServiceImpl(retrofit);
     }
 
 
