@@ -5,17 +5,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
+import co.gobd.tracker.network.AuthenticationApi;
+import co.gobd.tracker.network.TrackerApi;
 import co.gobd.tracker.service.AuthenticationService;
 import co.gobd.tracker.service.AuthenticationServiceImpl;
 import co.gobd.tracker.service.TrackerService;
 import co.gobd.tracker.service.TrackerServiceImpl;
-import co.gobd.tracker.utility.Constant;
 import dagger.Module;
 import dagger.Provides;
-import retrofit2.Retrofit;
 
 /**
  * Created by tonmoy on 11-Apr-16.
@@ -43,14 +42,14 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public TrackerService providesTrackerService(@Named(Constant.BackendName.SHADOW_CAT) Retrofit retrofit) {
-        return new TrackerServiceImpl(retrofit);
+    public TrackerService providesTrackerService(TrackerApi trackerApi) {
+        return new TrackerServiceImpl(trackerApi);
     }
 
     @Provides
     @Singleton
-    public AuthenticationService providesAuthenticationService(@Named(Constant.BackendName.TASK_CAT) Retrofit retrofit) {
-        return new AuthenticationServiceImpl(retrofit);
+    public AuthenticationService providesAuthenticationService(AuthenticationApi authenticationApi) {
+        return new AuthenticationServiceImpl(authenticationApi);
     }
 
 

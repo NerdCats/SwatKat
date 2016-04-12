@@ -17,13 +17,10 @@ import retrofit2.Retrofit;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     // Constructed by Dagger
-    private Retrofit retrofit;
-
     private AuthenticationApi authenticationApi;
 
-    public AuthenticationServiceImpl(Retrofit retrofit) {
-        this.retrofit = retrofit;
-        authenticationApi = this.retrofit.create(AuthenticationApi.class);
+    public AuthenticationServiceImpl(AuthenticationApi api) {
+        this.authenticationApi = api;
     }
 
     /**
