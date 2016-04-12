@@ -23,7 +23,7 @@ public class TokenService {
     public void getAssetId(String bearer){
         final AuthApi authApi = AuthClient.getApi(ApiEndpoint.PATH_LOGIN_BASE_URL, AuthApi.class);
 
-        Call<User> call = authApi.sendToken(bearer);
+        Call<User> call = authApi.getProfile(bearer);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
