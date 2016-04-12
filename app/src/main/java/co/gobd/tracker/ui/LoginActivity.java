@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, T
         if(assetId!="default_asset_id"){
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
