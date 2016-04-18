@@ -1,9 +1,9 @@
-package co.gobd.tracker.service.location;
+package co.gobd.tracker.service.tracker;
 
 /**
  * Created by tonmoy on 11-Apr-16.
  */
-public interface LocationCallback {
+public interface TrackerCallback {
     void onLocationSendSuccess();
     void onLocationSendFailure();
 }

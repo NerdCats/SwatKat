@@ -1,4 +1,4 @@
-package co.gobd.tracker.ui;
+package co.gobd.tracker.ui.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import co.gobd.tracker.R;
-import co.gobd.tracker.service.location.LocationService;
+import co.gobd.tracker.ui.service.LocationService;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

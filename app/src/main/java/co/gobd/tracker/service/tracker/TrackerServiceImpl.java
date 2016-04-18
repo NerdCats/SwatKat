@@ -1,12 +1,13 @@
-package co.gobd.tracker.service;
+package co.gobd.tracker.service.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import co.gobd.tracker.service.location.LocationCallback;
+import co.gobd.tracker.service.tracker.TrackerCallback;
 import co.gobd.tracker.model.tracker.Location;
 import co.gobd.tracker.model.tracker.TrackerLocation;
 import co.gobd.tracker.network.TrackerApi;
+import co.gobd.tracker.service.tracker.TrackerService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,7 +27,7 @@ public class TrackerServiceImpl implements TrackerService {
     }
 
     @Override
-    public void sendLocation(double latitude, double longitude, String assetId, final LocationCallback callback) {
+    public void sendLocation(double latitude, double longitude, String assetId, final TrackerCallback callback) {
 
         // Creates the POJO
         TrackerLocation trackerLocation = this.createLocationModel(latitude, longitude, assetId);

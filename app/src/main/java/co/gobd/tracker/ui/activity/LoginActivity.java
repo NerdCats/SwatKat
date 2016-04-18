@@ -1,4 +1,4 @@
-package co.gobd.tracker.ui;
+package co.gobd.tracker.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
