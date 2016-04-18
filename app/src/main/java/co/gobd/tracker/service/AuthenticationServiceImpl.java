@@ -9,7 +9,6 @@ import co.gobd.tracker.utility.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * Created by tonmoy on 12-Apr-16.
