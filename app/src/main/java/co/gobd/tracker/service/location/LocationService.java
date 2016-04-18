@@ -1,4 +1,4 @@
-package co.gobd.tracker.service;
+package co.gobd.tracker.service.location;
 
 import android.app.Service;
 import android.content.Context;
@@ -15,16 +15,11 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-
 import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
-import co.gobd.tracker.callback.LocationCallback;
-import co.gobd.tracker.utility.Constant;
-
-
-
+import co.gobd.tracker.service.TrackerService;
 import co.gobd.tracker.utility.SessionManager;
 
 
@@ -41,6 +36,9 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
     @Inject
     Context context;
+
+    @Inject
+    SessionManager sessionManager;
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -133,7 +131,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
         mCurrentLocation = location;
 
-        String assetId = SessionManager.getAssetId(context);
+        String assetId = sessionManager.getAssetId();
         trackerService.sendLocation(mCurrentLocation.getLatitude(),
                 mCurrentLocation.getLongitude(), assetId, new LocationCallback() {
                     @Override
@@ -146,8 +144,6 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
                     }
                 });
-
-
 
 
     }

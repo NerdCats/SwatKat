@@ -4,6 +4,8 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import co.gobd.tracker.config.BackendUrl;
+import co.gobd.tracker.network.AuthenticationApi;
+import co.gobd.tracker.network.TrackerApi;
 import co.gobd.tracker.utility.Constant;
 import dagger.Module;
 import dagger.Provides;
@@ -61,4 +63,19 @@ public class ApiModule {
                 .addConverterFactory(factory)
                 .build();
     }
+
+    @Singleton
+    @Provides
+    public TrackerApi providesTrackerApi(@Named(Constant.BackendName.SHADOW_CAT) Retrofit retrofit) {
+        return retrofit.create(TrackerApi.class);
+    }
+
+    @Singleton
+    @Provides
+    public AuthenticationApi providesAuthApi(@Named(Constant.BackendName.TASK_CAT) Retrofit retrofit) {
+        return retrofit.create(AuthenticationApi.class);
+    }
+
+
+
 }

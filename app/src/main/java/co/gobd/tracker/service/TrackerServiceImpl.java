@@ -3,14 +3,13 @@ package co.gobd.tracker.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.gobd.tracker.callback.LocationCallback;
+import co.gobd.tracker.service.location.LocationCallback;
 import co.gobd.tracker.model.tracker.Location;
 import co.gobd.tracker.model.tracker.TrackerLocation;
 import co.gobd.tracker.network.TrackerApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 /**
@@ -18,11 +17,12 @@ import retrofit2.Retrofit;
  */
 public class TrackerServiceImpl implements TrackerService {
 
-    private Retrofit retrofit;
+
+    private TrackerApi trackerApi;
 
     // Constructed by Dagger
-    public TrackerServiceImpl(Retrofit retrofit) {
-        this.retrofit = retrofit;
+    public TrackerServiceImpl(TrackerApi api) {
+        this.trackerApi = api;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class TrackerServiceImpl implements TrackerService {
         TrackerLocation trackerLocation = this.createLocationModel(latitude, longitude, assetId);
 
         // trackerLocation is sent as request Body
-        Call<Void> call = retrofit.create(TrackerApi.class).ping(trackerLocation);
+        Call<Void> call = trackerApi.ping(trackerLocation);
 
         call.enqueue(new Callback<Void>() {
             @Override

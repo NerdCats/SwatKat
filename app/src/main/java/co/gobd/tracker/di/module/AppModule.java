@@ -5,15 +5,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
+import co.gobd.tracker.network.AuthenticationApi;
+import co.gobd.tracker.network.TrackerApi;
+import co.gobd.tracker.service.AuthenticationService;
+import co.gobd.tracker.service.AuthenticationServiceImpl;
 import co.gobd.tracker.service.TrackerService;
 import co.gobd.tracker.service.TrackerServiceImpl;
 import co.gobd.tracker.utility.Constant;
+import co.gobd.tracker.utility.SessionManager;
+import co.gobd.tracker.utility.SessionManagerImpl;
 import dagger.Module;
 import dagger.Provides;
-import retrofit2.Retrofit;
 
 /**
  * Created by tonmoy on 11-Apr-16.
@@ -36,13 +40,25 @@ public class AppModule {
     @Provides
     @Singleton
     public SharedPreferences providesSharedPreferences(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context);
+        return context.getSharedPreferences(Constant.SharedPrefs.KEY_PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
 
     @Provides
     @Singleton
-    public TrackerService providesTrackerService(@Named(Constant.BackendName.SHADOW_CAT) Retrofit retrofit) {
-        return new TrackerServiceImpl(retrofit);
+    public TrackerService providesTrackerService(TrackerApi trackerApi) {
+        return new TrackerServiceImpl(trackerApi);
+    }
+
+    @Provides
+    @Singleton
+    public AuthenticationService providesAuthenticationService(AuthenticationApi authenticationApi) {
+        return new AuthenticationServiceImpl(authenticationApi);
+    }
+
+    @Provides
+    @Singleton
+    public SessionManager providesSessionManager(Context context, SharedPreferences sharedPreferences){
+        return new SessionManagerImpl(context, sharedPreferences);
     }
 
 

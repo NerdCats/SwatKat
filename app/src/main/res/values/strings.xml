@@ -2,4 +2,10 @@
     <string name="app_name">GO! Asset</string>
     <string name="action_settings">Settings</string>
     <string name="location_sent_successful">Location sent successfully</string>
+    <string name="message_auth_asset">Logging you in…</string>
+    <string name="message_auth_failed">Can\'t log you in, try again? </string>
+    <string name="message_connection_error">Can\'t connect, check your connection</string>
+    <string name="message_get_profile">Getting your profile…</string>
+    <string name="message_start_activity">Login successful, taking you home…</string>
+    <string name="message_profile_data_unavailable">Can\'t find profile info, try again?</string>
 </resources>

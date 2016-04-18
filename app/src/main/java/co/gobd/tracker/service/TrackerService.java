@@ -1,6 +1,6 @@
 package co.gobd.tracker.service;
 
-import co.gobd.tracker.callback.LocationCallback;
+import co.gobd.tracker.service.location.LocationCallback;
 
 /**
  * Created by tonmoy on 11-Apr-16.
