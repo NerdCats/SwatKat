@@ -4,6 +4,7 @@ package co.gobd.tracker.utility;
  * Created by fahad on 18-Apr-16.
  */
 public interface SessionManager {
+
     String getUsername();
 
     void setUsername(String input);

@@ -13,6 +13,9 @@ import co.gobd.tracker.service.AuthenticationService;
 import co.gobd.tracker.service.AuthenticationServiceImpl;
 import co.gobd.tracker.service.TrackerService;
 import co.gobd.tracker.service.TrackerServiceImpl;
+import co.gobd.tracker.utility.Constant;
+import co.gobd.tracker.utility.SessionManager;
+import co.gobd.tracker.utility.SessionManagerImpl;
 import dagger.Module;
 import dagger.Provides;
 
@@ -37,7 +40,7 @@ public class AppModule {
     @Provides
     @Singleton
     public SharedPreferences providesSharedPreferences(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context);
+        return context.getSharedPreferences(Constant.SharedPrefs.KEY_PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
 
     @Provides
@@ -50,6 +53,12 @@ public class AppModule {
     @Singleton
     public AuthenticationService providesAuthenticationService(AuthenticationApi authenticationApi) {
         return new AuthenticationServiceImpl(authenticationApi);
+    }
+
+    @Provides
+    @Singleton
+    public SessionManager providesSessionManager(Context context, SharedPreferences sharedPreferences){
+        return new SessionManagerImpl(context, sharedPreferences);
     }
 
 
