@@ -56,8 +56,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public SessionManager providesSessionManager(Context context, SharedPreferences sharedPreferences){
-        return new SessionManagerImpl(context, sharedPreferences);
+    public SessionManager providesSessionManager(SharedPreferences sharedPreferences){
+        return new SessionManagerImpl(sharedPreferences);
     }
 
 

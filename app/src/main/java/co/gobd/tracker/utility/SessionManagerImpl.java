@@ -1,6 +1,5 @@
 package co.gobd.tracker.utility;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
@@ -10,13 +9,11 @@ import android.content.SharedPreferences;
 public class SessionManagerImpl implements SessionManager {
 
     private SharedPreferences sharedPreferences;
-    private Context context;
     private SharedPreferences.Editor editor;
 
     //Constructed by DAGGER
 
-    public SessionManagerImpl(Context context, SharedPreferences prefs){
-        this.context = context;
+    public SessionManagerImpl(SharedPreferences prefs){
         this.sharedPreferences = prefs;
 
     }
