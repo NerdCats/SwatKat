@@ -5,7 +5,7 @@ import javax.inject.Singleton;
 import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.di.module.ApiModule;
 import co.gobd.tracker.di.module.AppModule;
-import co.gobd.tracker.service.LocationService;
+import co.gobd.tracker.service.location.LocationService;
 import co.gobd.tracker.ui.LoginActivity;
 import dagger.Component;
 

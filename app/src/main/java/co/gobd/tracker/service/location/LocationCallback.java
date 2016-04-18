@@ -1,4 +1,4 @@
-package co.gobd.tracker.callback;
+package co.gobd.tracker.service.location;
 
 /**
  * Created by tonmoy on 11-Apr-16.

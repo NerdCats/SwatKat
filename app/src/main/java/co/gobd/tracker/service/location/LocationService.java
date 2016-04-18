@@ -1,4 +1,4 @@
-package co.gobd.tracker.service;
+package co.gobd.tracker.service.location;
 
 import android.app.Service;
 import android.content.Context;
@@ -19,7 +19,7 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
-import co.gobd.tracker.callback.LocationCallback;
+import co.gobd.tracker.service.TrackerService;
 import co.gobd.tracker.utility.SessionManager;
 
 

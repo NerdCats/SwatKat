@@ -3,14 +3,13 @@ package co.gobd.tracker.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.gobd.tracker.callback.LocationCallback;
+import co.gobd.tracker.service.location.LocationCallback;
 import co.gobd.tracker.model.tracker.Location;
 import co.gobd.tracker.model.tracker.TrackerLocation;
 import co.gobd.tracker.network.TrackerApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 /**

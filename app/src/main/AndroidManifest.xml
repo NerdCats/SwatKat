@@ -21,7 +21,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <service
-            android:name=".service.LocationService"
+            android:name=".service.location.LocationService"
             android:enabled="true"
             android:exported="false" />
 
