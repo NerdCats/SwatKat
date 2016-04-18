@@ -1,96 +1,30 @@
 package co.gobd.tracker.utility;
 
-import java.util.HashMap;
-
-import android.content.Intent;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-
-import co.gobd.tracker.ui.LoginActivity;
-
 /**
- * Created by fahad on 31-Mar-16.
+ * Created by fahad on 18-Apr-16.
  */
+public interface SessionManager {
+    String getUsername();
 
-public class SessionManager {
+    void setUsername(String input);
 
-    private SharedPreferences sharedPreferences;
-    private static String PREFERENCE_NAME = "GOFetchAsset";
+    String getPassword();
 
-    public SessionManager(){
+    void setPassword(String input);
 
-    }
+    String getToken();
 
+    void setToken(String input);
 
-    private SharedPreferences getPrefs(Context context){
-        return context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-    }
+    String getBearer();
 
-    public String getUsername(Context context){
-        return getPrefs(context).getString(SharedPreferenceConstant.USERNAME, "default_username");
-    }
+    void setBearer(String input);
 
-    public void setUsername(Context context, String input){
-        SharedPreferences.Editor editor = getPrefs(context).edit();
+    String getRefreshToken();
 
-        editor.putString(SharedPreferenceConstant.USERNAME, input);
-        editor.apply();
-    }
+    void setRefreshToken(String input);
 
-    public String getPassword(Context context){
-        return getPrefs(context).getString(SharedPreferenceConstant.PASSWORD, "default_password");
-    }
+    String getAssetId();
 
-    public void setPassword(Context context, String input) {
-        SharedPreferences.Editor editor = getPrefs(context).edit();
-
-        editor.putString(SharedPreferenceConstant.PASSWORD, input);
-        editor.apply();
-    }
-
-    public String getToken(Context context){
-        return getPrefs(context).getString(SharedPreferenceConstant.TOKEN, "default_token");
-    }
-
-    public void setToken(Context context, String input) {
-        SharedPreferences.Editor editor = getPrefs(context).edit();
-
-        editor.putString(SharedPreferenceConstant.TOKEN, input);
-        editor.apply();
-    }
-
-    public String getBearer(Context context){
-        return getPrefs(context).getString(SharedPreferenceConstant.BEARER, "default_bearer");
-    }
-
-    public void setBearer(Context context, String input) {
-        SharedPreferences.Editor editor = getPrefs(context).edit();
-
-        editor.putString(SharedPreferenceConstant.BEARER, input);
-        editor.apply();
-    }
-
-    public String getRefreshToken(Context context){
-        return getPrefs(context).getString(SharedPreferenceConstant.REFRESH_TOKEN,
-                "default_refresh_token");
-    }
-
-    public void setRefreshToken(Context context, String input) {
-        SharedPreferences.Editor editor = getPrefs(context).edit();
-
-        editor.putString(SharedPreferenceConstant.REFRESH_TOKEN, input);
-        editor.apply();
-    }
-
-    public String getAssetId(Context context){
-        return getPrefs(context).getString(SharedPreferenceConstant.ASSET_ID, "default_asset_id");
-    }
-
-    public void setAssetId(Context context, String input) {
-        SharedPreferences.Editor editor = getPrefs(context).edit();
-
-        editor.putString(SharedPreferenceConstant.ASSET_ID, input);
-        editor.apply();
-    }
+    void setAssetId(String input);
 }

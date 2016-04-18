@@ -37,6 +37,9 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     @Inject
     Context context;
 
+    @Inject
+    SessionManager sessionManager;
+
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation;
@@ -128,7 +131,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
         mCurrentLocation = location;
 
-        String assetId = SessionManager.getAssetId(context);
+        String assetId = sessionManager.getAssetId();
         trackerService.sendLocation(mCurrentLocation.getLatitude(),
                 mCurrentLocation.getLongitude(), assetId, new LocationCallback() {
                     @Override

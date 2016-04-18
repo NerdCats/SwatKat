@@ -24,6 +24,9 @@ public class LoginActivity extends AppCompatActivity {
     @Inject
     Context context;
 
+    @Inject
+    SessionManager sessionManager;
+
     private EditText userNameText;
     private EditText passwordText;
 
@@ -36,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setupUi();
 
-        String assetId = SessionManager.getAssetId(context);
+        String assetId = sessionManager.getAssetId();
         if (assetId != "default_asset_id") {
             startMainActivity();
         }
@@ -52,11 +55,11 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void saveSessionData(String accessToken, String refreshToken, String bearer,
                                  String userName, String password) {
-        SessionManager.setUsername(context, userName);
-        SessionManager.setPassword(context, password);
-        SessionManager.setToken(context, accessToken);
-        SessionManager.setBearer(context, bearer);
-        SessionManager.setRefreshToken(context, refreshToken);
+        sessionManager.setUsername(userName);
+        sessionManager.setPassword(password);
+        sessionManager.setToken(accessToken);
+        sessionManager.setBearer(bearer);
+        sessionManager.setRefreshToken(refreshToken);
     }
 
 
@@ -76,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onLoadProfileSuccess(String assetId) {
                         // Saves the asset id into shared preference
-                        SessionManager.setAssetId(context, assetId);
+                        sessionManager.setAssetId(assetId);
                         startMainActivity();
                     }
 
