@@ -3,7 +3,6 @@ package co.gobd.tracker.di.module;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import javax.inject.Singleton;
 
@@ -57,8 +56,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public SessionManager providesSessionManager(Context context, SharedPreferences sharedPreferences){
-        return new SessionManagerImpl(context, sharedPreferences);
+    public SessionManager providesSessionManager(SharedPreferences sharedPreferences){
+        return new SessionManagerImpl(sharedPreferences);
     }
 
 
