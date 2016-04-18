@@ -1,6 +1,5 @@
-package co.gobd.tracker.service;
+package co.gobd.tracker.service.authentication;
 
-import co.gobd.tracker.callback.LoginCallback;
 import co.gobd.tracker.callback.ProfileCallback;
 import co.gobd.tracker.model.login.AccessToken;
 import co.gobd.tracker.model.user.User;
@@ -26,7 +25,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
      * Logs an asset in taskCat
      */
     @Override
-    public void login(String userName, String password, final LoginCallback callback) {
+    public void login(String userName, String password, final AuthenticationCallback callback) {
 
         Call<AccessToken> call = authenticationApi.login(userName, password,
                 Constant.Login.grantType,

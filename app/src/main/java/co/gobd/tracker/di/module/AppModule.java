@@ -3,14 +3,13 @@ package co.gobd.tracker.di.module;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import javax.inject.Singleton;
 
 import co.gobd.tracker.network.AuthenticationApi;
 import co.gobd.tracker.network.TrackerApi;
-import co.gobd.tracker.service.AuthenticationService;
-import co.gobd.tracker.service.AuthenticationServiceImpl;
+import co.gobd.tracker.service.authentication.AuthenticationService;
+import co.gobd.tracker.service.authentication.AuthenticationServiceImpl;
 import co.gobd.tracker.service.TrackerService;
 import co.gobd.tracker.service.TrackerServiceImpl;
 import co.gobd.tracker.utility.Constant;

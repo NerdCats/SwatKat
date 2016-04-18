@@ -12,9 +12,9 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
-import co.gobd.tracker.callback.LoginCallback;
+import co.gobd.tracker.service.authentication.AuthenticationCallback;
 import co.gobd.tracker.callback.ProfileCallback;
-import co.gobd.tracker.service.AuthenticationService;
+import co.gobd.tracker.service.authentication.AuthenticationService;
 import co.gobd.tracker.utility.SessionManager;
 
 public class LoginActivity extends AppCompatActivity {
@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         final String password = passwordText.getText().toString();
 
 
-        authService.login(userName, password, new LoginCallback() {
+        authService.login(userName, password, new AuthenticationCallback() {
             @Override
             public void onLoginSuccess(String accessToken, String refreshToken, String bearer) {
                 saveSessionData(accessToken, refreshToken, bearer, userName, password);
