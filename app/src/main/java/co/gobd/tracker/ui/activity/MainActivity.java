@@ -53,10 +53,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
 
-
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isLocationServiceRunning(LocationService.class)){
+            ibToggleStartStop.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
+        }
+        else{
+            ibToggleStartStop.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
+        }
     }
 
     @Override
