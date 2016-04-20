@@ -3,42 +3,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorPrimary"
     tools:context=".ui.activity.LoginActivity">
 
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="username"
-        android:ems="10"
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/etUsername"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="132dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="password"
-        android:ems="10"
-        android:id="@+id/etPassword"
+        android:drawableLeft="@drawable/ic_person_white_24dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_person_white_24dp"
+        android:hint="@string/username"
+        android:inputType="textNoSuggestions|textMultiLine"
+        android:textSize="18sp"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        app:met_textColorHint="@color/white"
+        app:met_textColor="@color/white"
+        app:met_floatingLabelTextColor="@color/white"
+        app:met_underlineColor="@color/white"
+        app:met_baseColor="@color/white"
+        app:met_clearButton="true"
+        app:met_floatingLabel="highlight"
+        app:met_primaryColor="@color/white" />
+
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/etPassword"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_lock_white_24dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_lock_white_24dp"
+        android:hint="@string/password"
+        android:layout_below="@id/etUsername"
+        android:inputType="textNoSuggestions|textMultiLine"
+        android:textSize="18sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        app:met_floatingLabelTextColor="@color/white"
+        app:met_textColor="@color/white"
+        app:met_textColorHint="@color/white"
+        app:met_underlineColor="@color/white"
+        app:met_baseColor="@color/white"
+        app:met_clearButton="true"
+        app:met_floatingLabel="highlight"
+        app:met_primaryColor="@color/white" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="SIGN IN"
+        style="@style/ButtonLoginWidthDarkPrimaryColor"
         android:onClick="onLoginButtonClick"
         android:id="@+id/button"
-        android:ems="10"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="86dp" />
+        android:layout_below="@id/etPassword" />
 </RelativeLayout>

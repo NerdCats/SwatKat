@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             ibToggleStartStop.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
         }
         else{
+            startLocationService();
             ibToggleStartStop.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
         }
     }

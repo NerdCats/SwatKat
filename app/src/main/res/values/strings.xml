@@ -10,4 +10,6 @@
     <string name="message_profile_data_unavailable">Can\'t find profile info, try again?</string>
     <string name="toggle_on">On</string>
     <string name="toggle_off">Off</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>
