@@ -1,5 +1,7 @@
 package co.gobd.tracker.ui.activity;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
@@ -12,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import co.gobd.tracker.R;
@@ -20,8 +23,8 @@ import co.gobd.tracker.ui.service.LocationService;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    Button btnStart;
-    Button btnStop;
+
+    ImageButton ib_toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         checkLocationStatus();
 
-        btnStart = (Button) findViewById(R.id.btn_start);
-        btnStop = (Button) findViewById(R.id.btn_stop);
+        ib_toggle  = (ImageButton) findViewById(R.id.ib_toggle_location);
+        ib_toggle.setOnClickListener(this);
 
-        btnStart.setOnClickListener(this);
-        btnStop.setOnClickListener(this);
 
     }
 
@@ -100,6 +101,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

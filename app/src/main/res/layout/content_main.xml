@@ -18,13 +18,14 @@
         tools:context=".ui.activity.MainActivity"
         tools:showIn="@layout/activity_main">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:src="@drawable/ic_play_arrow_black_24dp"
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/ib_toggle_location"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
+            android:background="@null"
+            android:src="@drawable/ic_play_circle_filled_green_24dp"/>
 
 
 

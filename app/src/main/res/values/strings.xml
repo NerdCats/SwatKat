@@ -8,4 +8,6 @@
     <string name="message_get_profile">Getting your profile…</string>
     <string name="message_start_activity">Login successful, taking you home…</string>
     <string name="message_profile_data_unavailable">Can\'t find profile info, try again?</string>
+    <string name="toggle_on">On</string>
+    <string name="toggle_off">Off</string>
 </resources>
