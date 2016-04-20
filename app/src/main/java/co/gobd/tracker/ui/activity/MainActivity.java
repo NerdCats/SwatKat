@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +21,11 @@ import android.widget.Toast;
 import co.gobd.tracker.R;
 import co.gobd.tracker.ui.service.LocationService;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    ImageButton ib_toggle;
+    ImageButton ibToggleStartStop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +37,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         checkLocationStatus();
 
-        ib_toggle  = (ImageButton) findViewById(R.id.ib_toggle_location);
-        ib_toggle.setOnClickListener(this);
+        ibToggleStartStop = (ImageButton) findViewById(R.id.ib_toggle_location);
+
+        ibToggleStartStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isLocationServiceRunning(LocationService.class)){
+                    stopLocationService();
+                    ibToggleStartStop.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
+                }
+                else{
+                    startLocationService();
+                    ibToggleStartStop.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
+                }
+
+            }
+        });
+
+
 
 
     }
@@ -103,7 +120,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alert.show();
     }
 
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
+    /**
+     * Checks if the service is running or not
+     *
+     * @param serviceClass
+     * @return
+     */
+
+    private boolean isLocationServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
@@ -127,18 +151,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         stopService(intent);
     }
 
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.btn_start:
-                startLocationService();
-                break;
-
-            case R.id.btn_stop:
-                stopLocationService();
-                break;
-        }
-    }
 }
