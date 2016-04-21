@@ -59,11 +59,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (isLocationServiceRunning(LocationService.class)){
-            ibToggleStartStop.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
+            ibToggleStartStop.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
         }
         else{
-            startLocationService();
-            ibToggleStartStop.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
+            ibToggleStartStop.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
         }
     }
 
