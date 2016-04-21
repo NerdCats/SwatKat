@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/background"
+
 
     tools:context=".ui.activity.LoginActivity">
 
@@ -25,14 +25,14 @@
         android:textSize="18sp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        app:met_textColorHint="@color/white"
-        app:met_textColor="@color/white"
-        app:met_floatingLabelTextColor="@color/white"
-        app:met_underlineColor="@color/white"
-        app:met_baseColor="@color/white"
+        app:met_textColorHint="@color/black"
+        app:met_textColor="@color/black"
+        app:met_floatingLabelTextColor="@color/black"
+        app:met_underlineColor="@color/black"
+        app:met_baseColor="@color/black"
         app:met_clearButton="true"
         app:met_floatingLabel="highlight"
-        app:met_primaryColor="@color/white" />
+        app:met_primaryColor="@color/black" />
 
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -48,14 +48,14 @@
         android:textSize="18sp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        app:met_floatingLabelTextColor="@color/white"
-        app:met_textColor="@color/white"
-        app:met_textColorHint="@color/white"
-        app:met_underlineColor="@color/white"
-        app:met_baseColor="@color/white"
+        app:met_textColorHint="@color/black"
+        app:met_textColor="@color/black"
+        app:met_floatingLabelTextColor="@color/black"
+        app:met_underlineColor="@color/black"
+        app:met_baseColor="@color/black"
         app:met_clearButton="true"
         app:met_floatingLabel="highlight"
-        app:met_primaryColor="@color/white" />
+        app:met_primaryColor="@color/black" />
 
     <Button
         android:text="SIGN IN"
