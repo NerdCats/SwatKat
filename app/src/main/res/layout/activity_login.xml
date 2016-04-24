@@ -8,8 +8,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-
-
     tools:context=".ui.activity.LoginActivity">
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -33,7 +31,6 @@
         app:met_clearButton="true"
         app:met_floatingLabel="highlight"
         app:met_primaryColor="@color/black" />
-
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/etPassword"
