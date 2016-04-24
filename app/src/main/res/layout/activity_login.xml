@@ -65,9 +65,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/button"
-        android:text="don't have an account? sign up"
+        android:text="Don't have an account? Sign up here"
         android:clickable="true"
         android:onClick="onSignUpClick"/>
 </RelativeLayout>
