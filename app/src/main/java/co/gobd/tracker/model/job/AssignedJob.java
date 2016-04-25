@@ -7,4 +7,10 @@ import java.util.List;
  */
 public class AssignedJob {
     List<JobModel> jobModelList;
+
+    public AssignedJob(List<JobModel> jobModelList){
+
+        this.jobModelList = jobModelList;
+
+    }
 }

@@ -19,12 +19,22 @@ import co.gobd.tracker.model.job.JobModel;
  */
 public class AssignedJobDeserializer implements JsonDeserializer<AssignedJob> {
 
+    private AssignedJob assignedJob;
+
+
     @Override
     public AssignedJob deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 
-        List<JobModel> jobModelList = new ArrayList<>();
-
         final JsonObject jsonObject = json.getAsJsonObject();
-        final JsonArray data = jsonObject.getAsJsonArray("data");
+        final JsonArray jsonArray = jsonObject.getAsJsonArray("data");
+        List<JobModel> jobModels = new ArrayList<>();
+
+        for (int i = 0; i < jsonArray.size(); i++ ) {
+            JobModel jobModel = context.deserialize(jsonArray.get(i), JobModel.class);
+            jobModels.add(jobModel);
+        }
+
+        assignedJob = new AssignedJob(jobModels);
+        return assignedJob;
     }
 }

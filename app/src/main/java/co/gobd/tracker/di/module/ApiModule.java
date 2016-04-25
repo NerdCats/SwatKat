@@ -1,12 +1,19 @@
 package co.gobd.tracker.di.module;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import co.gobd.tracker.config.BackendUrl;
+import co.gobd.tracker.model.job.AssignedJob;
+import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.network.AuthenticationApi;
 import co.gobd.tracker.network.TrackerApi;
 import co.gobd.tracker.utility.Constant;
+import co.gobd.tracker.utility.deserializer.AssignedJobDeserializer;
+import co.gobd.tracker.utility.deserializer.JobModelDeserializer;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -36,9 +43,20 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    public GsonConverterFactory providesGsonConverterFactory() {
-        return GsonConverterFactory.create();
+    public Gson providesGson()
+    {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(JobModel.class, new JobModelDeserializer());
+        gsonBuilder.registerTypeAdapter(AssignedJob.class, new AssignedJobDeserializer());
+        return gsonBuilder.create();
     }
+
+    @Provides
+    @Singleton
+    public GsonConverterFactory providesGsonConverterFactory(Gson gson) {
+        return GsonConverterFactory.create(gson);
+    }
+
 
     @Provides
     @Singleton
