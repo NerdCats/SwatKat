@@ -7,9 +7,12 @@ import android.content.SharedPreferences;
 import javax.inject.Singleton;
 
 import co.gobd.tracker.network.AuthenticationApi;
+import co.gobd.tracker.network.JobApi;
 import co.gobd.tracker.network.TrackerApi;
 import co.gobd.tracker.service.authentication.AuthenticationService;
 import co.gobd.tracker.service.authentication.AuthenticationServiceImpl;
+import co.gobd.tracker.service.job.JobService;
+import co.gobd.tracker.service.job.JobServiceImpl;
 import co.gobd.tracker.service.tracker.TrackerService;
 import co.gobd.tracker.service.tracker.TrackerServiceImpl;
 import co.gobd.tracker.utility.Constant;
@@ -58,6 +61,12 @@ public class AppModule {
     @Singleton
     public SessionManager providesSessionManager(SharedPreferences sharedPreferences){
         return new SessionManagerImpl(sharedPreferences);
+    }
+
+    @Provides
+    @Singleton
+    public JobService providesJobService(JobApi jobApi) {
+        return new JobServiceImpl(jobApi);
     }
 
 

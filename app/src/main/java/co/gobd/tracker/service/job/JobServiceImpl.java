@@ -13,7 +13,7 @@ public class JobServiceImpl implements JobService {
 
     private JobApi jobApi;
 
-    JobServiceImpl(JobApi jobApi) {
+    public JobServiceImpl(JobApi jobApi) {
 
         this.jobApi = jobApi;
     }
@@ -27,7 +27,7 @@ public class JobServiceImpl implements JobService {
             @Override
             public void onResponse(Call<AssignedJob> call, Response<AssignedJob> response) {
                 if(response.isSuccess()){
-                    callback.onGetJobSuccess();
+                    callback.onGetJobSuccess(response.body());
                 } else{
                     callback.onGetJobFailure();
                 }

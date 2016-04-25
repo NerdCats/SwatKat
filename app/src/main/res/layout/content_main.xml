@@ -27,6 +27,15 @@
             android:background="@null"
             android:src="@drawable/ic_play_circle_filled_green_24dp"/>
 
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/bt_job"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/ib_toggle_location"
+            android:text="get job"
+            android:onClick="onGetJobButtonClick"/>
+
 
 
 

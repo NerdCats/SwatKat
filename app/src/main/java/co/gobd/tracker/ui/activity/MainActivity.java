@@ -159,4 +159,10 @@ public class MainActivity extends AppCompatActivity {
         stopService(intent);
     }
 
+    public void onGetJobButtonClick(View view){
+        Intent intent = new Intent(this, JobActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }
