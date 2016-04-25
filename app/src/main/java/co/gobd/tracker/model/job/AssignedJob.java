@@ -8,9 +8,24 @@ import java.util.List;
 public class AssignedJob {
     List<JobModel> jobModelList;
 
-    public AssignedJob(List<JobModel> jobModelList){
+    public AssignedJob(List<JobModel> jobModelList) {
 
         this.jobModelList = jobModelList;
 
+    }
+
+    @Override
+    public String toString() {
+        return "AssignedJob{" +
+                "jobModelList=" + jobModelList +
+                '}';
+    }
+
+    public List<JobModel> getJobModelList() {
+        return jobModelList;
+    }
+
+    public void setJobModelList(List<JobModel> jobModelList) {
+        this.jobModelList = jobModelList;
     }
 }

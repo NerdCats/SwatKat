@@ -1,5 +1,7 @@
 package co.gobd.tracker.service.job;
 
+import android.util.Log;
+
 import co.gobd.tracker.model.job.AssignedJob;
 import co.gobd.tracker.network.JobApi;
 import retrofit2.Call;
@@ -11,6 +13,7 @@ import retrofit2.Response;
  */
 public class JobServiceImpl implements JobService {
 
+    private static final String TAG = JobServiceImpl.class.getSimpleName();
     private JobApi jobApi;
 
     public JobServiceImpl(JobApi jobApi) {
@@ -27,6 +30,7 @@ public class JobServiceImpl implements JobService {
             @Override
             public void onResponse(Call<AssignedJob> call, Response<AssignedJob> response) {
                 if(response.isSuccess()){
+                    Log.i(TAG, response.body().toString());
                     callback.onGetJobSuccess(response.body());
                 } else{
                     callback.onGetJobFailure();

@@ -26,4 +26,13 @@ public class DeliveryTask extends JobTask{
     }
 
     public Location getTo(){return To;}
+
+    @Override
+    public String toString() {
+        return "DeliveryTask{" +
+                "JobTaskStateString='" + JobTaskStateString + '\'' +
+                ", State='" + State + '\'' +
+                ", To=" + To +
+                '}';
+    }
 }

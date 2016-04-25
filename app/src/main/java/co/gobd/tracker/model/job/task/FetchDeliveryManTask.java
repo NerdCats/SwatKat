@@ -21,4 +21,12 @@ public class FetchDeliveryManTask extends JobTask {
     public String getState() {
         return State;
     }
+
+    @Override
+    public String toString() {
+        return "FetchDeliveryManTask{" +
+                "JobTaskStateString='" + JobTaskStateString + '\'' +
+                ", State='" + State + '\'' +
+                '}';
+    }
 }

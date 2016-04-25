@@ -1,5 +1,7 @@
 package co.gobd.tracker.model.job;
 
+import java.util.Arrays;
+
 /**
  * Created by fahad on 4/25/16.
  */
@@ -23,6 +25,6 @@ public class Point {
 
     @Override
     public String toString() {
-        return "Point [type = " + type + ", coordinates = " + coordinates.toString() + "]";
+        return "Point [type = " + type + ", coordinates = " + Arrays.toString(coordinates) + "]";
     }
 }

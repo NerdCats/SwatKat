@@ -1,7 +1,7 @@
 package co.gobd.tracker.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import javax.inject.Inject;
 
@@ -31,17 +31,17 @@ public class JobActivity extends AppCompatActivity {
         String assetId = sessionManager.getAssetId();
         jobService.getAssignedJobList(bearer, assetId, new JobCallback() {
             @Override
-            public void onConnectionError() {
-
-            }
-
-            @Override
             public void onGetJobSuccess(AssignedJob assignedJob) {
 
             }
 
             @Override
             public void onGetJobFailure() {
+
+            }
+
+            @Override
+            public void onConnectionError() {
 
             }
         });
