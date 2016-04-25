@@ -12,5 +12,5 @@
     <string name="toggle_off">Off</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="don't have an account? sign up">Signup</string>
+    <string name="signup">Don\'t have an account? Sign up</string>
 </resources>
