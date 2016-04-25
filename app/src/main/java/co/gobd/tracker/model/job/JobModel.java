@@ -18,4 +18,12 @@ public class JobModel {
         Tasks = tasks;
     }
 
+    @Override
+    public String toString() {
+        return "JobModel{" +
+                "Name='" + Name + '\'' +
+                ", State='" + State + '\'' +
+                ", Tasks=" + Tasks +
+                '}';
+    }
 }

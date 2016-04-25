@@ -27,4 +27,13 @@ public class PackagePickupTask extends JobTask {
     }
 
     public Location getFrom() { return From; }
+
+    @Override
+    public String toString() {
+        return "PackagePickupTask{" +
+                "JobTaskStateString='" + JobTaskStateString + '\'' +
+                ", State='" + State + '\'' +
+                ", From=" + From +
+                '}';
+    }
 }

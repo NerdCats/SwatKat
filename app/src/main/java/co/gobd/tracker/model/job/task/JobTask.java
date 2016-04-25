@@ -20,4 +20,12 @@ public class JobTask {
     public String getName() {
         return Name;
     }
+
+    @Override
+    public String toString() {
+        return "JobTask{" +
+                "Type='" + Type + '\'' +
+                ", Name='" + Name + '\'' +
+                '}';
+    }
 }

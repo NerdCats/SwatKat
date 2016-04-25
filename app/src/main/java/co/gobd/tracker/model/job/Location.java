@@ -28,4 +28,12 @@ public class Location {
     public void setAddress(String address) {
         Address = address;
     }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "Point=" + Point +
+                ", Address='" + Address + '\'' +
+                '}';
+    }
 }
