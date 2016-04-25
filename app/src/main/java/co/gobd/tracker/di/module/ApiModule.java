@@ -47,8 +47,8 @@ public class ApiModule {
     public Gson providesGson()
     {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(JobModel.class, new JobModelDeserializer());
         gsonBuilder.registerTypeAdapter(AssignedJob.class, new AssignedJobDeserializer());
+        gsonBuilder.registerTypeAdapter(JobModel.class, new JobModelDeserializer());
         return gsonBuilder.create();
     }
 

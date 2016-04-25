@@ -34,8 +34,7 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/ib_toggle_location"
             android:text="get job"
-            android:onClick="onGetJobButtonClick"
-            android:visibility="gone"/>
+            android:onClick="onGetJobButtonClick" />
 
 
 

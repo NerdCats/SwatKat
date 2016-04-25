@@ -31,6 +31,11 @@ public class JobActivity extends AppCompatActivity {
         String assetId = sessionManager.getAssetId();
         jobService.getAssignedJobList(bearer, assetId, new JobCallback() {
             @Override
+            public void onConnectionError() {
+
+            }
+
+            @Override
             public void onGetJobSuccess(AssignedJob assignedJob) {
 
             }

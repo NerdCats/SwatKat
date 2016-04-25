@@ -35,7 +35,7 @@ public class JobServiceImpl implements JobService {
 
             @Override
             public void onFailure(Call<AssignedJob> call, Throwable t) {
-
+                callback.onConnectionError();
             }
         });
 
