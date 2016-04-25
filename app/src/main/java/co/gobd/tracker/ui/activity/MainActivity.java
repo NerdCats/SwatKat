@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnStart;
     Button btnStop;
 
+    Button btnMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -35,9 +37,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnStart = (Button) findViewById(R.id.btn_start);
         btnStop = (Button) findViewById(R.id.btn_stop);
+        btnMap =  (Button) findViewById(R.id.btn_map);
 
         btnStart.setOnClickListener(this);
         btnStop.setOnClickListener(this);
+        btnMap.setOnClickListener(this);
 
     }
 
@@ -127,6 +131,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_stop:
                 stopLocationService();
+                break;
+
+            case R.id.btn_map:
+                startActivity(new Intent(MainActivity.this, JobActivity.class));
                 break;
         }
     }

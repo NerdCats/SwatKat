@@ -8,4 +8,7 @@
     <string name="message_get_profile">Getting your profile…</string>
     <string name="message_start_activity">Login successful, taking you home…</string>
     <string name="message_profile_data_unavailable">Can\'t find profile info, try again?</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
