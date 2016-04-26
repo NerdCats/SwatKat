@@ -61,13 +61,24 @@
         android:id="@+id/button"
         android:layout_below="@id/etPassword" />
     <TextView
+        android:id="@+id/tvSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="75dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="15dp"
         android:layout_below="@+id/button"
-        android:text="@string/signUp"
+        android:text="@string/signUp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignRight="@+id/tvSignUp"
+        android:layout_below="@+id/button"
+        android:text="@string/signUpClick"
         android:clickable="true"
-        android:onClick="onSignUpClick"/>
+        android:onClick="onSignUpButtonClick"/>
 </RelativeLayout>

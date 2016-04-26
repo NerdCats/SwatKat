@@ -62,6 +62,13 @@ public class LoginActivity extends AppCompatActivity {
         sessionManager.setRefreshToken(refreshToken);
     }
 
+    public void onSignUpButtonClick(View view){
+
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     public void onLoginButtonClick(View view) {
         final String userName = userNameText.getText().toString();
