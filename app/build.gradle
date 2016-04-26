@@ -27,8 +27,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
 
-    // FIXME Limit to only required play services
-    compile 'com.google.android.gms:play-services:8.4.0'
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
+    compile 'com.google.android.gms:play-services-location:8.4.0'
 
     // Retorfit
     compile('com.squareup.retrofit2:retrofit:2.0.0-beta4') {

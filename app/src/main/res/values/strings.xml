@@ -13,4 +13,5 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="signup">Don\'t have an account? Sign up</string>
+    <string name="msg_play_service_not_suported">This device is not supported</string>
 </resources>

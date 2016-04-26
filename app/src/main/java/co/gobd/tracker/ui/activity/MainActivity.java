@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.ui.service.LocationService;
+import co.gobd.tracker.utility.ServiceUtility;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        checkLocationStatus();
+
+        if (ServiceUtility.checkGooglePlayServices(getApplicationContext(), this)) {
+            checkLocationStatus();
+        }
 
         ibToggleStartStop = (ImageButton) findViewById(R.id.ib_toggle_location);
 
