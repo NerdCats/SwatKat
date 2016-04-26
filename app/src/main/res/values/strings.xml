@@ -11,4 +11,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="toggle_on">On</string>
+    <string name="toggle_off">Off</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="signup">Don\'t have an account? Sign up</string>
+    <string name="msg_play_service_not_suported">This device is not supported</string>
+
 </resources>

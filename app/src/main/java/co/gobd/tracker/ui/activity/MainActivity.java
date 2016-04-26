@@ -1,5 +1,7 @@
 package co.gobd.tracker.ui.activity;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
@@ -12,18 +14,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.ui.service.LocationService;
+import co.gobd.tracker.utility.ServiceUtility;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    Button btnStart;
-    Button btnStop;
 
-    Button btnMap;
+    ImageButton ibToggleStartStop;
+    private Button btnMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +37,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        checkLocationStatus();
-
-        btnStart = (Button) findViewById(R.id.btn_start);
-        btnStop = (Button) findViewById(R.id.btn_stop);
-        btnMap =  (Button) findViewById(R.id.btn_map);
-
-        btnStart.setOnClickListener(this);
-        btnStop.setOnClickListener(this);
+        btnMap = (Button) findViewById(R.id.btn_map);
         btnMap.setOnClickListener(this);
 
+        if (ServiceUtility.checkGooglePlayServices(getApplicationContext(), this)) {
+            checkLocationStatus();
+        }
+
+        ibToggleStartStop = (ImageButton) findViewById(R.id.ib_toggle_location);
+
+        ibToggleStartStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isLocationServiceRunning(LocationService.class)) {
+                    stopLocationService();
+                    ibToggleStartStop.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
+                } else {
+                    startLocationService();
+                    ibToggleStartStop.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
+                }
+
+            }
+        });
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isLocationServiceRunning(LocationService.class)) {
+            ibToggleStartStop.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
+        } else {
+            ibToggleStartStop.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
+        }
     }
 
     @Override
@@ -99,11 +126,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alertDialogBuilder.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
+                        //dialog.cancel();
+                        MainActivity.this.finish();
                     }
                 });
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
+    }
+
+    /**
+     * Checks if the service is running or not
+     *
+     * @param serviceClass
+     * @return
+     */
+
+    private boolean isLocationServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -120,22 +165,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         stopService(intent);
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
-            case R.id.btn_start:
-                startLocationService();
-                break;
-
-            case R.id.btn_stop:
-                stopLocationService();
-                break;
-
             case R.id.btn_map:
                 startActivity(new Intent(MainActivity.this, JobActivity.class));
                 break;
         }
     }
+
+    public void onGetJobButtonClick(View view) {
+        Intent intent = new Intent(this, JobActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
+
 }

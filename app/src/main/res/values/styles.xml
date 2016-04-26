@@ -17,30 +17,19 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="StartButtonStyle">
-        <item name="android:layout_width">wrap_content</item>
+    <style name="ButtonLoginWidthDarkPrimaryColor">
+        <item name="android:layout_width">280dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_alignParentTop">true</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_marginTop">199dp</item>
-        <item name="android:background">@color/colorGreen500</item>
-        <item name="android:padding">8dp</item>
-        <item name="android:textColor">@android:color/primary_text_dark</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="StopButtonStyle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_alignEnd">@+id/btn_start</item>
-        <item name="android:layout_alignLeft">@+id/btn_start</item>
-        <item name="android:layout_alignRight">@+id/btn_start</item>
-        <item name="android:layout_alignStart">@+id/btn_start</item>
-        <item name="android:layout_below">@+id/btn_start</item>
-        <item name="android:layout_marginTop">52dp</item>
-        <item name="android:background">@color/colorRed500</item>
-        <item name="android:textColor">@android:color/primary_text_dark</item>
-        <item name="android:textStyle">bold</item>
-    </style>
 
 </resources>

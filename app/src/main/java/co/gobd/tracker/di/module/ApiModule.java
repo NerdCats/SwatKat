@@ -1,12 +1,20 @@
 package co.gobd.tracker.di.module;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import co.gobd.tracker.config.BackendUrl;
+import co.gobd.tracker.model.job.AssignedJob;
+import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.network.AuthenticationApi;
+import co.gobd.tracker.network.JobApi;
 import co.gobd.tracker.network.TrackerApi;
 import co.gobd.tracker.utility.Constant;
+import co.gobd.tracker.utility.deserializer.AssignedJobDeserializer;
+import co.gobd.tracker.utility.deserializer.JobModelDeserializer;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -36,9 +44,20 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    public GsonConverterFactory providesGsonConverterFactory() {
-        return GsonConverterFactory.create();
+    public Gson providesGson()
+    {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(AssignedJob.class, new AssignedJobDeserializer());
+        gsonBuilder.registerTypeAdapter(JobModel.class, new JobModelDeserializer());
+        return gsonBuilder.create();
     }
+
+    @Provides
+    @Singleton
+    public GsonConverterFactory providesGsonConverterFactory(Gson gson) {
+        return GsonConverterFactory.create(gson);
+    }
+
 
     @Provides
     @Singleton
@@ -74,6 +93,12 @@ public class ApiModule {
     @Provides
     public AuthenticationApi providesAuthApi(@Named(Constant.BackendName.TASK_CAT) Retrofit retrofit) {
         return retrofit.create(AuthenticationApi.class);
+    }
+
+    @Singleton
+    @Provides
+    public JobApi providesJobApi(@Named(Constant.BackendName.TASK_CAT) Retrofit retrofit) {
+        return retrofit.create(JobApi.class);
     }
 
 

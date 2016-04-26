@@ -24,12 +24,17 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
+
     /* Required Google Play Services only, unnecessary packages are skipped */
     compile 'com.google.android.gms:play-services-location:8.4.0'
     compile 'com.google.android.gms:play-services-maps:8.4.0'
 
+    /* Support library */
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:support-v4:23.3.0'
 
-    // Retorfit
+    // Retrofit
     compile('com.squareup.retrofit2:retrofit:2.0.0-beta4') {
         // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
         exclude module: 'okhttp'
@@ -42,9 +47,8 @@ dependencies {
     compile 'com.google.dagger:dagger:2.0.2'
     apt 'com.google.dagger:dagger-compiler:2.0.2'
     provided 'org.glassfish:javax.annotation:10.0-b28'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:design:23.3.0'
 
-    // Support library
-    compile 'com.android.support:support-v4:23.3.0'
+    // Material EditText
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+
 }
