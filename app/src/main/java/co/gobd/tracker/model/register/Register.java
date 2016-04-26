@@ -29,6 +29,24 @@ public class Register {
     private String Type;
 
     /**
+     *
+     * @param ConfirmPassword
+     * @param Email
+     * @param Password
+     * @param PhoneNumber
+     * @param UserName
+     */
+    public Register(String UserName, String Password, String ConfirmPassword, String Email, String PhoneNumber ) {
+        this.UserName = UserName;
+        this.Password = Password;
+        this.ConfirmPassword = ConfirmPassword;
+        this.Email = Email;
+        this.PhoneNumber = PhoneNumber;
+        PicUri = "Empty";
+        Type = "BIKE_MESSENGER";
+    }
+
+    /**
      * 
      * @return
      *     The UserName

@@ -11,5 +11,5 @@ import retrofit2.http.POST;
  */
 public interface RegisterApi {
     @POST(BackendUrl.TaskCat.GET_REGISTER)
-    Call<Register> registerAsset(@Body Register register);
+    Call<Void> registerAsset(@Body Register register);
 }
