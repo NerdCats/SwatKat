@@ -1,11 +1,14 @@
 package co.gobd.tracker.utility;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+
+import co.gobd.tracker.R;
 
 /**
  * Created by tonmoy on 26-Apr-16.
@@ -26,10 +29,12 @@ public class ServiceUtility {
         int resultCode = apiAvailability.isGooglePlayServicesAvailable(context);
         if (resultCode != ConnectionResult.SUCCESS) {
             if (apiAvailability.isUserResolvableError(resultCode)) {
-                apiAvailability.getErrorDialog(activity, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
-                        .show();
+                Dialog dialog = apiAvailability.getErrorDialog(activity, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST);
+                dialog.setCancelable(false);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
             } else {
-                Log.i(TAG, "This device is not supported.");
+                Toast.makeText(context, R.string.msg_play_service_not_suported, Toast.LENGTH_SHORT).show();
             }
             return false;
         }
