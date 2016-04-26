@@ -17,4 +17,5 @@
     <string name="hint_phone">Phone</string>
     <string name="signUp">Don\'t have an account?</string>
     <string name="signUpClick">Sign up</string>
+    <string name="assetName">Logged in as </string>
 </resources>
