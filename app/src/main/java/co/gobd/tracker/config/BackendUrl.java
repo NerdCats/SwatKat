@@ -15,11 +15,16 @@ public class BackendUrl {
 
     // Main backend of go fetch
     public static final class TaskCat {
-        public static final String BASE = "http://gofetch.cloudapp.net:80/";
+        // Dev
+        public static final String BASE = "http://taskcatdev.azurewebsites.net/"  ;
+
+        //Production
+        //public static final String BASE = "http://gofetch.cloudapp.net/"
+
         // Path
         public static final String LOGIN = "token";
         public static final String GET_PROFILE = "api/Account/Profile";
+        public static final String GET_ASSIGNED_JOBS = "api/Account/{userId}/jobs";
 
     }
-
 }

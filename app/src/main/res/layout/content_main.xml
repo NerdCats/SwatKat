@@ -18,16 +18,25 @@
         tools:context=".ui.activity.MainActivity"
         tools:showIn="@layout/activity_main">
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ib_toggle_location"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:background="@null"
+            android:src="@drawable/ic_play_circle_filled_green_24dp"/>
 
         <Button
-            android:id="@+id/btn_start"
-            android:text="Start  service"
-            style="@style/StartButtonStyle" />
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/bt_job"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/ib_toggle_location"
+            android:text="get job"
+            android:onClick="onGetJobButtonClick" />
 
-        <Button
-            android:id="@+id/btn_stop"
-            android:text="Stop service"
-            style="@style/StopButtonStyle" />
+
 
 
     </RelativeLayout>
