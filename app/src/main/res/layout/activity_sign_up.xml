@@ -77,7 +77,7 @@
 
     <com.rengwuxian.materialedittext.MaterialEditText
 
-        android:id="@+id/etMail"
+        android:id="@+id/etEmail"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_email_black_24dp"
@@ -109,7 +109,7 @@
         android:inputType="number"
         android:textSize="18sp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/etMail"
+        android:layout_below="@+id/etEmail"
         app:met_textColorHint="@color/black"
         app:met_textColor="@color/black"
         app:met_floatingLabelTextColor="@color/black"
@@ -122,7 +122,7 @@
     <Button
         android:text="SIGN UP"
         style="@style/SignUpButtonLoginWidthDarkPrimaryColor"
-        android:onClick="onLoginButtonClick"
+        android:onClick="onSignUpButtonClick"
         android:id="@+id/bt_signup"
         android:layout_marginTop="40dp"
         android:layout_below="@id/etPhone" />

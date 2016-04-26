@@ -40,7 +40,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                registrationCallback.onConnectionError();
             }
         });
 
