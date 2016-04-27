@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/tvAssetName"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -42,6 +42,14 @@
             android:text="get job"
             android:onClick="onGetJobButtonClick"
             android:visibility="invisible"/>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/bt_sign_out"
+            android:layout_alignParentBottom="true"
+            android:text="sign out"
+            android:onClick="onSignOutButtonClick"/>
 
 
     </RelativeLayout>
