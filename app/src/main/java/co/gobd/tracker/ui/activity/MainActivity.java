@@ -182,7 +182,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSignOutButtonClick(View view){
-
+        sessionManager.clearAll();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }
