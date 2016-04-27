@@ -8,7 +8,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,8 +21,8 @@ import javax.inject.Inject;
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.ui.service.LocationService;
-import co.gobd.tracker.utility.SessionManager;
 import co.gobd.tracker.utility.ServiceUtility;
+import co.gobd.tracker.utility.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
 
