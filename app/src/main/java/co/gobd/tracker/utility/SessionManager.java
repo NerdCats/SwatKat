@@ -28,4 +28,6 @@ public interface SessionManager {
     String getAssetId();
 
     void setAssetId(String input);
+
+    void clearAll();
 }

@@ -18,6 +18,12 @@ public class SessionManagerImpl implements SessionManager {
 
     }
 
+    @Override
+    public void clearAll(){
+        editor.clear();
+        editor.commit();
+    }
+
 
     @Override
     public String getUsername(){
