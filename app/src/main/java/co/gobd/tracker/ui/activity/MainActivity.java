@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +23,7 @@ import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.ui.service.LocationService;
 import co.gobd.tracker.utility.SessionManager;
+import co.gobd.tracker.utility.ServiceUtility;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +43,10 @@ public class MainActivity extends AppCompatActivity {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        checkLocationStatus();
+
+        if (ServiceUtility.checkGooglePlayServices(getApplicationContext(), this)) {
+            checkLocationStatus();
+        }
 
         TextView tvAssetName = (TextView) findViewById(R.id.tvAssetName);
         String assetName = sessionManager.getUsername();
