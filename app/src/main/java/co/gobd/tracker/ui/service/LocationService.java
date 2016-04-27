@@ -1,11 +1,15 @@
 package co.gobd.tracker.ui.service;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -54,6 +58,19 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    //FIXME : this is a dirty dirty hack. I'm ashamed. Need to fix this.
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        Intent restartService = new Intent(getApplicationContext(), this.getClass());
+        restartService.setPackage(getPackageName());
+        PendingIntent restartServicePI = PendingIntent.getService(getApplicationContext(),1,
+                restartService,PendingIntent.FLAG_ONE_SHOT);
+        AlarmManager alarmService = (AlarmManager)getApplicationContext().
+                getSystemService(Context.ALARM_SERVICE);
+        alarmService.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() +1000,
+                restartServicePI);
     }
 
     @Override
@@ -149,6 +166,5 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
 
     }
-
 
 }
