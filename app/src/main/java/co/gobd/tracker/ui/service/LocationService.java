@@ -30,7 +30,7 @@ import co.gobd.tracker.utility.SessionManager;
 
 public class LocationService extends Service implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
-    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 60000;
+    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 30000;
 
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
             UPDATE_INTERVAL_IN_MILLISECONDS / 2;
