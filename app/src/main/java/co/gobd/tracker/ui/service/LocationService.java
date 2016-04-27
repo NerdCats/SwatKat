@@ -60,7 +60,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    //FIXME : this is a dirty dirty hack. I'm ashamed. Need to fix this.
+    //FIXME : Need to fix this. A better solution perhaps
     @Override
     public void onTaskRemoved(Intent rootIntent) {
         Intent restartService = new Intent(getApplicationContext(), this.getClass());
