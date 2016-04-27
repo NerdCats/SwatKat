@@ -1,11 +1,15 @@
 package co.gobd.tracker.ui.service;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -24,7 +28,8 @@ import co.gobd.tracker.service.tracker.TrackerCallback;
 import co.gobd.tracker.utility.SessionManager;
 
 
-public class LocationService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class LocationService extends Service implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, LocationListener {
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 60000;
 
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
@@ -53,6 +58,19 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    //FIXME : this is a dirty dirty hack. I'm ashamed. Need to fix this.
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        Intent restartService = new Intent(getApplicationContext(), this.getClass());
+        restartService.setPackage(getPackageName());
+        PendingIntent restartServicePI = PendingIntent.getService(getApplicationContext(),1,
+                restartService,PendingIntent.FLAG_ONE_SHOT);
+        AlarmManager alarmService = (AlarmManager)getApplicationContext().
+                getSystemService(Context.ALARM_SERVICE);
+        alarmService.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() +1000,
+                restartServicePI);
     }
 
     @Override
@@ -136,7 +154,8 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
                 mCurrentLocation.getLongitude(), assetId, new TrackerCallback() {
                     @Override
                     public void onLocationSendSuccess() {
-                        Toast.makeText(context, R.string.location_sent_successful, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.location_sent_successful,
+                                Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -147,6 +166,5 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
 
     }
-
 
 }
