@@ -24,7 +24,8 @@ import co.gobd.tracker.service.tracker.TrackerCallback;
 import co.gobd.tracker.utility.SessionManager;
 
 
-public class LocationService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class LocationService extends Service implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, LocationListener {
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 60000;
 
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
@@ -136,7 +137,8 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
                 mCurrentLocation.getLongitude(), assetId, new TrackerCallback() {
                     @Override
                     public void onLocationSendSuccess() {
-                        Toast.makeText(context, R.string.location_sent_successful, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.location_sent_successful,
+                                Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
