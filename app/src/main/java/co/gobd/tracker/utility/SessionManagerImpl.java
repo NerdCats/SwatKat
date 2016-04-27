@@ -1,6 +1,7 @@
 package co.gobd.tracker.utility;
 
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 /**
  * Created by fahad on 31-Mar-16.
@@ -20,8 +21,7 @@ public class SessionManagerImpl implements SessionManager {
 
     @Override
     public void clearAll(){
-        editor.clear();
-        editor.commit();
+        sharedPreferences.edit().clear().commit();
     }
 
 
