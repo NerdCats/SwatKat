@@ -24,6 +24,7 @@ public class BackendUrl {
         // Path
         public static final String LOGIN = "token";
         public static final String GET_PROFILE = "api/Account/Profile";
+        public static final String GET_REGISTER = "api/Account/Register";
         public static final String GET_ASSIGNED_JOBS = "api/Account/{userId}/jobs";
 
     }

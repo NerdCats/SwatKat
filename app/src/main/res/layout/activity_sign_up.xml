@@ -3,10 +3,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="co.gobd.tracker.ui.activity.SignUpActivity">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+
+        android:id="@+id/etUsername"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_person_white_24dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_person_white_24dp"
+        android:hint="@string/username"
+        android:inputType="textNoSuggestions"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        app:met_textColorHint="@color/black"
+        app:met_textColor="@color/black"
+        app:met_floatingLabelTextColor="@color/black"
+        app:met_underlineColor="@color/black"
+        app:met_baseColor="@color/black"
+        app:met_clearButton="true"
+        app:met_floatingLabel="highlight"
+        app:met_primaryColor="@color/black" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+
+        android:id="@+id/etPassword"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_lock_white_24dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_lock_white_24dp"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/etUsername"
+        app:met_textColorHint="@color/black"
+        app:met_textColor="@color/black"
+        app:met_floatingLabelTextColor="@color/black"
+        app:met_underlineColor="@color/black"
+        app:met_baseColor="@color/black"
+        app:met_clearButton="true"
+        app:met_floatingLabel="highlight"
+        app:met_primaryColor="@color/black" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+
+        android:id="@+id/etConfirmPassword"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_lock_white_24dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_lock_white_24dp"
+        android:hint="@string/confirmPassword"
+        android:inputType="textPassword"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/etPassword"
+        app:met_textColorHint="@color/black"
+        app:met_textColor="@color/black"
+        app:met_floatingLabelTextColor="@color/black"
+        app:met_underlineColor="@color/black"
+        app:met_baseColor="@color/black"
+        app:met_clearButton="true"
+        app:met_floatingLabel="highlight"
+        app:met_primaryColor="@color/black" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+
+        android:id="@+id/etEmail"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_email_black_24dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_email_black_24dp"
+        android:hint="@string/hint_email"
+        android:inputType="textNoSuggestions"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/etConfirmPassword"
+        app:met_textColorHint="@color/black"
+        app:met_textColor="@color/black"
+        app:met_floatingLabelTextColor="@color/black"
+        app:met_underlineColor="@color/black"
+        app:met_baseColor="@color/black"
+        app:met_clearButton="true"
+        app:met_floatingLabel="highlight"
+        app:met_primaryColor="@color/black" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+
+        android:id="@+id/etPhone"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_call_black_24dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_call_black_24dp"
+        android:hint="@string/hint_phone"
+        android:inputType="number"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/etEmail"
+        app:met_textColorHint="@color/black"
+        app:met_textColor="@color/black"
+        app:met_floatingLabelTextColor="@color/black"
+        app:met_underlineColor="@color/black"
+        app:met_baseColor="@color/black"
+        app:met_clearButton="true"
+        app:met_floatingLabel="highlight"
+        app:met_primaryColor="@color/black" />
+
+    <Button
+        android:text="SIGN UP"
+        style="@style/SignUpButtonLoginWidthDarkPrimaryColor"
+        android:onClick="onSignUpButtonClick"
+        android:id="@+id/bt_signup"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/etPhone" />
 
 </RelativeLayout>
