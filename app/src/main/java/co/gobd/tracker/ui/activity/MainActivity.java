@@ -8,6 +8,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -17,16 +20,22 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import co.gobd.tracker.R;
+import co.gobd.tracker.adapter.JobAdapter;
 import co.gobd.tracker.application.GoAssetApplication;
+import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.service.LocationService;
+import co.gobd.tracker.ui.view.OnItemClickListener;
 import co.gobd.tracker.utility.ServiceUtility;
 import co.gobd.tracker.utility.SessionManager;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     @Inject
     SessionManager sessionManager;
@@ -37,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     ImageButton ibToggleStartStop;
+    private List<JobModel> jobModelList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private JobAdapter jobAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +58,16 @@ public class MainActivity extends AppCompatActivity {
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        recyclerView = (RecyclerView) findViewById(R.id.rv_joblist);
+
+        jobAdapter = new JobAdapter(jobModelList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(jobAdapter);
+
+        //jobAdapter.setOnItemClickListener((OnItemClickListener) this);
 
 
         if (ServiceUtility.checkGooglePlayServices(getApplicationContext(), this)) {
