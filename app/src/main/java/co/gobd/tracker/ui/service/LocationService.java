@@ -6,7 +6,6 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
@@ -23,8 +22,8 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
-import co.gobd.tracker.service.tracker.TrackerService;
 import co.gobd.tracker.service.tracker.TrackerCallback;
+import co.gobd.tracker.service.tracker.TrackerService;
 import co.gobd.tracker.utility.SessionManager;
 
 
