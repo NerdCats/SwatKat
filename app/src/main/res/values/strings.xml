@@ -4,13 +4,22 @@
     <string name="location_sent_successful">Location sent successfully</string>
     <string name="message_auth_asset">Logging you in…</string>
     <string name="message_auth_failed">Can\'t log you in, try again? </string>
+    <string name="message_reg_failed">Can\'t register, try again?</string>
     <string name="message_connection_error">Can\'t connect, check your connection</string>
     <string name="message_get_profile">Getting your profile…</string>
     <string name="message_start_activity">Login successful, taking you home…</string>
+    <string name="message_reg_successful">Registration successful! Now log in</string>
     <string name="message_profile_data_unavailable">Can\'t find profile info, try again?</string>
     <string name="toggle_on">On</string>
     <string name="toggle_off">Off</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_phone">Phone</string>
+    <string name="signUp">Don\'t have an account?</string>
+    <string name="signUpClick">Sign up</string>
+    <string name="assetName">Logged in as </string>
     <string name="signup">Don\'t have an account? Sign up</string>
+    <string name="msg_play_service_not_suported">This device is not supported</string>
 </resources>
