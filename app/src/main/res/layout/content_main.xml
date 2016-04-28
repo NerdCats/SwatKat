@@ -29,8 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ib_toggle_location"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:background="@null"
             android:src="@drawable/ic_play_circle_filled_green_24dp"/>
 
