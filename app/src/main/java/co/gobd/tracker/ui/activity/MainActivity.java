@@ -21,6 +21,7 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
+import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.service.LocationService;
 import co.gobd.tracker.utility.ServiceUtility;
 import co.gobd.tracker.utility.SessionManager;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Inject
     SessionManager sessionManager;
+
+    @Inject
+    JobService jobService;
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 

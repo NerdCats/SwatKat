@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -17,16 +18,28 @@ import co.gobd.tracker.model.job.JobModel;
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
     private List<JobModel> jobModelList;
+    private AdapterView.OnItemClickListener onItemClickListener;
 
-    public class JobViewHolder extends RecyclerView.ViewHolder {
+    public class JobViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView name, state;
 
         public JobViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             name = (TextView) itemView.findViewById(R.id.tv_jobname);
             state = (TextView) itemView.findViewById(R.id.tv_jobstate);
 
 
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getLayoutPosition();
+            if(jobModelList.isEmpty()){
+                if(onItemClickListener != null){
+                    onItemClickListener.on
+                }
+            }
         }
     }
 
