@@ -60,6 +60,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     }
 
     //FIXME : Need to fix this. A better solution perhaps
+    //http://stackoverflow.com/a/20678640
     @Override
     public void onTaskRemoved(Intent rootIntent) {
         Intent restartService = new Intent(getApplicationContext(), this.getClass());
