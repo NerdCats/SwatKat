@@ -39,7 +39,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     public JobViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.activity_main,parent,false);
+                .inflate(R.layout.job_list_row,parent,false);
 
         return new JobViewHolder(itemView);
     }
