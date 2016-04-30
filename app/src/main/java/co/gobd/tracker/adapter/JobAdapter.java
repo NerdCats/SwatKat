@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     private OnItemClickListener onItemClickListener;
     private Context context;
 
-    public JobAdapter(Context context, JobService jobService, String bearer, String assetId){
+    public JobAdapter(final Context context, JobService jobService, String bearer, String assetId){
         this.jobService = jobService;
         this.context = context;
         this.jobModelList = new ArrayList<>();
@@ -48,11 +49,13 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
             @Override
             public void onGetJobFailure() {
+                Toast.makeText(context, "Job load failure", Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onConnectionError() {
+                Toast.makeText(context, "Connection error", Toast.LENGTH_SHORT).show();
 
             }
         });
