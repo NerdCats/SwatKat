@@ -8,10 +8,12 @@ public class TrackerLocation {
 
     private Location point;
     private String asset_id;
+    private String asset_name;
 
-    public TrackerLocation(Location location, String asset_id) {
+    public TrackerLocation(Location location, String asset_id, String name) {
         this.point = location;
         this.asset_id = asset_id;
+        this.asset_name = name;
 
     }
 
@@ -29,5 +31,13 @@ public class TrackerLocation {
 
     public void setAsset_id(String asset_id) {
         this.asset_id = asset_id;
+    }
+
+    public String getAsset_name() {
+        return asset_name;
+    }
+
+    public void setAsset_name(String asset_name) {
+        this.asset_name = asset_name;
     }
 }
