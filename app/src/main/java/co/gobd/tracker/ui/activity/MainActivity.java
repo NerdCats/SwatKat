@@ -42,12 +42,16 @@ public class MainActivity extends AppCompatActivity{
     @Inject
     JobService jobService;
 
+    @Inject
+    Context context;
+
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     ImageButton ibToggleStartStop;
     private List<JobModel> jobModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private JobAdapter jobAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +62,12 @@ public class MainActivity extends AppCompatActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        String assetId = sessionManager.getAssetId();
+        String bearer = sessionManager.getBearer();
+
         recyclerView = (RecyclerView) findViewById(R.id.rv_joblist);
 
-        jobAdapter = new JobAdapter(jobModelList);
+        jobAdapter = new JobAdapter(context, jobService, bearer, assetId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
