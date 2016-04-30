@@ -31,7 +31,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     private OnItemClickListener onItemClickListener;
     private Context context;
 
-    public JobAdapter(final Context context, JobService jobService, String bearer, String assetId){
+    public JobAdapter(Context context, JobService jobService, String bearer, String assetId){
         this.jobService = jobService;
         this.context = context;
         this.jobModelList = new ArrayList<>();
