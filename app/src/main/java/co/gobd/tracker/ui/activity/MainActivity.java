@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         String assetId = sessionManager.getAssetId();
         String bearer = sessionManager.getBearer();
