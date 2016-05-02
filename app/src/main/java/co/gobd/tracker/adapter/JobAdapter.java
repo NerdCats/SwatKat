@@ -80,9 +80,9 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         @Override
         public void onClick(View v) {
             int position = getLayoutPosition();
-            if(jobModelList.isEmpty()){
+            if(!jobModelList.isEmpty()){
                 if(onItemClickListener != null){
-                    onItemClickListener.onClick(v, position);
+                    onItemClickListener.onItemClick(v, position);
                 }
             }
         }
@@ -90,11 +90,6 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
     public void setOnItemClickListener(final OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
-    }
-
-    public JobAdapter(List<JobModel> jobModelList){
-        this.jobModelList = jobModelList;
-
     }
 
     @Override
