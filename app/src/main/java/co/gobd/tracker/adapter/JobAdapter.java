@@ -64,7 +64,9 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     }
 
     public class JobViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView name, state;
+
+        public TextView name;
+        public TextView state;
 
         public JobViewHolder(View itemView) {
             super(itemView);
@@ -109,7 +111,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
         JobModel jobModel = jobModelList.get(position);
         holder.name.setText(jobModel.getName());
-        holder.name.setText(jobModel.getState());
+        holder.state.setText(jobModel.getState());
     }
 
     @Override
