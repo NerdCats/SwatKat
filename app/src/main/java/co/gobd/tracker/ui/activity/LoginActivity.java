@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,8 +13,8 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
-import co.gobd.tracker.service.authentication.AuthenticationCallback;
 import co.gobd.tracker.callback.ProfileCallback;
+import co.gobd.tracker.service.authentication.AuthenticationCallback;
 import co.gobd.tracker.service.authentication.AuthenticationService;
 import co.gobd.tracker.utility.SessionManager;
 
@@ -34,7 +35,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        
+
+        // Toolbar setup
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        }
+
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
 
         setupUi();
@@ -60,6 +68,12 @@ public class LoginActivity extends AppCompatActivity {
         sessionManager.setToken(accessToken);
         sessionManager.setBearer(bearer);
         sessionManager.setRefreshToken(refreshToken);
+    }
+
+    public void onSignUpButtonClick(View view) {
+
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
     }
 
 
