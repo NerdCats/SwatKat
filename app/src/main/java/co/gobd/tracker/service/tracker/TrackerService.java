@@ -6,6 +6,6 @@ import co.gobd.tracker.service.tracker.TrackerCallback;
  * Created by tonmoy on 11-Apr-16.
  */
 public interface TrackerService {
-    void sendLocation(double latitude, double longitude, String assetId, TrackerCallback callback);
+    void sendLocation(double latitude, double longitude, String assetId, String name, TrackerCallback callback);
 
 }
