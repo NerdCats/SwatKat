@@ -19,7 +19,6 @@ import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.service.job.JobCallback;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.view.OnItemClickListener;
-import co.gobd.tracker.utility.SessionManager;
 
 /**
  * Created by fahad on 4/28/16.
