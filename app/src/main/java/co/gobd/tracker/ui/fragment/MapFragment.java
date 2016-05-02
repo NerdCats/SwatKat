@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import co.gobd.tracker.R;
+import co.gobd.tracker.ui.service.LocationService;
 import co.gobd.tracker.utility.Constant;
 
 /**
@@ -74,6 +76,11 @@ public class MapFragment extends Fragment {
                 googleMap = map;
                 googleMap.setMyLocationEnabled(true);
 
+                if (LocationService.mCurrentLocation != null) {
+                    double lat = LocationService.mCurrentLocation.getLatitude();
+                    double lng = LocationService.mCurrentLocation.getLongitude();
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 13.0f));
+                }
 
                 googleMap.addMarker(pickupMarker);
                 googleMap.addMarker(deliveryMarker);
@@ -85,6 +92,7 @@ public class MapFragment extends Fragment {
     }
 
     private void getJobData() {
+        // Retrieves passed data from the bundle
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             pickupLat = bundle.getDouble(Constant.Job.PICKUP_LAT);

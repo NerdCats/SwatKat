@@ -16,8 +16,6 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
-import co.gobd.tracker.model.job.AssignedJob;
-import co.gobd.tracker.service.job.JobCallback;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.fragment.MapFragment;
 import co.gobd.tracker.ui.fragment.TaskFragment;
@@ -65,7 +63,9 @@ public class JobActivity extends AppCompatActivity {
         // Toolbar setup
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // Viewpager setup
         viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -73,43 +73,19 @@ public class JobActivity extends AppCompatActivity {
 
         // TabLayout setup
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-
-
-        /*
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.activity_job, mapFragment, FRAGMENET_TAG_MAP)
-                .commit();*/
-
+        if (tabLayout != null) {
+            tabLayout.setupWithViewPager(viewPager);
+        }
 
         // Dagger injection
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
 
-        String bearer = sessionManager.getBearer();
-        String assetId = sessionManager.getAssetId();
-        jobService.getAssignedJobList(bearer, assetId, new JobCallback() {
-            @Override
-            public void onGetJobSuccess(AssignedJob assignedJob) {
-
-            }
-
-            @Override
-            public void onGetJobFailure() {
-
-            }
-
-            @Override
-            public void onConnectionError() {
-
-            }
-        });
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(mapFragment, "MAP");
-        adapter.addFragment(taskFragment, "TASK");
+        adapter.addFragment(mapFragment, getString(R.string.tab_name_map));
+        adapter.addFragment(taskFragment, getString(R.string.tab_name_task));
         viewPager.setAdapter(adapter);
     }
 

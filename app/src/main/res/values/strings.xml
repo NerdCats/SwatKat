@@ -19,5 +19,7 @@
     <string name="signup">Don\'t have an account? Sign up</string>
     <string name="msg_play_service_not_suported">This device is not supported</string>
     <string name="label_activity_job">Job details</string>
+    <string name="tab_name_map">Map</string>
+    <string name="tab_name_task">Task</string>
 
 </resources>

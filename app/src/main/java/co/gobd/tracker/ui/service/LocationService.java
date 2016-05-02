@@ -43,7 +43,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
-    private Location mCurrentLocation;
+    public static Location mCurrentLocation;
 
 
     public LocationService() {
