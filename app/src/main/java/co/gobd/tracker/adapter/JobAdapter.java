@@ -26,11 +26,14 @@ import co.gobd.tracker.utility.SessionManager;
  */
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
+    @Inject
+    Context context;
 
-    private JobService jobService;
+    @Inject
+    JobService jobService;
+
     private List<JobModel> jobModelList;
     private OnItemClickListener onItemClickListener;
-    private Context context;
 
     public JobAdapter(final Context context, JobService jobService, String bearer, String assetId){
         this.jobService = jobService;
