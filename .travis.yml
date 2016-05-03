@@ -36,4 +36,8 @@ script:
    #   repo: NerdCats/RoboCat
    #   tags: true
 
+# Whitelist
+branches:
+  only:
+    - master
 
