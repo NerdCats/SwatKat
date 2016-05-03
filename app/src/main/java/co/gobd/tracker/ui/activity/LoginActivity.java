@@ -16,6 +16,7 @@ import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.callback.ProfileCallback;
 import co.gobd.tracker.service.authentication.AuthenticationCallback;
 import co.gobd.tracker.service.authentication.AuthenticationService;
+import co.gobd.tracker.utility.ServiceUtility;
 import co.gobd.tracker.utility.SessionManager;
 
 public class LoginActivity extends AppCompatActivity {
@@ -35,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ((GoAssetApplication) getApplication()).getComponent().inject(this);
+        ServiceUtility.checkGooglePlayServices(context, this);
 
         // Toolbar setup
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -43,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
 
-        ((GoAssetApplication) getApplication()).getComponent().inject(this);
+
 
         setupUi();
 

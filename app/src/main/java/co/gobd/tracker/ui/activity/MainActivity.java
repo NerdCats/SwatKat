@@ -84,9 +84,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMap = (Button) findViewById(R.id.btn_map);
         btnMap.setOnClickListener(this);
 
-        if (ServiceUtility.checkGooglePlayServices(getApplicationContext(), this)) {
-            checkLocationStatus();
-        }
 
         TextView tvAssetName = (TextView) findViewById(R.id.tvAssetName);
         String assetName = sessionManager.getUsername();
