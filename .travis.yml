@@ -1,0 +1,39 @@
+sudo: false
+language: android
+android:
+  components:
+    - tools
+    - platform-tools
+
+    # The BuildTools version used by your project
+    - build-tools-23.0.3
+
+    # The SDK version used to compile your project
+    - android-23
+
+    # Additional components
+    - extra-google-google_play_services
+    - extra-android-m2repository
+    - extra-google-m2repository
+    - extra-android-support
+
+before_install:
+     - chmod +x gradlew
+
+script:
+  # - echo $ADB_INSTALL_TIMEOUT
+  # - android list target
+  # Builds unsigned Release .apk
+  - ./gradlew assembleRelease
+
+
+# deploy:
+  # - provider: releases
+  #   api_key: d2fef7290112d71fe416ca00fc8c25f28a70a2bf
+   # file: app/build/outputs/apk/app-debug.apk
+   # skip_cleanup: true
+   # on:
+   #   repo: NerdCats/RoboCat
+   #   tags: true
+
+
