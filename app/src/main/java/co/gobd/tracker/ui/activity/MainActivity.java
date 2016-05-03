@@ -221,12 +221,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void onGetJobButtonClick(View view) {
-        Intent intent = new Intent(this, JobActivity.class);
-        startActivity(intent);
-        finish();
-
-    }
 
     public void onSignOutButtonClick(View view) {
         stopLocationService();
