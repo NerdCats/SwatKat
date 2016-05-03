@@ -5,6 +5,7 @@ package co.gobd.tracker.utility;
  */
 public class Constant {
 
+
     public final class BackendName {
         public static final String TASK_CAT = "TASK_CAT";
         public static final String SHADOW_CAT = "SHADOW_CAT";
@@ -32,4 +33,15 @@ public class Constant {
         public static final String VALUE_DEFAULT_ASSET_ID = "default_asset_id";
     }
 
+    /**
+     * Created by tonmoy on 28-Apr-16.
+     */
+    public static class Job {
+        public static final String PICKUP_LAT = "PICKUP_LAT";
+        public static final String PICKUP_LNG = "PICKUP_LNG";
+        public static final String PICKUP_ADDRESS = "PICKUP_ADDRESS";
+        public static final String DELIVERY_LAT = "DELIVERY_LAT";
+        public static final String DELIVERY_LNG = "DELIVERY_LNG";
+        public static final String DELIVERY_ADDRESS = "DELIVERY_ADDRESS";
+    }
 }

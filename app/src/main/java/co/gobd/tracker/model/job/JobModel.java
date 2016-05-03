@@ -18,6 +18,14 @@ public class JobModel {
         Tasks = tasks;
     }
 
+    public String getName(){
+        return Name;
+    }
+
+    public String getState(){
+        return State;
+    }
+
     @Override
     public String toString() {
         return "JobModel{" +
