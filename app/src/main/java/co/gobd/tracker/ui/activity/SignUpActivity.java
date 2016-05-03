@@ -52,16 +52,17 @@ public class SignUpActivity extends AppCompatActivity {
             public void onRegistrationSuccess() {
                 Toast.makeText(context, R.string.message_reg_successful, Toast.LENGTH_SHORT).show();
                 gotoLoginActivity();
+
             }
 
             @Override
             public void onRegistrationFailure() {
-                Toast.makeText(context, R.string.message_reg_failed, Toast.LENGTH_SHORT);
+                Toast.makeText(context, R.string.message_reg_failed, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onConnectionError() {
-                Toast.makeText(context, R.string.message_connection_error, Toast.LENGTH_SHORT);
+                Toast.makeText(context, R.string.message_connection_error, Toast.LENGTH_SHORT).show();
             }
 
 

@@ -12,13 +12,20 @@
         android:name=".application.GoAssetApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="GO! Asset"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA85WD4uKZBnUUs6MgS1bX-fWmKKUvIwpk" />
+
         <activity
             android:name=".ui.activity.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme" />
+            android:label="@string/label_activity_main" />
+
 
         <service
             android:name=".ui.service.LocationService"
@@ -28,12 +35,18 @@
         <activity android:name=".ui.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.SignUpActivity" />
-        <activity android:name=".ui.activity.JobActivity"></activity>
+
+        <activity android:name=".ui.activity.SignUpActivity"
+            android:label="@string/label_activity_signup"
+            android:parentActivityName=".ui.activity.LoginActivity"
+            />
+        <activity
+            android:name=".ui.activity.JobActivity"
+            android:label="@string/label_activity_job"
+            android:parentActivityName=".ui.activity.MainActivity" />
     </application>
 
 </manifest>

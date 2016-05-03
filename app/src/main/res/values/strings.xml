@@ -10,6 +10,10 @@
     <string name="message_start_activity">Login successful, taking you home…</string>
     <string name="message_reg_successful">Registration successful! Now log in</string>
     <string name="message_profile_data_unavailable">Can\'t find profile info, try again?</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="toggle_on">On</string>
     <string name="toggle_off">Off</string>
     <string name="username">Username</string>
@@ -22,4 +26,11 @@
     <string name="assetName">Logged in as </string>
     <string name="signup">Don\'t have an account? Sign up</string>
     <string name="msg_play_service_not_suported">This device is not supported</string>
+    <string name="label_activity_job">Job details</string>
+    <string name="tab_name_map">Map</string>
+    <string name="tab_name_task">Task</string>
+    <string name="label_activity_login">Login</string>
+    <string name="label_activity_main">Home</string>
+    <string name="label_activity_signup">Sign up</string>
+
 </resources>

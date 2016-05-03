@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,23 +32,22 @@ import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.service.LocationService;
+import co.gobd.tracker.ui.view.OnItemClickListener;
 import co.gobd.tracker.utility.ServiceUtility;
 import co.gobd.tracker.utility.SessionManager;
 
-public class MainActivity extends AppCompatActivity{
-
-    @Inject
-    SessionManager sessionManager;
-
-    @Inject
-    JobService jobService;
-
-    @Inject
-    Context context;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnItemClickListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    JobService jobService;
+    @Inject
+    Context context;
+    private ImageButton ibToggleStartStop;
+    private Button btnMap;
 
-    ImageButton ibToggleStartStop;
     private List<JobModel> jobModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private JobAdapter jobAdapter;
@@ -60,6 +60,13 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
 
+        // Toolbar setup
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        }
+
         String assetId = sessionManager.getAssetId();
         String bearer = sessionManager.getBearer();
 
@@ -71,8 +78,11 @@ public class MainActivity extends AppCompatActivity{
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(jobAdapter);
 
-        //jobAdapter.setOnItemClickListener((OnItemClickListener) this);
+        jobAdapter.setOnItemClickListener(this);
 
+
+        btnMap = (Button) findViewById(R.id.btn_map);
+        btnMap.setOnClickListener(this);
 
         if (ServiceUtility.checkGooglePlayServices(getApplicationContext(), this)) {
             checkLocationStatus();
@@ -80,7 +90,7 @@ public class MainActivity extends AppCompatActivity{
 
         TextView tvAssetName = (TextView) findViewById(R.id.tvAssetName);
         String assetName = sessionManager.getUsername();
-        tvAssetName.setText("Logged in as "+assetName);
+        tvAssetName.setText(assetName);
 
         ibToggleStartStop = (ImageButton) findViewById(R.id.ib_toggle_location);
 
@@ -88,11 +98,10 @@ public class MainActivity extends AppCompatActivity{
         ibToggleStartStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isLocationServiceRunning(LocationService.class)){
+                if (isLocationServiceRunning(LocationService.class)) {
                     stopLocationService();
                     ibToggleStartStop.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
-                }
-                else{
+                } else {
                     startLocationService();
                     ibToggleStartStop.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
                 }
@@ -101,13 +110,13 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
-        if (isLocationServiceRunning(LocationService.class)){
+        if (isLocationServiceRunning(LocationService.class)) {
             ibToggleStartStop.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
-        }
-        else{
+        } else {
             ibToggleStartStop.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
         }
     }
@@ -205,13 +214,23 @@ public class MainActivity extends AppCompatActivity{
         stopService(intent);
     }
 
-    public void onGetJobButtonClick(View view){
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_map:
+                startActivity(new Intent(MainActivity.this, JobActivity.class));
+                break;
+        }
+    }
+
+    public void onGetJobButtonClick(View view) {
         Intent intent = new Intent(this, JobActivity.class);
         startActivity(intent);
         finish();
+
     }
 
-    public void onSignOutButtonClick(View view){
+    public void onSignOutButtonClick(View view) {
         stopLocationService();
         sessionManager.clearAll();
         Intent intent = new Intent(this, LoginActivity.class);
@@ -219,4 +238,9 @@ public class MainActivity extends AppCompatActivity{
         finish();
     }
 
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(context, "Item clicked" + position, Toast.LENGTH_SHORT).show();
+    }
 }
