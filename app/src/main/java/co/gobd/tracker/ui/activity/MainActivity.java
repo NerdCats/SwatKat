@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
+        checkLocationStatus();
         if (isLocationServiceRunning(LocationService.class)) {
             ibToggleStartStop.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
         } else {

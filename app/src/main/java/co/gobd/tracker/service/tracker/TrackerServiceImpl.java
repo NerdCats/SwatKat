@@ -27,10 +27,10 @@ public class TrackerServiceImpl implements TrackerService {
     }
 
     @Override
-    public void sendLocation(double latitude, double longitude, String assetId, final TrackerCallback callback) {
+    public void sendLocation(double latitude, double longitude, String assetId, String name, final TrackerCallback callback) {
 
         // Creates the POJO
-        TrackerLocation trackerLocation = this.createLocationModel(latitude, longitude, assetId);
+        TrackerLocation trackerLocation = this.createLocationModel(latitude, longitude, assetId, name);
 
         // trackerLocation is sent as request Body
         Call<Void> call = trackerApi.ping(trackerLocation);
@@ -54,14 +54,14 @@ public class TrackerServiceImpl implements TrackerService {
 
 
     // TODO Create unit test
-    private TrackerLocation createLocationModel(double lat, double lng, String assetId) {
+    private TrackerLocation createLocationModel(double lat, double lng, String assetId, String name) {
 
         List<Double> coordinates = new ArrayList<>();
         coordinates.add(lng);
         coordinates.add(lat);
         Location point = new Location("Point", coordinates);
 
-        return new TrackerLocation(point, assetId);
+        return new TrackerLocation(point, assetId, name);
 
     }
 }
