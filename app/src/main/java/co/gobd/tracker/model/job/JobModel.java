@@ -1,5 +1,7 @@
 package co.gobd.tracker.model.job;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
 import co.gobd.tracker.model.job.task.JobTask;
@@ -7,6 +9,8 @@ import co.gobd.tracker.model.job.task.JobTask;
 /**
  * Created by fahad on 4/25/16.
  */
+
+@Parcel
 public class JobModel {
     private String Name;
     private String State;
@@ -34,4 +38,5 @@ public class JobModel {
                 ", Tasks=" + Tasks +
                 '}';
     }
+
 }
