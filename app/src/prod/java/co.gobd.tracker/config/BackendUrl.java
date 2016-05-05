@@ -15,9 +15,6 @@ public class BackendUrl {
 
     // Main backend of go fetch
     public static final class TaskCat {
-        // Dev
-        //public static final String BASE = "http://taskcatdev.azurewebsites.net/";
-
         //Production
         public static final String BASE = "http://gofetch.cloudapp.net/";
 
