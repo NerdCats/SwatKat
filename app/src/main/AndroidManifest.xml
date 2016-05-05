@@ -12,7 +12,7 @@
         android:name=".application.GoAssetApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="${appName}"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
@@ -24,7 +24,7 @@
 
         <activity
             android:name=".ui.activity.MainActivity"
-            android:label="@string/label_activity_main" />
+            android:label="${appName}" />
 
 
         <service

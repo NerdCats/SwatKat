@@ -1,1 +1,2 @@
-include ':app'
+include ':GO! Asset'
+project(':GO! Asset').projectDir = new File('app')
