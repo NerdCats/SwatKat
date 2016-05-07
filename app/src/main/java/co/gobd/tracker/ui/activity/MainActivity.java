@@ -238,7 +238,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemClick(View view, int position, JobModel jobModel) {
-        String name = jobModel.getName();
-        Toast.makeText(context, "Item clicked" + position, Toast.LENGTH_SHORT).show();
+        //String name = jobModel.getName();
+        //Toast.makeText(context, "Item clicked" + position, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(MainActivity.this, JobActivity.class);
+        intent.putExtra("jobModel", jobModel);
+        startActivity(intent);
     }
 }

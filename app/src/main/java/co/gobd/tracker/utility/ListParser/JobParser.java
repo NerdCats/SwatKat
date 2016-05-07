@@ -31,8 +31,9 @@ public class JobParser {
             JobTask jobTask = jobModel.getTasks().get(i);
             if(JobTaskTypes.PACKAGE_PICKUP.equals(jobTask.getType())){
                 try{
-                    PackagePickupTask packagePickupTask = (PackagePickupTask) jobTask;
-                    location = packagePickupTask.getLocation();
+                    location = jobTask.getLocation();
+                    //PackagePickupTask packagePickupTask = (PackagePickupTask) jobTask;
+                    //location = packagePickupTask.getLocation();
                 }catch(Exception e){
                     e.printStackTrace();
                 }
@@ -48,8 +49,8 @@ public class JobParser {
             JobTask jobTask = jobModel.getTasks().get(i);
             if(JobTaskTypes.DELIVERY.equals(jobTask.getType())){
                 try{
-                    DeliveryTask deliveryTask = (DeliveryTask) jobTask;
-                    location = deliveryTask.getLocation();
+                    //DeliveryTask deliveryTask = (DeliveryTask) jobTask;
+                    location = jobTask.getLocation();
                 }catch(Exception e){
                     e.printStackTrace();
                 }
