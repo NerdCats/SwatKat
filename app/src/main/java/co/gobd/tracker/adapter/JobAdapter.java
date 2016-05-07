@@ -18,7 +18,7 @@ import co.gobd.tracker.model.job.AssignedJob;
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.service.job.JobCallback;
 import co.gobd.tracker.service.job.JobService;
-import co.gobd.tracker.ui.view.OnItemClickListener;
+import co.gobd.tracker.ui.view.OnJobItemClickListener;
 
 /**
  * Created by fahad on 4/28/16.
@@ -32,7 +32,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     JobService jobService;
 
     private List<JobModel> jobModelList;
-    private OnItemClickListener onItemClickListener;
+    private OnJobItemClickListener onJobItemClickListener;
 
     public JobAdapter(final Context context, JobService jobService, String bearer, String assetId){
         this.jobService = jobService;
@@ -81,15 +81,15 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         public void onClick(View v) {
             int position = getLayoutPosition();
             if(!jobModelList.isEmpty()){
-                if(onItemClickListener != null){
-                    onItemClickListener.onItemClick(v, position);
+                if(onJobItemClickListener != null){
+                    onJobItemClickListener.onItemClick(v, position, jobModelList.get(position));
                 }
             }
         }
     }
 
-    public void setOnItemClickListener(final OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
+    public void setOnJobItemClickListener(final OnJobItemClickListener onJobItemClickListener) {
+        this.onJobItemClickListener = onJobItemClickListener;
     }
 
     @Override
