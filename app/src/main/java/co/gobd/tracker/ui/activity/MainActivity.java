@@ -237,7 +237,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onItemClick(View view, int position, JobModel jobModel) {
+        String name = jobModel.getName();
         Toast.makeText(context, "Item clicked" + position, Toast.LENGTH_SHORT).show();
     }
 }
