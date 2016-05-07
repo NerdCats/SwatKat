@@ -16,6 +16,7 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
+import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.fragment.MapFragment;
 import co.gobd.tracker.ui.fragment.TaskFragment;
@@ -43,6 +44,8 @@ public class JobActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job);
+
+        JobModel jobModel = (JobModel) Parcels.unwrap(getIntent().getParcelableExtra("jobModel"));
 
         // Fixme Replace this with getIntentData method
         Bundle bundle = new Bundle();

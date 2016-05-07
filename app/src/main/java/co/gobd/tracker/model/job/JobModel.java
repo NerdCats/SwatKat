@@ -26,6 +26,10 @@ public class JobModel {
         return State;
     }
 
+    public List<JobTask> getTasks(){
+        return Tasks;
+    }
+
     @Override
     public String toString() {
         return "JobModel{" +
