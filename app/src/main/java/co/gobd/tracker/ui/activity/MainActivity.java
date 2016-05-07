@@ -33,7 +33,6 @@ import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.service.LocationService;
 import co.gobd.tracker.ui.view.OnItemClickListener;
-import co.gobd.tracker.utility.ServiceUtility;
 import co.gobd.tracker.utility.SessionManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnItemClickListener {
