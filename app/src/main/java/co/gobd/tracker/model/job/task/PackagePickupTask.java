@@ -26,7 +26,7 @@ public class PackagePickupTask extends JobTask {
         return State;
     }
 
-    public Location getFrom() { return From; }
+    public Location getLocation() { return From; }
 
     @Override
     public String toString() {

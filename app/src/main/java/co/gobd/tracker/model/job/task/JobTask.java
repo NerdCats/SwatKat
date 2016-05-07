@@ -1,9 +1,11 @@
 package co.gobd.tracker.model.job.task;
 
+import co.gobd.tracker.model.job.Location;
+
 /**
  * Created by fahad on 4/25/16.
  */
-public class JobTask {
+public abstract class JobTask {
 
     private String Type;
     private String Name;
@@ -20,6 +22,8 @@ public class JobTask {
     public String getName() {
         return Name;
     }
+
+    public abstract Location getLocation();
 
     @Override
     public String toString() {

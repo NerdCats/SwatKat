@@ -25,7 +25,7 @@ public class DeliveryTask extends JobTask{
         return State;
     }
 
-    public Location getTo(){return To;}
+    public Location getLocation(){return To;}
 
     @Override
     public String toString() {
