@@ -14,11 +14,13 @@ public abstract class JobTask implements Parcelable {
     private String Name;
 
     public JobTask(String type, String name) {
+        super();
         Name = name;
         Type = type;
     }
 
     protected JobTask(Parcel in) {
+        super();
         Name = in.readString();
     }
 

@@ -44,6 +44,10 @@ public class JobModel implements Parcelable {
         return Tasks;
     }
 
+    public void setTasks(List<JobTask> Tasks){
+        this.Tasks = Tasks;
+    }
+
     protected JobModel(Parcel in){
         super();
         this.Name = in.readString();
@@ -64,9 +68,7 @@ public class JobModel implements Parcelable {
         }
     };
 
-    public void setTasks(List<JobTask> Tasks){
-        this.Tasks = Tasks;
-    }
+
 
     @Override
     public String toString() {

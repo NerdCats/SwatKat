@@ -31,6 +31,7 @@ public class PackagePickupTask extends JobTask {
         JobTaskStateString = jobTaskStateString;
         State = state;
         From = from;
+        setType(JobTaskTypes.PACKAGE_PICKUP);
     }
 
     public PackagePickupTask(Parcel source){

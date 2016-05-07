@@ -29,6 +29,7 @@ public class FetchDeliveryManTask extends JobTask {
         super(JobTaskTypes.FETCH_DELIVERYMAN, "Fetching Delivery Guy");
         JobTaskStateString = jobTaskStateString;
         State = state;
+        setType(JobTaskTypes.FETCH_DELIVERYMAN);
     }
 
     public FetchDeliveryManTask(Parcel source){

@@ -31,6 +31,7 @@ public class DeliveryTask extends JobTask{
         JobTaskStateString = jobTaskStateString;
         State = state;
         To = to;
+        setType(JobTaskTypes.DELIVERY);
     }
 
     public DeliveryTask(Parcel source){
