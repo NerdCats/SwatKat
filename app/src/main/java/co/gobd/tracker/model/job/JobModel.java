@@ -16,9 +16,9 @@ import co.gobd.tracker.model.job.task.JobTask;
 public class JobModel implements Parcelable {
     private String Name;
     private String State;
-    private ArrayList<JobTask> Tasks;
+    private List<JobTask> Tasks;
 
-    public JobModel(String name, String state, ArrayList<JobTask> tasks) {
+    public JobModel(String name, String state, List<JobTask> tasks) {
         super();
         Name = name;
         State = state;
@@ -40,7 +40,7 @@ public class JobModel implements Parcelable {
         return State;
     }
 
-    public ArrayList<JobTask> getTasks(){
+    public List<JobTask> getTasks(){
         return Tasks;
     }
 
@@ -64,7 +64,7 @@ public class JobModel implements Parcelable {
         }
     };
 
-    public void setTasks(ArrayList<JobTask> Tasks){
+    public void setTasks(List<JobTask> Tasks){
         this.Tasks = Tasks;
     }
 
