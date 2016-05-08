@@ -32,10 +32,12 @@ import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.service.LocationService;
-import co.gobd.tracker.ui.view.OnItemClickListener;
+import co.gobd.tracker.ui.view.OnJobItemClickListener;
+import co.gobd.tracker.utility.Constant;
+import co.gobd.tracker.utility.ListParser.JobParser;
 import co.gobd.tracker.utility.SessionManager;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnJobItemClickListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     @Inject
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(jobAdapter);
 
-        jobAdapter.setOnItemClickListener(this);
+        jobAdapter.setOnJobItemClickListener(this);
 
 
         btnMap = (Button) findViewById(R.id.btn_map);
@@ -237,7 +239,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(context, "Item clicked" + position, Toast.LENGTH_SHORT).show();
+    public void onItemClick(View view, int position, JobModel jobModel) {
+        //String name = jobModel.getName();
+        //Toast.makeText(context, "Item clicked" + position, Toast.LENGTH_SHORT).show();
+        JobParser jobParser = new JobParser(jobModel);
+        String jobName = jobModel.getName();
+        String[] pickupCoordinates = jobParser.getPickupLocation().getPoint().getCoordinates();
+        String[] deliveryCoordinates = jobParser.getDeliveryLocation().getPoint().getCoordinates();
+
+        Bundle bundle = new Bundle();
+
+        bundle.putString(Constant.Job.JOB_NAME, jobName);
+        bundle.putDouble(Constant.Job.PICKUP_LAT, Double.parseDouble(pickupCoordinates[1]));
+        bundle.putDouble(Constant.Job.PICKUP_LNG, Double.parseDouble(pickupCoordinates[0]));
+        bundle.putString(Constant.Job.PICKUP_ADDRESS, jobParser.getPickupLocation().getAddress());
+
+        bundle.putDouble(Constant.Job.DELIVERY_LAT, Double.parseDouble(deliveryCoordinates[1]));
+        bundle.putDouble(Constant.Job.DELIVERY_LNG, Double.parseDouble(deliveryCoordinates[0]));
+        bundle.putString(Constant.Job.DELIVERY_ADDRESS, jobParser.getDeliveryLocation().getAddress());
+
+        Intent intent = new Intent(MainActivity.this, JobActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

@@ -43,5 +43,6 @@ public class Constant {
         public static final String DELIVERY_LAT = "DELIVERY_LAT";
         public static final String DELIVERY_LNG = "DELIVERY_LNG";
         public static final String DELIVERY_ADDRESS = "DELIVERY_ADDRESS";
+        public static final String JOB_NAME = "JOB_NAME";
     }
 }
