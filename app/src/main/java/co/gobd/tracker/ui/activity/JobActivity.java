@@ -76,11 +76,11 @@ public class JobActivity extends AppCompatActivity {
         Bundle bundleTo = new Bundle();
         bundleTo.putDouble(Constant.Job.PICKUP_LAT, pickupLat);
         bundleTo.putDouble(Constant.Job.PICKUP_LNG, pickupLng);
-        bundleTo.putString(Constant.Job.PICKUP_ADDRESS, pickupAddress);
+        bundleTo.putString(Constant.Job.PICKUP_ADDRESS, "Pickup : "+pickupAddress);
 
         bundleTo.putDouble(Constant.Job.DELIVERY_LAT, deliveryLat);
         bundleTo.putDouble(Constant.Job.DELIVERY_LNG, deliveryLng);
-        bundleTo.putString(Constant.Job.DELIVERY_ADDRESS, deliveryAddress);
+        bundleTo.putString(Constant.Job.DELIVERY_ADDRESS, "Delivery : "+deliveryAddress);
 
         //bundleOne.putDouble(Constant.Job.PICKUP_LAT, Double.parseDouble(pickupCoordinates[1]));
         //bundleOne.putDouble(Constant.Job.PICKUP_LNG, Double.parseDouble(pickupCoordinates[0]));
