@@ -256,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         bundle.putDouble(Constant.Job.DELIVERY_LAT, Double.parseDouble(deliveryCoordinates[1]));
         bundle.putDouble(Constant.Job.DELIVERY_LNG, Double.parseDouble(deliveryCoordinates[0]));
-        bundle.putString(Constant.Job.DELIVERY_ADDRESS, jobParser.getPickupLocation().getAddress());
+        bundle.putString(Constant.Job.DELIVERY_ADDRESS, jobParser.getDeliveryLocation().getAddress());
 
         Intent intent = new Intent(MainActivity.this, JobActivity.class);
         intent.putExtras(bundle);
