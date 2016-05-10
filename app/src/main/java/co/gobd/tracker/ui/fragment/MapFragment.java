@@ -65,7 +65,6 @@ public class MapFragment extends Fragment {
             e.printStackTrace();
         }
 
-
         final MarkerOptions pickupMarker = createMarkerOptions(MarkerType.PICKUP, pickupLat, pickupLng, pickupAddress);
         final MarkerOptions deliveryMarker = createMarkerOptions(MarkerType.DELIVERY, deliveryLat, deliveryLng, deliveryAddress);
 
@@ -86,7 +85,6 @@ public class MapFragment extends Fragment {
                 googleMap.addMarker(deliveryMarker);
             }
         });
-
 
         return view;
     }
