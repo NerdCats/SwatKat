@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +17,10 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
-import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.fragment.MapFragment;
 import co.gobd.tracker.ui.fragment.TaskFragment;
 import co.gobd.tracker.utility.Constant;
-import co.gobd.tracker.utility.ListParser.JobParser;
 import co.gobd.tracker.utility.SessionManager;
 
 public class JobActivity extends AppCompatActivity {
