@@ -1,14 +1,17 @@
 package co.gobd.tracker.ui.service;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -38,19 +41,15 @@ public class LocationService extends Service implements
             UPDATE_INTERVAL_IN_MILLISECONDS / 2;
 
     private static final String LOG_TAG = LocationService.class.getSimpleName();
-
+    public static Location mCurrentLocation;
     @Inject
     TrackerService trackerService;
-
     @Inject
     Context context;
-
     @Inject
     SessionManager sessionManager;
-
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
-    public static Location mCurrentLocation;
 
 
     /*//FIXME : Need to fix this. A better solution perhaps
@@ -129,23 +128,24 @@ public class LocationService extends Service implements
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, intent, 0);
 
-        // Set the Notification UI parameters
-        Notification notification = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            notification = new Notification.Builder(context)
-                    .setContentTitle("GO! Asset")
-                    .setContentText("Location tracking running...")
-                    .setContentIntent(pendingIntent)
-                    .build();
-            // Set the Notification as ongoing
-            notification.flags = notification.flags |
-                    Notification.FLAG_ONGOING_EVENT;
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setSmallIcon(R.drawable.ic_sync_white_18dp)
+                .setContentIntent(pendingIntent)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_sync_white_18dp))
+                .setContentTitle("GO! Asset")
+                .setContentText("Tracking is running...");
 
-            // Move the Service to the Foreground
-            startForeground(NOTIFICATION_ID, notification);
-        }
-        // FIXME add support for device < JELLY_BEAN
+        Notification notification = builder.build();
 
+        // Set the Notification as ongoing
+        notification.flags = notification.flags |
+                Notification.FLAG_ONGOING_EVENT;
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(NOTIFICATION_ID, notification);
+
+        // Move the Service to the Foreground
+        startForeground(NOTIFICATION_ID, notification);
     }
 
 
@@ -182,6 +182,7 @@ public class LocationService extends Service implements
         String name = sessionManager.getUsername();
         trackerService.sendLocation(mCurrentLocation.getLatitude(),
                 mCurrentLocation.getLongitude(), assetId, name, new TrackerCallback() {
+
                     @Override
                     public void onLocationSendSuccess() {
                         Toast.makeText(context, R.string.location_sent_successful,
@@ -190,7 +191,14 @@ public class LocationService extends Service implements
 
                     @Override
                     public void onLocationSendFailure() {
+                        Toast.makeText(context, R.string.location_sent_failure,
+                                Toast.LENGTH_SHORT).show();
+                    }
 
+                    @Override
+                    public void onConnectionError() {
+                        Toast.makeText(context, R.string.message_connection_error,
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
 

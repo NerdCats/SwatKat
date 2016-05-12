@@ -33,5 +33,6 @@
     <string name="label_activity_main">Home</string>
     <string name="label_activity_signup">Sign up</string>
     <string name="notification">Tracking location...</string>
+    <string name="location_sent_failure">Failed to send location</string>
 
 </resources>

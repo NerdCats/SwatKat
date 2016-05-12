@@ -3,11 +3,9 @@ package co.gobd.tracker.service.tracker;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.gobd.tracker.service.tracker.TrackerCallback;
 import co.gobd.tracker.model.tracker.Location;
 import co.gobd.tracker.model.tracker.TrackerLocation;
 import co.gobd.tracker.network.TrackerApi;
-import co.gobd.tracker.service.tracker.TrackerService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,7 +45,7 @@ public class TrackerServiceImpl implements TrackerService {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                callback.onConnectionError();
             }
         });
     }
