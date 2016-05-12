@@ -32,5 +32,6 @@
     <string name="label_activity_login">Login</string>
     <string name="label_activity_main">Home</string>
     <string name="label_activity_signup">Sign up</string>
+    <string name="notification">Tracking location...</string>
 
 </resources>

@@ -1,6 +1,6 @@
 package co.gobd.tracker.ui.service;
 
-import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.SystemClock;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -24,11 +24,14 @@ import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.service.tracker.TrackerCallback;
 import co.gobd.tracker.service.tracker.TrackerService;
+import co.gobd.tracker.ui.activity.MainActivity;
 import co.gobd.tracker.utility.SessionManager;
 
 
-public class LocationService extends Service implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class LocationService extends Service implements
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        LocationListener {
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
 
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
@@ -50,16 +53,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     public static Location mCurrentLocation;
 
 
-    public LocationService() {
-    }
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    //FIXME : Need to fix this. A better solution perhaps
+    /*//FIXME : Need to fix this. A better solution perhaps
     //http://stackoverflow.com/a/20678640
     @Override
     public void onTaskRemoved(Intent rootIntent) {
@@ -71,32 +65,34 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
                 getSystemService(Context.ALARM_SERVICE);
         alarmService.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() +1000,
                 restartServicePI);
-    }
+    }*/
 
     @Override
     public void onCreate() {
-        super.onCreate();
-
         // Injects the dependency
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
 
         buildGoogleApiClient();
-
+        mGoogleApiClient.connect();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mGoogleApiClient.connect();
-        return super.onStartCommand(intent, flags, startId);
+        return Service.START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         mGoogleApiClient.disconnect();
         String message = "Location service stopped";
         Log.i(LOG_TAG, message);
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -117,8 +113,41 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     }
 
     protected void startLocationUpdates() {
+
+        startServiceAsForeground();
+
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
     }
+
+    private void startServiceAsForeground() {
+
+        // Requires a notification to run a service as foreground
+        int NOTIFICATION_ID = 1;
+
+        // Create an Intent that will open the main Activity
+        // if the notification is clicked.
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, intent, 0);
+
+        // Set the Notification UI parameters
+        Notification notification = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            notification = new Notification.Builder(context)
+                    .setContentTitle("GO! Asset")
+                    .setContentText("Location tracking running...")
+                    .setContentIntent(pendingIntent)
+                    .build();
+            // Set the Notification as ongoing
+            notification.flags = notification.flags |
+                    Notification.FLAG_ONGOING_EVENT;
+
+            // Move the Service to the Foreground
+            startForeground(NOTIFICATION_ID, notification);
+        }
+        // FIXME add support for device < JELLY_BEAN
+
+    }
+
 
     @Override
     public void onConnected(Bundle bundle) {
