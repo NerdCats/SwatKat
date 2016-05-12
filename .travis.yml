@@ -2,42 +2,27 @@ sudo: false
 language: android
 android:
   components:
-    - tools
-    - platform-tools
-
-    # The BuildTools version used by your project
-    - build-tools-23.0.3
-
-    # The SDK version used to compile your project
-    - android-23
-
-    # Additional components
-    - extra-google-google_play_services
-    - extra-android-m2repository
-    - extra-google-m2repository
-    - extra-android-support
-
+  - tools
+  - platform-tools
+  - build-tools-23.0.3
+  - android-23
+  - extra-google-google_play_services
+  - extra-android-m2repository
+  - extra-google-m2repository
+  - extra-android-support
 before_install:
-     - chmod +x gradlew
-
+- openssl aes-256-cbc -K $encrypted_3e06dca8f225_key -iv $encrypted_3e06dca8f225_iv
+  -in keystore.jks.enc -out keystore.jks -d
+- chmod +x gradlew
 script:
-  # - echo $ADB_INSTALL_TIMEOUT
-  # - android list target
-  # Builds unsigned Release .apk
-  - ./gradlew assembleRelease
-
-
-# deploy:
-  # - provider: releases
-  #   api_key: d2fef7290112d71fe416ca00fc8c25f28a70a2bf
-   # file: app/build/outputs/apk/app-debug.apk
-   # skip_cleanup: true
-   # on:
-   #   repo: NerdCats/RoboCat
-   #   tags: true
-
-# Whitelist
+- "./gradlew assembleRelease"
 branches:
   only:
-    - master
-
+  - master
+env:
+  global:
+  - secure: DaBsRuEUgaHTPHV8nms0pJCNQ4DfC3P70lOhPlCEGZhuYhHod4/XD0UHoXggpIu1//TIp2tvZlvGTFT+6brzw1sTAGUywCtHPkUJxYuveVDqr7xV7Ay+124QuoS5m7SDkETpYyKhUhFrFQhCTl4SyDanXugK4s9/TndyM7f9Q4lQII23v1kJcm0+U0nK8xPj63rU/Mlcr4SwI8g+w7atMQtKk4Qg/p6g8I86aIPboQ7FylkfBAlKcG+3XpcKtllJKKSlz8lGgpK3MihUCq3lkein8bfj0lKay1oJug/8gPsx5UGWZ23tyVJfkVtcf08uUvs6LNj/un4+Obg6tCORHOQCrbMNGRkl5zMERsJSV6zSe4QWWHVmuMcg+T5qnWbBoSMiSKg6hN2pYroOgQsiwKJYoxFH41nXHMGozq7PcCx6SaQIvJ0ybgF0XhXZTaycs9zeem5QfMcvY81abPAFt2VTZDpiShvIox9NxE4hNpvcpoGvIxbG3RYd6UO2Sf9rWMNvIEZ5r1p6HLQY8X5XOg7UZTeiT5eTYfeE3R15LVMs4ZIGJkzblumDMGAEJYSt5p7q30twBXcVIUmFobdSfaXufvSyRlV7DJNV7nbgkHJu4VryYjBiWB0iISz0uubI6dpBNByfv3qtJOCLkx7dKqv0wwMPvADW0MR8c7MPQzM=
+  - secure: mxG3Eo0pt4UhQC7qYJbB0XjCCzXI+A9cLiWTdnsJ5aLDEt2eIQMfhPqc3q1m6fr0Eh5IQ9OKeEWosusF3uYfIvFbeQTnA45DKmNO8hIr/yWjY50EhcBF9zcIG4nq33UdDgIfsMKLNdm1Bw+d2DEY0v/SbocIhTwxvpgQ4H7J97xYAhJ6GULKwsA1YvY3XiBhdMp6CKrpg54wRGgIDljBPTwhFP0T30PGtBsK5bJ6d5M6nRnx6ekDh7KbRdc4cR8pQgkiSmJG4FwE7/g4RQw2UNX45TxhhHtFcEOyxuaUBajWcT4i3Pb8MYi3dYky5Ofs+Of3Gc3qV0ZKFF2iQYhlKx6SzVhODJvLDxR1sjXErtOEdOdom8RnLMrYtKK9TDk9x0ooFY16SnC2pruduHtG3+FF/waybwj74hDkhEcN6+jTV/HIztz63WJZ7LmRzYyVG1hahQ6l34iX3kvw6g4l8DE2ittmoIJq0fPGDM+9MWuuQtXGS0y0IP/7KDlEDawmyVaBlYoK3pm2hrN2MQjcQSBqmzZVggZVS3Qofiv5W5y+iOSoOeODsQ6vQYYpghvqvULw6SXj7cm7zy9+LEmlN+mSqnQxwMr74VqIZy3Iebkp1QcEYgbz6bRwCv+FiYORN/kuFLctSnkuoMDNXlAdVIRkRAyBnF6GNswloR/+hoo=
+after_success:
+- curl --ftp-create-dirs -T app/build/outputs/apk/go-asset-prod-release.apk -u $FTP_USER:$FTP_PASSWORD
+  ftp://builds.gobd.co/GOFetch/GOFetchAssetTracker/release/
