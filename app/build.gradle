@@ -5,10 +5,19 @@ android {
 
     signingConfigs {
         releaseSigningConfig {
-            keyAlias KEY_ALIAS
-            keyPassword KEY_PASSWORD
-            storeFile file('../keystore.jks')
-            storePassword STORE_PASSWORD
+            if (System.getenv("TRAVIS")) {
+                storeFile rootProject.file('../keystore.jks')
+                storePassword System.getenv("STORE_PASSWORD")
+                keyAlias System.getenv("KEY_ALIAS")
+                keyPassword System.getenv("KEY_PASSWORD")
+            } else {
+                keyAlias KEY_ALIAS
+                keyPassword KEY_PASSWORD
+                storeFile file('../keystore.jks')
+                storePassword STORE_PASSWORD
+            }
+
+
         }
     }
 
