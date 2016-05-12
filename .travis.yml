@@ -11,7 +11,7 @@ android:
   - extra-google-m2repository
   - extra-android-support
 before_install:
-- openssl aes-256-cbc -K $encrypted_3e06dca8f225_key -iv $encrypted_3e06dca8f225_iv in keystore.jks.enc -out keystore.jks -d
+- openssl aes-256-cbc -K $encrypted_3e06dca8f225_key -iv $encrypted_3e06dca8f225_iv -in keystore.jks.enc -out keystore.jks -d
 - chmod +x gradlew
 script:
 - "./gradlew assembleRelease"
