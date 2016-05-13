@@ -37,5 +37,5 @@ env:
   - secure: N9BbJSPHsqMluL2/MXe5Xs3XPenhToeyD4LyuBQA+7JpsOJ5KxM8WXtYTwZzSrx1SXcltYt2NB5WgueDSKSEu63slNv8zLi7FG9fa+NzvLV6fpDRxMtnRAAVklSSUdK9LXZYNPOrVCuU6Ng13IB3xV67N0fblpblU5Qv7kcWM1nLP4FDfk1LA7sSOVvJcyg3pDoj7MCWasrZmGWMy28OyOI7Fon4ZQAd27wzKQhwhkcKGEbHF5+XYQMVw6O2hyBUZguk1gNI/RT1+RsK4J2MU7/eqQA4FvMEP9dXxp5+Ldj32iHTq/bHNg3WyGMrwuJUr/dWTMwjDJqGF35LoKIzdqxTHyfRS7mcAhzbSlvEYsDhc3K8e2hkfaq3pMBX7yP1EvLPxIscCQT+5zTgCssIEGzaYujNz9gCRFW7rF3LNzP4wruNtwuQtQ0EszQajIGU6WMeQz2T+bQJLYbmrfKtKpcX0NaeEWM8/AOMyFkQRG4UjoHzznS8hlPZehE3XlPOJgjN40irDyukBcCVQJziA+LdG9vTZVFpAnsoP74cngUQ8LPvtiJKsAiqaXFl6x3pdpbYMCAQuC64lJQWVKvzxn2Tddj35GSRsltZDLMyI/EUqWp5hv/26wO3A3WS4ID5Rjb4ivpuKJ+Bagq0OzXO4RNkWYAybZEaoIj0uR07jUM=
 after_success:
   - export SSHPASS=$DEPLOY_PASS
-  - sshpass -e scp /home/travis/build/NerdCats/SwatKat/app/build/outputs/apk/go-asset-prod-release.apk $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+  - sshpass -e scp app/build/outputs/apk/go-asset-prod-release.apk $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
   
