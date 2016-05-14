@@ -14,7 +14,7 @@ android:
 addons:
   apt:
     packages:
-      - sshpass
+    - sshpass
 before_install:
 - openssl aes-256-cbc -K $encrypted_9ca5e40df743_key -iv $encrypted_9ca5e40df743_iv
   -in keystore.jks.enc -out keystore.jks -d
@@ -36,6 +36,14 @@ env:
   - secure: O0g2IO1SmR7ODDLB60nsYGVGqiVSD4KPcrX1sFh1fwzAPIetadYa5qELRwPH9d9wG20OJaeYORRe6ADevAsPEGWPpxqIkFu6GTYI2h9z759VkGivKbqu1nRRPmADxN1x6ZgHgYFSkQKwioWCMs0Agz+8AGNAOzVlZLGukKtb2tsk4JvoTRG12E940WZlKJ2thDnC9m4E6JvoAtDcNBWAP9/tFczeIrvQy96bNUfW4hl1xRK588KpIFMjRbWSLgumVYUtE1n1DMiGn3ZS5hDOet1B6ubbBw8w6hZGc4YI1lsSYvREd6AJDnd4y4E+dIxUfrPg5Boru38QD5XBJCOg8TVWz5JhSaDtteTs0naQpYEMj8T5OkKaV5pklvAs5jro4WRbFd3Ng3lEuVZY3f4GsUg3LQqk6g1If6jmR40XP2iSs8vSv5+r1IzgSqX4w6NYdh3nhyVJpYo/FUacxq2u/E/vxkB5mXYVOUpUKjUWB/e7ZovVY5xD12QmVrwA3Hbb5hXklkw3dfZOkq4F/H3MkY/khfgnyMZHkH72tpVheeUbphTczfd0dpywRTSFlClhz9OCCMekgTOZ9HNt+KQu1QxIn/zLZP5Sm5OV+gZJmItMPGMLiFucaltaFtVMNCQgC8/AyD+6W6Z4lU1g2rf3/+YxnHWj9dh8a110nzsXX5g=
   - secure: N9BbJSPHsqMluL2/MXe5Xs3XPenhToeyD4LyuBQA+7JpsOJ5KxM8WXtYTwZzSrx1SXcltYt2NB5WgueDSKSEu63slNv8zLi7FG9fa+NzvLV6fpDRxMtnRAAVklSSUdK9LXZYNPOrVCuU6Ng13IB3xV67N0fblpblU5Qv7kcWM1nLP4FDfk1LA7sSOVvJcyg3pDoj7MCWasrZmGWMy28OyOI7Fon4ZQAd27wzKQhwhkcKGEbHF5+XYQMVw6O2hyBUZguk1gNI/RT1+RsK4J2MU7/eqQA4FvMEP9dXxp5+Ldj32iHTq/bHNg3WyGMrwuJUr/dWTMwjDJqGF35LoKIzdqxTHyfRS7mcAhzbSlvEYsDhc3K8e2hkfaq3pMBX7yP1EvLPxIscCQT+5zTgCssIEGzaYujNz9gCRFW7rF3LNzP4wruNtwuQtQ0EszQajIGU6WMeQz2T+bQJLYbmrfKtKpcX0NaeEWM8/AOMyFkQRG4UjoHzznS8hlPZehE3XlPOJgjN40irDyukBcCVQJziA+LdG9vTZVFpAnsoP74cngUQ8LPvtiJKsAiqaXFl6x3pdpbYMCAQuC64lJQWVKvzxn2Tddj35GSRsltZDLMyI/EUqWp5hv/26wO3A3WS4ID5Rjb4ivpuKJ+Bagq0OzXO4RNkWYAybZEaoIj0uR07jUM=
 after_success:
-  - export SSHPASS=$DEPLOY_PASS
-  - sshpass -e scp app/build/outputs/apk/go-asset-prod-release.apk $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
-  
+- export SSHPASS=$DEPLOY_PASS
+- sshpass -e scp app/build/outputs/apk/go-asset-prod-release.apk $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+deploy:
+  provider: releases
+  api_key:
+    secure: je4PRkJUEH2hUAj5x6/W9z/XkVbtE7uTUDFbzF0NiUU8/Q8W70hjsDI9jTlyzQmS+HnBXmCn48wQDDlVNM3yg1ybxTLXGdoMAu8xQr3z0m+qsR4AhOL9QEOdWyoJZfilR9Ni9Mod7re3/rxkugYzlQNzVMJwhlujIdz248n3Akc5R/5epTNU3geqhPKuqtVsSdzHZcNKFPqSJd1IbvV1FsncB3oVFi9sRQK4iJN5F6jD0JcpR9CgTnr3C5lfhCAERQVNcCCdbvWE4yaHJA3TOgR3/lAnataA0diz4lvBQHRN7FZuBmdjXvfS2cV62ozhOc/ypMrjNi+P5UcS+wxd1IdgGLpvoG8fzlx6KjPEytlU8plDb02PgYAhwL2ysLIiaGxt53hVBeQb1dHa/84LRsKQc4i5YrTpu3Es2lR3dL2kkQe8aYwTIH/v7nfqYWvSeCkN2csl1Y7UOehqcL2Yl/Z7haoaSbbi++BeG2h6rFqBKYnpANoovmzhenKsfMcXYMRNQhqRWw663hjPt15ax7iWZZOkTsh2bYvHOOzNvk/WT0sDwbkq4Er2QFasQJgpxtL/mG4C6Fs6Cm6Q1StNBOHyPsbadaNeQylUhAgwdc8okg0ezkXCQIgHi87dUJcVxtCMyo0eovzH3OXQgXl+Dwx9sID7NfSfCSW4irA4QFM=
+  file: app/build/outputs/apk/go-asset-prod-release.apk
+  skip_cleanup: true
+  on:
+    repo: NerdCats/SwatKat
+    tags: true
