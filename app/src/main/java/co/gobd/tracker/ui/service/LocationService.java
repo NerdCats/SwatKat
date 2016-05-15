@@ -51,21 +51,6 @@ public class LocationService extends Service implements
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
 
-
-    /*//FIXME : Need to fix this. A better solution perhaps
-    //http://stackoverflow.com/a/20678640
-    @Override
-    public void onTaskRemoved(Intent rootIntent) {
-        Intent restartService = new Intent(getApplicationContext(), this.getClass());
-        restartService.setPackage(getPackageName());
-        PendingIntent restartServicePI = PendingIntent.getService(getApplicationContext(),1,
-                restartService,PendingIntent.FLAG_ONE_SHOT);
-        AlarmManager alarmService = (AlarmManager)getApplicationContext().
-                getSystemService(Context.ALARM_SERVICE);
-        alarmService.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() +1000,
-                restartServicePI);
-    }*/
-
     @Override
     public void onCreate() {
         // Injects the dependency
