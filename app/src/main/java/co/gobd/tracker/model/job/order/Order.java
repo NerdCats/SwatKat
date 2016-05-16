@@ -16,8 +16,8 @@ public class Order {
     private String Type;
     private String PayloadType;
     private String UserId;
-    private Object OrderLocation;
-    private Object ETA;
+    private Location OrderLocation;
+    private String ETA;
     private Double ETAMinutes;
     private String PaymentMethod;
 
@@ -197,7 +197,7 @@ public class Order {
      * @param OrderLocation
      *     The OrderLocation
      */
-    public void setOrderLocation(Object OrderLocation) {
+    public void setOrderLocation(Location OrderLocation) {
         this.OrderLocation = OrderLocation;
     }
 
@@ -215,7 +215,7 @@ public class Order {
      * @param ETA
      *     The ETA
      */
-    public void setETA(Object ETA) {
+    public void setETA(String ETA) {
         this.ETA = ETA;
     }
 
