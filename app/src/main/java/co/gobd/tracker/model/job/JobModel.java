@@ -3,8 +3,6 @@ package co.gobd.tracker.model.job;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.internal.bind.ArrayTypeAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +13,19 @@ import co.gobd.tracker.model.job.task.JobTask;
  * Created by fahad on 4/25/16.
  */
 public class JobModel implements Parcelable {
+
+    public static final Parcelable.Creator<JobModel> CREATOR = new Parcelable.Creator<JobModel>(){
+
+        @Override
+        public JobModel createFromParcel(Parcel source) {
+            return new JobModel(source);
+        }
+
+        @Override
+        public JobModel[] newArray(int size) {
+            return new JobModel[size];
+        }
+    };
     private String Name;
     private String State;
     private Order Order;
@@ -28,14 +39,39 @@ public class JobModel implements Parcelable {
     private String PaymentStatus;
     private String HRID;
     private String Id;
-    private List<JobTask> Tasks;
 
 
-    public JobModel(String name, String state, List<JobTask> tasks) {
+    /*public JobModel(String name, String state, List<JobTask> tasks) {
         super();
         Name = name;
         State = state;
         Tasks = tasks;
+    }*/
+    private List<JobTask> Tasks;
+
+    public JobModel(List<JobTask> tasks, String id, String HRID, String paymentStatus, Boolean deleted, String paymentMethod, String invoiceId, String preferredDeliveryTime, String modifiedTime, String createTime, co.gobd.tracker.model.job.User user, co.gobd.tracker.model.job.order.Order order, String state, String name) {
+        Tasks = tasks;
+        Id = id;
+        this.HRID = HRID;
+        PaymentStatus = paymentStatus;
+        Deleted = deleted;
+        PaymentMethod = paymentMethod;
+        InvoiceId = invoiceId;
+        PreferredDeliveryTime = preferredDeliveryTime;
+        ModifiedTime = modifiedTime;
+        CreateTime = createTime;
+        User = user;
+        Order = order;
+        State = state;
+        Name = name;
+    }
+
+
+    protected JobModel(Parcel in){
+        super();
+        this.Name = in.readString();
+        this.setTasks(new ArrayList<JobTask>());
+        in.readTypedList(getTasks(), JobTask.CREATOR);
     }
 
     @Override
@@ -44,13 +80,20 @@ public class JobModel implements Parcelable {
         dest.writeTypedList(getTasks());
     }
 
-
     public String getName(){
         return Name;
     }
 
+    public void setName(String name) {
+        Name = name;
+    }
+
     public String getState(){
         return State;
+    }
+
+    public void setState(String state) {
+        State = state;
     }
 
     public List<JobTask> getTasks(){
@@ -148,36 +191,6 @@ public class JobModel implements Parcelable {
     public void setOrder(co.gobd.tracker.model.job.order.Order order) {
         Order = order;
     }
-
-    public void setState(String state) {
-        State = state;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    protected JobModel(Parcel in){
-        super();
-        this.Name = in.readString();
-        this.setTasks(new ArrayList<JobTask>());
-        in.readTypedList(getTasks(), JobTask.CREATOR);
-    }
-
-    public static final Parcelable.Creator<JobModel> CREATOR = new Parcelable.Creator<JobModel>(){
-
-        @Override
-        public JobModel createFromParcel(Parcel source) {
-            return new JobModel(source);
-        }
-
-        @Override
-        public JobModel[] newArray(int size) {
-            return new JobModel[size];
-        }
-    };
-
-
 
     @Override
     public String toString() {

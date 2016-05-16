@@ -78,6 +78,15 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
         String Name = jsonObject.get("Name").getAsString();
         String State = jsonObject.get("State").getAsString();
+        String CreateTime = jsonObject.get("CreateTime").getAsString();
+        String ModifiedTime = jsonObject.get("ModifiedTime").getAsString();
+        String PreferredDeliveryTime = jsonObject.get("PreferredDeliveryTime").getAsString();
+        String InvoiceId = jsonObject.get("PaymentMethod").getAsString();
+        Boolean Deleted = jsonObject.get("Deleted").getAsBoolean();
+        String PaymentStatus = jsonObject.get("PaymentStatus").getAsString();
+        String HRID = jsonObject.get("HRID").getAsString();
+        String Id = jsonObject.get("Id").getAsString();
+
 
         jobModel = new JobModel(Name, State, jobTaskList);
 
