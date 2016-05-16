@@ -14,9 +14,6 @@ import java.util.List;
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.model.job.Location;
 import co.gobd.tracker.model.job.Point;
-import co.gobd.tracker.model.job.order.Order;
-import co.gobd.tracker.model.job.order.OrderCart;
-import co.gobd.tracker.model.job.order.PackageList;
 import co.gobd.tracker.model.job.task.DeliveryTask;
 import co.gobd.tracker.model.job.task.FetchDeliveryManTask;
 import co.gobd.tracker.model.job.task.JobTask;
@@ -98,29 +95,6 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
     }
 
-    public Order getOrder(JsonObject jsonObject){
-
-    }
-
-    public OrderCart getOrderCart(JsonObject jsonObject){
-
-    }
-
-    public PackageList getPackageList(JsonObject jsonObject){
-
-        String Item = jsonObject.get("Item").getAsString();
-        Integer Quantity = jsonObject.get("Quantity").getAsInt();
-        Double Price = jsonObject.get("Price").getAsDouble();
-        Double VAT = jsonObject.get("VAT").getAsDouble();
-        Double Total = jsonObject.get("Total").getAsDouble();
-        Double VATAmount = jsonObject.get("VATAmount").getAsDouble();
-        Double TotalPlusVAT = jsonObject.get("TotalPlusVAT").getAsDouble();
-        Double Weight = jsonObject.get("Weight").getAsDouble();
-
-        PackageList packageList = new PackageList(Item, Quantity, Price, VAT, Total, VATAmount,
-                TotalPlusVAT, Weight);
-        return packageList;
-    }
 
     public Location getLocation(JsonObject jsonObject){
 
