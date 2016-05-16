@@ -49,7 +49,10 @@ public class JobModel implements Parcelable {
     }*/
     private List<JobTask> Tasks;
 
-    public JobModel(List<JobTask> tasks, String id, String HRID, String paymentStatus, Boolean deleted, String paymentMethod, String invoiceId, String preferredDeliveryTime, String modifiedTime, String createTime, co.gobd.tracker.model.job.User user, co.gobd.tracker.model.job.order.Order order, String state, String name) {
+    public JobModel(List<JobTask> tasks, String id, String HRID, String paymentStatus,
+                    Boolean deleted, String paymentMethod, String invoiceId, String preferredDeliveryTime,
+                    String modifiedTime, String createTime, User user,
+                    Order order, String state, String name) {
         Tasks = tasks;
         Id = id;
         this.HRID = HRID;
