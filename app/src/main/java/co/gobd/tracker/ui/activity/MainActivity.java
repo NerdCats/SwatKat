@@ -240,8 +240,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemClick(View view, int position, JobModel jobModel) {
-        //String name = jobModel.getName();
-        //Toast.makeText(context, "Item clicked" + position, Toast.LENGTH_SHORT).show();
+
         JobParser jobParser = new JobParser(jobModel);
         String jobName = jobModel.getName();
         String[] pickupCoordinates = jobParser.getPickupLocation().getPoint().getCoordinates();

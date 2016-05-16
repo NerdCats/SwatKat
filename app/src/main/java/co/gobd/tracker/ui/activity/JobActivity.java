@@ -59,16 +59,6 @@ public class JobActivity extends AppCompatActivity {
         Double deliveryLat = bundleFrom.getDouble(Constant.Job.DELIVERY_LAT);
         Double deliveryLng = bundleFrom.getDouble(Constant.Job.DELIVERY_LNG);
 
-
-
-        //JobModel jobModel = bundleOne.getParcelable("jobModel");
-        //JobParser jobParser = new JobParser(jobModel);
-
-        //Toast.makeText(context, jobModel.getName(), Toast.LENGTH_SHORT).show();
-
-        //String[] pickupCoordinates = jobParser.getPickupLocation().getPoint().getCoordinates();
-        //String[] deliveryCoordinats = jobParser.getPickupLocation().getPoint().getCoordinates();
-
         // Fixme Replace this with getIntentData method
         Bundle bundleTo = new Bundle();
         bundleTo.putDouble(Constant.Job.PICKUP_LAT, pickupLat);
@@ -78,14 +68,6 @@ public class JobActivity extends AppCompatActivity {
         bundleTo.putDouble(Constant.Job.DELIVERY_LAT, deliveryLat);
         bundleTo.putDouble(Constant.Job.DELIVERY_LNG, deliveryLng);
         bundleTo.putString(Constant.Job.DELIVERY_ADDRESS, "Delivery : "+deliveryAddress);
-
-        //bundleOne.putDouble(Constant.Job.PICKUP_LAT, Double.parseDouble(pickupCoordinates[1]));
-        //bundleOne.putDouble(Constant.Job.PICKUP_LNG, Double.parseDouble(pickupCoordinates[0]));
-        //bundleOne.putString(Constant.Job.PICKUP_ADDRESS, jobParser.getPickupLocation().getAddress());
-
-        //bundleOne.putDouble(Constant.Job.DELIVERY_LAT, Double.parseDouble(deliveryCoordinats[1]));
-        //bundleOne.putDouble(Constant.Job.DELIVERY_LNG, Double.parseDouble(deliveryCoordinats[0]));
-        //bundleOne.putString(Constant.Job.DELIVERY_ADDRESS, jobParser.getPickupLocation().getAddress());
 
         // Fragment initialization
         mapFragment = new MapFragment();
