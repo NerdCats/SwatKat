@@ -21,7 +21,10 @@ public class Order {
     private Double ETAMinutes;
     private String PaymentMethod;
 
-    public Order(Location from, Location to, String packageDescription, co.gobd.tracker.model.job.order.OrderCart orderCart, String noteToDeliveryMan, String name, String type, String payloadType, String userId, Location orderLocation, String ETA, Double ETAMinutes, String paymentMethod) {
+    public Order(Location from, Location to, String packageDescription, OrderCart orderCart,
+                 String noteToDeliveryMan, String name, String type,
+                 String payloadType, String userId, Location orderLocation,
+                 String ETA, Double ETAMinutes, String paymentMethod) {
         From = from;
         To = to;
         PackageDescription = packageDescription;
