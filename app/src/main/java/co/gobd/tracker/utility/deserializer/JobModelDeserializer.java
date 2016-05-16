@@ -32,7 +32,8 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
     //FIXME Write unit test
     @Override
-    public JobModel deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public JobModel deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+            throws JsonParseException {
 
         List<JobTask> jobTaskList = new ArrayList<>();
 
