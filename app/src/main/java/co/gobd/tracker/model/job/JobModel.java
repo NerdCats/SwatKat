@@ -8,6 +8,7 @@ import com.google.gson.internal.bind.ArrayTypeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.gobd.tracker.model.job.order.Order;
 import co.gobd.tracker.model.job.task.JobTask;
 
 /**
@@ -16,7 +17,19 @@ import co.gobd.tracker.model.job.task.JobTask;
 public class JobModel implements Parcelable {
     private String Name;
     private String State;
+    private Order Order;
+    private User User;
+    private String CreateTime;
+    private String ModifiedTime;
+    private String PreferredDeliveryTime;
+    private String InvoiceId;
+    private String PaymentMethod;
+    private Boolean Deleted;
+    private String PaymentStatus;
+    private String HRID;
+    private String Id;
     private List<JobTask> Tasks;
+
 
     public JobModel(String name, String state, List<JobTask> tasks) {
         super();
@@ -46,6 +59,102 @@ public class JobModel implements Parcelable {
 
     public void setTasks(List<JobTask> Tasks){
         this.Tasks = Tasks;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
+    }
+
+    public String getHRID() {
+        return HRID;
+    }
+
+    public void setHRID(String HRID) {
+        this.HRID = HRID;
+    }
+
+    public String getPaymentStatus() {
+        return PaymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        PaymentStatus = paymentStatus;
+    }
+
+    public Boolean getDeleted() {
+        return Deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        Deleted = deleted;
+    }
+
+    public String getPaymentMethod() {
+        return PaymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        PaymentMethod = paymentMethod;
+    }
+
+    public String getInvoiceId() {
+        return InvoiceId;
+    }
+
+    public void setInvoiceId(String invoiceId) {
+        InvoiceId = invoiceId;
+    }
+
+    public String getPreferredDeliveryTime() {
+        return PreferredDeliveryTime;
+    }
+
+    public void setPreferredDeliveryTime(String preferredDeliveryTime) {
+        PreferredDeliveryTime = preferredDeliveryTime;
+    }
+
+    public String getModifiedTime() {
+        return ModifiedTime;
+    }
+
+    public void setModifiedTime(String modifiedTime) {
+        ModifiedTime = modifiedTime;
+    }
+
+    public String getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
+
+    public co.gobd.tracker.model.job.User getUser() {
+        return User;
+    }
+
+    public void setUser(co.gobd.tracker.model.job.User user) {
+        User = user;
+    }
+
+    public co.gobd.tracker.model.job.order.Order getOrder() {
+        return Order;
+    }
+
+    public void setOrder(co.gobd.tracker.model.job.order.Order order) {
+        Order = order;
+    }
+
+    public void setState(String state) {
+        State = state;
+    }
+
+    public void setName(String name) {
+        Name = name;
     }
 
     protected JobModel(Parcel in){
