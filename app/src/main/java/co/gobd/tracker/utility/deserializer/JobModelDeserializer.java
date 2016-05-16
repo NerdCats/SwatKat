@@ -14,6 +14,7 @@ import java.util.List;
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.model.job.Location;
 import co.gobd.tracker.model.job.Point;
+import co.gobd.tracker.model.job.order.Order;
 import co.gobd.tracker.model.job.task.DeliveryTask;
 import co.gobd.tracker.model.job.task.FetchDeliveryManTask;
 import co.gobd.tracker.model.job.task.JobTask;
@@ -79,6 +80,9 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
         String Name = jsonObject.get("Name").getAsString();
         String State = jsonObject.get("State").getAsString();
+
+        Order Order = context.deserialize(jsonObject.get("Order").getAsJsonObject(), Order.class);
+
         String CreateTime = jsonObject.get("CreateTime").getAsString();
         String ModifiedTime = jsonObject.get("ModifiedTime").getAsString();
         String PreferredDeliveryTime = jsonObject.get("PreferredDeliveryTime").getAsString();
@@ -89,7 +93,7 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
         String Id = jsonObject.get("Id").getAsString();
 
 
-        jobModel = new JobModel(Name, State, jobTaskList);
+        jobModel = new JobModel();
 
         return jobModel;
 

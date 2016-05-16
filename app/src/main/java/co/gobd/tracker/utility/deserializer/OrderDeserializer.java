@@ -27,7 +27,9 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
         Location From = LocationDeserializer.getLocation(jsonObject.get("From").getAsJsonObject());
         Location To = LocationDeserializer.getLocation(jsonObject.get("To").getAsJsonObject());
         String PackageDescription = jsonObject.get("PackageDescription").getAsString();
+
         OrderCart orderCart = context.deserialize(jsonObject.get("OrderCart").getAsJsonObject(),OrderCart.class);
+
         String NoteToDeliveryMan = jsonObject.get("NoteToDeliveryMan").getAsString();
         String Name = jsonObject.get("Name").getAsString();
         String Type = jsonObject.get("Type").getAsString();

@@ -26,6 +26,7 @@ public class JobModel implements Parcelable {
             return new JobModel[size];
         }
     };
+
     private String Name;
     private String State;
     private Order Order;
