@@ -15,6 +15,15 @@ public class OrderCart {
     private Double TotalWeight;
     private Double TotalToPay;
 
+    public OrderCart(List<co.gobd.tracker.model.job.order.PackageList> packageList, Double totalVATAmount, Double subTotal, Double serviceCharge, Double totalWeight, Double totalToPay) {
+        PackageList = packageList;
+        TotalVATAmount = totalVATAmount;
+        SubTotal = subTotal;
+        ServiceCharge = serviceCharge;
+        TotalWeight = totalWeight;
+        TotalToPay = totalToPay;
+    }
+
     /**
      *
      * @return

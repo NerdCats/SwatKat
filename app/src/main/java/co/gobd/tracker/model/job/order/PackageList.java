@@ -14,6 +14,17 @@ public class PackageList {
     private Double TotalPlusVAT;
     private Double Weight;
 
+    public PackageList(String item, Integer quantity, Double price, Double VAT, Double total, Double VATAmount, Double totalPlusVAT, Double weight) {
+        Item = item;
+        Quantity = quantity;
+        Price = price;
+        this.VAT = VAT;
+        Total = total;
+        this.VATAmount = VATAmount;
+        TotalPlusVAT = totalPlusVAT;
+        Weight = weight;
+    }
+
     /**
      *
      * @return
