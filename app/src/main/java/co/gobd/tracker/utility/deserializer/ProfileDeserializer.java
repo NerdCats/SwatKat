@@ -8,7 +8,7 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
-import co.gobd.tracker.model.user.Profile;
+import co.gobd.tracker.model.job.Profile;
 
 /**
  * Created by fahad on 5/17/16.

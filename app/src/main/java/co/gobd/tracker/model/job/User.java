@@ -1,7 +1,5 @@
 package co.gobd.tracker.model.job;
 
-import co.gobd.tracker.model.user.Profile;
-
 /**
  * Created by fahad on 5/16/16.
  */
