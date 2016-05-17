@@ -37,8 +37,16 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
         String Type = jsonObject.get("Type").getAsString();
         String PayloadType = jsonObject.get("PayloadType").getAsString();
         String UserId = jsonObject.get("UserId").getAsString();
-        Location OrderLocation = getLocation(jsonObject.get("OrderLocation").getAsJsonObject());
-        String ETA = jsonObject.get("ETA").getAsString();
+
+        //Location OrderLocation = getLocation(jsonObject.get("OrderLocation").getAsJsonObject());
+        Location OrderLocation = (jsonObject.get("OrderLocation").isJsonNull()) ?
+                null : getLocation(jsonObject.get("OrderLocation").getAsJsonObject());
+
+        //String ETA = jsonObject.get("ETA").getAsString();
+        String ETA = (jsonObject.get("ETA").isJsonNull()) ?
+                null : jsonObject.get("ETA").getAsString();
+
+
         Double ETAMinutes = jsonObject.get("ETAMinutes").getAsDouble();
         String PaymentMethod = jsonObject.get("PaymentMethod").getAsString();
 

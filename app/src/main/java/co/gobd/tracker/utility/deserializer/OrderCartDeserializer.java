@@ -38,16 +38,16 @@ public class OrderCartDeserializer implements JsonDeserializer<OrderCart> {
             Double VAT = packageList.get("VAT").getAsDouble();
             Double Total = packageList.get("Total").getAsDouble();
             Double VATAmount = packageList.get("VATAmount").getAsDouble();
-            Double TotalPlusVat = packageList.get("TotalPlusVat").getAsDouble();
+            Double TotalPlusVAT = packageList.get("TotalPlusVAT").getAsDouble();
             Double Weight = packageList.get("Weight").getAsDouble();
 
             PackageList obj = new PackageList(Item, Quantity, Price, VAT,
-                    Total, VATAmount, TotalPlusVat, Weight);
+                    Total, VATAmount, TotalPlusVAT, Weight);
 
             packageLists.add(obj);
         }
 
-        Double TotalVatAmount = jsonObject.get("TotalVatAmount").getAsDouble();
+        Double TotalVatAmount = jsonObject.get("TotalVATAmount").getAsDouble();
         Double SubTotal = jsonObject.get("SubTotal").getAsDouble();
         Double ServiceCharge = jsonObject.get("ServiceCharge").getAsDouble();
         Double TotalWeight = jsonObject.get("TotalWeight").getAsDouble();
