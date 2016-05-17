@@ -9,27 +9,35 @@ public class Profile {
     @SerializedName("NationalId")
     @Expose
     private String NationalId;
+
     @SerializedName("DriversLicenseId")
     @Expose
     private String DriversLicenseId;
+
     @SerializedName("Vehicle")
     @Expose
-    private Object Vehicle;
+    private String Vehicle;
+
     @SerializedName("FirstName")
     @Expose
     private String FirstName;
+
     @SerializedName("LastName")
     @Expose
     private String LastName;
+
     @SerializedName("Age")
     @Expose
     private Integer Age;
+
     @SerializedName("Gender")
     @Expose
     private String Gender;
+
     @SerializedName("Address")
     @Expose
     private String Address;
+
     @SerializedName("PicUri")
     @Expose
     private Object PicUri;
@@ -75,7 +83,7 @@ public class Profile {
      * @return
      *     The Vehicle
      */
-    public Object getVehicle() {
+    public String getVehicle() {
         return Vehicle;
     }
 
@@ -84,7 +92,7 @@ public class Profile {
      * @param Vehicle
      *     The Vehicle
      */
-    public void setVehicle(Object Vehicle) {
+    public void setVehicle(String Vehicle) {
         this.Vehicle = Vehicle;
     }
 

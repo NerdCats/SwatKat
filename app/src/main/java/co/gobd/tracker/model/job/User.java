@@ -1,16 +1,27 @@
 package co.gobd.tracker.model.job;
 
+import co.gobd.tracker.model.user.Profile;
+
 /**
  * Created by fahad on 5/16/16.
  */
 public class User {
 
     private String UserName;
-    private Object Profile;
+    private Profile Profile;
     private String Id;
     private String Type;
     private String PhoneNumber;
     private String Email;
+
+    public User(String userName, Profile profile, String id, String type, String phoneNumber, String email) {
+        UserName = userName;
+        Profile = profile;
+        Id = id;
+        Type = type;
+        PhoneNumber = phoneNumber;
+        Email = email;
+    }
 
     /**
      *
@@ -35,7 +46,7 @@ public class User {
      * @return
      *     The Profile
      */
-    public Object getProfile() {
+    public Profile getProfile() {
         return Profile;
     }
 
@@ -44,7 +55,7 @@ public class User {
      * @param Profile
      *     The Profile
      */
-    public void setProfile(Object Profile) {
+    public void setProfile(Profile Profile) {
         this.Profile = Profile;
     }
 
