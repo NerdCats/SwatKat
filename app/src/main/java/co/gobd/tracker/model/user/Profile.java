@@ -40,7 +40,19 @@ public class Profile {
 
     @SerializedName("PicUri")
     @Expose
-    private Object PicUri;
+    private String PicUri;
+
+    public Profile(String nationalId, String driversLicenseId, String vehicle, String firstName, String lastName, Integer age, String gender, String address, String picUri) {
+        NationalId = nationalId;
+        DriversLicenseId = driversLicenseId;
+        Vehicle = vehicle;
+        FirstName = firstName;
+        LastName = lastName;
+        Age = age;
+        Gender = gender;
+        Address = address;
+        PicUri = picUri;
+    }
 
     /**
      *
@@ -191,7 +203,7 @@ public class Profile {
      * @return
      *     The PicUri
      */
-    public Object getPicUri() {
+    public String getPicUri() {
         return PicUri;
     }
 
@@ -200,7 +212,7 @@ public class Profile {
      * @param PicUri
      *     The PicUri
      */
-    public void setPicUri(Object PicUri) {
+    public void setPicUri(String PicUri) {
         this.PicUri = PicUri;
     }
 
