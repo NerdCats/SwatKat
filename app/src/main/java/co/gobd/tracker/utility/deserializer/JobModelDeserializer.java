@@ -14,6 +14,7 @@ import java.util.List;
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.model.job.Location;
 import co.gobd.tracker.model.job.Point;
+import co.gobd.tracker.model.job.User;
 import co.gobd.tracker.model.job.order.Order;
 import co.gobd.tracker.model.job.task.DeliveryTask;
 import co.gobd.tracker.model.job.task.FetchDeliveryManTask;
@@ -34,10 +35,16 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
             throws JsonParseException {
 
         List<JobTask> jobTaskList = new ArrayList<>();
-
         final JsonObject jsonObject = json.getAsJsonObject();
-        final JsonArray tasks = jsonObject.getAsJsonArray("Tasks");
 
+
+        String Name = jsonObject.get("Name").getAsString();
+        String State = jsonObject.get("State").getAsString();
+        Order Order = context.deserialize(jsonObject.get("Order"), Order.class);
+        User User = context.deserialize(jsonObject.get("User"), User.class);
+        String JobServedBy = jsonObject.get("JobServedBy").getAsString();
+
+        final JsonArray tasks = jsonObject.getAsJsonArray("Tasks");
         for (int i = 0; i < tasks.size(); i++) {
             final JsonObject task = tasks.get(i).getAsJsonObject();
             final String type = task.get("Type").getAsString();
@@ -78,22 +85,22 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
         }
 
-        String Name = jsonObject.get("Name").getAsString();
-        String State = jsonObject.get("State").getAsString();
-
-        Order Order = context.deserialize(jsonObject.get("Order").getAsJsonObject(), Order.class);
-
         String CreateTime = jsonObject.get("CreateTime").getAsString();
         String ModifiedTime = jsonObject.get("ModifiedTime").getAsString();
         String PreferredDeliveryTime = jsonObject.get("PreferredDeliveryTime").getAsString();
         String InvoiceId = jsonObject.get("PaymentMethod").getAsString();
+        String PaymentMethod = jsonObject.get("PaymentMethod").getAsString();
         Boolean Deleted = jsonObject.get("Deleted").getAsBoolean();
         String PaymentStatus = jsonObject.get("PaymentStatus").getAsString();
         String HRID = jsonObject.get("HRID").getAsString();
         String Id = jsonObject.get("Id").getAsString();
 
 
-        jobModel = new JobModel();
+        jobModel = new JobModel(Name, State, Order,
+                User, JobServedBy, jobTaskList,
+                CreateTime, ModifiedTime, PreferredDeliveryTime,
+                InvoiceId, PaymentMethod ,Deleted, PaymentStatus,
+                HRID, Id);
 
         return jobModel;
 

@@ -31,6 +31,8 @@ public class JobModel implements Parcelable {
     private String State;
     private Order Order;
     private User User;
+    private String JobServedBy;
+    private List<JobTask> Tasks;
     private String CreateTime;
     private String ModifiedTime;
     private String PreferredDeliveryTime;
@@ -48,27 +50,8 @@ public class JobModel implements Parcelable {
         State = state;
         Tasks = tasks;
     }*/
-    private List<JobTask> Tasks;
 
-    public JobModel(List<JobTask> tasks, String id, String HRID, String paymentStatus,
-                    Boolean deleted, String paymentMethod, String invoiceId, String preferredDeliveryTime,
-                    String modifiedTime, String createTime, User user,
-                    Order order, String state, String name) {
-        Tasks = tasks;
-        Id = id;
-        this.HRID = HRID;
-        PaymentStatus = paymentStatus;
-        Deleted = deleted;
-        PaymentMethod = paymentMethod;
-        InvoiceId = invoiceId;
-        PreferredDeliveryTime = preferredDeliveryTime;
-        ModifiedTime = modifiedTime;
-        CreateTime = createTime;
-        User = user;
-        Order = order;
-        State = state;
-        Name = name;
-    }
+
 
 
     protected JobModel(Parcel in){
@@ -76,6 +59,28 @@ public class JobModel implements Parcelable {
         this.Name = in.readString();
         this.setTasks(new ArrayList<JobTask>());
         in.readTypedList(getTasks(), JobTask.CREATOR);
+    }
+
+    public JobModel(String name, String state, Order order,
+                    User user, String jobServedBy, List<JobTask> tasks,
+                    String createTime, String modifiedTime, String preferredDeliveryTime,
+                    String invoiceId, String paymentMethod, Boolean deleted, String paymentStatus,
+                    String HRID, String id) {
+        Name = name;
+        State = state;
+        Order = order;
+        User = user;
+        JobServedBy = jobServedBy;
+        Tasks = tasks;
+        CreateTime = createTime;
+        ModifiedTime = modifiedTime;
+        PreferredDeliveryTime = preferredDeliveryTime;
+        InvoiceId = invoiceId;
+        PaymentMethod = paymentMethod;
+        Deleted = deleted;
+        PaymentStatus = paymentStatus;
+        this.HRID = HRID;
+        Id = id;
     }
 
     @Override
@@ -98,6 +103,14 @@ public class JobModel implements Parcelable {
 
     public void setState(String state) {
         State = state;
+    }
+
+    public String getJobServedBy() {
+        return JobServedBy;
+    }
+
+    public void setJobServedBy(String jobServedBy) {
+        JobServedBy = jobServedBy;
     }
 
     public List<JobTask> getTasks(){
