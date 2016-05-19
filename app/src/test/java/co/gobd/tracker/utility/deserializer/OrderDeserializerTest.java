@@ -10,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import co.gobd.tracker.model.job.Location;
 import co.gobd.tracker.model.job.order.Order;
+import co.gobd.tracker.model.job.order.OrderCart;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,7 +18,6 @@ import static org.junit.Assert.assertEquals;
  * Created by fahad on 5/18/16.
  */
 
-@RunWith(MockitoJUnitRunner.class)
 public class OrderDeserializerTest {
 
     private Gson gson;
@@ -127,6 +127,7 @@ public class OrderDeserializerTest {
                 "}";
 
         Order order = gson.fromJson(json, Order.class);
+
 
         assertEquals("Falai dio na tailei hobe", order.getNoteToDeliveryMan());
         assertEquals("", order.getName());
