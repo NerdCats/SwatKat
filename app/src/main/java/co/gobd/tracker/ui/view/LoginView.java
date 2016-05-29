@@ -1,7 +1,7 @@
 package co.gobd.tracker.ui.view;
 
- /* Created by fahad on 5/29/2016.
- */
+/* Created by fahad on 5/29/2016.
+*/
 public interface LoginView {
 
     String getUserName();
@@ -27,4 +27,8 @@ public interface LoginView {
     void showUserNameEmptyError();
 
     void showPasswordEmptyError();
+
+    void saveAssetInformation(String assetId, String accessToken, String refreshToken, String bearer);
+
+    void showProfileLoadError();
 }

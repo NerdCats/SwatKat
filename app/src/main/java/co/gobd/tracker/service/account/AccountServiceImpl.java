@@ -53,7 +53,7 @@ public class AccountServiceImpl implements AccountService {
      * Logs an asset in taskCat
      */
     @Override
-    public void login(String userName, String password, final AuthenticationCallback callback) {
+    public void login(String userName, String password, final LoginCallback callback) {
 
         Call<AccessToken> call = accountApi.login(userName, password,
                 Constant.Login.grantType,
