@@ -9,9 +9,9 @@ import javax.inject.Singleton;
 import co.gobd.tracker.config.BackendUrl;
 import co.gobd.tracker.model.job.AssignedJob;
 import co.gobd.tracker.model.job.JobModel;
-import co.gobd.tracker.network.AuthenticationApi;
+
 import co.gobd.tracker.network.JobApi;
-import co.gobd.tracker.network.RegisterApi;
+import co.gobd.tracker.network.AccountApi;
 import co.gobd.tracker.network.TrackerApi;
 import co.gobd.tracker.utility.Constant;
 import co.gobd.tracker.utility.deserializer.AssignedJobDeserializer;
@@ -92,8 +92,8 @@ public class ApiModule {
 
     @Singleton
     @Provides
-    public AuthenticationApi providesAuthApi(@Named(Constant.BackendName.TASK_CAT) Retrofit retrofit) {
-        return retrofit.create(AuthenticationApi.class);
+    public AccountApi providesAuthApi(@Named(Constant.BackendName.TASK_CAT) Retrofit retrofit) {
+        return retrofit.create(AccountApi.class);
     }
 
     @Singleton
@@ -101,13 +101,5 @@ public class ApiModule {
     public JobApi providesJobApi(@Named(Constant.BackendName.TASK_CAT) Retrofit retrofit) {
         return retrofit.create(JobApi.class);
     }
-
-    @Singleton
-    @Provides
-    public RegisterApi providesRegisterApi(@Named(Constant.BackendName.TASK_CAT) Retrofit retrofit){
-        return retrofit.create(RegisterApi.class);
-    }
-
-
 
 }

@@ -13,16 +13,17 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
-import co.gobd.tracker.callback.ProfileCallback;
-import co.gobd.tracker.service.authentication.AuthenticationCallback;
-import co.gobd.tracker.service.authentication.AuthenticationService;
+import co.gobd.tracker.service.account.ProfileCallback;
+import co.gobd.tracker.service.account.AccountService;
+import co.gobd.tracker.service.account.AuthenticationCallback;
 import co.gobd.tracker.utility.ServiceUtility;
 import co.gobd.tracker.utility.SessionManager;
 
 public class LoginActivity extends AppCompatActivity {
 
     @Inject
-    AuthenticationService authService;
+    AccountService authService;
+
     @Inject
     Context context;
 
