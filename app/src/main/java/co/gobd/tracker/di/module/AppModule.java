@@ -46,7 +46,6 @@ public class AppModule {
     }
 
 
-
     @Provides
     @Singleton
     public SessionManager providesSessionManager(SharedPreferences sharedPreferences){
