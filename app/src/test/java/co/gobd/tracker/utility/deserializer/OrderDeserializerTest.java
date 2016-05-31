@@ -74,7 +74,7 @@ public class OrderDeserializerTest {
                     "\"Provider\":\"Default\"\n" +
                     "},\n" +
 
-                "\"PackageDescription\":\"Aloooz\",\n" +
+                "\"Description\":\"Aloooz\",\n" +
 
                 "\"OrderCart\":{\n" +
                     "\"PackageList\":[\n" +
