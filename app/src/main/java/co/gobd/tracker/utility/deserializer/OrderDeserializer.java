@@ -28,11 +28,12 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
 
         Location From = getLocation(jsonObject.get("From").getAsJsonObject());
         Location To = getLocation(jsonObject.get("To").getAsJsonObject());
-        String PackageDescription = jsonObject.get("PackageDescription").getAsString();
-
+        String Description = (jsonObject.get("Description").isJsonNull()) ?
+                null : jsonObject.get("Description").getAsString();
+        String NoteToDeliveryMan = jsonObject.get("NoteToDeliveryMan").getAsString();
         OrderCart orderCart = context.deserialize(jsonObject.get("OrderCart").getAsJsonObject(),OrderCart.class);
 
-        String NoteToDeliveryMan = jsonObject.get("NoteToDeliveryMan").getAsString();
+
         String Name = jsonObject.get("Name").getAsString();
         String Type = jsonObject.get("Type").getAsString();
         String PayloadType = jsonObject.get("PayloadType").getAsString();
@@ -50,7 +51,7 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
         Double ETAMinutes = jsonObject.get("ETAMinutes").getAsDouble();
         String PaymentMethod = jsonObject.get("PaymentMethod").getAsString();
 
-        order = new Order(From, To, PackageDescription, orderCart,
+        order = new Order(From, To, Description, orderCart,
                 NoteToDeliveryMan, Name, Type,
                 PayloadType, UserId, OrderLocation,
                 ETA, ETAMinutes, PaymentMethod);
