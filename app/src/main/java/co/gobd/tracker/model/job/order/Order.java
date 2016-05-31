@@ -9,7 +9,7 @@ public class Order {
 
     private Location From;
     private Location To;
-    private String PackageDescription;
+    private String Description;
     private OrderCart OrderCart;
     private String NoteToDeliveryMan;
     private String Name;
@@ -21,13 +21,13 @@ public class Order {
     private Double ETAMinutes;
     private String PaymentMethod;
 
-    public Order(Location from, Location to, String packageDescription, OrderCart orderCart,
+    public Order(Location from, Location to, String description, OrderCart orderCart,
                  String noteToDeliveryMan, String name, String type,
                  String payloadType, String userId, Location orderLocation,
                  String ETA, Double ETAMinutes, String paymentMethod) {
         From = from;
         To = to;
-        PackageDescription = packageDescription;
+        Description = description;
         OrderCart = orderCart;
         NoteToDeliveryMan = noteToDeliveryMan;
         Name = name;
@@ -81,17 +81,17 @@ public class Order {
      * @return
      *     The PackageDescription
      */
-    public String getPackageDescription() {
-        return PackageDescription;
+    public String getDescription() {
+        return Description;
     }
 
     /**
      *
-     * @param PackageDescription
-     *     The PackageDescription
+     * @param Description
+     *     The Description
      */
-    public void setPackageDescription(String PackageDescription) {
-        this.PackageDescription = PackageDescription;
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 
     /**
