@@ -18,6 +18,8 @@ public interface LoginView {
 
     void startSignUpActivity();
 
+    void startMainActivity();
+
     void showConnectionError();
 
     void showLoginError();
