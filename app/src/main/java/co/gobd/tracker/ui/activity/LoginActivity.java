@@ -67,8 +67,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         setContentView(R.layout.activity_login);
         unbinder = ButterKnife.bind(this);
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
-        loginPresenter.initialise(this);
         ServiceUtility.checkGooglePlayServices(context, this);
+        loginPresenter.initialise(this);
 
         // Toolbar setup
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
