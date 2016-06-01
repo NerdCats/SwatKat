@@ -79,6 +79,11 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
 
+        String assetId = sessionManager.getAssetId();
+        if (assetId != "default_asset_id") {
+            startMainActivity();
+        }
+
     }
 
     @OnClick({R.id.btn_signin, R.id.tvSignUp})
