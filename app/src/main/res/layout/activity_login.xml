@@ -75,7 +75,6 @@
             android:id="@+id/btn_signin"
             style="@style/ButtonLoginWidthDarkPrimaryColor"
             android:layout_below="@id/et_Password"
-            android:onClick="onLoginButtonClick"
             android:text="SIGN IN" />
 
         <TextView
@@ -93,15 +92,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-
             android:layout_alignEnd="@+id/btn_signin"
             android:layout_alignRight="@+id/btn_signin"
-            android:layout_alignTop="@+id/tv_SignUp"
+            android:layout_alignTop="@+id/tvSignUp"
             android:layout_marginEnd="82dp"
             android:layout_marginRight="82dp"
             android:clickable="true"
-            android:onClick="onSignUpButtonClick"
             android:text="@string/signUpClick"
             android:textColor="@color/colorPrimaryDark" />
 

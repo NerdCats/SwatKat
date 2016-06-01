@@ -73,6 +73,7 @@ public class LoginPresenter {
                     public void onLoadProfileSuccess(String assetId) {
                         loginView.stopProgress();
                         loginView.saveAssetInformation(assetId, accessToken, refreshToken, bearer);
+                        loginView.startMainActivity();
 
                     }
 

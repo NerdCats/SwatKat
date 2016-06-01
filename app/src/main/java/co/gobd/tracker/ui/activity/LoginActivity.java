@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rengwuxian.materialedittext.MaterialEditText;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -37,10 +39,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     LoginPresenter loginPresenter;
 
     @BindView(R.id.et_Username)
-    TextInputEditText etUsername;
+    MaterialEditText etUsername;
 
     @BindView(R.id.et_Password)
-    TextInputEditText etPassword;
+    MaterialEditText etPassword;
 
     @BindView(R.id.btn_signin)
     Button btnSignin;
@@ -67,8 +69,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         setContentView(R.layout.activity_login);
         unbinder = ButterKnife.bind(this);
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
-        ServiceUtility.checkGooglePlayServices(context, this);
         loginPresenter.initialise(this);
+        ServiceUtility.checkGooglePlayServices(context, this);
 
         // Toolbar setup
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -83,8 +85,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_signin:
-                if(loginPresenter.isValidCredentials())
+                if(loginPresenter.isValidCredentials()){
                     loginPresenter.login();
+                }
                 break;
             case R.id.tvSignUp:
                 startSignUpActivity();
