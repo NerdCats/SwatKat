@@ -12,13 +12,13 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
-import co.gobd.tracker.service.registration.RegistrationCallback;
-import co.gobd.tracker.service.registration.RegistrationService;
+import co.gobd.tracker.service.account.RegistrationCallback;
+import co.gobd.tracker.service.account.AccountService;
 
 public class SignUpActivity extends AppCompatActivity {
 
     @Inject
-    RegistrationService registrationService;
+    AccountService accountService;
 
     @Inject
     Context context;
@@ -46,7 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
         final String email = etEmail.getText().toString();
         final String phone = etPhone.getText().toString();
 
-        registrationService.getRegistered(userName, password, confirmPassword, email, phone, new RegistrationCallback() {
+        accountService.getRegistered(userName, password, confirmPassword, email, phone, new RegistrationCallback() {
 
             @Override
             public void onRegistrationSuccess() {

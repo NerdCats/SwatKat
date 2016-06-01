@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
         recyclerView.setAdapter(jobAdapter);
 
         jobAdapter.setOnJobItemClickListener(this);
-
         TextView tvAssetName = (TextView) findViewById(R.id.tvAssetName);
         String assetName = sessionManager.getUsername();
         tvAssetName.setText(assetName);
@@ -206,13 +205,6 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     public void stopLocationService() {
         Intent intent = new Intent(this, LocationService.class);
         stopService(intent);
-    }
-
-    public void onGetJobButtonClick(View view) {
-        Intent intent = new Intent(this, JobActivity.class);
-        startActivity(intent);
-        finish();
-
     }
 
     public void onSignOutButtonClick(View view) {

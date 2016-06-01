@@ -29,7 +29,7 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
 
-            android:id="@+id/etUsername"
+            android:id="@+id/et_Username"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -50,10 +50,10 @@
             app:met_underlineColor="@color/black" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/etPassword"
+            android:id="@+id/et_Password"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/etUsername"
+            android:layout_below="@id/et_Username"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:drawableLeft="@drawable/ic_lock_white_24dp"
@@ -74,8 +74,7 @@
         <Button
             android:id="@+id/btn_signin"
             style="@style/ButtonLoginWidthDarkPrimaryColor"
-            android:layout_below="@id/etPassword"
-            android:onClick="onLoginButtonClick"
+            android:layout_below="@id/et_Password"
             android:text="SIGN IN" />
 
         <TextView
@@ -93,16 +92,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-
             android:layout_alignEnd="@+id/btn_signin"
             android:layout_alignRight="@+id/btn_signin"
             android:layout_alignTop="@+id/tvSignUp"
             android:layout_marginEnd="82dp"
             android:layout_marginRight="82dp"
             android:clickable="true"
-            android:onClick="onSignUpButtonClick"
             android:text="@string/signUpClick"
             android:textColor="@color/colorPrimaryDark" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_Username"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"/>
+
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

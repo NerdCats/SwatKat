@@ -1,4 +1,4 @@
-package co.gobd.tracker.service.registration;
+package co.gobd.tracker.service.account;
 
 import co.gobd.tracker.callback.ConnectionCallback;
 

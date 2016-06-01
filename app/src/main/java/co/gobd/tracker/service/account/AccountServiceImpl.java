@@ -1,9 +1,9 @@
-package co.gobd.tracker.service.authentication;
+package co.gobd.tracker.service.account;
 
-import co.gobd.tracker.callback.ProfileCallback;
 import co.gobd.tracker.model.login.AccessToken;
+import co.gobd.tracker.model.register.Register;
 import co.gobd.tracker.model.user.User;
-import co.gobd.tracker.network.AuthenticationApi;
+import co.gobd.tracker.network.AccountApi;
 import co.gobd.tracker.utility.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -12,22 +12,50 @@ import retrofit2.Response;
 /**
  * Created by tonmoy on 12-Apr-16.
  */
-public class AuthenticationServiceImpl implements AuthenticationService {
+public class AccountServiceImpl implements AccountService {
 
     // Constructed by Dagger
-    private AuthenticationApi authenticationApi;
+    private AccountApi accountApi;
 
-    public AuthenticationServiceImpl(AuthenticationApi api) {
-        this.authenticationApi = api;
+    public AccountServiceImpl(AccountApi api) {
+        this.accountApi = api;
+    }
+
+    @Override
+    public void getRegistered(String userName, String password, String confirmPassword,
+                              String email, String phoneNumber,
+                              final RegistrationCallback registrationCallback) {
+
+        // Creates POJO
+        Register register = this.createRegisterModel(userName, password, confirmPassword, email, phoneNumber);
+
+        Call<Void> call = accountApi.registerAsset(register);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccess()){
+                    registrationCallback.onRegistrationSuccess();
+                } else {
+                    registrationCallback.onRegistrationFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                registrationCallback.onConnectionError();
+            }
+        });
+
     }
 
     /**
      * Logs an asset in taskCat
      */
     @Override
-    public void login(String userName, String password, final AuthenticationCallback callback) {
+    public void login(String userName, String password, final LoginCallback callback) {
 
-        Call<AccessToken> call = authenticationApi.login(userName, password,
+        Call<AccessToken> call = accountApi.login(userName, password,
                 Constant.Login.grantType,
                 Constant.Login.clientId,
                 Constant.Login.clientSecret);
@@ -61,7 +89,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public void getAssetProfile(String bearer, final ProfileCallback callback) {
-        Call<User> call = authenticationApi.getUserProfile(bearer);
+        Call<User> call = accountApi.getUserProfile(bearer);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -84,6 +112,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 callback.onConnectionError();
             }
         });
+
+    }
+
+    private Register createRegisterModel(String userName, String password,
+                                         String confirmPassword,
+                                         String email, String phoneNumber){
+
+        Register register = new Register(userName, password, confirmPassword, email, phoneNumber);
+
+        return register;
 
     }
 }

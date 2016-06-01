@@ -2,8 +2,10 @@ package co.gobd.tracker.network;
 
 import co.gobd.tracker.config.BackendUrl;
 import co.gobd.tracker.model.login.AccessToken;
+import co.gobd.tracker.model.register.Register;
 import co.gobd.tracker.model.user.User;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -13,7 +15,7 @@ import retrofit2.http.POST;
 /**
  * Created by fahad on 28-Mar-16.
  */
-public interface AuthenticationApi {
+public interface AccountApi {
 
     @FormUrlEncoded
     @POST(BackendUrl.TaskCat.LOGIN)
@@ -23,5 +25,8 @@ public interface AuthenticationApi {
 
     @GET(BackendUrl.TaskCat.GET_PROFILE)
     Call<User> getUserProfile(@Header("Authorization") String token);
+
+    @POST(BackendUrl.TaskCat.GET_REGISTER)
+    Call<Void> registerAsset(@Body Register register);
 
 }

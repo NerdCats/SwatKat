@@ -13,6 +13,5 @@
         android:id="@+id/tv_jobstate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_jobname"
-        tools:text="IN_PROGRESS" />
+        android:layout_below="@+id/tv_jobname"/>
 </RelativeLayout>
