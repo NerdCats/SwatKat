@@ -1,9 +1,11 @@
-
-package co.gobd.tracker.model.user;
+package co.gobd.tracker.model.job;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Created by fahad on 5/17/16.
+ */
 public class Profile {
 
     @SerializedName("NationalId")
@@ -217,3 +219,4 @@ public class Profile {
     }
 
 }
+
