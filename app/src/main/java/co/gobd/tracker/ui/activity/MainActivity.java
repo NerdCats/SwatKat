@@ -37,7 +37,7 @@ import co.gobd.tracker.utility.Constant;
 import co.gobd.tracker.utility.ListParser.JobParser;
 import co.gobd.tracker.utility.SessionManager;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnJobItemClickListener {
+public class MainActivity extends AppCompatActivity implements OnJobItemClickListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     @Inject
@@ -80,10 +80,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setAdapter(jobAdapter);
 
         jobAdapter.setOnJobItemClickListener(this);
-
-
-        btnMap = (Button) findViewById(R.id.btn_map);
-        btnMap.setOnClickListener(this);
 
 
         TextView tvAssetName = (TextView) findViewById(R.id.tvAssetName);
@@ -211,15 +207,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void stopLocationService() {
         Intent intent = new Intent(this, LocationService.class);
         stopService(intent);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_map:
-                startActivity(new Intent(MainActivity.this, JobActivity.class));
-                break;
-        }
     }
 
 
