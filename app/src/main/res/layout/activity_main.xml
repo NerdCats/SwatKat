@@ -48,23 +48,13 @@
             android:onClick="onSignOutButtonClick"
             android:text="sign out" />
 
-
-        <Button
-            android:id="@+id/btn_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/bt_sign_out"
-            android:layout_alignStart="@+id/bt_sign_out"
-            android:layout_alignTop="@+id/ib_toggle_location"
-            android:text="Show map" />
-
         <TextView
             android:id="@+id/tvAssetName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/btn_map"
+            android:layout_above="@+id/bt_sign_out"
             android:paddingBottom="16dp"
             tools:text="Logged in as Fahim" />
 
