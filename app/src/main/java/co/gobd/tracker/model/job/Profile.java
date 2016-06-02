@@ -8,18 +8,6 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Profile {
 
-    @SerializedName("NationalId")
-    @Expose
-    private String NationalId;
-
-    @SerializedName("DriversLicenseId")
-    @Expose
-    private String DriversLicenseId;
-
-    @SerializedName("Vehicle")
-    @Expose
-    private String Vehicle;
-
     @SerializedName("FirstName")
     @Expose
     private String FirstName;
@@ -36,6 +24,10 @@ public class Profile {
     @Expose
     private String Gender;
 
+    @SerializedName("InterestedLocalities")
+    @Expose
+    private String InterestedLocalities;
+
     @SerializedName("Address")
     @Expose
     private String Address;
@@ -44,70 +36,15 @@ public class Profile {
     @Expose
     private String PicUri;
 
-    public Profile(String nationalId, String driversLicenseId, String vehicle, String firstName, String lastName, Integer age, String gender, String address, String picUri) {
-        NationalId = nationalId;
-        DriversLicenseId = driversLicenseId;
-        Vehicle = vehicle;
+    public Profile(String firstName, String lastName, Integer age, String gender, String interestedLocalities, String address, String picUri) {
+
         FirstName = firstName;
         LastName = lastName;
         Age = age;
         Gender = gender;
+        InterestedLocalities = interestedLocalities;
         Address = address;
         PicUri = picUri;
-    }
-
-    /**
-     *
-     * @return
-     *     The NationalId
-     */
-    public String getNationalId() {
-        return NationalId;
-    }
-
-    /**
-     *
-     * @param NationalId
-     *     The NationalId
-     */
-    public void setNationalId(String NationalId) {
-        this.NationalId = NationalId;
-    }
-
-    /**
-     *
-     * @return
-     *     The DriversLicenseId
-     */
-    public String getDriversLicenseId() {
-        return DriversLicenseId;
-    }
-
-    /**
-     *
-     * @param DriversLicenseId
-     *     The DriversLicenseId
-     */
-    public void setDriversLicenseId(String DriversLicenseId) {
-        this.DriversLicenseId = DriversLicenseId;
-    }
-
-    /**
-     *
-     * @return
-     *     The Vehicle
-     */
-    public String getVehicle() {
-        return Vehicle;
-    }
-
-    /**
-     *
-     * @param Vehicle
-     *     The Vehicle
-     */
-    public void setVehicle(String Vehicle) {
-        this.Vehicle = Vehicle;
     }
 
     /**
@@ -180,6 +117,14 @@ public class Profile {
      */
     public void setGender(String Gender) {
         this.Gender = Gender;
+    }
+
+    public String getInterestedLocalities() {
+        return InterestedLocalities;
+    }
+
+    public void setInterestedLocalities(String interestedLocalities) {
+        InterestedLocalities = interestedLocalities;
     }
 
     /**

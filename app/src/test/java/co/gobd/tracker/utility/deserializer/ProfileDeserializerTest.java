@@ -35,28 +35,22 @@ public class ProfileDeserializerTest {
     @Test
     public void testDeserialize() throws Exception{
         String json = "{\n" +
-                        "\n" +
-                        "    \"NationalId\":null,\n" +
-                        "    \"DriversLicenseId\":null,\n" +
-                        "    \"Vehicle\":null,\n" +
-                        "    \"FirstName\":null,\n" +
-                        "    \"LastName\":null,\n" +
-                        "    \"Age\":0,\n" +
-                        "    \"Gender\":\"MALE\",\n" +
-                        "    \"Address\":null,\n" +
-                        "    \"PicUri\":null\n" +
-                        "\n" +
-                    "}";
+                "\"FirstName\":null,\n" +
+                "\"LastName\":null,\n" +
+                "\"Age\":0,\n" +
+                "\"Gender\":\"MALE\",\n" +
+                "\"InterestedLocalities\":null,\n" +
+                "\"Address\":null,\n" +
+                "\"PicUri\":null\n" +
+                "}";
 
         Profile profile = gson.fromJson(json, Profile.class);
 
-        assertEquals(null, profile.getNationalId());
-        assertEquals(null, profile.getDriversLicenseId());
-        assertEquals(null, profile.getVehicle());
         assertEquals(null, profile.getFirstName());
         assertEquals(null, profile.getLastName());
         assertEquals(new Integer(0), profile.getAge());
         assertEquals("MALE", profile.getGender());
+        assertEquals(null, profile.getInterestedLocalities());
         assertEquals(null, profile.getAddress());
         assertEquals(null, profile.getPicUri());
     }
