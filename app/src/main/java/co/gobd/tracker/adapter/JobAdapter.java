@@ -1,6 +1,7 @@
 package co.gobd.tracker.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,14 +66,18 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
     public class JobViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        CardView cardView;
         public TextView name;
         public TextView state;
+        public TextView hrid;
 
         public JobViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            cardView = (CardView) itemView.findViewById(R.id.cv_jobmodel);
             name = (TextView) itemView.findViewById(R.id.tv_jobname);
             state = (TextView) itemView.findViewById(R.id.tv_jobstate);
+            hrid = (TextView) itemView.findViewById(R.id.tv_hrid);
 
 
         }
@@ -107,6 +112,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         JobModel jobModel = jobModelList.get(position);
         holder.name.setText(jobModel.getName());
         holder.state.setText(jobModel.getState());
+        holder.hrid.setText("HRID : "+jobModel.getHRID());
     }
 
     @Override
