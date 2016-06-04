@@ -12,20 +12,7 @@ import co.gobd.tracker.model.job.task.JobTask;
 /**
  * Created by fahad on 4/25/16.
  */
-public class JobModel implements Parcelable {
-
-    public static final Parcelable.Creator<JobModel> CREATOR = new Parcelable.Creator<JobModel>(){
-
-        @Override
-        public JobModel createFromParcel(Parcel source) {
-            return new JobModel(source);
-        }
-
-        @Override
-        public JobModel[] newArray(int size) {
-            return new JobModel[size];
-        }
-    };
+public class JobModel{
 
     private String Name;
     private String State;
@@ -43,29 +30,12 @@ public class JobModel implements Parcelable {
     private String HRID;
     private String Id;
 
-
-    /*public JobModel(String name, String state, List<JobTask> tasks) {
-        super();
-        Name = name;
-        State = state;
-        Tasks = tasks;
-    }*/
-
-
-
-
-    protected JobModel(Parcel in){
-        super();
-        this.Name = in.readString();
-        this.setTasks(new ArrayList<JobTask>());
-        in.readTypedList(getTasks(), JobTask.CREATOR);
-    }
-
     public JobModel(String name, String state, Order order,
                     User user, String jobServedBy, List<JobTask> tasks,
                     String createTime, String modifiedTime, String preferredDeliveryTime,
                     String invoiceId, String paymentMethod, Boolean deleted, String paymentStatus,
                     String HRID, String id) {
+
         Name = name;
         State = state;
         Order = order;
@@ -83,11 +53,6 @@ public class JobModel implements Parcelable {
         Id = id;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags){
-        dest.writeString(getName());
-        dest.writeTypedList(getTasks());
-    }
 
     public String getName(){
         return Name;
@@ -216,11 +181,6 @@ public class JobModel implements Parcelable {
                 ", State='" + State + '\'' +
                 ", Tasks=" + Tasks +
                 '}';
-    }
-
-    @Override
-    public int describeContents() {
-        return this.hashCode();
     }
 
 }

@@ -13,18 +13,6 @@ public class FetchDeliveryManTask extends JobTask {
     private String JobTaskStateString;
     private String State;
 
-    @Override
-    public int describeContents(){
-        return this.hashCode();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags){
-        dest.writeString(getType());
-        super.writeToParcel(dest, flags);
-        dest.writeString(getState());
-    }
-
     public FetchDeliveryManTask(String jobTaskStateString, String state) {
         super(JobTaskTypes.FETCH_DELIVERYMAN, "Fetching Delivery Guy");
         JobTaskStateString = jobTaskStateString;
@@ -32,10 +20,6 @@ public class FetchDeliveryManTask extends JobTask {
         setType(JobTaskTypes.FETCH_DELIVERYMAN);
     }
 
-    public FetchDeliveryManTask(Parcel source){
-        super(source);
-        this.State = source.readString();
-    }
 
     public String getJobTaskStateString() {
         return JobTaskStateString;
@@ -53,15 +37,6 @@ public class FetchDeliveryManTask extends JobTask {
         return null;
     }
 
-    public static final Parcelable.Creator<FetchDeliveryManTask> CREATOR = new Parcelable.Creator<FetchDeliveryManTask>(){
-        public FetchDeliveryManTask createFromParcel(Parcel in){
-            return new FetchDeliveryManTask(in);
-        }
-
-        public FetchDeliveryManTask[] newArray(int size){
-            return new FetchDeliveryManTask[size];
-        }
-    };
 
     @Override
     public String toString() {

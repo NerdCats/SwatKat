@@ -25,6 +25,7 @@ public class Order {
                  String noteToDeliveryMan, String name, String type,
                  String payloadType, String userId, Location orderLocation,
                  String ETA, Double ETAMinutes, String paymentMethod) {
+
         From = from;
         To = to;
         Description = description;

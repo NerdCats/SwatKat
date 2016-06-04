@@ -14,29 +14,12 @@ public class DeliveryTask extends JobTask{
     private String State;
     private Location To;
 
-    @Override
-    public int describeContents(){
-        return this.hashCode();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags){
-        dest.writeString(getType());
-        super.writeToParcel(dest, flags);
-        dest.writeString(getState());
-    }
-
     public DeliveryTask(String jobTaskStateString, String state, Location to) {
         super(JobTaskTypes.DELIVERY, "Delivering Package");
         JobTaskStateString = jobTaskStateString;
         State = state;
         To = to;
         setType(JobTaskTypes.DELIVERY);
-    }
-
-    public DeliveryTask(Parcel source){
-        super(source);
-        this.State = source.readString();
     }
 
     public String getJobTaskStateString() {
@@ -53,15 +36,6 @@ public class DeliveryTask extends JobTask{
 
     public Location getLocation(){return To;}
 
-    public static final Parcelable.Creator<DeliveryTask> CREATOR = new Parcelable.Creator<DeliveryTask>(){
-        public DeliveryTask createFromParcel(Parcel in){
-            return new DeliveryTask(in);
-        }
-
-        public DeliveryTask[] newArray(int size){
-            return new DeliveryTask[size];
-        }
-    };
 
     @Override
     public String toString() {
