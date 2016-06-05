@@ -10,3 +10,6 @@
 keystore.jks
 *.apk
 
+app/.DS_Store
+gradle/.DS_Store
+gradle/wrapper/.DS_Store
