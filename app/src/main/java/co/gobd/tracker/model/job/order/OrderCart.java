@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class OrderCart implements Parcelable {
 
-    private List<PackageList> PackageList = new ArrayList<PackageList>();
+    private List<PackageList> ListofPackageList = new ArrayList<PackageList>();
     private Double TotalVATAmount;
     private Double SubTotal;
     private Double ServiceCharge;
@@ -20,12 +20,21 @@ public class OrderCart implements Parcelable {
 
     public OrderCart(List<PackageList> packageList, Double totalVATAmount, Double subTotal,
                      Double serviceCharge, Double totalWeight, Double totalToPay) {
-        PackageList = packageList;
+        ListofPackageList = packageList;
         TotalVATAmount = totalVATAmount;
         SubTotal = subTotal;
         ServiceCharge = serviceCharge;
         TotalWeight = totalWeight;
         TotalToPay = totalToPay;
+    }
+
+    private OrderCart(Parcel in){
+        ListofPackageList = in.readTypedList(ListofPackageList, PackageList.CREATOR);
+        TotalVATAmount = in.readDouble();
+        SubTotal = in.readDouble();
+        ServiceCharge = in.readDouble();
+        TotalWeight = in.readDouble();
+        TotalToPay = in.readDouble();
     }
 
     @Override
@@ -36,7 +45,7 @@ public class OrderCart implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
-        dest.writeList(PackageList);
+        dest.writeTypedList(ListofPackageList);
         dest.writeDouble(TotalVATAmount);
         dest.writeDouble(SubTotal);
         dest.writeDouble(ServiceCharge);
@@ -49,19 +58,19 @@ public class OrderCart implements Parcelable {
     /**
      *
      * @return
-     *     The PackageList
+     *     The ListofPackageList
      */
-    public List<PackageList> getPackageList() {
-        return PackageList;
+    public List<PackageList> getListofPackageList() {
+        return ListofPackageList;
     }
 
     /**
      *
      * @param PackageList
-     *     The PackageList
+     *     The ListofPackageList
      */
-    public void setPackageList(List<PackageList> PackageList) {
-        this.PackageList = PackageList;
+    public void setListofPackageList(List<PackageList> PackageList) {
+        this.ListofPackageList = PackageList;
     }
 
     /**
