@@ -1,12 +1,15 @@
 package co.gobd.tracker.model.job.order;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by fahad on 5/16/16.
  */
-public class OrderCart {
+public class OrderCart implements Parcelable {
 
     private List<PackageList> PackageList = new ArrayList<PackageList>();
     private Double TotalVATAmount;
@@ -24,6 +27,24 @@ public class OrderCart {
         TotalWeight = totalWeight;
         TotalToPay = totalToPay;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeList(PackageList);
+        dest.writeDouble(TotalVATAmount);
+        dest.writeDouble(SubTotal);
+        dest.writeDouble(ServiceCharge);
+        dest.writeDouble(TotalWeight);
+        dest.writeDouble(TotalToPay);
+
+    }
+
 
     /**
      *
@@ -132,6 +153,7 @@ public class OrderCart {
     public void setTotalToPay(Double TotalToPay) {
         this.TotalToPay = TotalToPay;
     }
+
 
 }
 
