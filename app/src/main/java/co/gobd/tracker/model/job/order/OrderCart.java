@@ -29,13 +29,29 @@ public class OrderCart implements Parcelable {
     }
 
     private OrderCart(Parcel in){
-        ListofPackageList = in.readTypedList(ListofPackageList, PackageList.CREATOR);
+        in.readTypedList(ListofPackageList, PackageList.CREATOR);
         TotalVATAmount = in.readDouble();
         SubTotal = in.readDouble();
         ServiceCharge = in.readDouble();
         TotalWeight = in.readDouble();
         TotalToPay = in.readDouble();
     }
+
+    public static final Parcelable.Creator<OrderCart> CREATOR
+            = new Parcelable.Creator<OrderCart>(){
+
+        @Override
+        public OrderCart createFromParcel(Parcel source) {
+            return new OrderCart(source);
+        }
+
+        @Override
+        public OrderCart[] newArray(int size) {
+            return new OrderCart[size];
+        }
+    };
+
+
 
     @Override
     public int describeContents() {
