@@ -1,11 +1,13 @@
 package co.gobd.tracker.model.job.order;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import co.gobd.tracker.model.job.Location;
 
 /**
  * Created by fahad on 5/16/16.
  */
-public class Order {
+public class Order implements Parcelable {
 
     private Location From;
     private Location To;
@@ -39,6 +41,16 @@ public class Order {
         this.ETA = ETA;
         this.ETAMinutes = ETAMinutes;
         PaymentMethod = paymentMethod;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 
     /**
