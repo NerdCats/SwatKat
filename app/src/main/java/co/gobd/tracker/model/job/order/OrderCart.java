@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class OrderCart implements Parcelable {
 
-    private List<PackageList> ListofPackageList = new ArrayList<PackageList>();
+    private List<PackageList> ListofPackageList = new ArrayList<>();
     private Double TotalVATAmount;
     private Double SubTotal;
     private Double ServiceCharge;

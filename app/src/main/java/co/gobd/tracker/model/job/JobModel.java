@@ -8,11 +8,12 @@ import java.util.List;
 
 import co.gobd.tracker.model.job.order.Order;
 import co.gobd.tracker.model.job.task.JobTask;
+import co.gobd.tracker.utility.Constant;
 
 /**
  * Created by fahad on 4/25/16.
  */
-public class JobModel{
+public class JobModel implements Parcelable{
 
     private String Name;
     private String State;
@@ -29,6 +30,61 @@ public class JobModel{
     private String PaymentStatus;
     private String HRID;
     private String Id;
+
+    public static final Parcelable.Creator<JobModel> CREATOR
+            = new Parcelable.Creator<JobModel>(){
+        @Override
+        public JobModel createFromParcel(Parcel source) {
+            return new JobModel(source);
+        }
+
+        @Override
+        public JobModel[] newArray(int size) {
+            return new JobModel[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(Name);
+        dest.writeString(State);
+        dest.writeParcelable(Order, flags);
+        dest.writeParcelable(User, flags);
+        dest.writeString(JobServedBy);
+        dest.writeTypedList(Tasks);
+        dest.writeString(CreateTime);
+        dest.writeString(ModifiedTime);
+        dest.writeString(PreferredDeliveryTime);
+        dest.writeString(InvoiceId);
+        dest.writeString(PaymentMethod);
+        dest.writeValue(Deleted);
+        dest.writeString(PaymentStatus);
+        dest.writeString(HRID);
+        dest.writeString(Id);
+    }
+
+    private JobModel(Parcel in){
+        Name = in.readString();
+        State = in.readString();
+        Order = in.readParcelable(Location.class.getClassLoader());
+        User = in.readParcelable(User.class.getClassLoader());
+        JobServedBy = in.readString();
+        in.readTypedList(Tasks, JobTask.CREATOR);
+        CreateTime = in.readString();
+        ModifiedTime = in.readString();
+        PreferredDeliveryTime = in.readString();
+        InvoiceId = in.readString();
+        PaymentMethod = in.readString();
+        Deleted = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        PaymentStatus = in.readString();
+        HRID = in.readString();
+        Id = in.readString();
+    }
 
     public JobModel(String name, String state, Order order,
                     User user, String jobServedBy, List<JobTask> tasks,
