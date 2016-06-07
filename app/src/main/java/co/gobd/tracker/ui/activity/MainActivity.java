@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     @Override
     public void onItemClick(View view, int position, JobModel jobModel) {
 
-        JobParser jobParser = new JobParser(jobModel);
+        /*JobParser jobParser = new JobParser(jobModel);
         String jobName = jobModel.getName();
         String[] pickupCoordinates = jobParser.getPickupLocation().getPoint().getCoordinates();
         String[] deliveryCoordinates = jobParser.getDeliveryLocation().getPoint().getCoordinates();
@@ -237,6 +237,12 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
 
         Intent intent = new Intent(MainActivity.this, JobActivity.class);
         intent.putExtras(bundle);
+        startActivity(intent);*/
+
+        Intent intent = new Intent(this, JobActivity.class);
+        intent.putExtra("JobModel", jobModel);
         startActivity(intent);
+
+
     }
 }

@@ -74,6 +74,7 @@ public class JobModel implements Parcelable{
         Order = in.readParcelable(Location.class.getClassLoader());
         User = in.readParcelable(User.class.getClassLoader());
         JobServedBy = in.readString();
+        Tasks = new ArrayList<>();
         in.readTypedList(Tasks, JobTask.CREATOR);
         CreateTime = in.readString();
         ModifiedTime = in.readString();

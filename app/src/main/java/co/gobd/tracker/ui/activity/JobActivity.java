@@ -17,6 +17,7 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
+import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.fragment.MapFragment;
 import co.gobd.tracker.ui.fragment.TaskFragment;
@@ -50,8 +51,8 @@ public class JobActivity extends AppCompatActivity {
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
 
         Bundle bundleFrom = getIntent().getExtras();
-
-        String jobName = bundleFrom.getString(Constant.Job.JOB_NAME);
+        JobModel jobModel = bundleFrom.getParcelable("JobModel");
+        /*String jobName = bundleFrom.getString(Constant.Job.JOB_NAME);
         String pickupAddress = bundleFrom.getString(Constant.Job.PICKUP_ADDRESS);
         String deliveryAddress = bundleFrom.getString(Constant.Job.DELIVERY_ADDRESS);
         Double pickupLat = bundleFrom.getDouble(Constant.Job.PICKUP_LAT);
@@ -67,7 +68,7 @@ public class JobActivity extends AppCompatActivity {
 
         bundleTo.putDouble(Constant.Job.DELIVERY_LAT, deliveryLat);
         bundleTo.putDouble(Constant.Job.DELIVERY_LNG, deliveryLng);
-        bundleTo.putString(Constant.Job.DELIVERY_ADDRESS, "Delivery : "+deliveryAddress);
+        bundleTo.putString(Constant.Job.DELIVERY_ADDRESS, "Delivery : "+deliveryAddress);*/
 
         // Fragment initialization
         mapFragment = new MapFragment();

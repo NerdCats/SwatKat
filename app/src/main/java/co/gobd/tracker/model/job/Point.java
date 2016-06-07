@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class Point implements Parcelable {
 
     private String type;
-    private String[] coordinates;
+    private String[] coordinates = new String[2];
 
     public Point(String type, String[] coordinates) {
         this.type = type;
@@ -20,7 +20,9 @@ public class Point implements Parcelable {
 
     private Point(Parcel in){
         type = in.readString();
-        in.readStringArray(coordinates);
+        coordinates[0] = in.readString();
+        coordinates[1] = in.readString();
+
     }
 
     public String getType() {
@@ -29,6 +31,14 @@ public class Point implements Parcelable {
 
     public String[] getCoordinates() {
         return coordinates;
+    }
+
+    public String getLongitude(){
+        return coordinates[0];
+    }
+
+    public String getLatitude(){
+        return coordinates[1];
     }
 
     @Override
@@ -45,7 +55,8 @@ public class Point implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
 
         dest.writeString(type);
-        dest.writeStringArray(coordinates);
+        dest.writeString(getLongitude());
+        dest.writeString(getLatitude());
 
     }
 
