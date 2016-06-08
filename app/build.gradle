@@ -104,4 +104,11 @@ dependencies {
 
 
     androidTestCompile 'junit:junit:4.12'
+    // Solves "versions for app (23.3.0) and test app (23.1.1) differ"
+    androidTestCompile 'com.android.support:support-annotations:23.3.0'
+
+    // Android JUnit Runner
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    // JUnit4 Rules
+    androidTestCompile 'com.android.support.test:rules:0.5'
 }
