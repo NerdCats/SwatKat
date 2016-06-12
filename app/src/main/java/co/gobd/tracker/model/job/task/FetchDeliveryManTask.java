@@ -8,22 +8,10 @@ import co.gobd.tracker.model.job.Location;
 /**
  * Created by fahad on 4/25/16.
  */
-public class FetchDeliveryManTask extends JobTask {
+public class FetchDeliveryManTask extends JobTask implements Parcelable {
 
     private String JobTaskStateString;
     private String State;
-
-    @Override
-    public int describeContents(){
-        return this.hashCode();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags){
-        dest.writeString(getType());
-        super.writeToParcel(dest, flags);
-        dest.writeString(getState());
-    }
 
     public FetchDeliveryManTask(String jobTaskStateString, String state) {
         super(JobTaskTypes.FETCH_DELIVERYMAN, "Fetching Delivery Guy");
@@ -32,10 +20,25 @@ public class FetchDeliveryManTask extends JobTask {
         setType(JobTaskTypes.FETCH_DELIVERYMAN);
     }
 
-    public FetchDeliveryManTask(Parcel source){
-        super(source);
-        this.State = source.readString();
+    public FetchDeliveryManTask(Parcel in){
+        super(in);
+        JobTaskStateString = in.readString();
+        State = in.readString();
     }
+
+    public static final Parcelable.Creator<FetchDeliveryManTask> CREATOR
+            = new Parcelable.Creator<FetchDeliveryManTask>(){
+        @Override
+        public FetchDeliveryManTask createFromParcel(Parcel source) {
+            return new FetchDeliveryManTask(source);
+        }
+
+        @Override
+        public FetchDeliveryManTask[] newArray(int size) {
+            return new FetchDeliveryManTask[size];
+        }
+    };
+
 
     public String getJobTaskStateString() {
         return JobTaskStateString;
@@ -53,15 +56,6 @@ public class FetchDeliveryManTask extends JobTask {
         return null;
     }
 
-    public static final Parcelable.Creator<FetchDeliveryManTask> CREATOR = new Parcelable.Creator<FetchDeliveryManTask>(){
-        public FetchDeliveryManTask createFromParcel(Parcel in){
-            return new FetchDeliveryManTask(in);
-        }
-
-        public FetchDeliveryManTask[] newArray(int size){
-            return new FetchDeliveryManTask[size];
-        }
-    };
 
     @Override
     public String toString() {
@@ -69,5 +63,18 @@ public class FetchDeliveryManTask extends JobTask {
                 "JobTaskStateString='" + JobTaskStateString + '\'' +
                 ", State='" + State + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return super.describeContents();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(CLASS_TYPE_FETCH_DELIVERY_MAN_TASK);
+        super.writeToParcel(dest, flags);
+        dest.writeString(JobTaskStateString);
+        dest.writeString(State);
     }
 }

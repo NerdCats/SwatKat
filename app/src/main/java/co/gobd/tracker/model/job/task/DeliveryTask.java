@@ -8,23 +8,11 @@ import co.gobd.tracker.model.job.Location;
 /**
  * Created by fahad on 4/25/16.
  */
-public class DeliveryTask extends JobTask{
+public class DeliveryTask extends JobTask implements Parcelable{
 
     private String JobTaskStateString;
     private String State;
     private Location To;
-
-    @Override
-    public int describeContents(){
-        return this.hashCode();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags){
-        dest.writeString(getType());
-        super.writeToParcel(dest, flags);
-        dest.writeString(getState());
-    }
 
     public DeliveryTask(String jobTaskStateString, String state, Location to) {
         super(JobTaskTypes.DELIVERY, "Delivering Package");
@@ -34,10 +22,25 @@ public class DeliveryTask extends JobTask{
         setType(JobTaskTypes.DELIVERY);
     }
 
-    public DeliveryTask(Parcel source){
-        super(source);
-        this.State = source.readString();
+    public DeliveryTask(Parcel in){
+        super(in);
+        JobTaskStateString = in.readString();
+        State = in.readString();
+        To = in.readParcelable(Location.class.getClassLoader());
     }
+
+    public static final Parcelable.Creator<DeliveryTask> CREATOR
+            = new Parcelable.Creator<DeliveryTask>() {
+        @Override
+        public DeliveryTask createFromParcel(Parcel source) {
+            return new DeliveryTask(source);
+        }
+
+        @Override
+        public DeliveryTask[] newArray(int size) {
+            return new DeliveryTask[size];
+        }
+    };
 
     public String getJobTaskStateString() {
         return JobTaskStateString;
@@ -53,15 +56,6 @@ public class DeliveryTask extends JobTask{
 
     public Location getLocation(){return To;}
 
-    public static final Parcelable.Creator<DeliveryTask> CREATOR = new Parcelable.Creator<DeliveryTask>(){
-        public DeliveryTask createFromParcel(Parcel in){
-            return new DeliveryTask(in);
-        }
-
-        public DeliveryTask[] newArray(int size){
-            return new DeliveryTask[size];
-        }
-    };
 
     @Override
     public String toString() {
@@ -70,5 +64,19 @@ public class DeliveryTask extends JobTask{
                 ", State='" + State + '\'' +
                 ", To=" + To +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return super.describeContents();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(CLASS_TYPE_DELIVERY_TASK);
+        super.writeToParcel(dest, flags);
+        dest.writeString(JobTaskStateString);
+        dest.writeString(State);
+        dest.writeParcelable(To, flags);
     }
 }

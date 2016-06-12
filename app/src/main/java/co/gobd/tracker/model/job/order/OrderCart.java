@@ -1,14 +1,17 @@
 package co.gobd.tracker.model.job.order;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by fahad on 5/16/16.
  */
-public class OrderCart {
+public class OrderCart implements Parcelable {
 
-    private List<PackageList> PackageList = new ArrayList<PackageList>();
+    private List<PackageList> ListofPackageList = new ArrayList<>();
     private Double TotalVATAmount;
     private Double SubTotal;
     private Double ServiceCharge;
@@ -17,7 +20,7 @@ public class OrderCart {
 
     public OrderCart(List<PackageList> packageList, Double totalVATAmount, Double subTotal,
                      Double serviceCharge, Double totalWeight, Double totalToPay) {
-        PackageList = packageList;
+        ListofPackageList = packageList;
         TotalVATAmount = totalVATAmount;
         SubTotal = subTotal;
         ServiceCharge = serviceCharge;
@@ -25,22 +28,65 @@ public class OrderCart {
         TotalToPay = totalToPay;
     }
 
+    private OrderCart(Parcel in){
+        in.readTypedList(ListofPackageList, PackageList.CREATOR);
+        TotalVATAmount = in.readDouble();
+        SubTotal = in.readDouble();
+        ServiceCharge = in.readDouble();
+        TotalWeight = in.readDouble();
+        TotalToPay = in.readDouble();
+    }
+
+    public static final Parcelable.Creator<OrderCart> CREATOR
+            = new Parcelable.Creator<OrderCart>(){
+
+        @Override
+        public OrderCart createFromParcel(Parcel source) {
+            return new OrderCart(source);
+        }
+
+        @Override
+        public OrderCart[] newArray(int size) {
+            return new OrderCart[size];
+        }
+    };
+
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeTypedList(ListofPackageList);
+        dest.writeDouble(TotalVATAmount);
+        dest.writeDouble(SubTotal);
+        dest.writeDouble(ServiceCharge);
+        dest.writeDouble(TotalWeight);
+        dest.writeDouble(TotalToPay);
+
+    }
+
+
     /**
      *
      * @return
-     *     The PackageList
+     *     The ListofPackageList
      */
-    public List<PackageList> getPackageList() {
-        return PackageList;
+    public List<PackageList> getListofPackageList() {
+        return ListofPackageList;
     }
 
     /**
      *
      * @param PackageList
-     *     The PackageList
+     *     The ListofPackageList
      */
-    public void setPackageList(List<PackageList> PackageList) {
-        this.PackageList = PackageList;
+    public void setListofPackageList(List<PackageList> PackageList) {
+        this.ListofPackageList = PackageList;
     }
 
     /**
@@ -132,6 +178,7 @@ public class OrderCart {
     public void setTotalToPay(Double TotalToPay) {
         this.TotalToPay = TotalToPay;
     }
+
 
 }
 

@@ -71,7 +71,7 @@ public class OrderCartDeserializerTest {
 
         OrderCart orderCart = gson.fromJson(json, OrderCart.class);
 
-        assertNotEquals(orderCart.getPackageList().size(), 0);
+        assertNotEquals(orderCart.getListofPackageList().size(), 0);
         assertEquals(new Double(1.10), orderCart.getTotalVATAmount());
         assertEquals(new Double(11.10), orderCart.getSubTotal());
         assertEquals(new Double(0.0), orderCart.getServiceCharge());

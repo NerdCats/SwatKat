@@ -1,9 +1,12 @@
 package co.gobd.tracker.model.job.order;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by fahad on 5/16/16.
  */
-public class PackageList {
+public class PackageList implements Parcelable {
 
     private String Item;
     private Integer Quantity;
@@ -24,6 +27,49 @@ public class PackageList {
         TotalPlusVAT = totalPlusVAT;
         Weight = weight;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(Item);
+        dest.writeInt(Quantity);
+        dest.writeDouble(Price);
+        dest.writeDouble(VAT);
+        dest.writeDouble(Total);
+        dest.writeDouble(VATAmount);
+        dest.writeDouble(TotalPlusVAT);
+        dest.writeDouble(Weight);
+    }
+
+    private PackageList(Parcel in){
+        Item = in.readString();
+        Quantity = in.readInt();
+        Price = in.readDouble();
+        VAT = in.readDouble();
+        Total = in.readDouble();
+        VATAmount = in.readDouble();
+        TotalPlusVAT = in.readDouble();
+        Weight = in.readDouble();
+    }
+
+    public static final Parcelable.Creator<PackageList> CREATOR
+            = new Parcelable.Creator<PackageList>(){
+
+        @Override
+        public PackageList createFromParcel(Parcel source) {
+            return new PackageList(source);
+        }
+
+        @Override
+        public PackageList[] newArray(int size) {
+            return new PackageList[size];
+        }
+    };
 
     /**
      *

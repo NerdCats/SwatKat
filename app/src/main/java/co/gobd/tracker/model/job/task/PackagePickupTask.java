@@ -8,23 +8,11 @@ import co.gobd.tracker.model.job.Location;
 /**
  * Created by fahad on 4/25/16.
  */
-public class PackagePickupTask extends JobTask {
+public class PackagePickupTask extends JobTask implements Parcelable {
 
     private String JobTaskStateString;
     private String State;
     private Location From;
-
-    @Override
-    public int describeContents(){
-        return this.hashCode();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags){
-        dest.writeString(getType());
-        super.writeToParcel(dest, flags);
-        dest.writeString(getState());
-    }
 
     public PackagePickupTask(String jobTaskStateString, String state, Location from) {
         super(JobTaskTypes.PACKAGE_PICKUP, "Picking Up Package");
@@ -34,10 +22,25 @@ public class PackagePickupTask extends JobTask {
         setType(JobTaskTypes.PACKAGE_PICKUP);
     }
 
-    public PackagePickupTask(Parcel source){
-        super(source);
-        this.State = source.readString();
+    public PackagePickupTask(Parcel in){
+        super(in);
+        JobTaskStateString = in.readString();
+        State = in.readString();
+        From = in.readParcelable(Location.class.getClassLoader());
     }
+
+    public static final Parcelable.Creator<PackagePickupTask> CREATOR
+            = new Parcelable.Creator<PackagePickupTask>(){
+        @Override
+        public PackagePickupTask createFromParcel(Parcel source) {
+            return new PackagePickupTask(source);
+        }
+
+        @Override
+        public PackagePickupTask[] newArray(int size) {
+            return new PackagePickupTask[size];
+        }
+    };
 
     public String getJobTaskStateString() {
         return JobTaskStateString;
@@ -53,15 +56,6 @@ public class PackagePickupTask extends JobTask {
 
     public Location getLocation() { return From; }
 
-    public static final Parcelable.Creator<PackagePickupTask> CREATOR = new Parcelable.Creator<PackagePickupTask>(){
-        public PackagePickupTask createFromParcel(Parcel in){
-            return new PackagePickupTask(in);
-        }
-
-        public PackagePickupTask[] newArray(int size){
-            return new PackagePickupTask[size];
-        }
-    };
 
     @Override
     public String toString() {
@@ -71,4 +65,19 @@ public class PackagePickupTask extends JobTask {
                 ", From=" + From +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return super.describeContents();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(CLASS_TYPE_PACKAGE_PICKUP_TASK);
+        super.writeToParcel(dest, flags);
+        dest.writeString(JobTaskStateString);
+        dest.writeString(State);
+        dest.writeParcelable(From, flags);
+    }
+
 }
