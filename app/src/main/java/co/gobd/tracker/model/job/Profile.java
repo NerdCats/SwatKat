@@ -57,7 +57,7 @@ public class Profile implements Parcelable {
     }
 
     public static final Parcelable.Creator<Profile> CREATOR
-            = new Parcelable.Creator<Profile>(){
+            = new Parcelable.Creator<Profile>() {
 
         @Override
         public Profile createFromParcel(Parcel source) {
@@ -70,7 +70,7 @@ public class Profile implements Parcelable {
         }
     };
 
-    private Profile(Parcel in){
+    private Profile(Parcel in) {
         FirstName = in.readString();
         LastName = in.readString();
         Age = in.readInt();
@@ -94,72 +94,56 @@ public class Profile implements Parcelable {
     }
 
     /**
-     *
-     * @return
-     *     The FirstName
+     * @return The FirstName
      */
     public String getFirstName() {
         return FirstName;
     }
 
     /**
-     *
-     * @param FirstName
-     *     The FirstName
+     * @param FirstName The FirstName
      */
     public void setFirstName(String FirstName) {
         this.FirstName = FirstName;
     }
 
     /**
-     *
-     * @return
-     *     The LastName
+     * @return The LastName
      */
     public String getLastName() {
         return LastName;
     }
 
     /**
-     *
-     * @param LastName
-     *     The LastName
+     * @param LastName The LastName
      */
     public void setLastName(String LastName) {
         this.LastName = LastName;
     }
 
     /**
-     *
-     * @return
-     *     The Age
+     * @return The Age
      */
     public Integer getAge() {
         return Age;
     }
 
     /**
-     *
-     * @param Age
-     *     The Age
+     * @param Age The Age
      */
     public void setAge(Integer Age) {
         this.Age = Age;
     }
 
     /**
-     *
-     * @return
-     *     The Gender
+     * @return The Gender
      */
     public String getGender() {
         return Gender;
     }
 
     /**
-     *
-     * @param Gender
-     *     The Gender
+     * @param Gender The Gender
      */
     public void setGender(String Gender) {
         this.Gender = Gender;
@@ -174,36 +158,28 @@ public class Profile implements Parcelable {
     }
 
     /**
-     *
-     * @return
-     *     The Address
+     * @return The Address
      */
     public String getAddress() {
         return Address;
     }
 
     /**
-     *
-     * @param Address
-     *     The Address
+     * @param Address The Address
      */
     public void setAddress(String Address) {
         this.Address = Address;
     }
 
     /**
-     *
-     * @return
-     *     The PicUri
+     * @return The PicUri
      */
     public String getPicUri() {
         return PicUri;
     }
 
     /**
-     *
-     * @param PicUri
-     *     The PicUri
+     * @param PicUri The PicUri
      */
     public void setPicUri(String PicUri) {
         this.PicUri = PicUri;
