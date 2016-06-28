@@ -6,6 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,12 +25,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import co.gobd.tracker.R;
 import co.gobd.tracker.adapter.JobAdapter;
 import co.gobd.tracker.application.GoAssetApplication;
@@ -33,9 +32,10 @@ import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.service.LocationService;
 import co.gobd.tracker.ui.view.OnJobItemClickListener;
-import co.gobd.tracker.utility.Constant;
-import co.gobd.tracker.utility.ListParser.JobParser;
 import co.gobd.tracker.utility.SessionManager;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements OnJobItemClickListener {
 
@@ -52,7 +52,11 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     private List<JobModel> jobModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private JobAdapter jobAdapter;
+    private Toolbar toolbar;
 
+    private NavigationView nvDrawer;
+    private ActionBarDrawerToggle drawerToggle;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +66,14 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
 
         // Toolbar setup
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
+        /*if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
+        }*/
+
+        // Sets the drawer view
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         String assetId = sessionManager.getAssetId();
         String bearer = sessionManager.getBearer();
@@ -121,16 +128,20 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
         return true;
     }
 
+    @Override protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
