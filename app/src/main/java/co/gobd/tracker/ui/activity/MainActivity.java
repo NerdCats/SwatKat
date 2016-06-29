@@ -22,7 +22,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,8 +35,6 @@ import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.service.LocationService;
 import co.gobd.tracker.ui.view.OnJobItemClickListener;
 import co.gobd.tracker.utility.SessionManager;
-import java.util.ArrayList;
-import java.util.List;
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements OnJobItemClickListener {
@@ -51,14 +48,11 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
   @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
   @BindView(R.id.navigation_view) NavigationView navigationView;
+  @BindView(R.id.rv_joblist) RecyclerView rvJobList;
 
   private ImageButton ibToggleStartStop;
-  private Button btnMap;
 
-  private List<JobModel> jobModelList = new ArrayList<>();
-  private RecyclerView recyclerView;
   private JobAdapter jobAdapter;
-
 
   private ActionBarDrawerToggle drawerToggle;
 
@@ -84,13 +78,13 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     String assetId = sessionManager.getAssetId();
     String bearer = sessionManager.getBearer();
 
-    recyclerView = (RecyclerView) findViewById(R.id.rv_joblist);
+    rvJobList = (RecyclerView) findViewById(R.id.rv_joblist);
 
     jobAdapter = new JobAdapter(context, jobService, bearer, assetId);
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-    recyclerView.setLayoutManager(layoutManager);
-    recyclerView.setItemAnimator(new DefaultItemAnimator());
-    recyclerView.setAdapter(jobAdapter);
+    rvJobList.setLayoutManager(layoutManager);
+    rvJobList.setItemAnimator(new DefaultItemAnimator());
+    rvJobList.setAdapter(jobAdapter);
 
     jobAdapter.setOnJobItemClickListener(this);
     String assetName = sessionManager.getUsername();
