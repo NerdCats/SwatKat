@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
 
   @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
+  @BindView(R.id.navigation_view) NavigationView navigationView;
 
   private ImageButton ibToggleStartStop;
   private Button btnMap;
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
   private JobAdapter jobAdapter;
 
 
-  private NavigationView nvDrawer;
   private ActionBarDrawerToggle drawerToggle;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     }
 
     drawerToggle = setupDrawerToggle();
-    nvDrawer = (NavigationView) findViewById(R.id.navigation_view);
 
     // Tie DrawerLayout events to the ActionBarToggle
     drawerLayout.addDrawerListener(drawerToggle);
@@ -95,8 +94,8 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     jobAdapter.setOnJobItemClickListener(this);
     String assetName = sessionManager.getUsername();
 
-    View headerLayout = nvDrawer.getHeaderView(0);
-    TextView tvAssetName = (TextView) headerLayout.findViewById(R.id.nav_header_asset_name);
+    View headerLayout = navigationView.getHeaderView(0);
+    TextView tvAssetName = ButterKnife.findById(headerLayout, R.id.nav_header_asset_name);
     tvAssetName.setText(assetName);
 
     ibToggleStartStop = (ImageButton) findViewById(R.id.ib_toggle_location);
