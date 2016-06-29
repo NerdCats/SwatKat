@@ -4,11 +4,11 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
   private List<JobModel> jobModelList = new ArrayList<>();
   private RecyclerView recyclerView;
   private JobAdapter jobAdapter;
-  private Toolbar toolbar;
 
+  private Toolbar toolbar;
   private NavigationView nvDrawer;
   private ActionBarDrawerToggle drawerToggle;
   private DrawerLayout drawerLayout;
@@ -71,6 +71,11 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
 
     // Sets the drawer view
     drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+    drawerToggle = setupDrawerToggle();
+    nvDrawer = (NavigationView) findViewById(R.id.navigation_view);
+
+    // Tie DrawerLayout events to the ActionBarToggle
+    drawerLayout.addDrawerListener(drawerToggle);
 
     String assetId = sessionManager.getAssetId();
     String bearer = sessionManager.getBearer();
@@ -84,8 +89,10 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     recyclerView.setAdapter(jobAdapter);
 
     jobAdapter.setOnJobItemClickListener(this);
-    TextView tvAssetName = (TextView) findViewById(R.id.tvAssetName);
     String assetName = sessionManager.getUsername();
+
+    View headerLayout = nvDrawer.getHeaderView(0);
+    TextView tvAssetName = (TextView) headerLayout.findViewById(R.id.nav_header_asset_name);
     tvAssetName.setText(assetName);
 
     ibToggleStartStop = (ImageButton) findViewById(R.id.ib_toggle_location);
@@ -101,6 +108,11 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
         }
       }
     });
+  }
+
+  private ActionBarDrawerToggle setupDrawerToggle() {
+    return new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open,
+        R.string.drawer_close);
   }
 
   @Override protected void onResume() {
@@ -121,16 +133,22 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
 
   @Override protected void onPostCreate(@Nullable Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
+    // Sync the toggle state after onRestoreInstanceState has occurred.
+    drawerToggle.syncState();
+  }
+
+  @Override public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    // Pass any configuration change to the drawer toggles
+    drawerToggle.onConfigurationChanged(newConfig);
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     // Handle action bar item clicks here. The action bar will
     // automatically handle clicks on the Home/Up button, so long
     // as you specify a parent activity in AndroidManifest.xml.
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        drawerLayout.openDrawer(GravityCompat.START);
-        return true;
+    if (drawerToggle.onOptionsItemSelected(item)) {
+      return true;
     }
 
     return super.onOptionsItemSelected(item);
