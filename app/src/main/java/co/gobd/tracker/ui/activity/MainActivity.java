@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -25,6 +26,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import co.gobd.tracker.R;
 import co.gobd.tracker.adapter.JobAdapter;
 import co.gobd.tracker.application.GoAssetApplication;
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
   @Inject SessionManager sessionManager;
   @Inject JobService jobService;
   @Inject Context context;
+
+  @BindView(R.id.toolbar) Toolbar toolbar;
+
   private ImageButton ibToggleStartStop;
   private Button btnMap;
 
@@ -50,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
   private RecyclerView recyclerView;
   private JobAdapter jobAdapter;
 
-  private Toolbar toolbar;
+
   private NavigationView nvDrawer;
   private ActionBarDrawerToggle drawerToggle;
   private DrawerLayout drawerLayout;
@@ -59,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
 
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    ButterKnife.bind(this);
     ((GoAssetApplication) getApplication()).getComponent().inject(this);
 
     // Toolbar setup
@@ -178,8 +185,7 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
         .setCancelable(false)
         .setPositiveButton("Enable", new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int id) {
-            Intent callGPSSettingIntent =
-                new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            Intent callGPSSettingIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(callGPSSettingIntent);
           }
         });
