@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import co.gobd.tracker.R;
 import co.gobd.tracker.adapter.JobAdapter;
 import co.gobd.tracker.application.GoAssetApplication;
@@ -52,46 +53,32 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
 
   private ImageButton ibToggleStartStop;
 
-  private JobAdapter jobAdapter;
-
   private ActionBarDrawerToggle drawerToggle;
+
+  // Keeps a reference of ButterKnife object
+  // unbind() is called in onDestroy()
+  private Unbinder butterKnifeUnbinder;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
 
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    ButterKnife.bind(this);
+    butterKnifeUnbinder = ButterKnife.bind(this);
+    // Dagger 2 Injection
     ((GoAssetApplication) getApplication()).getComponent().inject(this);
 
     // Toolbar setup
     setSupportActionBar(toolbar);
-    if (getSupportActionBar() != null) {
-      getSupportActionBar().setDisplayShowHomeEnabled(true);
-      getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-    }
 
-    drawerToggle = setupDrawerToggle();
+    setupNavigationDrawer();
 
-    // Tie DrawerLayout events to the ActionBarToggle
-    drawerLayout.addDrawerListener(drawerToggle);
-
-    String assetId = sessionManager.getAssetId();
-    String bearer = sessionManager.getBearer();
-
-    rvJobList = (RecyclerView) findViewById(R.id.rv_joblist);
-
-    jobAdapter = new JobAdapter(context, jobService, bearer, assetId);
-    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-    rvJobList.setLayoutManager(layoutManager);
-    rvJobList.setItemAnimator(new DefaultItemAnimator());
-    rvJobList.setAdapter(jobAdapter);
-
+    JobAdapter jobAdapter = new JobAdapter(context, jobService, sessionManager.getBearer(),
+        sessionManager.getAssetId());
     jobAdapter.setOnJobItemClickListener(this);
-    String assetName = sessionManager.getUsername();
 
-    View headerLayout = navigationView.getHeaderView(0);
-    TextView tvAssetName = ButterKnife.findById(headerLayout, R.id.nav_header_asset_name);
-    tvAssetName.setText(assetName);
+    setupRecyclerView(jobAdapter);
+
+    setupNavigationHeaderView(sessionManager.getUsername());
 
     ibToggleStartStop = (ImageButton) findViewById(R.id.ib_toggle_location);
 
@@ -108,6 +95,24 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     });
   }
 
+  private void setupNavigationHeaderView(String assetName) {
+    View headerLayout = navigationView.getHeaderView(0);
+    TextView tvAssetName = ButterKnife.findById(headerLayout, R.id.nav_header_asset_name);
+    tvAssetName.setText(assetName);
+  }
+
+  private void setupRecyclerView(JobAdapter jobAdapter) {
+    rvJobList.setLayoutManager(new LinearLayoutManager(context));
+    rvJobList.setItemAnimator(new DefaultItemAnimator());
+    rvJobList.setAdapter(jobAdapter);
+  }
+
+  private void setupNavigationDrawer() {
+    drawerToggle = setupDrawerToggle();
+    // Tie DrawerLayout events to the ActionBarToggle
+    drawerLayout.addDrawerListener(drawerToggle);
+  }
+
   private ActionBarDrawerToggle setupDrawerToggle() {
     return new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open,
         R.string.drawer_close);
@@ -121,6 +126,11 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     } else {
       ibToggleStartStop.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
     }
+  }
+
+  @Override protected void onDestroy() {
+    super.onDestroy();
+    butterKnifeUnbinder.unbind();
   }
 
   @Override public boolean onCreateOptionsMenu(Menu menu) {
