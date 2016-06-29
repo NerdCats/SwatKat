@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="192dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/colorPrimary"
+    android:padding="16dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    >
+
+  <TextView
+      android:id="@+id/nav_header_asset_name"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      tools:text="Asset name"
+      android:textColor="@android:color/white"
+      android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+</LinearLayout>
