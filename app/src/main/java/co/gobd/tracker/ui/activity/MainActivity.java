@@ -43,6 +43,7 @@ import javax.inject.Inject;
 public class MainActivity extends AppCompatActivity implements OnJobItemClickListener {
 
   private static final String LOG_TAG = MainActivity.class.getSimpleName();
+
   @Inject SessionManager sessionManager;
   @Inject JobService jobService;
   @Inject Context context;
