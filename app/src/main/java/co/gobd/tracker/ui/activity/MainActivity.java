@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
   @Inject Context context;
 
   @BindView(R.id.toolbar) Toolbar toolbar;
+  @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
 
   private ImageButton ibToggleStartStop;
   private Button btnMap;
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
 
   private NavigationView nvDrawer;
   private ActionBarDrawerToggle drawerToggle;
-  private DrawerLayout drawerLayout;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
 
@@ -69,15 +69,12 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     ((GoAssetApplication) getApplication()).getComponent().inject(this);
 
     // Toolbar setup
-    toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     if (getSupportActionBar() != null) {
       getSupportActionBar().setDisplayShowHomeEnabled(true);
       getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
-    // Sets the drawer view
-    drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawerToggle = setupDrawerToggle();
     nvDrawer = (NavigationView) findViewById(R.id.navigation_view);
 
