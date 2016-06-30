@@ -40,7 +40,7 @@ import co.gobd.tracker.ui.view.OnJobItemClickListener;
 import co.gobd.tracker.utility.SessionManager;
 
 public class MainActivity extends AppCompatActivity
-        implements OnJobItemClickListener, View.OnClickListener {
+        implements OnJobItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity
         setupNavigationHeaderView(sessionManager.getUsername());
 
         fabToggleTracking.setOnClickListener(this);
+
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void setupToolbar() {
@@ -257,5 +259,35 @@ public class MainActivity extends AppCompatActivity
                 }
                 break;
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        if (item.isChecked()) {
+            item.setChecked(false);
+        }
+        else
+        {
+            item.setChecked(true);
+        }
+
+        setTitle(item.getTitle());
+        drawerLayout.closeDrawers();
+
+        switch (item.getItemId()) {
+            case R.id.nav_settings:
+                //TODO:
+                break;
+            case R.id.nav_logout:
+                logout();
+                break;
+            case R.id.nav_about:
+                //TODO:
+                break;
+        }
+
+
+        return true;
     }
 }
