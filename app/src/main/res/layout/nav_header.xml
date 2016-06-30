@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="192dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="?attr/colorPrimary"
+    android:background="@drawable/navheader"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical"
@@ -12,6 +12,7 @@
 
   <TextView
       android:id="@+id/nav_header_asset_name"
+      android:textSize="16sp"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       tools:text="Asset name"
