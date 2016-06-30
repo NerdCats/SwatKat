@@ -34,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccess()){
+                if (response.isSuccess()) {
                     registrationCallback.onRegistrationSuccess();
                 } else {
                     registrationCallback.onRegistrationFailure();
@@ -117,7 +117,7 @@ public class AccountServiceImpl implements AccountService {
 
     private Register createRegisterModel(String userName, String password,
                                          String confirmPassword,
-                                         String email, String phoneNumber){
+                                         String email, String phoneNumber) {
 
         Register register = new Register(userName, password, confirmPassword, email, phoneNumber);
 

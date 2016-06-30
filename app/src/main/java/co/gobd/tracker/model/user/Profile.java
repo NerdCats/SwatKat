@@ -1,4 +1,3 @@
-
 package co.gobd.tracker.model.user;
 
 import com.google.gson.annotations.Expose;
@@ -55,162 +54,126 @@ public class Profile {
     }
 
     /**
-     *
-     * @return
-     *     The NationalId
+     * @return The NationalId
      */
     public String getNationalId() {
         return NationalId;
     }
 
     /**
-     *
-     * @param NationalId
-     *     The NationalId
+     * @param NationalId The NationalId
      */
     public void setNationalId(String NationalId) {
         this.NationalId = NationalId;
     }
 
     /**
-     *
-     * @return
-     *     The DriversLicenseId
+     * @return The DriversLicenseId
      */
     public String getDriversLicenseId() {
         return DriversLicenseId;
     }
 
     /**
-     *
-     * @param DriversLicenseId
-     *     The DriversLicenseId
+     * @param DriversLicenseId The DriversLicenseId
      */
     public void setDriversLicenseId(String DriversLicenseId) {
         this.DriversLicenseId = DriversLicenseId;
     }
 
     /**
-     *
-     * @return
-     *     The Vehicle
+     * @return The Vehicle
      */
     public String getVehicle() {
         return Vehicle;
     }
 
     /**
-     *
-     * @param Vehicle
-     *     The Vehicle
+     * @param Vehicle The Vehicle
      */
     public void setVehicle(String Vehicle) {
         this.Vehicle = Vehicle;
     }
 
     /**
-     *
-     * @return
-     *     The FirstName
+     * @return The FirstName
      */
     public String getFirstName() {
         return FirstName;
     }
 
     /**
-     *
-     * @param FirstName
-     *     The FirstName
+     * @param FirstName The FirstName
      */
     public void setFirstName(String FirstName) {
         this.FirstName = FirstName;
     }
 
     /**
-     *
-     * @return
-     *     The LastName
+     * @return The LastName
      */
     public String getLastName() {
         return LastName;
     }
 
     /**
-     *
-     * @param LastName
-     *     The LastName
+     * @param LastName The LastName
      */
     public void setLastName(String LastName) {
         this.LastName = LastName;
     }
 
     /**
-     *
-     * @return
-     *     The Age
+     * @return The Age
      */
     public Integer getAge() {
         return Age;
     }
 
     /**
-     *
-     * @param Age
-     *     The Age
+     * @param Age The Age
      */
     public void setAge(Integer Age) {
         this.Age = Age;
     }
 
     /**
-     *
-     * @return
-     *     The Gender
+     * @return The Gender
      */
     public String getGender() {
         return Gender;
     }
 
     /**
-     *
-     * @param Gender
-     *     The Gender
+     * @param Gender The Gender
      */
     public void setGender(String Gender) {
         this.Gender = Gender;
     }
 
     /**
-     *
-     * @return
-     *     The Address
+     * @return The Address
      */
     public String getAddress() {
         return Address;
     }
 
     /**
-     *
-     * @param Address
-     *     The Address
+     * @param Address The Address
      */
     public void setAddress(String Address) {
         this.Address = Address;
     }
 
     /**
-     *
-     * @return
-     *     The PicUri
+     * @return The PicUri
      */
     public String getPicUri() {
         return PicUri;
     }
 
     /**
-     *
-     * @param PicUri
-     *     The PicUri
+     * @param PicUri The PicUri
      */
     public void setPicUri(String PicUri) {
         this.PicUri = PicUri;

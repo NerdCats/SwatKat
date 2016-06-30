@@ -35,7 +35,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     private List<JobModel> jobModelList;
     private OnJobItemClickListener onJobItemClickListener;
 
-    public JobAdapter(final Context context, JobService jobService, String bearer, String assetId){
+    public JobAdapter(final Context context, JobService jobService, String bearer, String assetId) {
         this.jobService = jobService;
         this.context = context;
         this.jobModelList = new ArrayList<>();
@@ -44,7 +44,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         jobService.getAssignedJobList(bearer, assetId, new JobCallback() {
             @Override
             public void onGetJobSuccess(AssignedJob assignedJob) {
-                if(assignedJob != null){
+                if (assignedJob != null) {
                     jobModelList = assignedJob.getJobModelList();
                     notifyDataSetChanged();
                 }
@@ -64,12 +64,39 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         });
     }
 
-    public class JobViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public void setOnJobItemClickListener(final OnJobItemClickListener onJobItemClickListener) {
+        this.onJobItemClickListener = onJobItemClickListener;
+    }
 
-        CardView cardView;
+    @Override
+    public JobViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater
+                .from(parent.getContext())
+                .inflate(R.layout.job_list_row, parent, false);
+
+        return new JobViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(JobViewHolder holder, int position) {
+
+        JobModel jobModel = jobModelList.get(position);
+        holder.name.setText(jobModel.getName());
+        holder.state.setText(jobModel.getState());
+        holder.hrid.setText("HRID : " + jobModel.getHRID());
+    }
+
+    @Override
+    public int getItemCount() {
+        return jobModelList.size();
+    }
+
+    public class JobViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         public TextView name;
         public TextView state;
         public TextView hrid;
+        CardView cardView;
 
         public JobViewHolder(View itemView) {
             super(itemView);
@@ -85,39 +112,12 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         @Override
         public void onClick(View v) {
             int position = getLayoutPosition();
-            if(!jobModelList.isEmpty()){
-                if(onJobItemClickListener != null){
+            if (!jobModelList.isEmpty()) {
+                if (onJobItemClickListener != null) {
                     onJobItemClickListener.onItemClick(v, position, jobModelList.get(position));
                 }
             }
         }
-    }
-
-    public void setOnJobItemClickListener(final OnJobItemClickListener onJobItemClickListener) {
-        this.onJobItemClickListener = onJobItemClickListener;
-    }
-
-    @Override
-    public JobViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater
-                .from(parent.getContext())
-                .inflate(R.layout.job_list_row,parent,false);
-
-        return new JobViewHolder(itemView);
-    }
-
-    @Override
-    public void onBindViewHolder(JobViewHolder holder, int position) {
-
-        JobModel jobModel = jobModelList.get(position);
-        holder.name.setText(jobModel.getName());
-        holder.state.setText(jobModel.getState());
-        holder.hrid.setText("HRID : "+jobModel.getHRID());
-    }
-
-    @Override
-    public int getItemCount(){
-        return jobModelList.size();
     }
 
 

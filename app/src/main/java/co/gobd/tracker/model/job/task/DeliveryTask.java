@@ -8,26 +8,7 @@ import co.gobd.tracker.model.job.Location;
 /**
  * Created by fahad on 4/25/16.
  */
-public class DeliveryTask extends JobTask implements Parcelable{
-
-    private String JobTaskStateString;
-    private String State;
-    private Location To;
-
-    public DeliveryTask(String jobTaskStateString, String state, Location to) {
-        super(JobTaskTypes.DELIVERY, "Delivering Package");
-        JobTaskStateString = jobTaskStateString;
-        State = state;
-        To = to;
-        setType(JobTaskTypes.DELIVERY);
-    }
-
-    public DeliveryTask(Parcel in){
-        super(in);
-        JobTaskStateString = in.readString();
-        State = in.readString();
-        To = in.readParcelable(Location.class.getClassLoader());
-    }
+public class DeliveryTask extends JobTask implements Parcelable {
 
     public static final Parcelable.Creator<DeliveryTask> CREATOR
             = new Parcelable.Creator<DeliveryTask>() {
@@ -41,6 +22,24 @@ public class DeliveryTask extends JobTask implements Parcelable{
             return new DeliveryTask[size];
         }
     };
+    private String JobTaskStateString;
+    private String State;
+    private Location To;
+
+    public DeliveryTask(String jobTaskStateString, String state, Location to) {
+        super(JobTaskTypes.DELIVERY, "Delivering Package");
+        JobTaskStateString = jobTaskStateString;
+        State = state;
+        To = to;
+        setType(JobTaskTypes.DELIVERY);
+    }
+
+    public DeliveryTask(Parcel in) {
+        super(in);
+        JobTaskStateString = in.readString();
+        State = in.readString();
+        To = in.readParcelable(Location.class.getClassLoader());
+    }
 
     public String getJobTaskStateString() {
         return JobTaskStateString;
@@ -50,11 +49,13 @@ public class DeliveryTask extends JobTask implements Parcelable{
         return State;
     }
 
-    public void setState(String State){
+    public void setState(String State) {
         this.State = State;
     }
 
-    public Location getLocation(){return To;}
+    public Location getLocation() {
+        return To;
+    }
 
 
     @Override

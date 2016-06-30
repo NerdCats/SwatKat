@@ -8,5 +8,6 @@ import co.gobd.tracker.callback.ConnectionCallback;
 public interface ProfileCallback extends ConnectionCallback {
 
     void onLoadProfileSuccess(String assetId);
+
     void onLoadProfileFailure();
 }

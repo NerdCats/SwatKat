@@ -1,12 +1,12 @@
 package co.gobd.tracker.utility;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.widget.Toast;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 
 import co.gobd.tracker.R;
 

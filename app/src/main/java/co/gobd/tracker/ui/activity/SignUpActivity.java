@@ -2,8 +2,8 @@ package co.gobd.tracker.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,8 +12,8 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
-import co.gobd.tracker.service.account.RegistrationCallback;
 import co.gobd.tracker.service.account.AccountService;
+import co.gobd.tracker.service.account.RegistrationCallback;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -38,7 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
         setupUi();
     }
 
-    public void onSignUpButtonClick(View view){
+    public void onSignUpButtonClick(View view) {
 
         final String userName = etUserName.getText().toString();
         final String password = etPassword.getText().toString();
@@ -70,7 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    void setupUi(){
+    void setupUi() {
         etUserName = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
@@ -78,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
         etPhone = (EditText) findViewById(R.id.etPhone);
     }
 
-    private void gotoLoginActivity(){
+    private void gotoLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();

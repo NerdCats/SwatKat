@@ -10,6 +10,20 @@ import java.util.Arrays;
  */
 public class Point implements Parcelable {
 
+    public static final Parcelable.Creator<Point> CREATOR
+            = new Parcelable.Creator<Point>() {
+
+
+        @Override
+        public Point createFromParcel(Parcel source) {
+            return new Point(source);
+        }
+
+        @Override
+        public Point[] newArray(int size) {
+            return new Point[size];
+        }
+    };
     private String type;
     private String[] coordinates = new String[2];
 
@@ -18,7 +32,7 @@ public class Point implements Parcelable {
         this.coordinates = coordinates;
     }
 
-    private Point(Parcel in){
+    private Point(Parcel in) {
         type = in.readString();
         coordinates[0] = in.readString();
         coordinates[1] = in.readString();
@@ -33,11 +47,11 @@ public class Point implements Parcelable {
         return coordinates;
     }
 
-    public String getLongitude(){
+    public String getLongitude() {
         return coordinates[0];
     }
 
-    public String getLatitude(){
+    public String getLatitude() {
         return coordinates[1];
     }
 
@@ -59,19 +73,4 @@ public class Point implements Parcelable {
         dest.writeString(getLatitude());
 
     }
-
-    public static final Parcelable.Creator<Point> CREATOR
-            = new Parcelable.Creator<Point>(){
-
-
-        @Override
-        public Point createFromParcel(Parcel source) {
-            return new Point(source);
-        }
-
-        @Override
-        public Point[] newArray(int size) {
-            return new Point[size];
-        }
-    };
 }

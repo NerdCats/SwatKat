@@ -1,5 +1,7 @@
 package co.gobd.tracker.ui.activity;
 
+import com.rengwuxian.materialedittext.MaterialEditText;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +12,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 import javax.inject.Inject;
 
@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private Unbinder unbinder;
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         loginPresenter.onDestroy();
         unbinder.unbind();
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_signin:
-                if(loginPresenter.isValidCredentials()){
+                if (loginPresenter.isValidCredentials()) {
                     loginPresenter.login();
                 }
                 break;
@@ -121,13 +121,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void startProgress() {
-        if(progressBar != null)
+        if (progressBar != null)
             progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void stopProgress() {
-        if(progressBar != null)
+        if (progressBar != null)
             progressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void startMainActivity(){
+    public void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -156,17 +156,17 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void showPasswordLengthError() {
-        Toast.makeText(context,"Password must be at least 6 characters long",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showUserNameEmptyError() {
-        Toast.makeText(context,"Username can't be empty",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Username can't be empty", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showPasswordEmptyError() {
-        Toast.makeText(context,"Password can't be empty",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Password can't be empty", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -179,6 +179,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void showProfileLoadError() {
-        Toast.makeText(context,"Something went wrong, try again?",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Something went wrong, try again?", Toast.LENGTH_SHORT).show();
     }
 }

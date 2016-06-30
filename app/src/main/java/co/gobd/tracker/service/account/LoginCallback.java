@@ -8,6 +8,7 @@ import co.gobd.tracker.callback.ConnectionCallback;
 public interface LoginCallback extends ConnectionCallback {
 
     void onLoginSuccess(String accessToken, String refreshToken, String bearer);
+
     void onLoginFailure();
 
 }

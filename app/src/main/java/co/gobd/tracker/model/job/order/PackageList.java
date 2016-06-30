@@ -8,6 +8,19 @@ import android.os.Parcelable;
  */
 public class PackageList implements Parcelable {
 
+    public static final Parcelable.Creator<PackageList> CREATOR
+            = new Parcelable.Creator<PackageList>() {
+
+        @Override
+        public PackageList createFromParcel(Parcel source) {
+            return new PackageList(source);
+        }
+
+        @Override
+        public PackageList[] newArray(int size) {
+            return new PackageList[size];
+        }
+    };
     private String Item;
     private Integer Quantity;
     private Double Price;
@@ -28,6 +41,17 @@ public class PackageList implements Parcelable {
         Weight = weight;
     }
 
+    private PackageList(Parcel in) {
+        Item = in.readString();
+        Quantity = in.readInt();
+        Price = in.readDouble();
+        VAT = in.readDouble();
+        Total = in.readDouble();
+        VATAmount = in.readDouble();
+        TotalPlusVAT = in.readDouble();
+        Weight = in.readDouble();
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -46,170 +70,113 @@ public class PackageList implements Parcelable {
         dest.writeDouble(Weight);
     }
 
-    private PackageList(Parcel in){
-        Item = in.readString();
-        Quantity = in.readInt();
-        Price = in.readDouble();
-        VAT = in.readDouble();
-        Total = in.readDouble();
-        VATAmount = in.readDouble();
-        TotalPlusVAT = in.readDouble();
-        Weight = in.readDouble();
-    }
-
-    public static final Parcelable.Creator<PackageList> CREATOR
-            = new Parcelable.Creator<PackageList>(){
-
-        @Override
-        public PackageList createFromParcel(Parcel source) {
-            return new PackageList(source);
-        }
-
-        @Override
-        public PackageList[] newArray(int size) {
-            return new PackageList[size];
-        }
-    };
-
     /**
-     *
-     * @return
-     *     The Item
+     * @return The Item
      */
     public String getItem() {
         return Item;
     }
 
     /**
-     *
-     * @param Item
-     *     The Item
+     * @param Item The Item
      */
     public void setItem(String Item) {
         this.Item = Item;
     }
 
     /**
-     *
-     * @return
-     *     The Quantity
+     * @return The Quantity
      */
     public Integer getQuantity() {
         return Quantity;
     }
 
     /**
-     *
-     * @param Quantity
-     *     The Quantity
+     * @param Quantity The Quantity
      */
     public void setQuantity(Integer Quantity) {
         this.Quantity = Quantity;
     }
 
     /**
-     *
-     * @return
-     *     The Price
+     * @return The Price
      */
     public Double getPrice() {
         return Price;
     }
 
     /**
-     *
-     * @param Price
-     *     The Price
+     * @param Price The Price
      */
     public void setPrice(Double Price) {
         this.Price = Price;
     }
 
     /**
-     *
-     * @return
-     *     The VAT
+     * @return The VAT
      */
     public Double getVAT() {
         return VAT;
     }
 
     /**
-     *
-     * @param VAT
-     *     The VAT
+     * @param VAT The VAT
      */
     public void setVAT(Double VAT) {
         this.VAT = VAT;
     }
 
     /**
-     *
-     * @return
-     *     The Total
+     * @return The Total
      */
     public Double getTotal() {
         return Total;
     }
 
     /**
-     *
-     * @param Total
-     *     The Total
+     * @param Total The Total
      */
     public void setTotal(Double Total) {
         this.Total = Total;
     }
 
     /**
-     *
-     * @return
-     *     The VATAmount
+     * @return The VATAmount
      */
     public Double getVATAmount() {
         return VATAmount;
     }
 
     /**
-     *
-     * @param VATAmount
-     *     The VATAmount
+     * @param VATAmount The VATAmount
      */
     public void setVATAmount(Double VATAmount) {
         this.VATAmount = VATAmount;
     }
 
     /**
-     *
-     * @return
-     *     The TotalPlusVAT
+     * @return The TotalPlusVAT
      */
     public Double getTotalPlusVAT() {
         return TotalPlusVAT;
     }
 
     /**
-     *
-     * @param TotalPlusVAT
-     *     The TotalPlusVAT
+     * @param TotalPlusVAT The TotalPlusVAT
      */
     public void setTotalPlusVAT(Double TotalPlusVAT) {
         this.TotalPlusVAT = TotalPlusVAT;
     }
 
     /**
-     *
-     * @return
-     *     The Weight
+     * @return The Weight
      */
     public Double getWeight() {
         return Weight;
     }
 
     /**
-     *
-     * @param Weight
-     *     The Weight
+     * @param Weight The Weight
      */
     public void setWeight(Double Weight) {
         this.Weight = Weight;

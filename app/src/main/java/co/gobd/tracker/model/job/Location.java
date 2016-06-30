@@ -2,19 +2,35 @@ package co.gobd.tracker.model.job;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import co.gobd.tracker.model.job.*;
 
 /**
  * Created by fahad on 4/25/16.
  */
 public class Location implements Parcelable {
 
+    public static final Parcelable.Creator<Location> CREATOR
+            = new Parcelable.Creator<Location>() {
+        @Override
+        public Location createFromParcel(Parcel source) {
+            return new Location(source);
+        }
+
+        @Override
+        public Location[] newArray(int size) {
+            return new Location[size];
+        }
+    };
     private Point point;
     private String Address;
 
     public Location(Point point, String address) {
         this.point = point;
         Address = address;
+    }
+
+    private Location(Parcel in) {
+        point = in.readParcelable(Point.class.getClassLoader());
+        Address = in.readString();
     }
 
     public co.gobd.tracker.model.job.Point getPoint() {
@@ -52,22 +68,4 @@ public class Location implements Parcelable {
         dest.writeParcelable(point, flags);
         dest.writeString(Address);
     }
-
-    private Location(Parcel in){
-        point = in.readParcelable(Point.class.getClassLoader());
-        Address = in.readString();
-    }
-
-    public static final Parcelable.Creator<Location> CREATOR
-            = new Parcelable.Creator<Location>(){
-        @Override
-        public Location createFromParcel(Parcel source) {
-            return new Location(source);
-        }
-
-        @Override
-        public Location[] newArray(int size) {
-            return new Location[size];
-        }
-    };
 }

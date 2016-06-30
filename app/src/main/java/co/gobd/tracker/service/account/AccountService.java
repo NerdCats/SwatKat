@@ -6,6 +6,8 @@ package co.gobd.tracker.service.account;
 public interface AccountService {
     void getRegistered(String userName, String password, String confirmPassword, String email,
                        String phoneNumber, final RegistrationCallback registrationCallback);
+
     void login(String userName, String password, LoginCallback callback);
+
     void getAssetProfile(String bearer, ProfileCallback callback);
 }
