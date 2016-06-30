@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,35 +18,26 @@
 
   </android.support.design.widget.AppBarLayout>
 
-  <RelativeLayout
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/rv_joblist"
       android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      />
+
+
+  <android.support.design.widget.FloatingActionButton
+      android:id="@+id/fab_toggle_tracking"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      >
-
-    <android.support.v7.widget.RecyclerView
-
-        android:id="@+id/rv_joblist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/ib_toggle_location"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/ib_toggle_location"
-        android:layout_marginTop="57dp"
-        android:scrollbars="vertical"
-        />
+      android:layout_gravity="bottom|end"
+      android:layout_margin="16dp"
+      android:src="@drawable/ic_play_arrow_white_24dp"
+      app:fabSize="normal"
+      app:layout_anchor="@id/rv_joblist"
+      app:layout_anchorGravity="bottom|right|end"
+      />
 
 
-    <ImageButton
-        android:id="@+id/ib_toggle_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-
-        android:layout_alignParentRight="true"
-        android:background="@null"
-        android:src="@drawable/ic_play_circle_filled_green_24dp"
-        />
-
-  </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

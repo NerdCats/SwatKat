@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,11 +19,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
@@ -38,7 +37,8 @@ import co.gobd.tracker.ui.view.OnJobItemClickListener;
 import co.gobd.tracker.utility.SessionManager;
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements OnJobItemClickListener {
+public class MainActivity extends AppCompatActivity
+    implements OnJobItemClickListener, View.OnClickListener {
 
   private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
   @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
   @BindView(R.id.navigation_view) NavigationView navigationView;
   @BindView(R.id.rv_joblist) RecyclerView rvJobList;
-  @BindView(R.id.ib_toggle_location) ImageButton ibToggleLocation;
+  @BindView(R.id.fab_toggle_tracking) FloatingActionButton fabToggleTracking;
 
   private ActionBarDrawerToggle drawerToggle;
 
@@ -80,17 +80,7 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
 
     setupNavigationHeaderView(sessionManager.getUsername());
 
-    ibToggleLocation.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        if (isLocationServiceRunning(LocationService.class)) {
-          stopLocationService();
-          ibToggleLocation.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
-        } else {
-          startLocationService();
-          ibToggleLocation.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
-        }
-      }
-    });
+    fabToggleTracking.setOnClickListener(this);
   }
 
   private void setupToolbar() {
@@ -124,9 +114,9 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     super.onResume();
     checkLocationStatus();
     if (isLocationServiceRunning(LocationService.class)) {
-      ibToggleLocation.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
+      fabToggleTracking.setImageResource(R.drawable.ic_pause_white_24dp);
     } else {
-      ibToggleLocation.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
+      fabToggleTracking.setImageResource(R.drawable.ic_play_arrow_white_24dp);
     }
   }
 
@@ -154,9 +144,6 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
     if (drawerToggle.onOptionsItemSelected(item)) {
       return true;
     }
@@ -164,11 +151,7 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     return super.onOptionsItemSelected(item);
   }
 
-  /**
-   * Checks if GPS is enabled or not.
-   */
   public void checkLocationStatus() {
-    Log.i(LOG_TAG, "Checking GPS Status");
     LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
     if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
       Toast.makeText(this, "Location is enabled", Toast.LENGTH_SHORT).show();
@@ -176,10 +159,6 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
       showGPSDisabledAlertToUser();
     }
   }
-
-  /**
-   * Alert Dialog to enable GPS
-   */
 
   public void showGPSDisabledAlertToUser() {
     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -201,10 +180,6 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     AlertDialog alert = alertDialogBuilder.create();
     alert.show();
   }
-
-  /**
-   * Checks if the service is running or not
-   */
 
   private boolean isLocationServiceRunning(Class<?> serviceClass) {
     ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -240,9 +215,22 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
   }
 
   @Override public void onItemClick(View view, int position, JobModel jobModel) {
-
     Intent intent = new Intent(this, JobActivity.class);
     intent.putExtra("JobModel", jobModel);
     startActivity(intent);
+  }
+
+  @Override public void onClick(View v) {
+    switch (v.getId()) {
+      case R.id.fab_toggle_tracking:
+        if (isLocationServiceRunning(LocationService.class)) {
+          stopLocationService();
+          fabToggleTracking.setImageResource(R.drawable.ic_play_arrow_white_24dp);
+        } else {
+          startLocationService();
+          fabToggleTracking.setImageResource(R.drawable.ic_pause_white_24dp);
+        }
+        break;
+    }
   }
 }
