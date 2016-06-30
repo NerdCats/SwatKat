@@ -34,25 +34,6 @@
         android:scrollbars="vertical"
         />
 
-    <Button
-        android:id="@+id/bt_sign_out"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="onSignOutButtonClick"
-        android:text="sign out"
-        />
-    <TextView
-        android:id="@+id/tv_asset_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bt_sign_out"
-        android:layout_alignParentLeft="true"
-        android:paddingBottom="16dp"
-        tools:text="Logged in as Fahim"
-        />
 
     <ImageButton
         android:id="@+id/ib_toggle_location"

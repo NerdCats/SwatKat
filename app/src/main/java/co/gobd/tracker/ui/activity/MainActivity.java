@@ -217,22 +217,23 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     return false;
   }
 
-  /**
-   * Starts the location service that enables Google location update
-   */
-  public void startLocationService() {
+  private void startLocationService() {
     Intent intent = new Intent(this, LocationService.class);
     startService(intent);
   }
 
-  public void stopLocationService() {
+  private void stopLocationService() {
     Intent intent = new Intent(this, LocationService.class);
     stopService(intent);
   }
 
-  public void onSignOutButtonClick(View view) {
+  private void logout() {
     stopLocationService();
     sessionManager.clearAll();
+    startLoginActivity();
+  }
+
+  private void startLoginActivity() {
     Intent intent = new Intent(this, LoginActivity.class);
     startActivity(intent);
     finish();
