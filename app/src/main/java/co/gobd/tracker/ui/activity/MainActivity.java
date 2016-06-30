@@ -50,25 +50,25 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
   @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
   @BindView(R.id.navigation_view) NavigationView navigationView;
   @BindView(R.id.rv_joblist) RecyclerView rvJobList;
-
-  private ImageButton ibToggleStartStop;
+  @BindView(R.id.ib_toggle_location) ImageButton ibToggleLocation;
 
   private ActionBarDrawerToggle drawerToggle;
 
-  // Keeps a reference of ButterKnife object
-  // unbind() is called in onDestroy()
+  // Keeps a reference of ButterKnife object so that it can be cleared from memory later
+  // Unbinder#unbind() is called in Activity#onDestroy()
   private Unbinder butterKnifeUnbinder;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
 
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
     butterKnifeUnbinder = ButterKnife.bind(this);
+
     // Dagger 2 Injection
     ((GoAssetApplication) getApplication()).getComponent().inject(this);
 
-    // Toolbar setup
-    setSupportActionBar(toolbar);
+    setupToolbar();
 
     setupNavigationDrawer();
 
@@ -80,19 +80,21 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
 
     setupNavigationHeaderView(sessionManager.getUsername());
 
-    ibToggleStartStop = (ImageButton) findViewById(R.id.ib_toggle_location);
-
-    ibToggleStartStop.setOnClickListener(new View.OnClickListener() {
+    ibToggleLocation.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         if (isLocationServiceRunning(LocationService.class)) {
           stopLocationService();
-          ibToggleStartStop.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
+          ibToggleLocation.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
         } else {
           startLocationService();
-          ibToggleStartStop.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
+          ibToggleLocation.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
         }
       }
     });
+  }
+
+  private void setupToolbar() {
+    setSupportActionBar(toolbar);
   }
 
   private void setupNavigationHeaderView(String assetName) {
@@ -122,9 +124,9 @@ public class MainActivity extends AppCompatActivity implements OnJobItemClickLis
     super.onResume();
     checkLocationStatus();
     if (isLocationServiceRunning(LocationService.class)) {
-      ibToggleStartStop.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
+      ibToggleLocation.setImageResource(R.drawable.ic_pause_circle_filled_red_24dp);
     } else {
-      ibToggleStartStop.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
+      ibToggleLocation.setImageResource(R.drawable.ic_play_circle_filled_green_24dp);
     }
   }
 
