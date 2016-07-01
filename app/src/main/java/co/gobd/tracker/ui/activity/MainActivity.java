@@ -277,13 +277,14 @@ public class MainActivity extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.nav_settings:
-                //TODO:
+                //TODO: Implement Settings activity/fragment
                 break;
             case R.id.nav_logout:
                 logout();
                 break;
             case R.id.nav_about:
-                //TODO:
+                //TODO: Use About Libraries for hassle free about page
+                // https://github.com/mikepenz/AboutLibraries
                 break;
         }
 
