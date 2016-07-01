@@ -8,13 +8,24 @@ import java.util.List;
 
 import co.gobd.tracker.model.job.order.Order;
 import co.gobd.tracker.model.job.task.JobTask;
-import co.gobd.tracker.utility.Constant;
 
 /**
  * Created by fahad on 4/25/16.
  */
-public class JobModel implements Parcelable{
+public class JobModel implements Parcelable {
 
+    public static final Parcelable.Creator<JobModel> CREATOR
+            = new Parcelable.Creator<JobModel>() {
+        @Override
+        public JobModel createFromParcel(Parcel source) {
+            return new JobModel(source);
+        }
+
+        @Override
+        public JobModel[] newArray(int size) {
+            return new JobModel[size];
+        }
+    };
     private String Name;
     private String State;
     private Order Order;
@@ -31,44 +42,7 @@ public class JobModel implements Parcelable{
     private String HRID;
     private String Id;
 
-    public static final Parcelable.Creator<JobModel> CREATOR
-            = new Parcelable.Creator<JobModel>(){
-        @Override
-        public JobModel createFromParcel(Parcel source) {
-            return new JobModel(source);
-        }
-
-        @Override
-        public JobModel[] newArray(int size) {
-            return new JobModel[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(Name);
-        dest.writeString(State);
-        dest.writeParcelable(Order, flags);
-        dest.writeParcelable(User, flags);
-        dest.writeString(JobServedBy);
-        dest.writeTypedList(Tasks);
-        dest.writeString(CreateTime);
-        dest.writeString(ModifiedTime);
-        dest.writeString(PreferredDeliveryTime);
-        dest.writeString(InvoiceId);
-        dest.writeString(PaymentMethod);
-        dest.writeValue(Deleted);
-        dest.writeString(PaymentStatus);
-        dest.writeString(HRID);
-        dest.writeString(Id);
-    }
-
-    private JobModel(Parcel in){
+    private JobModel(Parcel in) {
         Name = in.readString();
         State = in.readString();
         Order = in.readParcelable(Location.class.getClassLoader());
@@ -110,8 +84,31 @@ public class JobModel implements Parcelable{
         Id = id;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-    public String getName(){
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(Name);
+        dest.writeString(State);
+        dest.writeParcelable(Order, flags);
+        dest.writeParcelable(User, flags);
+        dest.writeString(JobServedBy);
+        dest.writeTypedList(Tasks);
+        dest.writeString(CreateTime);
+        dest.writeString(ModifiedTime);
+        dest.writeString(PreferredDeliveryTime);
+        dest.writeString(InvoiceId);
+        dest.writeString(PaymentMethod);
+        dest.writeValue(Deleted);
+        dest.writeString(PaymentStatus);
+        dest.writeString(HRID);
+        dest.writeString(Id);
+    }
+
+    public String getName() {
         return Name;
     }
 
@@ -119,7 +116,7 @@ public class JobModel implements Parcelable{
         Name = name;
     }
 
-    public String getState(){
+    public String getState() {
         return State;
     }
 
@@ -135,11 +132,11 @@ public class JobModel implements Parcelable{
         JobServedBy = jobServedBy;
     }
 
-    public List<JobTask> getTasks(){
+    public List<JobTask> getTasks() {
         return Tasks;
     }
 
-    public void setTasks(List<JobTask> Tasks){
+    public void setTasks(List<JobTask> Tasks) {
         this.Tasks = Tasks;
     }
 

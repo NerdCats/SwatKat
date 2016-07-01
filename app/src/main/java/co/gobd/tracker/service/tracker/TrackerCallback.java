@@ -7,5 +7,6 @@ import co.gobd.tracker.callback.ConnectionCallback;
  */
 public interface TrackerCallback extends ConnectionCallback {
     void onLocationSendSuccess();
+
     void onLocationSendFailure();
 }

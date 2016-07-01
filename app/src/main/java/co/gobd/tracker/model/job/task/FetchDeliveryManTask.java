@@ -10,24 +10,8 @@ import co.gobd.tracker.model.job.Location;
  */
 public class FetchDeliveryManTask extends JobTask implements Parcelable {
 
-    private String JobTaskStateString;
-    private String State;
-
-    public FetchDeliveryManTask(String jobTaskStateString, String state) {
-        super(JobTaskTypes.FETCH_DELIVERYMAN, "Fetching Delivery Guy");
-        JobTaskStateString = jobTaskStateString;
-        State = state;
-        setType(JobTaskTypes.FETCH_DELIVERYMAN);
-    }
-
-    public FetchDeliveryManTask(Parcel in){
-        super(in);
-        JobTaskStateString = in.readString();
-        State = in.readString();
-    }
-
     public static final Parcelable.Creator<FetchDeliveryManTask> CREATOR
-            = new Parcelable.Creator<FetchDeliveryManTask>(){
+            = new Parcelable.Creator<FetchDeliveryManTask>() {
         @Override
         public FetchDeliveryManTask createFromParcel(Parcel source) {
             return new FetchDeliveryManTask(source);
@@ -38,7 +22,21 @@ public class FetchDeliveryManTask extends JobTask implements Parcelable {
             return new FetchDeliveryManTask[size];
         }
     };
+    private String JobTaskStateString;
+    private String State;
 
+    public FetchDeliveryManTask(String jobTaskStateString, String state) {
+        super(JobTaskTypes.FETCH_DELIVERYMAN, "Fetching Delivery Guy");
+        JobTaskStateString = jobTaskStateString;
+        State = state;
+        setType(JobTaskTypes.FETCH_DELIVERYMAN);
+    }
+
+    public FetchDeliveryManTask(Parcel in) {
+        super(in);
+        JobTaskStateString = in.readString();
+        State = in.readString();
+    }
 
     public String getJobTaskStateString() {
         return JobTaskStateString;
@@ -48,11 +46,11 @@ public class FetchDeliveryManTask extends JobTask implements Parcelable {
         return State;
     }
 
-    public void setState(String State){
+    public void setState(String State) {
         this.State = State;
     }
 
-    public Location getLocation(){
+    public Location getLocation() {
         return null;
     }
 

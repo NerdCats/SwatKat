@@ -1,4 +1,3 @@
-
 package co.gobd.tracker.model.user;
 
 
@@ -39,180 +38,140 @@ public class User {
     private Profile Profile;
 
     /**
-     *
-     * @return
-     *     The IsUserAuthenticated
+     * @return The IsUserAuthenticated
      */
     public Boolean getIsUserAuthenticated() {
         return IsUserAuthenticated;
     }
 
     /**
-     *
-     * @param IsUserAuthenticated
-     *     The IsUserAuthenticated
+     * @param IsUserAuthenticated The IsUserAuthenticated
      */
     public void setIsUserAuthenticated(Boolean IsUserAuthenticated) {
         this.IsUserAuthenticated = IsUserAuthenticated;
     }
 
     /**
-     *
-     * @return
-     *     The AverageRating
+     * @return The AverageRating
      */
     public Integer getAverageRating() {
         return AverageRating;
     }
 
     /**
-     *
-     * @param AverageRating
-     *     The AverageRating
+     * @param AverageRating The AverageRating
      */
     public void setAverageRating(Integer AverageRating) {
         this.AverageRating = AverageRating;
     }
 
     /**
-     *
-     * @return
-     *     The Id
+     * @return The Id
      */
     public String getId() {
         return Id;
     }
 
     /**
-     *
-     * @param Id
-     *     The Id
+     * @param Id The Id
      */
     public void setId(String Id) {
         this.Id = Id;
     }
 
     /**
-     *
-     * @return
-     *     The Type
+     * @return The Type
      */
     public String getType() {
         return Type;
     }
 
     /**
-     *
-     * @param Type
-     *     The Type
+     * @param Type The Type
      */
     public void setType(String Type) {
         this.Type = Type;
     }
 
     /**
-     *
-     * @return
-     *     The UserName
+     * @return The UserName
      */
     public Object getUserName() {
         return UserName;
     }
 
     /**
-     *
-     * @param UserName
-     *     The UserName
+     * @param UserName The UserName
      */
     public void setUserName(Object UserName) {
         this.UserName = UserName;
     }
 
     /**
-     *
-     * @return
-     *     The PhoneNumber
+     * @return The PhoneNumber
      */
     public String getPhoneNumber() {
         return PhoneNumber;
     }
 
     /**
-     *
-     * @param PhoneNumber
-     *     The PhoneNumber
+     * @param PhoneNumber The PhoneNumber
      */
     public void setPhoneNumber(String PhoneNumber) {
         this.PhoneNumber = PhoneNumber;
     }
 
     /**
-     *
-     * @return
-     *     The PhoneNumberConfirmed
+     * @return The PhoneNumberConfirmed
      */
     public Boolean getPhoneNumberConfirmed() {
         return PhoneNumberConfirmed;
     }
 
     /**
-     *
-     * @param PhoneNumberConfirmed
-     *     The PhoneNumberConfirmed
+     * @param PhoneNumberConfirmed The PhoneNumberConfirmed
      */
     public void setPhoneNumberConfirmed(Boolean PhoneNumberConfirmed) {
         this.PhoneNumberConfirmed = PhoneNumberConfirmed;
     }
 
     /**
-     *
-     * @return
-     *     The Email
+     * @return The Email
      */
     public String getEmail() {
         return Email;
     }
 
     /**
-     *
-     * @param Email
-     *     The Email
+     * @param Email The Email
      */
     public void setEmail(String Email) {
         this.Email = Email;
     }
 
     /**
-     *
-     * @return
-     *     The EmailConfirmed
+     * @return The EmailConfirmed
      */
     public Boolean getEmailConfirmed() {
         return EmailConfirmed;
     }
 
     /**
-     *
-     * @param EmailConfirmed
-     *     The EmailConfirmed
+     * @param EmailConfirmed The EmailConfirmed
      */
     public void setEmailConfirmed(Boolean EmailConfirmed) {
         this.EmailConfirmed = EmailConfirmed;
     }
 
     /**
-     *
-     * @return
-     *     The Profile
+     * @return The Profile
      */
     public Profile getProfile() {
         return Profile;
     }
 
     /**
-     *
-     * @param Profile
-     *     The Profile
+     * @param Profile The Profile
      */
     public void setProfile(Profile Profile) {
         this.Profile = Profile;

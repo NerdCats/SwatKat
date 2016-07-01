@@ -10,6 +10,18 @@ import co.gobd.tracker.model.job.Location;
  */
 public class PackagePickupTask extends JobTask implements Parcelable {
 
+    public static final Parcelable.Creator<PackagePickupTask> CREATOR
+            = new Parcelable.Creator<PackagePickupTask>() {
+        @Override
+        public PackagePickupTask createFromParcel(Parcel source) {
+            return new PackagePickupTask(source);
+        }
+
+        @Override
+        public PackagePickupTask[] newArray(int size) {
+            return new PackagePickupTask[size];
+        }
+    };
     private String JobTaskStateString;
     private String State;
     private Location From;
@@ -22,25 +34,12 @@ public class PackagePickupTask extends JobTask implements Parcelable {
         setType(JobTaskTypes.PACKAGE_PICKUP);
     }
 
-    public PackagePickupTask(Parcel in){
+    public PackagePickupTask(Parcel in) {
         super(in);
         JobTaskStateString = in.readString();
         State = in.readString();
         From = in.readParcelable(Location.class.getClassLoader());
     }
-
-    public static final Parcelable.Creator<PackagePickupTask> CREATOR
-            = new Parcelable.Creator<PackagePickupTask>(){
-        @Override
-        public PackagePickupTask createFromParcel(Parcel source) {
-            return new PackagePickupTask(source);
-        }
-
-        @Override
-        public PackagePickupTask[] newArray(int size) {
-            return new PackagePickupTask[size];
-        }
-    };
 
     public String getJobTaskStateString() {
         return JobTaskStateString;
@@ -50,11 +49,13 @@ public class PackagePickupTask extends JobTask implements Parcelable {
         return State;
     }
 
-    public void setState(String State){
+    public void setState(String State) {
         this.State = State;
     }
 
-    public Location getLocation() { return From; }
+    public Location getLocation() {
+        return From;
+    }
 
 
     @Override

@@ -14,7 +14,7 @@ import co.gobd.tracker.model.job.User;
 /**
  * Created by fahad on 5/17/16.
  */
-public class UserDeserializer implements JsonDeserializer<User>{
+public class UserDeserializer implements JsonDeserializer<User> {
 
     private User User;
 

@@ -13,8 +13,8 @@ import co.gobd.tracker.model.job.Profile;
 import co.gobd.tracker.model.job.User;
 import co.gobd.tracker.model.job.order.Order;
 import co.gobd.tracker.model.job.order.OrderCart;
-import co.gobd.tracker.network.JobApi;
 import co.gobd.tracker.network.AccountApi;
+import co.gobd.tracker.network.JobApi;
 import co.gobd.tracker.network.TrackerApi;
 import co.gobd.tracker.utility.Constant;
 import co.gobd.tracker.utility.deserializer.AssignedJobDeserializer;
@@ -53,8 +53,7 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    public Gson providesGson()
-    {
+    public Gson providesGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(AssignedJob.class, new AssignedJobDeserializer());
         gsonBuilder.registerTypeAdapter(JobModel.class, new JobModelDeserializer());

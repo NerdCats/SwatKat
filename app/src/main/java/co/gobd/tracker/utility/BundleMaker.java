@@ -11,7 +11,7 @@ public class BundleMaker {
 
     private Bundle bundle;
 
-    public BundleMaker(JobParser jobParser){
+    public BundleMaker(JobParser jobParser) {
 
     }
 }

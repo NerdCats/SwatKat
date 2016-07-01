@@ -11,6 +11,19 @@ import java.util.List;
  */
 public class OrderCart implements Parcelable {
 
+    public static final Parcelable.Creator<OrderCart> CREATOR
+            = new Parcelable.Creator<OrderCart>() {
+
+        @Override
+        public OrderCart createFromParcel(Parcel source) {
+            return new OrderCart(source);
+        }
+
+        @Override
+        public OrderCart[] newArray(int size) {
+            return new OrderCart[size];
+        }
+    };
     private List<PackageList> ListofPackageList = new ArrayList<>();
     private Double TotalVATAmount;
     private Double SubTotal;
@@ -28,7 +41,7 @@ public class OrderCart implements Parcelable {
         TotalToPay = totalToPay;
     }
 
-    private OrderCart(Parcel in){
+    private OrderCart(Parcel in) {
         in.readTypedList(ListofPackageList, PackageList.CREATOR);
         TotalVATAmount = in.readDouble();
         SubTotal = in.readDouble();
@@ -36,22 +49,6 @@ public class OrderCart implements Parcelable {
         TotalWeight = in.readDouble();
         TotalToPay = in.readDouble();
     }
-
-    public static final Parcelable.Creator<OrderCart> CREATOR
-            = new Parcelable.Creator<OrderCart>(){
-
-        @Override
-        public OrderCart createFromParcel(Parcel source) {
-            return new OrderCart(source);
-        }
-
-        @Override
-        public OrderCart[] newArray(int size) {
-            return new OrderCart[size];
-        }
-    };
-
-
 
     @Override
     public int describeContents() {
@@ -72,108 +69,84 @@ public class OrderCart implements Parcelable {
 
 
     /**
-     *
-     * @return
-     *     The ListofPackageList
+     * @return The ListofPackageList
      */
     public List<PackageList> getListofPackageList() {
         return ListofPackageList;
     }
 
     /**
-     *
-     * @param PackageList
-     *     The ListofPackageList
+     * @param PackageList The ListofPackageList
      */
     public void setListofPackageList(List<PackageList> PackageList) {
         this.ListofPackageList = PackageList;
     }
 
     /**
-     *
-     * @return
-     *     The TotalVATAmount
+     * @return The TotalVATAmount
      */
     public Double getTotalVATAmount() {
         return TotalVATAmount;
     }
 
     /**
-     *
-     * @param TotalVATAmount
-     *     The TotalVATAmount
+     * @param TotalVATAmount The TotalVATAmount
      */
     public void setTotalVATAmount(Double TotalVATAmount) {
         this.TotalVATAmount = TotalVATAmount;
     }
 
     /**
-     *
-     * @return
-     *     The SubTotal
+     * @return The SubTotal
      */
     public Double getSubTotal() {
         return SubTotal;
     }
 
     /**
-     *
-     * @param SubTotal
-     *     The SubTotal
+     * @param SubTotal The SubTotal
      */
     public void setSubTotal(Double SubTotal) {
         this.SubTotal = SubTotal;
     }
 
     /**
-     *
-     * @return
-     *     The ServiceCharge
+     * @return The ServiceCharge
      */
     public Double getServiceCharge() {
         return ServiceCharge;
     }
 
     /**
-     *
-     * @param ServiceCharge
-     *     The ServiceCharge
+     * @param ServiceCharge The ServiceCharge
      */
     public void setServiceCharge(Double ServiceCharge) {
         this.ServiceCharge = ServiceCharge;
     }
 
     /**
-     *
-     * @return
-     *     The TotalWeight
+     * @return The TotalWeight
      */
     public Double getTotalWeight() {
         return TotalWeight;
     }
 
     /**
-     *
-     * @param TotalWeight
-     *     The TotalWeight
+     * @param TotalWeight The TotalWeight
      */
     public void setTotalWeight(Double TotalWeight) {
         this.TotalWeight = TotalWeight;
     }
 
     /**
-     *
-     * @return
-     *     The TotalToPay
+     * @return The TotalToPay
      */
     public Double getTotalToPay() {
         return TotalToPay;
     }
 
     /**
-     *
-     * @param TotalToPay
-     *     The TotalToPay
+     * @param TotalToPay The TotalToPay
      */
     public void setTotalToPay(Double TotalToPay) {
         this.TotalToPay = TotalToPay;

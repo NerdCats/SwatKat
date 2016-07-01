@@ -11,9 +11,9 @@ public class DeviceUtility {
 
     private static final String TAG = "DeviceUtility";
 
-    public static String getDeviceIMEI(Context context){
+    public static String getDeviceIMEI(Context context) {
 
-        TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(context.TELEPHONY_SERVICE);
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(context.TELEPHONY_SERVICE);
         return telephonyManager.getDeviceId();
 
     }

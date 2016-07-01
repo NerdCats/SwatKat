@@ -34,5 +34,7 @@
     <string name="label_activity_signup">Sign up</string>
     <string name="notification">Tracking location...</string>
     <string name="location_sent_failure">Failed to send location</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drwaer</string>
 
 </resources>

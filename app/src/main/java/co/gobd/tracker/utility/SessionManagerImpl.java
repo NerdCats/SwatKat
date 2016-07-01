@@ -1,7 +1,6 @@
 package co.gobd.tracker.utility;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 /**
  * Created by fahad on 31-Mar-16.
@@ -14,24 +13,25 @@ public class SessionManagerImpl implements SessionManager {
 
     //Constructed by DAGGER
 
-    public SessionManagerImpl(SharedPreferences prefs){
+    public SessionManagerImpl(SharedPreferences prefs) {
         this.sharedPreferences = prefs;
 
     }
 
     @Override
-    public void clearAll(){
+    public void clearAll() {
         sharedPreferences.edit().clear().commit();
     }
 
 
     @Override
-    public String getUsername(){
+    public String getUsername() {
         return sharedPreferences.getString(Constant.SharedPrefs.KEY_USERNAME,
                 Constant.SharedPrefs.VALUE_DEFAULT_USERNAME);
     }
+
     @Override
-    public void setUsername(String input){
+    public void setUsername(String input) {
         editor = sharedPreferences.edit();
 
         editor.putString(Constant.SharedPrefs.KEY_USERNAME, input);
@@ -39,7 +39,7 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public String getPassword(){
+    public String getPassword() {
         return sharedPreferences.getString(Constant.SharedPrefs.KEY_PASSWORD,
                 Constant.SharedPrefs.VALUE_DEFAULT_PASSWORD);
     }
@@ -53,7 +53,7 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public String getToken(){
+    public String getToken() {
         return sharedPreferences.getString(Constant.SharedPrefs.KEY_TOKEN,
                 Constant.SharedPrefs.VALUE_DEFAULT_TOKEN);
     }
@@ -67,7 +67,7 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public String getBearer(){
+    public String getBearer() {
         return sharedPreferences.getString(Constant.SharedPrefs.KEY_BEARER,
                 Constant.SharedPrefs.VALUE_DEFAULT_BEARER);
     }
@@ -81,7 +81,7 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public String getRefreshToken(){
+    public String getRefreshToken() {
         return sharedPreferences.getString(Constant.SharedPrefs.KEY_REFRESH_TOKEN,
                 "default_refresh_token");
     }
@@ -95,7 +95,7 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public String getAssetId(){
+    public String getAssetId() {
         return sharedPreferences.getString(Constant.SharedPrefs.KEY_ASSET_ID,
                 Constant.SharedPrefs.VALUE_DEFAULT_ASSET_ID);
     }

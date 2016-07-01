@@ -89,10 +89,10 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
         String CreateTime = jsonObject.get("CreateTime").getAsString();
         String ModifiedTime = jsonObject.get("ModifiedTime").getAsString();
 
-        String PreferredDeliveryTime =(jsonObject.get("PreferredDeliveryTime").isJsonNull()) ?
+        String PreferredDeliveryTime = (jsonObject.get("PreferredDeliveryTime").isJsonNull()) ?
                 null : jsonObject.get("PreferredDeliveryTime").getAsString();
 
-        String InvoiceId =(jsonObject.get("PaymentMethod").isJsonNull()) ?
+        String InvoiceId = (jsonObject.get("PaymentMethod").isJsonNull()) ?
                 null : jsonObject.get("PaymentMethod").getAsString();
 
         String PaymentMethod = jsonObject.get("PaymentMethod").getAsString();
@@ -105,7 +105,7 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
         jobModel = new JobModel(Name, State, Order,
                 User, JobServedBy, jobTaskList,
                 CreateTime, ModifiedTime, PreferredDeliveryTime,
-                InvoiceId, PaymentMethod ,Deleted, PaymentStatus,
+                InvoiceId, PaymentMethod, Deleted, PaymentStatus,
                 HRID, Id);
 
         return jobModel;
@@ -113,14 +113,14 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
     }
 
 
-    public Location getLocation(JsonObject jsonObject){
+    public Location getLocation(JsonObject jsonObject) {
 
         String address = jsonObject.get("Address").getAsString();
         JsonObject jsonPoint = jsonObject.get("Point").getAsJsonObject();
         String type = jsonPoint.get("type").getAsString();
         JsonArray jsonCoord = jsonPoint.getAsJsonArray("coordinates");
         String[] coord = new String[2];
-        for (int i = 0; i<jsonCoord.size(); i++){
+        for (int i = 0; i < jsonCoord.size(); i++) {
             coord[i] = jsonCoord.get(i).getAsString();
         }
 

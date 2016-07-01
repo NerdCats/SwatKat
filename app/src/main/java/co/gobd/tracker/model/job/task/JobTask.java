@@ -13,7 +13,18 @@ public abstract class JobTask implements Parcelable {
     public static final int CLASS_TYPE_FETCH_DELIVERY_MAN_TASK = 1;
     public static final int CLASS_TYPE_PACKAGE_PICKUP_TASK = 2;
     public static final int CLASS_TYPE_DELIVERY_TASK = 3;
+    public static final Parcelable.Creator<JobTask> CREATOR
+            = new Parcelable.Creator<JobTask>() {
+        @Override
+        public JobTask createFromParcel(Parcel source) {
+            return JobTask.getConcreteClass(source);
+        }
 
+        @Override
+        public JobTask[] newArray(int size) {
+            return new JobTask[size];
+        }
+    };
     private String Type;
     private String Name;
 
@@ -22,16 +33,29 @@ public abstract class JobTask implements Parcelable {
         Type = type;
     }
 
-    public JobTask(Parcel in){
+    public JobTask(Parcel in) {
         Type = in.readString();
         Name = in.readString();
+    }
+
+    public static JobTask getConcreteClass(Parcel source) {
+        switch (source.readInt()) {
+            case CLASS_TYPE_FETCH_DELIVERY_MAN_TASK:
+                return new FetchDeliveryManTask(source);
+            case CLASS_TYPE_PACKAGE_PICKUP_TASK:
+                return new PackagePickupTask(source);
+            case CLASS_TYPE_DELIVERY_TASK:
+                return new DeliveryTask(source);
+            default:
+                return null;
+        }
     }
 
     public String getType() {
         return Type;
     }
 
-    public void setType(String Type){
+    public void setType(String Type) {
         this.Type = Type;
     }
 
@@ -58,30 +82,5 @@ public abstract class JobTask implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(Type);
         dest.writeString(Name);
-    }
-
-    public static final Parcelable.Creator<JobTask> CREATOR
-            = new Parcelable.Creator<JobTask>(){
-        @Override
-        public JobTask createFromParcel(Parcel source) {
-            return JobTask.getConcreteClass(source);
-        }
-
-        @Override
-        public JobTask[] newArray(int size) {
-            return new JobTask[size];
-        }
-    };
-
-    public static JobTask getConcreteClass(Parcel source){
-        switch (source.readInt()){
-            case CLASS_TYPE_FETCH_DELIVERY_MAN_TASK:
-                return new FetchDeliveryManTask(source);
-            case CLASS_TYPE_PACKAGE_PICKUP_TASK:
-                return new PackagePickupTask(source);
-            case CLASS_TYPE_DELIVERY_TASK:
-                return new DeliveryTask(source);
-            default: return null;
-        }
     }
 }

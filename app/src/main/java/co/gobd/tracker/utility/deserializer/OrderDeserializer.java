@@ -31,7 +31,7 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
         String Description = (jsonObject.get("Description").isJsonNull()) ?
                 null : jsonObject.get("Description").getAsString();
         String NoteToDeliveryMan = jsonObject.get("NoteToDeliveryMan").getAsString();
-        OrderCart orderCart = context.deserialize(jsonObject.get("OrderCart").getAsJsonObject(),OrderCart.class);
+        OrderCart orderCart = context.deserialize(jsonObject.get("OrderCart").getAsJsonObject(), OrderCart.class);
 
 
         String Name = jsonObject.get("Name").getAsString();
@@ -57,14 +57,14 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
         return order;
     }
 
-    public Location getLocation(JsonObject jsonObject){
+    public Location getLocation(JsonObject jsonObject) {
 
         String address = jsonObject.get("Address").getAsString();
         JsonObject jsonPoint = jsonObject.get("Point").getAsJsonObject();
         String type = jsonPoint.get("type").getAsString();
         JsonArray jsonCoord = jsonPoint.getAsJsonArray("coordinates");
         String[] coord = new String[2];
-        for (int i = 0; i<jsonCoord.size(); i++){
+        for (int i = 0; i < jsonCoord.size(); i++) {
             coord[i] = jsonCoord.get(i).getAsString();
         }
 

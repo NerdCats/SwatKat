@@ -15,38 +15,37 @@ import co.gobd.tracker.utility.SessionManager;
  */
 public class LoginPresenter {
 
+    @Inject
+    SessionManager sessionManager;
     private WeakReference<LoginView> loginViewWeakReference;
     private AccountService accountService;
     private LoginView loginView;
 
     @Inject
-    SessionManager sessionManager;
-
-    @Inject
-    public LoginPresenter(AccountService accountService){
+    public LoginPresenter(AccountService accountService) {
         this.accountService = accountService;
     }
 
-    public void initialise(LoginView view){
+    public void initialise(LoginView view) {
         this.loginViewWeakReference = new WeakReference<>(view);
 
         loginView = this.loginViewWeakReference.get();
     }
 
-    public boolean isValidCredentials(){
-        if(loginView != null){
+    public boolean isValidCredentials() {
+        if (loginView != null) {
             String userName = loginView.getUserName();
-            if (userName == null || userName.isEmpty()){
+            if (userName == null || userName.isEmpty()) {
                 loginView.showUserNameEmptyError();
                 return false;
             }
 
             String password = loginView.getPassword();
-            if (password == null || password.isEmpty()){
+            if (password == null || password.isEmpty()) {
                 loginView.showPasswordEmptyError();
                 return false;
             }
-            if(password.length() < 6){
+            if (password.length() < 6) {
                 loginView.showPasswordLengthError();
                 return false;
             }
@@ -110,7 +109,7 @@ public class LoginPresenter {
         });
     }
 
-    public void onDestroy(){
+    public void onDestroy() {
         loginViewWeakReference = null;
     }
 

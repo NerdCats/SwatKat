@@ -29,10 +29,10 @@ public class JobServiceImpl implements JobService {
         call.enqueue(new Callback<AssignedJob>() {
             @Override
             public void onResponse(Call<AssignedJob> call, Response<AssignedJob> response) {
-                if(response.isSuccess()){
+                if (response.isSuccess()) {
                     Log.i(TAG, response.body().toString());
                     callback.onGetJobSuccess(response.body());
-                } else{
+                } else {
                     callback.onGetJobFailure();
                 }
             }

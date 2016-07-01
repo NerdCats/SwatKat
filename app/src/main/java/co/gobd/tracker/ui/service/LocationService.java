@@ -1,5 +1,11 @@
 package co.gobd.tracker.ui.service;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -15,12 +21,6 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-
 import javax.inject.Inject;
 
 import co.gobd.tracker.R;
@@ -30,10 +30,8 @@ import co.gobd.tracker.service.tracker.TrackerService;
 import co.gobd.tracker.ui.activity.MainActivity;
 import co.gobd.tracker.utility.SessionManager;
 
-
-public class LocationService extends Service implements
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
+public class LocationService extends Service
+        implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
 
@@ -81,11 +79,11 @@ public class LocationService extends Service implements
 
     protected synchronized void buildGoogleApiClient() {
         Log.i(LOG_TAG, "Building GoogleApiClient");
-        mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
+        mGoogleApiClient =
+                new GoogleApiClient.Builder(getApplicationContext()).addConnectionCallbacks(this)
+                        .addOnConnectionFailedListener(this)
+                        .addApi(LocationServices.API)
+                        .build();
         createLocationRequest();
     }
 
@@ -100,7 +98,8 @@ public class LocationService extends Service implements
 
         startServiceAsForeground();
 
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest,
+                this);
     }
 
     private void startServiceAsForeground() {
@@ -114,25 +113,25 @@ public class LocationService extends Service implements
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, intent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setSmallIcon(R.drawable.ic_sync_white_18dp)
+        builder.setSmallIcon(R.drawable.ic_directions_run_white_24dp)
                 .setContentIntent(pendingIntent)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_sync_white_18dp))
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_go_logo))
                 .setContentTitle("GO! Asset")
-                .setContentText("Tracking is running...");
+                .setContentText("Tracking is running")
+                .setColor(getResources().getColor(R.color.colorPrimary));
 
         Notification notification = builder.build();
 
         // Set the Notification as ongoing
-        notification.flags = notification.flags |
-                Notification.FLAG_ONGOING_EVENT;
+        notification.flags = notification.flags | Notification.FLAG_ONGOING_EVENT;
 
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, notification);
 
         // Move the Service to the Foreground
         startForeground(NOTIFICATION_ID, notification);
     }
-
 
     @Override
     public void onConnected(Bundle bundle) {
@@ -144,8 +143,6 @@ public class LocationService extends Service implements
         }
 
         startLocationUpdates();
-
-
     }
 
     @Override
@@ -165,29 +162,23 @@ public class LocationService extends Service implements
 
         String assetId = sessionManager.getAssetId();
         String name = sessionManager.getUsername();
-        trackerService.sendLocation(mCurrentLocation.getLatitude(),
-                mCurrentLocation.getLongitude(), assetId, name, new TrackerCallback() {
+        trackerService.sendLocation(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude(),
+                assetId, name, new TrackerCallback() {
 
                     @Override
                     public void onLocationSendSuccess() {
-                        Toast.makeText(context, R.string.location_sent_successful,
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.location_sent_successful, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onLocationSendFailure() {
-                        Toast.makeText(context, R.string.location_sent_failure,
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.location_sent_failure, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onConnectionError() {
-                        Toast.makeText(context, R.string.message_connection_error,
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.message_connection_error, Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
     }
-
 }
