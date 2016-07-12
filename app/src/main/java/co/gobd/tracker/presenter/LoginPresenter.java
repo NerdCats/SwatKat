@@ -11,41 +11,42 @@ import co.gobd.tracker.ui.view.LoginView;
 import co.gobd.tracker.utility.SessionManager;
 
 /**
- * Created by fahad on 5/29/2016.
+ * Created by fahadwajed on 6/22/16.
  */
 public class LoginPresenter {
 
-    @Inject
-    SessionManager sessionManager;
     private WeakReference<LoginView> loginViewWeakReference;
     private AccountService accountService;
     private LoginView loginView;
 
     @Inject
-    public LoginPresenter(AccountService accountService) {
+    SessionManager sessionManager;
+
+    @Inject
+    public LoginPresenter(AccountService accountService){
         this.accountService = accountService;
     }
 
-    public void initialise(LoginView view) {
+    public void initialise(LoginView view){
         this.loginViewWeakReference = new WeakReference<>(view);
 
         loginView = this.loginViewWeakReference.get();
     }
 
-    public boolean isValidCredentials() {
-        if (loginView != null) {
+    public boolean isValidCredentials(){
+        if(loginView != null){
             String userName = loginView.getUserName();
-            if (userName == null || userName.isEmpty()) {
+            if (userName == null || userName.isEmpty()){
                 loginView.showUserNameEmptyError();
                 return false;
             }
 
             String password = loginView.getPassword();
-            if (password == null || password.isEmpty()) {
+            if (password == null || password.isEmpty()){
                 loginView.showPasswordEmptyError();
                 return false;
             }
-            if (password.length() < 6) {
+            if(password.length() < 6){
                 loginView.showPasswordLengthError();
                 return false;
             }
@@ -67,7 +68,7 @@ public class LoginPresenter {
             public void onLoginSuccess(final String accessToken, final String refreshToken, final String bearer) {
                 sessionManager.setUsername(userName);
                 sessionManager.setPassword(password);
-                accountService.getAssetProfile(bearer, new ProfileCallback() {
+                accountService.getProfile(bearer, new ProfileCallback() {
                     @Override
                     public void onLoadProfileSuccess(String assetId) {
                         loginView.stopProgress();
@@ -109,8 +110,7 @@ public class LoginPresenter {
         });
     }
 
-    public void onDestroy() {
+    public void onDestroy(){
         loginViewWeakReference = null;
     }
-
 }

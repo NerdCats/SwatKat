@@ -14,7 +14,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="${appName}"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.Dark">
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -24,7 +24,8 @@
 
         <activity
             android:name=".ui.activity.MainActivity"
-            android:label="${appName}" />
+            android:label="${appName}"
+            android:theme="@style/AppTheme"/>
 
 
         <service

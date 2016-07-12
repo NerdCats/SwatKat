@@ -10,11 +10,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by tonmoy on 12-Apr-16.
+ * Created by fahadwajed on 6/22/16.
  */
 public class AccountServiceImpl implements AccountService {
 
-    // Constructed by Dagger
     private AccountApi accountApi;
 
     public AccountServiceImpl(AccountApi api) {
@@ -22,19 +21,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void getRegistered(String userName, String password, String confirmPassword,
-                              String email, String phoneNumber,
-                              final RegistrationCallback registrationCallback) {
+    public void getRegister(Register register, final RegistrationCallback registrationCallback) {
 
-        // Creates POJO
-        Register register = this.createRegisterModel(userName, password, confirmPassword, email, phoneNumber);
-
-        Call<Void> call = accountApi.registerAsset(register);
+        Call<Void> call = accountApi.register(register);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccess()) {
+                if (response.isSuccess()){
                     registrationCallback.onRegistrationSuccess();
                 } else {
                     registrationCallback.onRegistrationFailure();
@@ -49,9 +43,6 @@ public class AccountServiceImpl implements AccountService {
 
     }
 
-    /**
-     * Logs an asset in taskCat
-     */
     @Override
     public void login(String userName, String password, final LoginCallback callback) {
 
@@ -85,11 +76,13 @@ public class AccountServiceImpl implements AccountService {
                 callback.onConnectionError();
             }
         });
+
     }
 
     @Override
-    public void getAssetProfile(String bearer, final ProfileCallback callback) {
-        Call<User> call = accountApi.getUserProfile(bearer);
+    public void getProfile(String bearer, final ProfileCallback callback) {
+
+        Call<User> call = accountApi.getProfile(bearer);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -112,16 +105,6 @@ public class AccountServiceImpl implements AccountService {
                 callback.onConnectionError();
             }
         });
-
     }
 
-    private Register createRegisterModel(String userName, String password,
-                                         String confirmPassword,
-                                         String email, String phoneNumber) {
-
-        Register register = new Register(userName, password, confirmPassword, email, phoneNumber);
-
-        return register;
-
-    }
 }
