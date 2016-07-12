@@ -30,7 +30,7 @@ android {
 
     defaultConfig {
         applicationId "co.gobd.tracker"
-        minSdkVersion 14
+        minSdkVersion 11
         targetSdkVersion 22
         versionCode 4
         versionName "0.1.4"
