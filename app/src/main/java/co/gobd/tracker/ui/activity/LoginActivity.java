@@ -1,15 +1,14 @@
 package co.gobd.tracker.ui.activity;
 
-import com.rengwuxian.materialedittext.MaterialEditText;
-
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +22,6 @@ import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.presenter.LoginPresenter;
 import co.gobd.tracker.ui.view.LoginView;
-import co.gobd.tracker.utility.ServiceUtility;
 import co.gobd.tracker.utility.SessionManager;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
@@ -37,30 +35,28 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Inject
     LoginPresenter loginPresenter;
 
-    @BindView(R.id.et_Username)
-    MaterialEditText etUsername;
+    @BindView(R.id.et_username)
+    EditText etUserName;
 
-    @BindView(R.id.et_Password)
-    MaterialEditText etPassword;
+    @BindView(R.id.et_password)
+    EditText etPassword;
 
-    @BindView(R.id.btn_signin)
-    Button btnSignin;
+    @BindView(R.id.btn_sign_in)
+    Button btnSignIn;
 
-    @BindView(R.id.tvSignUp)
+    @BindView(R.id.tv_signup)
     TextView tvSignUp;
-
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
 
     private Unbinder unbinder;
 
+    ProgressDialog progressDialog;
+
     @Override
-    protected void onDestroy() {
+    protected void onDestroy(){
         super.onDestroy();
         loginPresenter.onDestroy();
         unbinder.unbind();
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,31 +65,22 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         unbinder = ButterKnife.bind(this);
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
         loginPresenter.initialise(this);
-        ServiceUtility.checkGooglePlayServices(context, this);
-
-        // Toolbar setup
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
 
         String assetId = sessionManager.getAssetId();
         if (assetId != "default_asset_id") {
             startMainActivity();
         }
-
     }
 
-    @OnClick({R.id.btn_signin, R.id.tvSignUp})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_signin:
-                if (loginPresenter.isValidCredentials()) {
+    @OnClick({R.id.btn_sign_in, R.id.tv_signup})
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.btn_sign_in:
+                if(loginPresenter.isValidCredentials()){
                     loginPresenter.login();
                 }
                 break;
-            case R.id.tvSignUp:
+            case R.id.tv_signup:
                 startSignUpActivity();
                 break;
         }
@@ -101,7 +88,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public String getUserName() {
-        return etUsername.getText().toString();
+        return etUserName.getText().toString();
     }
 
     @Override
@@ -111,24 +98,25 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void showUserNameError() {
-        etUsername.setError("Username or password didn't match");
+        etUserName.setError("Username or Password didn't match");
     }
 
     @Override
     public void showPasswordError() {
-        etPassword.setError("Username or password didn't match");
+        etPassword.setError("Username or Password didn't match");
     }
 
     @Override
     public void startProgress() {
-        if (progressBar != null)
-            progressBar.setVisibility(View.VISIBLE);
+        progressDialog = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating... ");
+        progressDialog.show();
     }
 
     @Override
     public void stopProgress() {
-        if (progressBar != null)
-            progressBar.setVisibility(View.INVISIBLE);
+        progressDialog.dismiss();
     }
 
     @Override
@@ -141,32 +129,36 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
     }
 
     @Override
     public void showConnectionError() {
         Toast.makeText(context, "Can't connect to the server", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void showLoginError() {
         Toast.makeText(context, "Can't log in, try again?", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void showPasswordLengthError() {
-        Toast.makeText(context, "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"Password must be at least 6 characters long",Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void showUserNameEmptyError() {
-        Toast.makeText(context, "Username can't be empty", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"Username can't be empty",Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void showPasswordEmptyError() {
-        Toast.makeText(context, "Password can't be empty", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"Password can't be empty",Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -179,6 +171,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void showProfileLoadError() {
-        Toast.makeText(context, "Something went wrong, try again?", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"Something went wrong, try again?",Toast.LENGTH_SHORT).show();
     }
 }

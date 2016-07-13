@@ -24,9 +24,9 @@ public interface AccountApi {
                             @Field("client_secret") String clientSecret);
 
     @GET(BackendUrl.TaskCat.GET_PROFILE)
-    Call<User> getUserProfile(@Header("Authorization") String token);
+    Call<User> getProfile(@Header("Authorization") String token);
 
     @POST(BackendUrl.TaskCat.GET_REGISTER)
-    Call<Void> registerAsset(@Body Register register);
+    Call<Void> register(@Body Register register);
 
 }

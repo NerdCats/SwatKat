@@ -1,114 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activity.LoginActivity">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true">
 
-    <android.support.design.widget.AppBarLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <ImageView android:src="@drawable/hi_res_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal"/>
 
-
-    </android.support.design.widget.AppBarLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-
-            android:id="@+id/et_Username"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:drawableLeft="@drawable/ic_person_white_24dp"
-            android:drawablePadding="8dp"
-            android:drawableStart="@drawable/ic_person_white_24dp"
-            android:hint="@string/username"
-            android:inputType="textNoSuggestions"
-            android:textSize="18sp"
-            app:met_baseColor="@color/black"
-            app:met_clearButton="true"
-            app:met_floatingLabel="highlight"
-            app:met_floatingLabelTextColor="@color/black"
-            app:met_primaryColor="@color/black"
-            app:met_textColor="@color/black"
-            app:met_textColorHint="@color/black"
-            app:met_underlineColor="@color/black" />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/et_Password"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/et_Username"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:drawableLeft="@drawable/ic_lock_white_24dp"
-            android:drawablePadding="8dp"
-            android:drawableStart="@drawable/ic_lock_white_24dp"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:textSize="18sp"
-            app:met_baseColor="@color/black"
-            app:met_clearButton="true"
-            app:met_floatingLabel="highlight"
-            app:met_floatingLabelTextColor="@color/black"
-            app:met_primaryColor="@color/black"
-            app:met_textColor="@color/black"
-            app:met_textColorHint="@color/black"
-            app:met_underlineColor="@color/black" />
-
-        <Button
-            android:id="@+id/btn_signin"
-            style="@style/ButtonLoginWidthDarkPrimaryColor"
-            android:layout_below="@id/et_Password"
-            android:text="SIGN IN" />
-
-        <TextView
-            android:id="@+id/tvSignUp"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/btn_signin"
-            android:layout_alignStart="@id/btn_signin"
-            android:layout_below="@+id/btn_signin"
-            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/et_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_username"
+                android:singleLine="true"
+                android:drawableLeft="@drawable/ic_person_white_24dp"/>
+        </android.support.design.widget.TextInputLayout>
 
-            android:layout_marginTop="15dp"
-            android:text="@string/signUp" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_password"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/btn_signin"
-            android:layout_alignRight="@+id/btn_signin"
-            android:layout_alignTop="@+id/tvSignUp"
-            android:layout_marginEnd="82dp"
-            android:layout_marginRight="82dp"
-            android:clickable="true"
-            android:text="@string/signUpClick"
-            android:textColor="@color/colorPrimaryDark" />
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/hint_password"
+                android:singleLine="true"
+                android:drawableLeft="@drawable/ic_lock_white_24dp" />
+        </android.support.design.widget.TextInputLayout>
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_sign_in"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_Username"
-            android:layout_centerHorizontal="true"
-            android:visibility="invisible"/>
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="@string/sign_in_button_text"/>
 
-    </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+        <TextView android:id="@+id/tv_signup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/sign_up_text_view_text"
+            android:gravity="center"
+            android:textSize="16sp"/>
+    </LinearLayout>
+</ScrollView>
