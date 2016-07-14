@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_jobmodel"
@@ -26,9 +27,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/tv_hrid"
+                android:layout_marginTop="8dp"
                 android:paddingBottom="8dp"
                 android:textSize="24sp"
-                android:layout_marginTop="8dp"
                 tools:text="Delivery job for Fahim Delivery job for Fahim Delivery job for Fahim Delivery job for Fahim" />
 
             <TextView
@@ -75,7 +76,7 @@
 
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                tools:text="Call" />
+                android:text="Call" />
 
             <Button
                 android:id="@+id/btn_task_update"
@@ -86,19 +87,19 @@
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/btn_call"
                 android:layout_toRightOf="@+id/btn_call"
-                tools:text="Update" />
+                android:text="Update" />
 
             <ImageView
                 android:id="@+id/iv_job_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:src="@drawable/ic_done_green_500_24dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="26dp"
                 android:layout_marginRight="26dp"
-                android:layout_marginEnd="26dp" />
+                tools:src="@drawable/ic_done_green_500_24dp" />
 
         </RelativeLayout>
 
@@ -106,3 +107,4 @@
 
 
 </android.support.v7.widget.CardView>
+
