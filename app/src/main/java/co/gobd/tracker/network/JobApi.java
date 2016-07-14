@@ -20,5 +20,7 @@ public interface JobApi {
                                       @Path("userId") String userId);
 
     @PATCH(BackendUrl.TaskCat.PATCH_TASK_STATE)
-    Void patchTaskState(@Header("Authorization") String bearer, @Body UpdateTaskState updateTaskState);
+    Call<Void> patchTaskState(@Header("Authorization") String bearer, @Path("jobId") String jobId,
+                              @Path("taskId") String taskId,
+                              @Body UpdateTaskState updateTaskState);
 }

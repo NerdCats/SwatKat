@@ -3,6 +3,7 @@ package co.gobd.tracker.service.job;
 import android.util.Log;
 
 import co.gobd.tracker.model.job.AssignedJob;
+import co.gobd.tracker.model.job.UpdateTaskState;
 import co.gobd.tracker.network.JobApi;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,5 +45,30 @@ public class JobServiceImpl implements JobService {
         });
 
     }
+
+    @Override
+    public void patchTaskState(String bearer, String jobId, String taskId, UpdateTaskState updateTaskState,
+                               final PatchCallback callback) {
+
+        Call<Void> call = jobApi.patchTaskState(bearer, jobId, taskId, updateTaskState);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccess()){
+                    callback.onPatchSuccess();
+                } else {
+                    callback.onPatchFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                callback.onConnectionError();
+            }
+        });
+
+    }
+
 
 }
