@@ -83,7 +83,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         JobModel jobModel = jobModelList.get(position);
         holder.name.setText(jobModel.getName());
         holder.state.setText(jobModel.getState());
-        holder.hrid.setText("HRID : " + jobModel.getHRID());
+        holder.hrid.setText(jobModel.getHRID());
     }
 
     @Override
