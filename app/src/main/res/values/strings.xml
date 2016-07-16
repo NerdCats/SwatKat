@@ -53,6 +53,8 @@
 
     <!--Job Details -->
     <string name="note_to_delivery_man">Note</string>
+    <string name="pickup">Pickup Address</string>
+    <string name="delivery">Delivery Address</string>
     <string name="sample">Although cards can support multiple actions,
         UI controls, and an overflow menu, use restraint and remember
         that cards are entry points to more complex and detailed information.</string>
