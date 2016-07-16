@@ -55,4 +55,8 @@
 How that should be handled in the WebCat? </string>
     <string name="note_empty">No special notes!</string>
 
+    <!--Job Details -->
+    <string name="pickup">Pickup Address</string>
+    <string name="delivery">Delivery Address</string>
+
 </resources>
