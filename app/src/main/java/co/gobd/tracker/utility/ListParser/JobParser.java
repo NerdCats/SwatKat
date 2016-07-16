@@ -4,6 +4,7 @@ import java.util.List;
 
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.model.job.Location;
+import co.gobd.tracker.model.job.order.PackageList;
 import co.gobd.tracker.model.job.task.JobTask;
 import co.gobd.tracker.model.job.task.JobTaskTypes;
 
@@ -55,5 +56,10 @@ public class JobParser {
             }
         }
         return location;
+    }
+
+    public List<PackageList> getPackageList()
+    {
+        return jobModel.getOrder().getOrderCart().getListofPackageList();
     }
 }

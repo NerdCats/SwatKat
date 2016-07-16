@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(View view, int position, JobModel jobModel) {
-        Intent intent = new Intent(this, JobActivity.class);
+        Intent intent = new Intent(this, JobDetailsActivity.class);
         intent.putExtra("JobModel", jobModel);
         startActivity(intent);
     }
