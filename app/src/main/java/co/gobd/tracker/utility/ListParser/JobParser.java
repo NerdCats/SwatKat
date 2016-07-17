@@ -1,9 +1,11 @@
 package co.gobd.tracker.utility.ListParser;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.model.job.Location;
+import co.gobd.tracker.model.job.order.PackageList;
 import co.gobd.tracker.model.job.task.JobTask;
 import co.gobd.tracker.model.job.task.JobTaskTypes;
 
@@ -56,4 +58,16 @@ public class JobParser {
         }
         return location;
     }
+
+    public List<PackageList> getPackageList(){
+
+        List<PackageList> packageLists = jobModel.getOrder().getOrderCart().getListofPackageList();
+        return packageLists;
+    }
+
+    public String getNoteToDeliveryMan(){
+        String noteToDeliveryMan = jobModel.getOrder().getNoteToDeliveryMan();
+        return noteToDeliveryMan;
+    }
+
 }
