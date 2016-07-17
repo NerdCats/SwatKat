@@ -13,6 +13,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.gobd.tracker.R;
+import co.gobd.tracker.utility.ListViewHelper;
 
 public class JobDetailsActivity extends AppCompatActivity {
 
@@ -39,12 +40,15 @@ public class JobDetailsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         packageLists = new ArrayList<>();
-        packageLists.add("Choco cherry meal");
-        packageLists.add("Protein packed Salad meal");
-        packageLists.add("The JAR oatmeal");
+        for (int i = 0; i < 5 ; i++) {
+            packageLists.add("Choco cherry meal");
+            packageLists.add("Protein packed Salad meal");
+            packageLists.add("The JAR oatmeal");
+        }
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,packageLists);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,packageLists);
         lvPackageList.setAdapter(adapter);
+        ListViewHelper.getListViewSize(lvPackageList);
 
 
     }
