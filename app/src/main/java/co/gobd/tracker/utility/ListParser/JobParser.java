@@ -42,6 +42,19 @@ public class JobParser {
         return location;
     }
 
+    public String getTaskId(String taskType){
+        List<JobTask> jobTasks = getTaskList();
+        String taskId = null;
+        for (int i = 0; i < jobTasks.size(); i++){
+            JobTask jobTask = jobModel.getTasks().get(i);
+            if(taskType.equals(jobTask.getType())){
+                taskId = jobTask.getId();
+            }
+        }
+
+        return taskId;
+    }
+
     public Location getDeliveryLocation() {
         List<JobTask> jobTasks = getTaskList();
         Location location = null;

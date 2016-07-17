@@ -52,31 +52,32 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
             String jobTaskStateString;
             String state;
+            String id;
             Location location;
             switch (type) {
                 case JobTaskTypes.FETCH_DELIVERYMAN:
                     jobTaskStateString = task.get("JobTaskStateString").getAsString();
                     state = task.get("State").getAsString();
-
-                    jobTaskList.add(new FetchDeliveryManTask(jobTaskStateString, state));
+                    id = task.get("id").getAsString();
+                    jobTaskList.add(new FetchDeliveryManTask(jobTaskStateString, state, id));
                     break;
 
                 case JobTaskTypes.PACKAGE_PICKUP:
                     jobTaskStateString = task.get("JobTaskStateString").getAsString();
                     state = task.get("State").getAsString();
-
+                    id = task.get("id").getAsString();
                     location = getLocation(task.getAsJsonObject("PickupLocation"));
 
-                    jobTaskList.add(new PackagePickupTask(jobTaskStateString, state, location));
+                    jobTaskList.add(new PackagePickupTask(jobTaskStateString, state, location, id));
                     break;
 
                 case JobTaskTypes.DELIVERY:
                     jobTaskStateString = task.get("JobTaskStateString").getAsString();
                     state = task.get("State").getAsString();
-
+                    id = task.get("id").getAsString();
                     location = getLocation(task.getAsJsonObject("To"));
 
-                    jobTaskList.add(new DeliveryTask(jobTaskStateString, state, location));
+                    jobTaskList.add(new DeliveryTask(jobTaskStateString, state, location, id));
                     break;
 
                 default:

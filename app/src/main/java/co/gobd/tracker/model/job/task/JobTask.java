@@ -64,6 +64,7 @@ public abstract class JobTask implements Parcelable {
     }
 
     public abstract Location getLocation();
+    public abstract String getId();
 
     @Override
     public String toString() {
