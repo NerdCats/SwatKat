@@ -120,10 +120,11 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
         String type = jsonPoint.get("type").getAsString();
 
-        JsonObject testObj = (jsonPoint.get("coordinates").isJsonNull()) ?
-                null : jsonPoint.get("coordinates").getAsJsonObject();
+        JsonElement testObj = (jsonPoint.get("coordinates").isJsonNull()) ?
+                null : jsonPoint.get("coordinates").getAsJsonArray();
+
         if(testObj != null) {
-            JsonArray jsonCoord = testObj.getAsJsonArray("coordinates");
+            JsonArray jsonCoord = jsonPoint.get("coordinates").getAsJsonArray();
             String[] coord = new String[2];
             for (int i = 0; i < jsonCoord.size(); i++) {
                 coord[i] = jsonCoord.get(i).getAsString();
@@ -143,6 +144,5 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
 
     }
-
 
 }
