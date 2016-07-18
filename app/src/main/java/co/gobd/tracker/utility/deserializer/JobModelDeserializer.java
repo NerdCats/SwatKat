@@ -52,31 +52,32 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
             String jobTaskStateString;
             String state;
+            String id;
             Location location;
             switch (type) {
                 case JobTaskTypes.FETCH_DELIVERYMAN:
                     jobTaskStateString = task.get("JobTaskStateString").getAsString();
                     state = task.get("State").getAsString();
-
-                    jobTaskList.add(new FetchDeliveryManTask(jobTaskStateString, state));
+                    id = task.get("id").getAsString();
+                    jobTaskList.add(new FetchDeliveryManTask(jobTaskStateString, state, id));
                     break;
 
                 case JobTaskTypes.PACKAGE_PICKUP:
                     jobTaskStateString = task.get("JobTaskStateString").getAsString();
                     state = task.get("State").getAsString();
-
+                    id = task.get("id").getAsString();
                     location = getLocation(task.getAsJsonObject("PickupLocation"));
 
-                    jobTaskList.add(new PackagePickupTask(jobTaskStateString, state, location));
+                    jobTaskList.add(new PackagePickupTask(jobTaskStateString, state, location, id));
                     break;
 
                 case JobTaskTypes.DELIVERY:
                     jobTaskStateString = task.get("JobTaskStateString").getAsString();
                     state = task.get("State").getAsString();
-
+                    id = task.get("id").getAsString();
                     location = getLocation(task.getAsJsonObject("To"));
 
-                    jobTaskList.add(new DeliveryTask(jobTaskStateString, state, location));
+                    jobTaskList.add(new DeliveryTask(jobTaskStateString, state, location, id));
                     break;
 
                 default:
@@ -117,20 +118,32 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
         String address = jsonObject.get("Address").getAsString();
         JsonObject jsonPoint = jsonObject.get("Point").getAsJsonObject();
+
         String type = jsonPoint.get("type").getAsString();
-        JsonArray jsonCoord = jsonPoint.getAsJsonArray("coordinates");
-        String[] coord = new String[2];
-        for (int i = 0; i < jsonCoord.size(); i++) {
-            coord[i] = jsonCoord.get(i).getAsString();
+
+        JsonElement testObj = (jsonPoint.get("coordinates").isJsonNull()) ?
+                null : jsonPoint.get("coordinates").getAsJsonArray();
+
+        if(testObj != null) {
+            JsonArray jsonCoord = jsonPoint.get("coordinates").getAsJsonArray();
+            String[] coord = new String[2];
+            for (int i = 0; i < jsonCoord.size(); i++) {
+                coord[i] = jsonCoord.get(i).getAsString();
+            }
+
+            Point point = new Point(type, coord);
+
+            Location location = new Location(point, address);
+
+            return location;
         }
 
-        Point point = new Point(type, coord);
-
+        Point point = new Point(type, null);
         Location location = new Location(point, address);
 
         return location;
 
-    }
 
+    }
 
 }

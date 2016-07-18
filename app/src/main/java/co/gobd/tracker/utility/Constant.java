@@ -17,6 +17,11 @@ public class Constant {
         public static final String DELIVERY_LNG = "DELIVERY_LNG";
         public static final String DELIVERY_ADDRESS = "DELIVERY_ADDRESS";
         public static final String JOB_NAME = "JOB_NAME";
+        public static final String NOTE_TO_DELIVERY_MAN = "NOTE";
+        public static final String JOB_ID = "JOB_ID";
+        public static final String TASK_ID_PICKUP = "TASK_ID_PICKUP";
+        public static final String TASK_ID_DELIVERY = "TASK_ID_DELIVERY";
+        public static final String ORDER_CART = "ORDER_CART";
     }
 
     public final class BackendName {

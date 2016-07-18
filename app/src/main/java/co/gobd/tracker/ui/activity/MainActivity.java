@@ -34,9 +34,13 @@ import co.gobd.tracker.R;
 import co.gobd.tracker.adapter.JobAdapter;
 import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.model.job.JobModel;
+import co.gobd.tracker.model.job.order.OrderCart;
+import co.gobd.tracker.model.job.task.JobTaskTypes;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.service.LocationService;
 import co.gobd.tracker.ui.view.OnJobItemClickListener;
+import co.gobd.tracker.utility.Constant;
+import co.gobd.tracker.utility.ListParser.JobParser;
 import co.gobd.tracker.utility.SessionManager;
 
 public class MainActivity extends AppCompatActivity
@@ -241,8 +245,28 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(View view, int position, JobModel jobModel) {
+
         Intent intent = new Intent(this, JobDetailsActivity.class);
-        intent.putExtra("JobModel", jobModel);
+
+        JobParser jobParser = new JobParser(jobModel);
+
+        String noteToDeliveryMan = jobParser.getNoteToDeliveryMan();
+        String pickupAddress = jobParser.getPickupLocation().getAddress();
+        String deliveryAddress = jobParser.getDeliveryLocation().getAddress();
+        //String pickupLat = jobParser.getPickupLocation().getPoint().getLatitude();
+        //String pickupLon = jobParser.getPickupLocation().getPoint().getLongitude();
+        //String deliveryLat = jobParser.getDeliveryLocation().getPoint().getLatitude();
+        //String deliveryLon = jobParser.getDeliveryLocation().getPoint().getLongitude();
+        OrderCart orderCart = jobModel.getOrder().getOrderCart();
+
+        intent.putExtra(Constant.Job.ORDER_CART, orderCart);
+        intent.putExtra(Constant.Job.PICKUP_ADDRESS, pickupAddress);
+        intent.putExtra(Constant.Job.DELIVERY_ADDRESS, deliveryAddress);
+        intent.putExtra(Constant.Job.JOB_ID, jobModel.getId());
+        intent.putExtra(Constant.Job.NOTE_TO_DELIVERY_MAN, noteToDeliveryMan);
+        intent.putExtra(Constant.Job.TASK_ID_PICKUP,jobParser.getTaskId(JobTaskTypes.PACKAGE_PICKUP));
+        intent.putExtra(Constant.Job.TASK_ID_PICKUP,jobParser.getTaskId(JobTaskTypes.DELIVERY));
+
         startActivity(intent);
     }
 

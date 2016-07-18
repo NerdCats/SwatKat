@@ -25,12 +25,14 @@ public class PackagePickupTask extends JobTask implements Parcelable {
     private String JobTaskStateString;
     private String State;
     private Location From;
+    private String Id;
 
-    public PackagePickupTask(String jobTaskStateString, String state, Location from) {
+    public PackagePickupTask(String jobTaskStateString, String state, Location from, String Id) {
         super(JobTaskTypes.PACKAGE_PICKUP, "Picking Up Package");
         JobTaskStateString = jobTaskStateString;
         State = state;
         From = from;
+        this.Id = Id;
         setType(JobTaskTypes.PACKAGE_PICKUP);
     }
 
@@ -39,6 +41,15 @@ public class PackagePickupTask extends JobTask implements Parcelable {
         JobTaskStateString = in.readString();
         State = in.readString();
         From = in.readParcelable(Location.class.getClassLoader());
+        Id = in.readString();
+    }
+
+    public String getId(){
+        return Id;
+    }
+
+    public void setId(String Id){
+        this.Id = Id;
     }
 
     public String getJobTaskStateString() {
@@ -79,6 +90,7 @@ public class PackagePickupTask extends JobTask implements Parcelable {
         dest.writeString(JobTaskStateString);
         dest.writeString(State);
         dest.writeParcelable(From, flags);
+        dest.writeString(Id);
     }
 
 }
