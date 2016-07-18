@@ -45,18 +45,27 @@ public class JobDetailsActivity extends AppCompatActivity {
 
         packageLists = new ArrayList<>();
 
-        getPackageList(getIntent().getExtras());
+        updatePackageList(getIntent().getExtras());
+
+        updateNote(getIntent().getExtras());
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, packageLists);
         lvPackageList.setAdapter(adapter);
         ListViewHelper.getListViewSize(lvPackageList);
 
+    }
+
+    public void updateNote(Bundle extras) {
+        if (extras != null) {
+            String note = extras.getString(Constant.Job.NOTE_TO_DELIVERY_MAN);
+            tvNoteToDelivery.setText(note);
+        }
 
     }
 
-    public void getPackageList(Bundle bundle) {
-        if (bundle != null) {
-            OrderCart cart = (OrderCart) bundle.get(Constant.Job.ORDER_CART);
+    public void updatePackageList(Bundle extras) {
+        if (extras != null) {
+            OrderCart cart = (OrderCart) extras.get(Constant.Job.ORDER_CART);
             if (cart != null) {
                 for (PackageList item : cart.getListofPackageList()) {
                     String itemName = item.getItem();
