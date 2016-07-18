@@ -263,6 +263,7 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra(Constant.Job.PICKUP_ADDRESS, pickupAddress);
         intent.putExtra(Constant.Job.DELIVERY_ADDRESS, deliveryAddress);
         intent.putExtra(Constant.Job.JOB_ID, jobModel.getId());
+        intent.putExtra(Constant.Job.JOB_HRID, jobModel.getHRID());
         intent.putExtra(Constant.Job.NOTE_TO_DELIVERY_MAN, noteToDeliveryMan);
         intent.putExtra(Constant.Job.TASK_ID_PICKUP,jobParser.getTaskId(JobTaskTypes.PACKAGE_PICKUP));
         intent.putExtra(Constant.Job.TASK_ID_PICKUP,jobParser.getTaskId(JobTaskTypes.DELIVERY));

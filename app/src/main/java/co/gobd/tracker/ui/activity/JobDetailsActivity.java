@@ -3,6 +3,7 @@ package co.gobd.tracker.ui.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -39,6 +40,9 @@ public class JobDetailsActivity extends AppCompatActivity {
     @BindView(R.id.tv_delivery_address)
     TextView tvDeliveryAddress;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     ListAdapter adapter;
     List<String> packageLists;
 
@@ -50,7 +54,11 @@ public class JobDetailsActivity extends AppCompatActivity {
 
         packageLists = new ArrayList<>();
 
+
         Bundle bundle = getIntent().getExtras();
+        setupToolBar();
+
+        updateToolBarTitle(bundle);
 
         updatePackageList(bundle);
 
@@ -60,7 +68,19 @@ public class JobDetailsActivity extends AppCompatActivity {
 
         updateDeliveryAddress(bundle);
 
+    }
 
+    public void updateToolBarTitle(Bundle extras) {
+        if (extras != null) {
+            String jobHrid = extras.getString(Constant.Job.JOB_HRID);
+            toolbar.setTitle(jobHrid);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    public void setupToolBar() {
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
     }
 
     public void updatePickupAddress(Bundle extras) {

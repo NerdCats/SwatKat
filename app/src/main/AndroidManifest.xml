@@ -50,7 +50,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.activity.JobDetailsActivity"
             android:theme="@style/AppTheme"
-            ></activity>
+            android:parentActivityName=".ui.activity.MainActivity"
+            />
     </application>
 
 </manifest>

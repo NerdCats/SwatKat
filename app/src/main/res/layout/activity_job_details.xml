@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <include layout="@layout/cardview_package_list"></include>
+        <include layout="@layout/toolbar" />
 
-        <include layout="@layout/cardview_note_to_delivery_man"></include>
+    </android.support.design.widget.AppBarLayout>
 
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:paddingBottom="2dp"
+        >
 
-        <include layout="@layout/cardview_pickup" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
 
-        <include layout="@layout/cardview_delivery" />
-    </LinearLayout>
-</ScrollView>
+            >
+
+            <include layout="@layout/cardview_package_list"/>
+
+            <include layout="@layout/cardview_note_to_delivery_man"/>
+
+            <include layout="@layout/cardview_pickup" />
+
+            <include layout="@layout/cardview_delivery" />
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2dp">
-    
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:text="@string/note_to_delivery_man"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_note_to_delivery"
@@ -28,8 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title_note"
             android:text="@string/note_empty"
-            tools:text="@string/sample"
-            />
+            tools:text="@string/sample" />
 
 
     </RelativeLayout>
