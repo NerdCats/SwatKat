@@ -41,7 +41,7 @@
     <string name="label_activity_login">Login</string>
     <string name="label_activity_main">Home</string>
     <string name="label_activity_signup">Sign up</string>
-    <string name="notification">Tracking location...</string>
+    <string name="notification">Tracking location…</string>
     <string name="location_sent_failure">Failed to send location</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drwaer</string>
@@ -56,7 +56,9 @@ How that should be handled in the WebCat? </string>
     <string name="note_empty">No special notes!</string>
 
     <!--Job Details -->
-    <string name="pickup">Pickup Address</string>
-    <string name="delivery">Delivery Address</string>
+    <string name="pickup">Pickup address</string>
+    <string name="delivery">Delivery address</string>
+    <string name="btn_locate_on_map">Open in map</string>
+    <string name="title_package_list">Package list</string>
 
 </resources>

@@ -11,7 +11,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
+
             android:paddingRight="16dp">
 
 
@@ -19,7 +19,8 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Package list"
+                android:text="@string/title_package_list"
+                android:paddingLeft="16dp"
                 android:textSize="16sp" />
 
             <ListView

@@ -60,9 +60,6 @@ public class JobDetailsActivity extends AppCompatActivity {
 
         updateDeliveryAddress(bundle);
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, packageLists);
-        lvPackageList.setAdapter(adapter);
-        ListViewHelper.getListViewSize(lvPackageList);
 
     }
 
@@ -98,5 +95,8 @@ public class JobDetailsActivity extends AppCompatActivity {
                 }
             }
         }
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, packageLists);
+        lvPackageList.setAdapter(adapter);
+        ListViewHelper.getListViewSize(lvPackageList);
     }
 }

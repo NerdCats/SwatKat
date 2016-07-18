@@ -29,7 +29,7 @@
             android:layout_below="@+id/tv_title_note"
             android:text="@string/note_empty"
             tools:text="@string/sample"
-            android:textSize="14sp" />
+            />
 
 
     </RelativeLayout>
