@@ -27,6 +27,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_delivery_address"
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
                 android:text="@string/sample"

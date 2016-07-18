@@ -33,8 +33,13 @@ public class JobDetailsActivity extends AppCompatActivity {
     @BindView(R.id.tv_note_to_delivery)
     TextView tvNoteToDelivery;
 
-    ListAdapter adapter;
+    @BindView(R.id.tv_pickup_address)
+    TextView tvPickupAddress;
 
+    @BindView(R.id.tv_delivery_address)
+    TextView tvDeliveryAddress;
+
+    ListAdapter adapter;
     List<String> packageLists;
 
     @Override
@@ -45,14 +50,34 @@ public class JobDetailsActivity extends AppCompatActivity {
 
         packageLists = new ArrayList<>();
 
-        updatePackageList(getIntent().getExtras());
+        Bundle bundle = getIntent().getExtras();
 
-        updateNote(getIntent().getExtras());
+        updatePackageList(bundle);
+
+        updateNote(bundle);
+
+        updatePickupAddress(bundle);
+
+        updateDeliveryAddress(bundle);
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, packageLists);
         lvPackageList.setAdapter(adapter);
         ListViewHelper.getListViewSize(lvPackageList);
 
+    }
+
+    public void updatePickupAddress(Bundle extras) {
+        if (extras != null) {
+            String address = extras.getString(Constant.Job.PICKUP_ADDRESS);
+            tvPickupAddress.setText(address);
+        }
+    }
+
+    public void updateDeliveryAddress(Bundle extras) {
+        if (extras != null) {
+            String address = extras.getString(Constant.Job.DELIVERY_ADDRESS);
+            tvDeliveryAddress.setText(address);
+        }
     }
 
     public void updateNote(Bundle extras) {
