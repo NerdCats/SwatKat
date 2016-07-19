@@ -37,6 +37,7 @@
       app:fabSize="normal"
       app:layout_anchor="@id/rv_joblist"
       app:layout_anchorGravity="bottom|right|end"
+      app:layout_behavior="co.gobd.tracker.utility.ScrollAwareFABBehavior"
       />
 
 

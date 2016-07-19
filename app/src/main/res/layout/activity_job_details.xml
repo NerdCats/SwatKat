@@ -31,11 +31,13 @@
 
             <include layout="@layout/cardview_package_description" />
 
-            <include layout="@layout/cardview_note_to_delivery_man"/>
-
             <include layout="@layout/cardview_pickup" />
 
             <include layout="@layout/cardview_delivery" />
+
+            <include layout="@layout/cardview_note_to_delivery_man"/>
+
+
 
         </LinearLayout>
     </ScrollView>
