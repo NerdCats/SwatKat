@@ -21,16 +21,16 @@
             android:paddingRight="16dp">
 
             <TextView
-                android:id="@+id/tv_jobname"
+                android:id="@+id/tv_job_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_hrid"
-                android:layout_marginTop="8dp"
-                android:paddingBottom="8dp"
+
+                android:padding="8dp"
                 android:textSize="16sp"
-                tools:text="Delivery job for Fahim Delivery job for Fahim Delivery job for Fahim Delivery job for Fahim" />
+                tools:text="ZuumZuum"
+                android:layout_below="@+id/tv_hrid"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
             <TextView
                 android:id="@+id/tv_jobstate"
@@ -49,19 +49,46 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:textStyle="bold"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 tools:text="Job-LW5S3GKW" />
 
             <TextView
                 android:id="@+id/tv_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_jobname"
-                android:textSize="14sp"
-                android:background="@color/material_lime_200"
+
                 android:padding="4dp"
-                tools:text="BDT 750" />
+                android:textSize="14sp"
+                tools:text="BDT 750"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/tv_locality_pickup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="4dp"
+                android:layout_marginTop="4dp"
+                tools:text="Pickup Banani"
+
+                android:layout_alignTop="@+id/tv_job_user"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/tv_locality_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="16sp"
+                android:padding="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/tv_locality_pickup"
+                tools:text="Delivery Mohammadpur" />
 
         </RelativeLayout>
 
@@ -76,10 +103,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="Call"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/btn_task_update"
-                android:layout_toStartOf="@+id/btn_task_update" />
+                android:layout_toStartOf="@+id/btn_task_update"
+                android:text="Call" />
 
             <Button
                 android:id="@+id/btn_task_update"
@@ -87,10 +114,10 @@
                 android:layout_width="wrap_content"
 
                 android:layout_height="wrap_content"
-                android:text="Update"
-                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentTop="true"
+                android:text="Update" />
 
         </RelativeLayout>
 

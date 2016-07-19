@@ -81,10 +81,17 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     public void onBindViewHolder(JobViewHolder holder, int position) {
 
         JobModel jobModel = jobModelList.get(position);
-        holder.name.setText(jobModel.getName());
+        holder.name.setText(jobModel.getUser().getUserName());
         holder.state.setText(jobModel.getState());
         holder.hrid.setText(jobModel.getHRID());
         holder.totalPrice.setText("BDT " + jobModel.getOrder().getOrderCart().getTotalToPay());
+
+        // FIXME Update when jobmodel has locality data
+        String pickup = "Pickup Banani";
+        String delivery = "Delivery Mohammadpur";
+
+        holder.pickupLocality.setText(pickup);
+        holder.deliveryLocality.setText(delivery);
 
     }
 
@@ -100,6 +107,9 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         TextView hrid;
         TextView totalPrice;
 
+        TextView pickupLocality;
+        TextView deliveryLocality;
+
 
         CardView cardView;
 
@@ -107,12 +117,12 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             super(itemView);
             itemView.setOnClickListener(this);
             cardView = (CardView) itemView.findViewById(R.id.cv_jobmodel);
-            name = (TextView) itemView.findViewById(R.id.tv_jobname);
+            name = (TextView) itemView.findViewById(R.id.tv_job_user);
             state = (TextView) itemView.findViewById(R.id.tv_jobstate);
             hrid = (TextView) itemView.findViewById(R.id.tv_hrid);
             totalPrice = (TextView) itemView.findViewById(R.id.tv_total_price);
-
-
+            pickupLocality = (TextView) itemView.findViewById(R.id.tv_locality_pickup);
+            deliveryLocality = (TextView) itemView.findViewById(R.id.tv_locality_delivery);
 
         }
 
