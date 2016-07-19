@@ -120,6 +120,8 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
         JsonObject jsonPoint = jsonObject.get("Point").getAsJsonObject();
 
         String type = jsonPoint.get("type").getAsString();
+        String locality = (jsonObject.get("Locality").isJsonNull()) ?
+                null : jsonObject.get("Locality").getAsString();
 
         JsonElement testObj = (jsonPoint.get("coordinates").isJsonNull()) ?
                 null : jsonPoint.get("coordinates").getAsJsonArray();
@@ -133,13 +135,13 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
             Point point = new Point(type, coord);
 
-            Location location = new Location(point, address);
+            Location location = new Location(point, address, locality);
 
             return location;
         }
 
         Point point = new Point(type, null);
-        Location location = new Location(point, address);
+        Location location = new Location(point, address, locality);
 
         return location;
 
