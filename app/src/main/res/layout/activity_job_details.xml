@@ -29,6 +29,8 @@
 
             <include layout="@layout/cardview_package_list"/>
 
+            <include layout="@layout/cardview_package_description" />
+
             <include layout="@layout/cardview_note_to_delivery_man"/>
 
             <include layout="@layout/cardview_pickup" />

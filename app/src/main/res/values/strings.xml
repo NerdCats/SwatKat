@@ -60,5 +60,6 @@ How that should be handled in the WebCat? </string>
     <string name="delivery">Delivery address</string>
     <string name="btn_locate_on_map">Open in map</string>
     <string name="title_package_list">Package list</string>
+    <string name="title_package_description">Description</string>
 
 </resources>

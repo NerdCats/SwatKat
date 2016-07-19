@@ -43,6 +43,9 @@ public class JobDetailsActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.tv_package_description)
+    TextView tvPackageDescription;
+
     ListAdapter adapter;
     List<String> packageLists;
 
@@ -68,6 +71,14 @@ public class JobDetailsActivity extends AppCompatActivity {
 
         updateDeliveryAddress(bundle);
 
+        updatePackageDescription(bundle);
+
+    }
+
+    public void updatePackageDescription(Bundle extras) {
+        if (extras != null) {
+            tvPackageDescription.setText(extras.getString(Constant.Job.PACKAGE_DESCRIPTION));
+        }
     }
 
     public void updateToolBarTitle(Bundle extras) {

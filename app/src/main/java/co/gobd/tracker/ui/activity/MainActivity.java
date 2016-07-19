@@ -258,8 +258,10 @@ public class MainActivity extends AppCompatActivity
         //String deliveryLat = jobParser.getDeliveryLocation().getPoint().getLatitude();
         //String deliveryLon = jobParser.getDeliveryLocation().getPoint().getLongitude();
         OrderCart orderCart = jobModel.getOrder().getOrderCart();
+        String packageDescription = jobModel.getOrder().getDescription();
 
         intent.putExtra(Constant.Job.ORDER_CART, orderCart);
+        intent.putExtra(Constant.Job.PACKAGE_DESCRIPTION, packageDescription);
         intent.putExtra(Constant.Job.PICKUP_ADDRESS, pickupAddress);
         intent.putExtra(Constant.Job.DELIVERY_ADDRESS, deliveryAddress);
         intent.putExtra(Constant.Job.JOB_ID, jobModel.getId());
