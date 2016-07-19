@@ -23,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -183,7 +182,7 @@ public class MainActivity extends AppCompatActivity
     public void checkLocationStatus() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            Toast.makeText(this, "Location is enabled", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Location is enabled", Toast.LENGTH_SHORT).show();
         } else {
             showGPSDisabledAlertToUser();
         }

@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +17,6 @@ import javax.inject.Inject;
 import co.gobd.tracker.R;
 import co.gobd.tracker.model.job.AssignedJob;
 import co.gobd.tracker.model.job.JobModel;
-import co.gobd.tracker.model.job.JobState;
 import co.gobd.tracker.service.job.JobCallback;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.view.OnJobItemClickListener;
@@ -88,17 +86,6 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         holder.hrid.setText(jobModel.getHRID());
         holder.totalPrice.setText("BDT " + jobModel.getOrder().getOrderCart().getTotalToPay());
 
-        switch (jobModel.getState()) {
-            case JobState.COMPLETED:
-                holder.jobState.setImageResource(R.drawable.ic_done_green_500_24dp);
-                break;
-            case JobState.ENQUEUED:
-                holder.jobState.setImageResource(R.drawable.ic_hourglass_full_green_500_24dp);
-                break;
-            default:
-                holder.jobState.setImageResource(R.drawable.ic_hourglass_full_green_500_24dp);
-                break;
-        }
     }
 
     @Override
@@ -112,7 +99,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         TextView state;
         TextView hrid;
         TextView totalPrice;
-        ImageView jobState;
+
 
         CardView cardView;
 
@@ -124,7 +111,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             state = (TextView) itemView.findViewById(R.id.tv_jobstate);
             hrid = (TextView) itemView.findViewById(R.id.tv_hrid);
             totalPrice = (TextView) itemView.findViewById(R.id.tv_total_price);
-            jobState = (ImageView) itemView.findViewById(R.id.iv_job_state);
+
 
 
         }
