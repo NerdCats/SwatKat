@@ -29,7 +29,7 @@
                 android:layout_below="@+id/tv_hrid"
                 android:layout_marginTop="8dp"
                 android:paddingBottom="8dp"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 tools:text="Delivery job for Fahim Delivery job for Fahim Delivery job for Fahim Delivery job for Fahim" />
 
             <TextView
@@ -49,8 +49,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-
-                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textSize="24sp"
                 tools:text="Job-LW5S3GKW" />
 
             <TextView
@@ -58,6 +58,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_jobname"
+                android:textSize="14sp"
+                android:background="@color/material_lime_200"
+                android:padding="4dp"
                 tools:text="BDT 750" />
 
         </RelativeLayout>
@@ -72,11 +75,11 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
 
-                android:layout_alignParentStart="true"
+                android:text="Call"
                 android:layout_alignParentTop="true"
-                android:text="Call" />
+                android:layout_toLeftOf="@+id/btn_task_update"
+                android:layout_toStartOf="@+id/btn_task_update" />
 
             <Button
                 android:id="@+id/btn_task_update"
@@ -84,10 +87,10 @@
                 android:layout_width="wrap_content"
 
                 android:layout_height="wrap_content"
+                android:text="Update"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/btn_call"
-                android:layout_toRightOf="@+id/btn_call"
-                android:text="Update" />
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 
