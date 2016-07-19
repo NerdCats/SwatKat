@@ -22,15 +22,18 @@ public class Location implements Parcelable {
     };
     private Point point;
     private String Address;
+    private String locality;
 
-    public Location(Point point, String address) {
+    public Location(Point point, String address, String locality) {
         this.point = point;
         Address = address;
+        this.locality = locality;
     }
 
     private Location(Parcel in) {
         point = in.readParcelable(Point.class.getClassLoader());
         Address = in.readString();
+        locality = in.readString();
     }
 
     public co.gobd.tracker.model.job.Point getPoint() {
@@ -43,6 +46,14 @@ public class Location implements Parcelable {
 
     public String getAddress() {
         return Address;
+    }
+
+    public String getLocality(){
+        return locality;
+    }
+
+    public void setLocality(String locality){
+        this.locality = locality;
     }
 
     public void setAddress(String address) {
@@ -67,5 +78,6 @@ public class Location implements Parcelable {
 
         dest.writeParcelable(point, flags);
         dest.writeString(Address);
+        dest.writeString(locality);
     }
 }
