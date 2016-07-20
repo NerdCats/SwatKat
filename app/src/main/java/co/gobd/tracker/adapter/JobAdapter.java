@@ -84,12 +84,15 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         holder.name.setText(jobModel.getUser().getUserName());
         holder.state.setText(jobModel.getState());
         holder.hrid.setText(jobModel.getHRID());
-        holder.totalPrice.setText("BDT " + jobModel.getOrder().getOrderCart().getTotalToPay());
 
-        // FIXME Update when jobmodel has locality data
-        String pickup = "Pickup Banani";
-        String delivery = "Delivery Mohammadpur";
+        String totalPrice = context.getString(R.string.currency_bdt) +
+                jobModel.getOrder().getOrderCart().getTotalToPay();
+        holder.totalPrice.setText(totalPrice);
 
+        String pickup = context.getString(R.string.text_job_pickup) +
+                jobModel.getOrder().getFrom().getLocality();
+        String delivery = context.getString(R.string.text_job_delivery) +
+                jobModel.getOrder().getTo().getLocality();
         holder.pickupLocality.setText(pickup);
         holder.deliveryLocality.setText(delivery);
 

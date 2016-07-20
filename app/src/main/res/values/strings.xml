@@ -61,5 +61,8 @@ How that should be handled in the WebCat? </string>
     <string name="btn_locate_on_map">Open in map</string>
     <string name="title_package_list">Package list</string>
     <string name="title_package_description">Description</string>
+    <string name="currency_bdt">"BDT "</string>
+    <string name="text_job_pickup">"Pickup "</string>
+    <string name="text_job_delivery">"Delivery "</string>
 
 </resources>
