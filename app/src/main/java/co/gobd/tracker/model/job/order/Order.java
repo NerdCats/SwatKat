@@ -34,6 +34,7 @@ public class Order implements Parcelable {
     private Location OrderLocation;
     private String ETA;
     private Double ETAMinutes;
+    private Double RequiredChangeFor;
     private String PaymentMethod;
 
     private Order(Parcel in) {
@@ -49,13 +50,14 @@ public class Order implements Parcelable {
         OrderLocation = in.readParcelable(Location.class.getClassLoader());
         ETA = in.readString();
         ETAMinutes = in.readDouble();
+        RequiredChangeFor = in.readDouble();
         PaymentMethod = in.readString();
     }
 
     public Order(Location from, Location to, String description, OrderCart orderCart,
                  String noteToDeliveryMan, String name, String type,
                  String payloadType, String userId, Location orderLocation,
-                 String ETA, Double ETAMinutes, String paymentMethod) {
+                 String ETA, Double ETAMinutes, Double RequiredChangeFor, String paymentMethod) {
 
         From = from;
         To = to;
@@ -69,6 +71,7 @@ public class Order implements Parcelable {
         OrderLocation = orderLocation;
         this.ETA = ETA;
         this.ETAMinutes = ETAMinutes;
+        this.RequiredChangeFor = RequiredChangeFor;
         PaymentMethod = paymentMethod;
     }
 
@@ -92,6 +95,7 @@ public class Order implements Parcelable {
         dest.writeParcelable(OrderLocation, flags);
         dest.writeString(ETA);
         dest.writeDouble(ETAMinutes);
+        dest.writeDouble(RequiredChangeFor);
         dest.writeString(PaymentMethod);
 
     }
@@ -277,6 +281,15 @@ public class Order implements Parcelable {
     public void setPaymentMethod(String PaymentMethod) {
         this.PaymentMethod = PaymentMethod;
     }
+
+    public Double getRequiredChangeFor() {
+        return RequiredChangeFor;
+    }
+
+    public void setRequiredChangeFor(Double requiredChangeFor) {
+        RequiredChangeFor = requiredChangeFor;
+    }
+
 
 }
 
