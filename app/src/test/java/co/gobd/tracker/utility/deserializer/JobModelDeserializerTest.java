@@ -35,28 +35,6 @@ public class JobModelDeserializerTest {
     public void testDeserialize() throws Exception {
 
         String json = "{\n" +
-                "\"Assets\":{\n" +
-                "\"57660709b477aa9971d80425\":{\n" +
-                "\"AverageRating\":0.0,\n" +
-                "\"UserName\":\"enam\",\n" +
-                "\"Profile\":{\n" +
-                "\"NationalId\":\"\",\n" +
-                "\"DriversLicenseId\":\"\",\n" +
-                "\"Vehicle\":null,\n" +
-                "\"FirstName\":\"Enam\",\n" +
-                "\"LastName\":\"Mohammed\",\n" +
-                "\"Age\":24,\n" +
-                "\"Gender\":\"MALE\",\n" +
-                "\"InterestedLocalities\":null,\n" +
-                "\"Address\":null,\n" +
-                "\"PicUri\":\"https://cdn4.iconfinder.com/data/icons/eldorado-user/40/user-128.png\"\n" +
-                "},\n" +
-                "\"Id\":\"57660709b477aa9971d80425\",\n" +
-                "\"Type\":\"BIKE_MESSENGER\",\n" +
-                "\"PhoneNumber\":\"+8801712422524\",\n" +
-                "\"Email\":\"enam@gobd.co\"\n" +
-                "}\n" +
-                "},\n" +
                 "\"Name\":\"Delivery Job for ZuumZuum\",\n" +
                 "\"Order\":{\n" +
                 "\"NoteToDeliveryMan\":\"Please call and confirm before the pick.\",\n" +
