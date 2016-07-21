@@ -1,6 +1,7 @@
 package co.gobd.tracker.ui.activity;
 
 import android.app.ActivityManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -87,6 +88,8 @@ public class MainActivity extends AppCompatActivity
     List<JobModel> jobModelList;
     JobAdapter jobAdapter;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -103,11 +106,9 @@ public class MainActivity extends AppCompatActivity
         setupNavigationDrawer();
 
 
-        jobAdapter = new JobAdapter();
+        jobAdapter = new JobAdapter(context);
         mainPresenter.initialise(this);
         mainPresenter.setInProgressedJob();
-        jobModelList = mainPresenter.getInProgressedJob();
-        setJobModelList(jobModelList);
         jobAdapter.setOnJobItemClickListener(this);
 
         setupRecyclerView(jobAdapter);
@@ -336,5 +337,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void setJobModelList(List<JobModel> jobModelList) {
         jobAdapter.setJobModelList(jobModelList);
+    }
+
+    @Override
+    public void startProgress() {
+        progressDialog = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Downloading Jobs... ");
+        progressDialog.show();
+    }
+
+    @Override
+    public void stopProgress() {
+        progressDialog.dismiss();
     }
 }

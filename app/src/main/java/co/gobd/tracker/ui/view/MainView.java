@@ -9,6 +9,7 @@ import co.gobd.tracker.model.job.JobModel;
  */
 
 public interface MainView {
-    //List<JobModel> getJobModelList();
     void setJobModelList(List<JobModel> jobModelList);
+    void startProgress();
+    void stopProgress();
 }

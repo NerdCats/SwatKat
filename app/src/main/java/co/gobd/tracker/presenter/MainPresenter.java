@@ -38,9 +38,12 @@ public class MainPresenter {
     }
 
     public void setInProgressedJob(){
+
         jobService.getAssignedJobList(sessionManager.getBearer(),
                 sessionManager.getAssetId(),
                 Constant.JobTaskState.IN_PROGRESS, new JobCallback() {
+
+
                     @Override
                     public void onGetJobSuccess(AssignedJob assignedJob) {
                         if(assignedJob != null){

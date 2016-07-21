@@ -26,12 +26,17 @@ import co.gobd.tracker.ui.view.OnJobItemClickListener;
  */
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
-    @Inject
+
     Context context;
 
 
     private List<JobModel> jobModelList;
     private OnJobItemClickListener onJobItemClickListener;
+
+    public JobAdapter(Context context) {
+        jobModelList = new ArrayList<>();
+        this.context = context;
+    }
 
 
     public void setOnJobItemClickListener(final OnJobItemClickListener onJobItemClickListener) {
