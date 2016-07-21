@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity
 
         jobAdapter = new JobAdapter(context);
         mainPresenter.initialise(this);
-        mainPresenter.setInProgressedJob();
+        mainPresenter.loadAdapterData();
         jobAdapter.setOnJobItemClickListener(this);
 
         setupRecyclerView(jobAdapter);
@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mainPresenter.onDestroy();
         butterKnifeUnbinder.unbind();
     }
 
@@ -336,7 +337,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void setJobModelList(List<JobModel> jobModelList) {
-        jobAdapter.setJobModelList(jobModelList);
+        jobAdapter.setAdapterData(jobModelList);
     }
 
     @Override

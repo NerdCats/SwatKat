@@ -37,7 +37,7 @@ public class MainPresenter {
         mainView = this.mainViewWeakReference.get();
     }
 
-    public void setInProgressedJob(){
+    public void loadAdapterData(){
 
         jobService.getAssignedJobList(sessionManager.getBearer(),
                 sessionManager.getAssetId(),
@@ -67,4 +67,9 @@ public class MainPresenter {
     public List<JobModel> getInProgressedJob(){
         return jobModelList;
     }
+
+    public void onDestroy(){
+        mainViewWeakReference = null;
+    }
+
 }

@@ -43,7 +43,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         this.onJobItemClickListener = onJobItemClickListener;
     }
 
-    public void setJobModelList(List<JobModel> jobModelList){
+    public void setAdapterData(List<JobModel> jobModelList){
         this.jobModelList = jobModelList;
         notifyDataSetChanged();
     }
