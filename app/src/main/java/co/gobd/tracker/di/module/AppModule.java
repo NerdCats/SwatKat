@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 
 import javax.inject.Singleton;
 
+import co.gobd.tracker.presenter.MainPresenter;
+import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.utility.Constant;
 import co.gobd.tracker.utility.SessionManager;
 import co.gobd.tracker.utility.SessionManagerImpl;
@@ -29,6 +31,7 @@ public class AppModule {
     public Context providesContext() {
         return application;
     }
+
 
     @Provides
     @Singleton

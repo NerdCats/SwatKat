@@ -26,6 +26,12 @@ public class Constant {
         public static final String PACKAGE_DESCRIPTION = "DESCRIPTION";
     }
 
+    public static class JobTaskState{
+        public static final String IN_PROGRESS = "IN_PROGRESS";
+        public static final String COMPLETED = "COMPLETED";
+        public static final String CANCELLED = "CANCELLED";
+    }
+
     public final class BackendName {
         public static final String TASK_CAT = "TASK_CAT";
         public static final String SHADOW_CAT = "SHADOW_CAT";

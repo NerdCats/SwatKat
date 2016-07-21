@@ -23,9 +23,9 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void getAssignedJobList(String bearer, String assetId, final JobCallback callback) {
+    public void getAssignedJobList(String bearer, String assetId, String jobStateUpto, final JobCallback callback) {
 
-        Call<AssignedJob> call = jobApi.getAssignedJobs(bearer, assetId);
+        Call<AssignedJob> call = jobApi.getAssignedJobs(bearer, assetId, jobStateUpto);
 
         call.enqueue(new Callback<AssignedJob>() {
             @Override

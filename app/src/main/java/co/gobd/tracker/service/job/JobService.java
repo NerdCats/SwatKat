@@ -7,7 +7,7 @@ import co.gobd.tracker.model.job.UpdateTaskState;
  */
 public interface JobService {
 
-    void getAssignedJobList(String bearer, String assetId,
+    void getAssignedJobList(String bearer, String assetId, String jobStateUpto,
                             final JobCallback callback);
 
     void patchTaskState(String bearer, String jobId, String taskId, UpdateTaskState updateTaskState,
