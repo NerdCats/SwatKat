@@ -29,43 +29,18 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     @Inject
     Context context;
 
-    @Inject
-    JobService jobService;
 
     private List<JobModel> jobModelList;
     private OnJobItemClickListener onJobItemClickListener;
 
-    public JobAdapter(final Context context, JobService jobService, String bearer, String assetId) {
-        this.jobService = jobService;
-        this.context = context;
-        this.jobModelList = new ArrayList<>();
-
-
-        jobService.getAssignedJobList(bearer, assetId, new JobCallback() {
-            @Override
-            public void onGetJobSuccess(AssignedJob assignedJob) {
-                if (assignedJob != null) {
-                    jobModelList = assignedJob.getJobModelList();
-                    notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onGetJobFailure() {
-                Toast.makeText(context, "Job load failure", Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onConnectionError() {
-                Toast.makeText(context, "Connection error", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
 
     public void setOnJobItemClickListener(final OnJobItemClickListener onJobItemClickListener) {
         this.onJobItemClickListener = onJobItemClickListener;
+    }
+
+    public void setJobModelList(List<JobModel> jobModelList){
+        this.jobModelList = jobModelList;
+        notifyDataSetChanged();
     }
 
     @Override

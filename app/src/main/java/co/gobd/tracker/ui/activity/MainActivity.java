@@ -24,6 +24,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -35,15 +37,17 @@ import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.model.job.order.OrderCart;
 import co.gobd.tracker.model.job.task.JobTaskTypes;
+import co.gobd.tracker.presenter.MainPresenter;
 import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.service.LocationService;
+import co.gobd.tracker.ui.view.MainView;
 import co.gobd.tracker.ui.view.OnJobItemClickListener;
 import co.gobd.tracker.utility.Constant;
 import co.gobd.tracker.utility.ListParser.JobParser;
 import co.gobd.tracker.utility.SessionManager;
 
 public class MainActivity extends AppCompatActivity
-        implements OnJobItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+        implements MainView, OnJobItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -55,6 +59,9 @@ public class MainActivity extends AppCompatActivity
 
     @Inject
     Context context;
+
+    @Inject
+    MainPresenter mainPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -77,6 +84,9 @@ public class MainActivity extends AppCompatActivity
     // Unbinder#unbind() is called in Activity#onDestroy()
     private Unbinder butterKnifeUnbinder;
 
+    List<JobModel> jobModelList;
+    JobAdapter jobAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -92,8 +102,12 @@ public class MainActivity extends AppCompatActivity
 
         setupNavigationDrawer();
 
-        JobAdapter jobAdapter = new JobAdapter(context, jobService, sessionManager.getBearer(),
-                sessionManager.getAssetId());
+
+        jobAdapter = new JobAdapter();
+        mainPresenter.initialise(this);
+        mainPresenter.setInProgressedJob();
+        jobModelList = mainPresenter.getInProgressedJob();
+        setJobModelList(jobModelList);
         jobAdapter.setOnJobItemClickListener(this);
 
         setupRecyclerView(jobAdapter);
@@ -316,5 +330,11 @@ public class MainActivity extends AppCompatActivity
 
 
         return true;
+    }
+
+
+    @Override
+    public void setJobModelList(List<JobModel> jobModelList) {
+        jobAdapter.setJobModelList(jobModelList);
     }
 }
