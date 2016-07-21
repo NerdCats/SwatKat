@@ -23,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -34,8 +33,6 @@ import co.gobd.tracker.R;
 import co.gobd.tracker.adapter.JobAdapter;
 import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.model.job.JobModel;
-import co.gobd.tracker.model.job.Location;
-import co.gobd.tracker.model.job.Point;
 import co.gobd.tracker.model.job.order.OrderCart;
 import co.gobd.tracker.model.job.task.JobTaskTypes;
 import co.gobd.tracker.service.job.JobService;
@@ -185,7 +182,7 @@ public class MainActivity extends AppCompatActivity
     public void checkLocationStatus() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            Toast.makeText(this, "Location is enabled", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Location is enabled", Toast.LENGTH_SHORT).show();
         } else {
             showGPSDisabledAlertToUser();
         }
@@ -247,7 +244,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(View view, int position, JobModel jobModel) {
-        Intent intent = new Intent(this, JobActivity.class);
+
+        Intent intent = new Intent(this, JobDetailsActivity.class);
+
         JobParser jobParser = new JobParser(jobModel);
 
         String noteToDeliveryMan = jobParser.getNoteToDeliveryMan();
@@ -258,11 +257,14 @@ public class MainActivity extends AppCompatActivity
         //String deliveryLat = jobParser.getDeliveryLocation().getPoint().getLatitude();
         //String deliveryLon = jobParser.getDeliveryLocation().getPoint().getLongitude();
         OrderCart orderCart = jobModel.getOrder().getOrderCart();
+        String packageDescription = jobModel.getOrder().getDescription();
 
         intent.putExtra(Constant.Job.ORDER_CART, orderCart);
+        intent.putExtra(Constant.Job.PACKAGE_DESCRIPTION, packageDescription);
         intent.putExtra(Constant.Job.PICKUP_ADDRESS, pickupAddress);
         intent.putExtra(Constant.Job.DELIVERY_ADDRESS, deliveryAddress);
         intent.putExtra(Constant.Job.JOB_ID, jobModel.getId());
+        intent.putExtra(Constant.Job.JOB_HRID, jobModel.getHRID());
         intent.putExtra(Constant.Job.NOTE_TO_DELIVERY_MAN, noteToDeliveryMan);
         intent.putExtra(Constant.Job.TASK_ID_PICKUP,jobParser.getTaskId(JobTaskTypes.PACKAGE_PICKUP));
         intent.putExtra(Constant.Job.TASK_ID_PICKUP,jobParser.getTaskId(JobTaskTypes.DELIVERY));

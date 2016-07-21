@@ -41,7 +41,7 @@
     <string name="label_activity_login">Login</string>
     <string name="label_activity_main">Home</string>
     <string name="label_activity_signup">Sign up</string>
-    <string name="notification">Tracking location...</string>
+    <string name="notification">Tracking location…</string>
     <string name="location_sent_failure">Failed to send location</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drwaer</string>
@@ -50,5 +50,19 @@
     <string name="tracking_frequency">Tracking Frequency</string>
     <string name="list_of_seconds">Intervals</string>
     <string name="server_endpoint">Servers</string>
+    <string name="note_to_delivery_man">Note</string>
+    <string name="sample">Sometimes, after opening the webcat, it is found that, the access token is saved on the browser\'s local storage, but its validity has ended. In that case, the authorized api calls returns unauthorized 401 error.
+How that should be handled in the WebCat? </string>
+    <string name="note_empty">No special notes!</string>
+
+    <!--Job Details -->
+    <string name="pickup">Pickup address</string>
+    <string name="delivery">Delivery address</string>
+    <string name="btn_locate_on_map">Open in map</string>
+    <string name="title_package_list">Package list</string>
+    <string name="title_package_description">Description</string>
+    <string name="currency_bdt">"BDT "</string>
+    <string name="text_job_pickup">"Pickup "</string>
+    <string name="text_job_delivery">"Delivery "</string>
 
 </resources>

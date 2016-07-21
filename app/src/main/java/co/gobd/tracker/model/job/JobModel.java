@@ -42,6 +42,10 @@ public class JobModel implements Parcelable {
     private String HRID;
     private String Id;
 
+    public JobModel(){
+
+    }
+
     private JobModel(Parcel in) {
         Name = in.readString();
         State = in.readString();

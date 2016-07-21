@@ -20,29 +20,40 @@ public class Location implements Parcelable {
             return new Location[size];
         }
     };
-    private Point point;
+    private Point Point;
     private String Address;
+    private String Locality;
 
-    public Location(Point point, String address) {
-        this.point = point;
+    public Location(Point point, String address, String locality) {
+        this.Point = point;
         Address = address;
+        this.Locality = locality;
     }
 
     private Location(Parcel in) {
-        point = in.readParcelable(Point.class.getClassLoader());
+        Point = in.readParcelable(Point.class.getClassLoader());
         Address = in.readString();
+        Locality = in.readString();
     }
 
     public co.gobd.tracker.model.job.Point getPoint() {
-        return point;
+        return Point;
     }
 
     public void setPoint(co.gobd.tracker.model.job.Point point) {
-        this.point = point;
+        this.Point = point;
     }
 
     public String getAddress() {
         return Address;
+    }
+
+    public String getLocality(){
+        return Locality;
+    }
+
+    public void setLocality(String locality){
+        this.Locality = locality;
     }
 
     public void setAddress(String address) {
@@ -52,7 +63,7 @@ public class Location implements Parcelable {
     @Override
     public String toString() {
         return "Location{" +
-                "point=" + point +
+                "point=" + Point +
                 ", Address='" + Address + '\'' +
                 '}';
     }
@@ -65,7 +76,8 @@ public class Location implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
-        dest.writeParcelable(point, flags);
+        dest.writeParcelable(Point, flags);
         dest.writeString(Address);
+        dest.writeString(Locality);
     }
 }

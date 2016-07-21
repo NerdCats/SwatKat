@@ -51,12 +51,15 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
         Double ETAMinutes = (jsonObject.get("ETAMinutes").isJsonNull()) ?
                 null : jsonObject.get("ETAMinutes").getAsDouble();
 
+        Double RequiredChangeFor = (jsonObject.get("RequiredChangeFor").isJsonNull()) ?
+                null : jsonObject.get("RequiredChangeFor").getAsDouble();
+
         String PaymentMethod = jsonObject.get("PaymentMethod").getAsString();
 
         order = new Order(From, To, Description, orderCart,
                 NoteToDeliveryMan, Name, Type,
                 PayloadType, UserId, OrderLocation,
-                ETA, ETAMinutes, PaymentMethod);
+                ETA, ETAMinutes, RequiredChangeFor, PaymentMethod);
 
         return order;
     }
@@ -67,6 +70,8 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
         JsonObject jsonPoint = jsonObject.get("Point").getAsJsonObject();
 
         String type = jsonPoint.get("type").getAsString();
+        String locality = (jsonObject.get("Locality").isJsonNull()) ?
+                null : jsonObject.get("Locality").getAsString();
 
         JsonElement testObj = (jsonPoint.get("coordinates").isJsonNull()) ?
                 null : jsonPoint.get("coordinates").getAsJsonArray();
@@ -80,13 +85,13 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
 
             Point point = new Point(type, coord);
 
-            Location location = new Location(point, address);
+            Location location = new Location(point, address, locality);
 
             return location;
         }
 
         Point point = new Point(type, null);
-        Location location = new Location(point, address);
+        Location location = new Location(point, address, locality);
 
         return location;
 
