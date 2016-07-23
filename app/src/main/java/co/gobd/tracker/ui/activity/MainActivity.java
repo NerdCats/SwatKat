@@ -45,6 +45,7 @@ import co.gobd.tracker.ui.view.MainView;
 import co.gobd.tracker.ui.view.OnJobItemClickListener;
 import co.gobd.tracker.utility.Constant;
 import co.gobd.tracker.utility.ListParser.JobParser;
+import co.gobd.tracker.utility.ServiceUtility;
 import co.gobd.tracker.utility.SessionManager;
 
 public class MainActivity extends AppCompatActivity
@@ -100,6 +101,8 @@ public class MainActivity extends AppCompatActivity
 
         // Dagger 2 Injection
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
+
+        ServiceUtility.checkGooglePlayServices(context, this);
 
         setupToolbar();
 
