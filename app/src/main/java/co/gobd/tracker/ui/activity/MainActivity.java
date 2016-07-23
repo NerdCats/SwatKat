@@ -370,7 +370,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onTaskUpdateClick() {
+    public void onTaskUpdateClick(String jobId) {
         //TODO: Remove when not needed
         Toast.makeText(context, "Task update clicked", Toast.LENGTH_SHORT).show();
     }

@@ -112,7 +112,9 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             taskUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onTaskUpdateClickListener.onTaskUpdateClick();
+                    int position = getAdapterPosition();
+                    String jobId = jobModelList.get(position).getId();
+                    onTaskUpdateClickListener.onTaskUpdateClick(jobId);
                 }
             });
         }
