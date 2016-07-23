@@ -6,19 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import co.gobd.tracker.R;
-import co.gobd.tracker.model.job.AssignedJob;
 import co.gobd.tracker.model.job.JobModel;
-import co.gobd.tracker.service.job.JobCallback;
-import co.gobd.tracker.service.job.JobService;
 import co.gobd.tracker.ui.view.OnJobItemClickListener;
 
 /**
@@ -33,6 +28,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     private List<JobModel> jobModelList;
     private OnJobItemClickListener onJobItemClickListener;
 
+    private OnTaskUpdateClickListener onTaskUpdateClickListener;
+
     public JobAdapter(Context context) {
         jobModelList = new ArrayList<>();
         this.context = context;
@@ -43,7 +40,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         this.onJobItemClickListener = onJobItemClickListener;
     }
 
-    public void setAdapterData(List<JobModel> jobModelList){
+    public void setAdapterData(List<JobModel> jobModelList) {
         this.jobModelList = jobModelList;
         notifyDataSetChanged();
     }
@@ -83,6 +80,10 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         return jobModelList.size();
     }
 
+    public void setOnTaskUpdateClickListener(OnTaskUpdateClickListener onTaskUpdateClickListener) {
+        this.onTaskUpdateClickListener = onTaskUpdateClickListener;
+    }
+
     public class JobViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView name;
@@ -92,7 +93,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
         TextView pickupLocality;
         TextView deliveryLocality;
-
+        Button taskUpdate;
 
         CardView cardView;
 
@@ -106,7 +107,14 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             totalPrice = (TextView) itemView.findViewById(R.id.tv_total_price);
             pickupLocality = (TextView) itemView.findViewById(R.id.tv_locality_pickup);
             deliveryLocality = (TextView) itemView.findViewById(R.id.tv_locality_delivery);
+            taskUpdate = (Button) itemView.findViewById(R.id.btn_task_update);
 
+            taskUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onTaskUpdateClickListener.onTaskUpdateClick();
+                }
+            });
         }
 
         @Override

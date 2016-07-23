@@ -7,8 +7,10 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.model.job.AssignedJob;
 import co.gobd.tracker.model.job.JobModel;
+import co.gobd.tracker.model.job.UpdateTaskState;
 import co.gobd.tracker.service.job.JobCallback;
 import co.gobd.tracker.service.job.JobService;
+import co.gobd.tracker.service.job.PatchCallback;
 import co.gobd.tracker.ui.view.MainView;
 import co.gobd.tracker.utility.Constant;
 import co.gobd.tracker.utility.SessionManager;
@@ -70,6 +72,26 @@ public class MainPresenter {
 
     public void onDestroy(){
         mainViewWeakReference = null;
+    }
+
+    public void updateTaskStateToCompleted(String jobId, String taskId)
+    {
+        jobService.updateTaskState(sessionManager.getBearer(), jobId, taskId, new UpdateTaskState(), new PatchCallback() {
+            @Override
+            public void onPatchSuccess() {
+                mainView.disableCheckbox();
+            }
+
+            @Override
+            public void onPatchFailure() {
+                mainView.showTaskUpdateError();
+            }
+
+            @Override
+            public void onConnectionError() {
+                mainView.showConnectionError();
+            }
+        });
     }
 
 }

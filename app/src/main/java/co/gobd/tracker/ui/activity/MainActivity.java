@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import co.gobd.tracker.R;
 import co.gobd.tracker.adapter.JobAdapter;
+import co.gobd.tracker.adapter.OnTaskUpdateClickListener;
 import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.model.job.order.OrderCart;
@@ -49,7 +51,7 @@ import co.gobd.tracker.utility.ServiceUtility;
 import co.gobd.tracker.utility.SessionManager;
 
 public class MainActivity extends AppCompatActivity
-        implements MainView, OnJobItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+        implements MainView, OnJobItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, OnTaskUpdateClickListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -79,17 +81,13 @@ public class MainActivity extends AppCompatActivity
 
     @BindView(R.id.fab_toggle_tracking)
     FloatingActionButton fabToggleTracking;
-
+    List<JobModel> jobModelList;
+    JobAdapter jobAdapter;
+    ProgressDialog progressDialog;
     private ActionBarDrawerToggle drawerToggle;
-
     // Keeps a reference of ButterKnife object so that it can be cleared from memory later
     // Unbinder#unbind() is called in Activity#onDestroy()
     private Unbinder butterKnifeUnbinder;
-
-    List<JobModel> jobModelList;
-    JobAdapter jobAdapter;
-
-    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +110,9 @@ public class MainActivity extends AppCompatActivity
         jobAdapter = new JobAdapter(context);
         mainPresenter.initialise(this);
         mainPresenter.loadAdapterData();
+
         jobAdapter.setOnJobItemClickListener(this);
+        jobAdapter.setOnTaskUpdateClickListener(this);
 
         setupRecyclerView(jobAdapter);
 
@@ -285,8 +285,8 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra(Constant.Job.JOB_ID, jobModel.getId());
         intent.putExtra(Constant.Job.JOB_HRID, jobModel.getHRID());
         intent.putExtra(Constant.Job.NOTE_TO_DELIVERY_MAN, noteToDeliveryMan);
-        intent.putExtra(Constant.Job.TASK_ID_PICKUP,jobParser.getTaskId(JobTaskTypes.PACKAGE_PICKUP));
-        intent.putExtra(Constant.Job.TASK_ID_PICKUP,jobParser.getTaskId(JobTaskTypes.DELIVERY));
+        intent.putExtra(Constant.Job.TASK_ID_PICKUP, jobParser.getTaskId(JobTaskTypes.PACKAGE_PICKUP));
+        intent.putExtra(Constant.Job.TASK_ID_PICKUP, jobParser.getTaskId(JobTaskTypes.DELIVERY));
 
         startActivity(intent);
     }
@@ -311,9 +311,7 @@ public class MainActivity extends AppCompatActivity
 
         if (item.isChecked()) {
             item.setChecked(false);
-        }
-        else
-        {
+        } else {
             item.setChecked(true);
         }
 
@@ -354,5 +352,26 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void stopProgress() {
         progressDialog.dismiss();
+    }
+
+    @Override
+    public void disableCheckbox() {
+
+    }
+
+    @Override
+    public void showTaskUpdateError() {
+
+    }
+
+    @Override
+    public void showConnectionError() {
+
+    }
+
+    @Override
+    public void onTaskUpdateClick() {
+        //TODO: Remove when not needed
+        Toast.makeText(context, "Task update clicked", Toast.LENGTH_SHORT).show();
     }
 }
