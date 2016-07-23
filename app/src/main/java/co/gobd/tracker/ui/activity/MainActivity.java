@@ -24,7 +24,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
 
@@ -81,9 +82,13 @@ public class MainActivity extends AppCompatActivity
 
     @BindView(R.id.fab_toggle_tracking)
     FloatingActionButton fabToggleTracking;
+
     List<JobModel> jobModelList;
     JobAdapter jobAdapter;
+
     ProgressDialog progressDialog;
+    MaterialDialog taskUpdateDialog;
+
     private ActionBarDrawerToggle drawerToggle;
     // Keeps a reference of ButterKnife object so that it can be cleared from memory later
     // Unbinder#unbind() is called in Activity#onDestroy()
@@ -106,6 +111,7 @@ public class MainActivity extends AppCompatActivity
 
         setupNavigationDrawer();
 
+        setupTaskUpdateDialog();
 
         jobAdapter = new JobAdapter(context);
         mainPresenter.initialise(this);
@@ -121,6 +127,14 @@ public class MainActivity extends AppCompatActivity
         fabToggleTracking.setOnClickListener(this);
 
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void setupTaskUpdateDialog() {
+        boolean wrapInScrollView = true;
+        taskUpdateDialog = new MaterialDialog.Builder(this)
+                .title(R.string.title_task_update)
+                .customView(R.layout.layout_task_update, wrapInScrollView)
+                .build();
     }
 
     private void setupToolbar() {
@@ -371,7 +385,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onTaskUpdateClick(String jobId) {
-        //TODO: Remove when not needed
-        Toast.makeText(context, "Task update clicked", Toast.LENGTH_SHORT).show();
+       taskUpdateDialog.show();
     }
 }

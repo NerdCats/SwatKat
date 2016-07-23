@@ -41,4 +41,9 @@
 
     </style>
 
+    <style name="MaterialCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+
 </resources>
