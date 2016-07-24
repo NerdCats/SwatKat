@@ -114,7 +114,11 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     String jobId = jobModelList.get(position).getId();
-                    onTaskUpdateClickListener.onTaskUpdateClick(jobId);
+                    int PACKAGE_PICKUP_TASK = 1;
+                    int DELIVERY_TASK = 2;
+                    String pickupTaskId = jobModelList.get(position).getTasks().get(PACKAGE_PICKUP_TASK).getId();
+                    String deliveryTaskId = jobModelList.get(position).getTasks().get(DELIVERY_TASK).getId();
+                    onTaskUpdateClickListener.onTaskUpdateClick(jobId, pickupTaskId, deliveryTaskId);
                 }
             });
         }

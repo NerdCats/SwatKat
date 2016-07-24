@@ -14,6 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_margin="8dp"
         android:checked="false"
+        android:onClick="onCheckBoxClicked"
         android:text="Pickup complete?" />
 
     <CheckBox
@@ -26,6 +27,7 @@
         android:layout_below="@+id/cb_pickup"
         android:layout_margin="8dp"
         android:checked="false"
+        android:onClick="onCheckBoxClicked"
         android:text="Delivery complete?" />
 
 

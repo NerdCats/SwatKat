@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -23,8 +24,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
@@ -89,6 +92,9 @@ public class MainActivity extends AppCompatActivity
     ProgressDialog progressDialog;
     MaterialDialog taskUpdateDialog;
 
+    CheckBox cbPickup;
+    CheckBox cbDelivery;
+
     private ActionBarDrawerToggle drawerToggle;
     // Keeps a reference of ButterKnife object so that it can be cleared from memory later
     // Unbinder#unbind() is called in Activity#onDestroy()
@@ -111,7 +117,7 @@ public class MainActivity extends AppCompatActivity
 
         setupNavigationDrawer();
 
-        setupTaskUpdateDialog();
+        //setupTaskUpdateDialog();
 
         jobAdapter = new JobAdapter(context);
         mainPresenter.initialise(this);
@@ -129,11 +135,18 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void setupTaskUpdateDialog() {
+    public MaterialDialog createTaskUpdateDialog() {
         boolean wrapInScrollView = true;
-        taskUpdateDialog = new MaterialDialog.Builder(this)
+        return new MaterialDialog.Builder(this)
                 .title(R.string.title_task_update)
                 .customView(R.layout.layout_task_update, wrapInScrollView)
+                .positiveText(R.string.dialog_button_update)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                    }
+                })
                 .build();
     }
 
@@ -384,7 +397,32 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onTaskUpdateClick(String jobId) {
-       taskUpdateDialog.show();
+    public void onTaskUpdateClick(String jobId, String pickupTaskId, String deliveryTaskId) {
+        taskUpdateDialog = createTaskUpdateDialog();
+        taskUpdateDialog.show();
+
+        View view = taskUpdateDialog.getCustomView();
+        cbPickup = (CheckBox) view.findViewById(R.id.cb_pickup);
+        cbDelivery = (CheckBox) view.findViewById(R.id.cb_delivery);
+    }
+
+    public void onCheckBoxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        switch (view.getId()) {
+            case R.id.cb_pickup:
+                if (checked) {
+                    //TODO:
+                } else {
+
+                }
+                break;
+            case R.id.cb_delivery:
+                if (checked) {
+                    //TODO:
+                } else {
+
+                }
+                break;
+        }
     }
 }
