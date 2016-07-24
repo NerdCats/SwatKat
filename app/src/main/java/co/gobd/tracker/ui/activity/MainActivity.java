@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public MaterialDialog createTaskUpdateDialog() {
+    public MaterialDialog createTaskUpdateDialog(final String jobId, final String pickUpTaskId, final String deliveryTaskId) {
         boolean wrapInScrollView = true;
         return new MaterialDialog.Builder(this)
                 .title(R.string.title_task_update)
@@ -144,7 +144,12 @@ public class MainActivity extends AppCompatActivity
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
+                        mainPresenter.loadAdapterData();
+                        if (cbPickup.isChecked()) {
+                            mainPresenter.updateTaskStateToCompleted(jobId, pickUpTaskId);
+                        } else if (cbDelivery.isChecked()) {
+                            mainPresenter.updateTaskStateToCompleted(jobId, deliveryTaskId);
+                        }
                     }
                 })
                 .build();
@@ -319,6 +324,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab_toggle_tracking:
@@ -399,7 +409,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onTaskUpdateClick(String jobId, String pickupTaskId, String deliveryTaskId,
                                   String pickUpTaskState, String deliveryTaskState) {
-        taskUpdateDialog = createTaskUpdateDialog();
+        taskUpdateDialog = createTaskUpdateDialog(jobId, pickupTaskId, deliveryTaskId);
         taskUpdateDialog.show();
 
         View view = taskUpdateDialog.getCustomView();

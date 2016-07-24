@@ -93,11 +93,14 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
         String PreferredDeliveryTime = (jsonObject.get("PreferredDeliveryTime").isJsonNull()) ?
                 null : jsonObject.get("PreferredDeliveryTime").getAsString();
 
-        String InvoiceId = (jsonObject.get("PaymentMethod").isJsonNull()) ?
-                null : jsonObject.get("PaymentMethod").getAsString();
+        String InvoiceId = (jsonObject.get("InvoiceId").isJsonNull()) ?
+                null : jsonObject.get("InvoiceId").getAsString();
 
         String PaymentMethod = jsonObject.get("PaymentMethod").getAsString();
-        Boolean Deleted = jsonObject.get("Deleted").getAsBoolean();
+
+        Boolean Deleted = (jsonObject.get("IsDeleted").isJsonNull())?
+                null : jsonObject.get("IsDeleted").getAsBoolean();
+
         String PaymentStatus = jsonObject.get("PaymentStatus").getAsString();
         String HRID = jsonObject.get("HRID").getAsString();
         String Id = jsonObject.get("Id").getAsString();
