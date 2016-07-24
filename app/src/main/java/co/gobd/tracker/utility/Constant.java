@@ -32,6 +32,12 @@ public class Constant {
         public static final String CANCELLED = "CANCELLED";
     }
 
+    public static class Task{
+        public static final int PACKAGE_PICKUP = 1;
+        public static final int DELIVERY = 2;
+
+    }
+
     public final class BackendName {
         public static final String TASK_CAT = "TASK_CAT";
         public static final String SHADOW_CAT = "SHADOW_CAT";

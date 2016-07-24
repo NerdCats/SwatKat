@@ -14,7 +14,10 @@ import java.util.List;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.model.job.JobModel;
+import co.gobd.tracker.model.job.task.DeliveryTask;
+import co.gobd.tracker.model.job.task.PackagePickupTask;
 import co.gobd.tracker.ui.view.OnJobItemClickListener;
+import co.gobd.tracker.utility.Constant;
 
 /**
  * Created by fahad on 4/28/16.
@@ -114,11 +117,17 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     String jobId = jobModelList.get(position).getId();
-                    int PACKAGE_PICKUP_TASK = 1;
-                    int DELIVERY_TASK = 2;
-                    String pickupTaskId = jobModelList.get(position).getTasks().get(PACKAGE_PICKUP_TASK).getId();
-                    String deliveryTaskId = jobModelList.get(position).getTasks().get(DELIVERY_TASK).getId();
-                    onTaskUpdateClickListener.onTaskUpdateClick(jobId, pickupTaskId, deliveryTaskId);
+
+                    String pickupTaskId = jobModelList.get(position).getTasks().get(Constant.Task.PACKAGE_PICKUP).getId();
+                    String deliveryTaskId = jobModelList.get(position).getTasks().get(Constant.Task.DELIVERY).getId();
+
+                    String pickupTaskState = ((PackagePickupTask) jobModelList.get(position).
+                            getTasks().get(Constant.Task.PACKAGE_PICKUP)).getState();
+                    String deliveryTaskState = ((DeliveryTask) jobModelList.get(position).
+                            getTasks().get(Constant.Task.DELIVERY)).getState();
+
+                    onTaskUpdateClickListener.onTaskUpdateClick(jobId, pickupTaskId, deliveryTaskId,
+                            pickupTaskState, deliveryTaskState);
                 }
             });
         }

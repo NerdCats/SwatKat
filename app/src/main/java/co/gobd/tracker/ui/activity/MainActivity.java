@@ -397,13 +397,32 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onTaskUpdateClick(String jobId, String pickupTaskId, String deliveryTaskId) {
+    public void onTaskUpdateClick(String jobId, String pickupTaskId, String deliveryTaskId,
+                                  String pickUpTaskState, String deliveryTaskState) {
         taskUpdateDialog = createTaskUpdateDialog();
         taskUpdateDialog.show();
 
         View view = taskUpdateDialog.getCustomView();
         cbPickup = (CheckBox) view.findViewById(R.id.cb_pickup);
         cbDelivery = (CheckBox) view.findViewById(R.id.cb_delivery);
+
+        updateCheckBox(pickUpTaskState, deliveryTaskState);
+
+    }
+
+    public void updateCheckBox(String pickUpTaskState, String deliveryTaskState) {
+        if (pickUpTaskState.equals(Constant.JobTaskState.COMPLETED)) {
+            disableCheckBox(cbPickup);
+        }
+
+        if (deliveryTaskState.equals(Constant.JobTaskState.COMPLETED)) {
+            disableCheckBox(cbDelivery);
+        }
+    }
+
+    public void disableCheckBox(CheckBox checkBox) {
+        checkBox.setChecked(true);
+        checkBox.setEnabled(false);
     }
 
     public void onCheckBoxClicked(View view) {
