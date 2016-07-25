@@ -10,7 +10,6 @@ import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.Streaming;
 
 /**
  * Created by fahad on 4/25/16.
@@ -24,5 +23,5 @@ public interface JobApi {
     @PATCH(BackendUrl.TaskCat.PATCH_TASK_STATE)
     Call<Void> patchTaskState(@Header("Authorization") String bearer, @Path("jobId") String jobId,
                               @Path("taskId") String taskId,
-                              @Body UpdateTaskState updateTaskState);
+                              @Body UpdateTaskState[] updateTaskState);
 }

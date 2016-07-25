@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -23,7 +24,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
 
@@ -34,6 +40,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import co.gobd.tracker.R;
 import co.gobd.tracker.adapter.JobAdapter;
+import co.gobd.tracker.adapter.OnTaskUpdateClickListener;
 import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.model.job.order.OrderCart;
@@ -49,7 +56,7 @@ import co.gobd.tracker.utility.ServiceUtility;
 import co.gobd.tracker.utility.SessionManager;
 
 public class MainActivity extends AppCompatActivity
-        implements MainView, OnJobItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+        implements MainView, OnJobItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, OnTaskUpdateClickListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -80,16 +87,25 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.fab_toggle_tracking)
     FloatingActionButton fabToggleTracking;
 
-    private ActionBarDrawerToggle drawerToggle;
-
-    // Keeps a reference of ButterKnife object so that it can be cleared from memory later
-    // Unbinder#unbind() is called in Activity#onDestroy()
-    private Unbinder butterKnifeUnbinder;
-
     List<JobModel> jobModelList;
     JobAdapter jobAdapter;
 
     ProgressDialog progressDialog;
+    MaterialDialog taskUpdateDialog;
+
+    CheckBox cbPickup;
+    CheckBox cbDelivery;
+
+    private ActionBarDrawerToggle drawerToggle;
+
+    /**
+     * Keeps a reference of ButterKnife object so that it can be cleared from memory later
+     * Unbinder#unbind() is called in Activity#onDestroy()
+     */
+    private Unbinder butterKnifeUnbinder;
+
+    private boolean isPickupInProgress;
+    private boolean isDeliveryInProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,11 +124,14 @@ public class MainActivity extends AppCompatActivity
 
         setupNavigationDrawer();
 
+        //setupTaskUpdateDialog();
 
         jobAdapter = new JobAdapter(context);
         mainPresenter.initialise(this);
         mainPresenter.loadAdapterData();
+
         jobAdapter.setOnJobItemClickListener(this);
+        jobAdapter.setOnTaskUpdateClickListener(this);
 
         setupRecyclerView(jobAdapter);
 
@@ -121,6 +140,27 @@ public class MainActivity extends AppCompatActivity
         fabToggleTracking.setOnClickListener(this);
 
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public MaterialDialog createTaskUpdateDialog(final String jobId, final String pickUpTaskId, final String deliveryTaskId) {
+        boolean wrapInScrollView = true;
+        return new MaterialDialog.Builder(this)
+                .title(R.string.title_task_update)
+                .customView(R.layout.layout_task_update, wrapInScrollView)
+                .positiveText(R.string.dialog_button_update)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        if (cbPickup.isChecked() && isPickupInProgress) {
+                            mainPresenter.updateTaskStateToCompleted(jobId, pickUpTaskId);
+                        }
+                        if (cbDelivery.isChecked() && isDeliveryInProgress) {
+                            mainPresenter.updateTaskStateToCompleted(jobId, deliveryTaskId);
+                        }
+                        mainPresenter.loadAdapterData();
+                    }
+                })
+                .build();
     }
 
     private void setupToolbar() {
@@ -285,10 +325,15 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra(Constant.Job.JOB_ID, jobModel.getId());
         intent.putExtra(Constant.Job.JOB_HRID, jobModel.getHRID());
         intent.putExtra(Constant.Job.NOTE_TO_DELIVERY_MAN, noteToDeliveryMan);
-        intent.putExtra(Constant.Job.TASK_ID_PICKUP,jobParser.getTaskId(JobTaskTypes.PACKAGE_PICKUP));
-        intent.putExtra(Constant.Job.TASK_ID_PICKUP,jobParser.getTaskId(JobTaskTypes.DELIVERY));
+        intent.putExtra(Constant.Job.TASK_ID_PICKUP, jobParser.getTaskId(JobTaskTypes.PACKAGE_PICKUP));
+        intent.putExtra(Constant.Job.TASK_ID_PICKUP, jobParser.getTaskId(JobTaskTypes.DELIVERY));
 
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -311,9 +356,7 @@ public class MainActivity extends AppCompatActivity
 
         if (item.isChecked()) {
             item.setChecked(false);
-        }
-        else
-        {
+        } else {
             item.setChecked(true);
         }
 
@@ -355,4 +398,56 @@ public class MainActivity extends AppCompatActivity
     public void stopProgress() {
         progressDialog.dismiss();
     }
+
+    @Override
+    public void showTaskUpdateSuccessfulMsg() {
+        Toast.makeText(context, R.string.msg_task_update_successful, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void showTaskUpdateError() {
+        Toast.makeText(context, R.string.msg_task_update_error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showConnectionError() {
+        Toast.makeText(context, R.string.message_connection_error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onTaskUpdateClick(String jobId, String pickupTaskId, String deliveryTaskId,
+                                  String pickUpTaskState, String deliveryTaskState) {
+        taskUpdateDialog = createTaskUpdateDialog(jobId, pickupTaskId, deliveryTaskId);
+        taskUpdateDialog.show();
+
+        View view = taskUpdateDialog.getCustomView();
+        cbPickup = (CheckBox) view.findViewById(R.id.cb_pickup);
+        cbDelivery = (CheckBox) view.findViewById(R.id.cb_delivery);
+
+        isPickupInProgress = true;
+        isDeliveryInProgress = true;
+
+        updateCheckBox(pickUpTaskState, deliveryTaskState);
+
+    }
+
+    public void updateCheckBox(String pickUpTaskState, String deliveryTaskState) {
+        if (pickUpTaskState.equals(Constant.JobTaskState.COMPLETED)) {
+            disableCheckBox(cbPickup);
+            isPickupInProgress = false;
+        }
+
+        if (deliveryTaskState.equals(Constant.JobTaskState.COMPLETED)) {
+            disableCheckBox(cbDelivery);
+            isDeliveryInProgress = false;
+        }
+    }
+
+    public void disableCheckBox(CheckBox checkBox) {
+        checkBox.setChecked(true);
+        checkBox.setEnabled(false);
+
+    }
+
 }

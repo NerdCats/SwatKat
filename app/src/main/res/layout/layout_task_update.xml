@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_task_update"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <CheckBox
+        android:id="@+id/cb_pickup"
+        style="@style/MaterialCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="8dp"
+        android:checked="false"
+        android:text="Pickup complete?" />
+
+    <CheckBox
+        android:id="@+id/cb_delivery"
+        style="@style/MaterialCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/cb_pickup"
+        android:layout_margin="8dp"
+        android:checked="false"
+        android:text="Delivery complete?" />
+
+
+</RelativeLayout>

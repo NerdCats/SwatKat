@@ -12,4 +12,10 @@ public interface MainView {
     void setJobModelList(List<JobModel> jobModelList);
     void startProgress();
     void stopProgress();
+
+    void showTaskUpdateSuccessfulMsg();
+
+    void showTaskUpdateError();
+
+    void showConnectionError();
 }

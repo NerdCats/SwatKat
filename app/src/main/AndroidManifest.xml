@@ -25,6 +25,8 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="${appName}"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/AppTheme" />
 
         <service

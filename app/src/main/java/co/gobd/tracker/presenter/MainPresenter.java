@@ -7,8 +7,10 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.model.job.AssignedJob;
 import co.gobd.tracker.model.job.JobModel;
+import co.gobd.tracker.model.job.UpdateTaskState;
 import co.gobd.tracker.service.job.JobCallback;
 import co.gobd.tracker.service.job.JobService;
+import co.gobd.tracker.service.job.PatchCallback;
 import co.gobd.tracker.ui.view.MainView;
 import co.gobd.tracker.utility.Constant;
 import co.gobd.tracker.utility.SessionManager;
@@ -19,25 +21,24 @@ import co.gobd.tracker.utility.SessionManager;
 
 public class MainPresenter {
 
+    @Inject
+    SessionManager sessionManager;
     private JobService jobService;
     private MainView mainView;
     private WeakReference<MainView> mainViewWeakReference;
     private List<JobModel> jobModelList;
 
     @Inject
-    SessionManager sessionManager;
-
-    @Inject
-    public MainPresenter(JobService jobService){
+    public MainPresenter(JobService jobService) {
         this.jobService = jobService;
     }
 
-    public void initialise(MainView view){
+    public void initialise(MainView view) {
         this.mainViewWeakReference = new WeakReference<>(view);
         mainView = this.mainViewWeakReference.get();
     }
 
-    public void loadAdapterData(){
+    public void loadAdapterData() {
 
         jobService.getAssignedJobList(sessionManager.getBearer(),
                 sessionManager.getAssetId(),
@@ -46,7 +47,7 @@ public class MainPresenter {
 
                     @Override
                     public void onGetJobSuccess(AssignedJob assignedJob) {
-                        if(assignedJob != null){
+                        if (assignedJob != null) {
                             jobModelList = assignedJob.getJobModelList();
                             mainView.setJobModelList(jobModelList);
                         }
@@ -64,12 +65,35 @@ public class MainPresenter {
                 });
     }
 
-    public List<JobModel> getInProgressedJob(){
+    public List<JobModel> getInProgressedJob() {
         return jobModelList;
     }
 
-    public void onDestroy(){
+    public void onDestroy() {
         mainViewWeakReference = null;
+    }
+
+    public void updateTaskStateToCompleted(String jobId, String taskId) {
+
+        UpdateTaskState[] state = {new UpdateTaskState("replace", "State", "COMPLETED")};
+
+        jobService.updateTaskState(sessionManager.getBearer(), jobId, taskId,
+                state, new PatchCallback() {
+                    @Override
+                    public void onPatchSuccess() {
+                        mainView.showTaskUpdateSuccessfulMsg();
+                    }
+
+                    @Override
+                    public void onPatchFailure() {
+                        mainView.showTaskUpdateError();
+                    }
+
+                    @Override
+                    public void onConnectionError() {
+                        mainView.showConnectionError();
+                    }
+                });
     }
 
 }
