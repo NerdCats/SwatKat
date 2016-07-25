@@ -74,12 +74,14 @@ public class MainPresenter {
     }
 
     public void updateTaskStateToCompleted(String jobId, String taskId) {
-        UpdateTaskState updateTaskState = new UpdateTaskState("replace", "/State", "COMPLETED");
+
+        UpdateTaskState[] state = {new UpdateTaskState("replace", "State", "COMPLETED")};
+
         jobService.updateTaskState(sessionManager.getBearer(), jobId, taskId,
-                updateTaskState, new PatchCallback() {
+                state, new PatchCallback() {
                     @Override
                     public void onPatchSuccess() {
-                        mainView.disableCheckbox();
+                        mainView.showTaskUpdateSuccessfulMsg();
                     }
 
                     @Override

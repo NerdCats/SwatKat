@@ -47,7 +47,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void updateTaskState(String bearer, String jobId, String taskId, UpdateTaskState updateTaskState,
+    public void updateTaskState(String bearer, String jobId, String taskId, UpdateTaskState[] updateTaskState,
                                 final PatchCallback callback) {
 
         Call<Void> call = jobApi.patchTaskState(bearer, jobId, taskId, updateTaskState);

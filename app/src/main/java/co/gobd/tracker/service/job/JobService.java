@@ -10,6 +10,6 @@ public interface JobService {
     void getAssignedJobList(String bearer, String assetId, String jobStateUpto,
                             final JobCallback callback);
 
-    void updateTaskState(String bearer, String jobId, String taskId, UpdateTaskState updateTaskState,
+    void updateTaskState(String bearer, String jobId, String taskId, UpdateTaskState[] updateTaskState,
                          final PatchCallback callback);
 }

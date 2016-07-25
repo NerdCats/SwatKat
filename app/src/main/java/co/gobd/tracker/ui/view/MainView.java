@@ -13,7 +13,7 @@ public interface MainView {
     void startProgress();
     void stopProgress();
 
-    void disableCheckbox();
+    void showTaskUpdateSuccessfulMsg();
 
     void showTaskUpdateError();
 

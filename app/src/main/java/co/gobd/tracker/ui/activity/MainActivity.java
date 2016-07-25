@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -96,9 +97,15 @@ public class MainActivity extends AppCompatActivity
     CheckBox cbDelivery;
 
     private ActionBarDrawerToggle drawerToggle;
-    // Keeps a reference of ButterKnife object so that it can be cleared from memory later
-    // Unbinder#unbind() is called in Activity#onDestroy()
+
+    /**
+     * Keeps a reference of ButterKnife object so that it can be cleared from memory later
+     * Unbinder#unbind() is called in Activity#onDestroy()
+     */
     private Unbinder butterKnifeUnbinder;
+
+    private boolean isPickupInProgress;
+    private boolean isDeliveryInProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,12 +151,13 @@ public class MainActivity extends AppCompatActivity
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        mainPresenter.loadAdapterData();
-                        if (cbPickup.isChecked()) {
+                        if (cbPickup.isChecked() && isPickupInProgress) {
                             mainPresenter.updateTaskStateToCompleted(jobId, pickUpTaskId);
-                        } else if (cbDelivery.isChecked()) {
+                        }
+                        if (cbDelivery.isChecked() && isDeliveryInProgress) {
                             mainPresenter.updateTaskStateToCompleted(jobId, deliveryTaskId);
                         }
+                        mainPresenter.loadAdapterData();
                     }
                 })
                 .build();
@@ -392,18 +400,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void disableCheckbox() {
+    public void showTaskUpdateSuccessfulMsg() {
+        Toast.makeText(context, R.string.msg_task_update_successful, Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void showTaskUpdateError() {
-
+        Toast.makeText(context, R.string.msg_task_update_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showConnectionError() {
-
+        Toast.makeText(context, R.string.message_connection_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -416,6 +425,9 @@ public class MainActivity extends AppCompatActivity
         cbPickup = (CheckBox) view.findViewById(R.id.cb_pickup);
         cbDelivery = (CheckBox) view.findViewById(R.id.cb_delivery);
 
+        isPickupInProgress = true;
+        isDeliveryInProgress = true;
+
         updateCheckBox(pickUpTaskState, deliveryTaskState);
 
     }
@@ -423,35 +435,19 @@ public class MainActivity extends AppCompatActivity
     public void updateCheckBox(String pickUpTaskState, String deliveryTaskState) {
         if (pickUpTaskState.equals(Constant.JobTaskState.COMPLETED)) {
             disableCheckBox(cbPickup);
+            isPickupInProgress = false;
         }
 
         if (deliveryTaskState.equals(Constant.JobTaskState.COMPLETED)) {
             disableCheckBox(cbDelivery);
+            isDeliveryInProgress = false;
         }
     }
 
     public void disableCheckBox(CheckBox checkBox) {
         checkBox.setChecked(true);
         checkBox.setEnabled(false);
+
     }
 
-    public void onCheckBoxClicked(View view) {
-        boolean checked = ((CheckBox) view).isChecked();
-        switch (view.getId()) {
-            case R.id.cb_pickup:
-                if (checked) {
-                    //TODO:
-                } else {
-
-                }
-                break;
-            case R.id.cb_delivery:
-                if (checked) {
-                    //TODO:
-                } else {
-
-                }
-                break;
-        }
-    }
 }

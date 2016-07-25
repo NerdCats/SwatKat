@@ -66,5 +66,7 @@ How that should be handled in the WebCat? </string>
     <string name="text_job_delivery">"Delivery "</string>
     <string name="title_task_update">Update tasks</string>
     <string name="dialog_button_update">UPDATE</string>
+    <string name="msg_task_update_successful">Task updated successfully</string>
+    <string name="msg_task_update_error">Task update failed</string>
 
 </resources>

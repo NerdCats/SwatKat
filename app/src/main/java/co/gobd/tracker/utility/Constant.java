@@ -26,15 +26,17 @@ public class Constant {
         public static final String PACKAGE_DESCRIPTION = "DESCRIPTION";
     }
 
-    public static class JobTaskState{
+    public static class JobTaskState {
         public static final String IN_PROGRESS = "IN_PROGRESS";
         public static final String COMPLETED = "COMPLETED";
         public static final String CANCELLED = "CANCELLED";
     }
 
-    public static class Task{
+    public static class Task {
         public static final int PACKAGE_PICKUP = 1;
         public static final int DELIVERY = 2;
+
+        public static final String updateTaskState = "{\"value:\"\"COMPLETED\",\"path\":\"State\",\"op\":\"replace\"}";
 
     }
 
