@@ -30,7 +30,7 @@ public class JobModel implements Parcelable {
     private String State;
     private Order Order;
     private User User;
-    private String JobServedBy;
+    private User JobServedBy;
     private List<JobTask> Tasks;
     private String CreateTime;
     private String ModifiedTime;
@@ -51,7 +51,7 @@ public class JobModel implements Parcelable {
         State = in.readString();
         Order = in.readParcelable(Location.class.getClassLoader());
         User = in.readParcelable(User.class.getClassLoader());
-        JobServedBy = in.readString();
+        JobServedBy = in.readParcelable(User.class.getClassLoader());
         Tasks = new ArrayList<>();
         in.readTypedList(Tasks, JobTask.CREATOR);
         CreateTime = in.readString();
@@ -66,7 +66,7 @@ public class JobModel implements Parcelable {
     }
 
     public JobModel(String name, String state, Order order,
-                    User user, String jobServedBy, List<JobTask> tasks,
+                    User user, User jobServedBy, List<JobTask> tasks,
                     String createTime, String modifiedTime, String preferredDeliveryTime,
                     String invoiceId, String paymentMethod, Boolean deleted, String paymentStatus,
                     String HRID, String id) {
@@ -99,7 +99,7 @@ public class JobModel implements Parcelable {
         dest.writeString(State);
         dest.writeParcelable(Order, flags);
         dest.writeParcelable(User, flags);
-        dest.writeString(JobServedBy);
+        dest.writeParcelable(JobServedBy, flags);
         dest.writeTypedList(Tasks);
         dest.writeString(CreateTime);
         dest.writeString(ModifiedTime);
@@ -128,11 +128,11 @@ public class JobModel implements Parcelable {
         State = state;
     }
 
-    public String getJobServedBy() {
+    public User getJobServedBy() {
         return JobServedBy;
     }
 
-    public void setJobServedBy(String jobServedBy) {
+    public void setJobServedBy(User jobServedBy) {
         JobServedBy = jobServedBy;
     }
 

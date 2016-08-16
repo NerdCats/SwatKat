@@ -42,8 +42,7 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
         String State = jsonObject.get("State").getAsString();
         Order Order = context.deserialize(jsonObject.get("Order"), Order.class);
         User User = context.deserialize(jsonObject.get("User"), User.class);
-        String JobServedBy = (jsonObject.get("JobServedBy").isJsonNull()) ?
-                null : jsonObject.get("JobServedBy").getAsString();
+        User JobServedBy = context.deserialize(jsonObject.get("User"), User.class);
 
         final JsonArray tasks = jsonObject.getAsJsonArray("Tasks");
         for (int i = 0; i < tasks.size(); i++) {
