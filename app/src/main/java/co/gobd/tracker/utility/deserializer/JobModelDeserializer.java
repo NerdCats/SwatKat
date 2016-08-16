@@ -42,8 +42,7 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
         String State = jsonObject.get("State").getAsString();
         Order Order = context.deserialize(jsonObject.get("Order"), Order.class);
         User User = context.deserialize(jsonObject.get("User"), User.class);
-        String JobServedBy = (jsonObject.get("JobServedBy").isJsonNull()) ?
-                null : jsonObject.get("JobServedBy").getAsString();
+        User JobServedBy = context.deserialize(jsonObject.get("JobServedBy"), User.class);
 
         final JsonArray tasks = jsonObject.getAsJsonArray("Tasks");
         for (int i = 0; i < tasks.size(); i++) {
@@ -90,6 +89,18 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
         String CreateTime = jsonObject.get("CreateTime").getAsString();
         String ModifiedTime = jsonObject.get("ModifiedTime").getAsString();
 
+        Boolean ETAFailed = (jsonObject.get("ETAFailed").isJsonNull()) ?
+                null : jsonObject.get("ETAFailed").getAsBoolean();
+
+        String CompletionTime = (jsonObject.get("CompletionTime").isJsonNull())?
+                null : jsonObject.get("CompletionTime").getAsString();
+
+        String InitiatinTime = (jsonObject.get("InitiatinTime").isJsonNull())?
+                null : jsonObject.get("InitiatinTime").getAsString();
+
+        String Duration = (jsonObject.get("Duration").isJsonNull())?
+                null : jsonObject.get("Duration").getAsString();
+
         String PreferredDeliveryTime = (jsonObject.get("PreferredDeliveryTime").isJsonNull()) ?
                 null : jsonObject.get("PreferredDeliveryTime").getAsString();
 
@@ -97,6 +108,9 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
                 null : jsonObject.get("InvoiceId").getAsString();
 
         String PaymentMethod = jsonObject.get("PaymentMethod").getAsString();
+
+        String CancellationReason = (jsonObject.get("CancellationReason").isJsonNull()) ?
+                null : jsonObject.get("CancellationReason").getAsString();
 
         Boolean Deleted = (jsonObject.get("IsDeleted").isJsonNull())?
                 null : jsonObject.get("IsDeleted").getAsBoolean();
@@ -108,8 +122,9 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
         jobModel = new JobModel(Name, State, Order,
                 User, JobServedBy, jobTaskList,
-                CreateTime, ModifiedTime, PreferredDeliveryTime,
-                InvoiceId, PaymentMethod, Deleted, PaymentStatus,
+                CreateTime, ModifiedTime, ETAFailed, CompletionTime, InitiatinTime,
+                Duration ,PreferredDeliveryTime,
+                InvoiceId, PaymentMethod, CancellationReason, Deleted, PaymentStatus,
                 HRID, Id);
 
         return jobModel;
