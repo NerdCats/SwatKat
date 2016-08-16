@@ -34,9 +34,14 @@ public class JobModel implements Parcelable {
     private List<JobTask> Tasks;
     private String CreateTime;
     private String ModifiedTime;
+    private Boolean ETAFailed;
+    private String CompletionTime;
+    private String InitiatinTime;
+    private String Duration;
     private String PreferredDeliveryTime;
     private String InvoiceId;
     private String PaymentMethod;
+    private String CancellationReason;
     private Boolean Deleted;
     private String PaymentStatus;
     private String HRID;
@@ -56,9 +61,14 @@ public class JobModel implements Parcelable {
         in.readTypedList(Tasks, JobTask.CREATOR);
         CreateTime = in.readString();
         ModifiedTime = in.readString();
+        ETAFailed = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        CompletionTime = in.readString();
+        InitiatinTime = in.readString();
+        Duration = in.readString();
         PreferredDeliveryTime = in.readString();
         InvoiceId = in.readString();
         PaymentMethod = in.readString();
+        CancellationReason = in.readString();
         Deleted = (Boolean) in.readValue(Boolean.class.getClassLoader());
         PaymentStatus = in.readString();
         HRID = in.readString();
@@ -67,8 +77,9 @@ public class JobModel implements Parcelable {
 
     public JobModel(String name, String state, Order order,
                     User user, User jobServedBy, List<JobTask> tasks,
-                    String createTime, String modifiedTime, String preferredDeliveryTime,
-                    String invoiceId, String paymentMethod, Boolean deleted, String paymentStatus,
+                    String createTime, String modifiedTime, Boolean etaFailed, String completionTime,
+                    String initiatinTime, String duration, String preferredDeliveryTime,
+                    String invoiceId, String paymentMethod, String cancellationReason, Boolean deleted, String paymentStatus,
                     String HRID, String id) {
 
         Name = name;
@@ -79,9 +90,14 @@ public class JobModel implements Parcelable {
         Tasks = tasks;
         CreateTime = createTime;
         ModifiedTime = modifiedTime;
+        ETAFailed = etaFailed;
+        CompletionTime = completionTime;
+        InitiatinTime = initiatinTime;
+        Duration = duration;
         PreferredDeliveryTime = preferredDeliveryTime;
         InvoiceId = invoiceId;
         PaymentMethod = paymentMethod;
+        CancellationReason = cancellationReason;
         Deleted = deleted;
         PaymentStatus = paymentStatus;
         this.HRID = HRID;
@@ -103,9 +119,14 @@ public class JobModel implements Parcelable {
         dest.writeTypedList(Tasks);
         dest.writeString(CreateTime);
         dest.writeString(ModifiedTime);
+        dest.writeValue(ETAFailed);
+        dest.writeString(CompletionTime);
+        dest.writeString(InitiatinTime);
+        dest.writeString(Duration);
         dest.writeString(PreferredDeliveryTime);
         dest.writeString(InvoiceId);
         dest.writeString(PaymentMethod);
+        dest.writeString(CancellationReason);
         dest.writeValue(Deleted);
         dest.writeString(PaymentStatus);
         dest.writeString(HRID);
@@ -207,6 +228,47 @@ public class JobModel implements Parcelable {
     public void setModifiedTime(String modifiedTime) {
         ModifiedTime = modifiedTime;
     }
+
+    public Boolean getETAFailed(){
+        return ETAFailed;
+    }
+
+    void setETAFailed(Boolean etaFailed){
+        ETAFailed = etaFailed;
+    }
+
+    public String getCompletionTime() {
+        return CompletionTime;
+    }
+
+    public void setCompletionTime(String completionTime) {
+        CompletionTime = completionTime;
+    }
+
+    public String getInitiatinTime() {
+        return InitiatinTime;
+    }
+
+    public void setInitiatinTime(String initiatinTime) {
+        InitiatinTime = initiatinTime;
+    }
+
+    public String getDuration() {
+        return Duration;
+    }
+
+    public void setDuration(String duration) {
+        Duration = duration;
+    }
+
+    public String getCancellationReason() {
+        return CancellationReason;
+    }
+
+    public void setCancellationReason(String cancellationReason) {
+        CancellationReason = cancellationReason;
+    }
+
 
     public String getCreateTime() {
         return CreateTime;
