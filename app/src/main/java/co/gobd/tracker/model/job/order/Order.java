@@ -12,33 +12,24 @@ public class Order {
     private String Description;
     private OrderCart OrderCart;
     private String NoteToDeliveryMan;
-    private String Name;
     private String Type;
-    private String PayloadType;
+    private String Variant;
     private String UserId;
-    private Location OrderLocation;
-    private String ETA;
-    private Double ETAMinutes;
     private Double RequiredChangeFor;
     private String PaymentMethod;
 
     public Order(Location from, Location to, String description, OrderCart orderCart,
-                 String noteToDeliveryMan, String name, String type,
-                 String payloadType, String userId, Location orderLocation,
-                 String ETA, Double ETAMinutes, Double RequiredChangeFor, String paymentMethod) {
+                 String noteToDeliveryMan, String type, String variant,
+                 String userId, Double RequiredChangeFor, String paymentMethod) {
 
         From = from;
         To = to;
         Description = description;
         OrderCart = orderCart;
         NoteToDeliveryMan = noteToDeliveryMan;
-        Name = name;
         Type = type;
-        PayloadType = payloadType;
+        Variant = variant;
         UserId = userId;
-        OrderLocation = orderLocation;
-        this.ETA = ETA;
-        this.ETAMinutes = ETAMinutes;
         this.RequiredChangeFor = RequiredChangeFor;
         PaymentMethod = paymentMethod;
     }
@@ -114,20 +105,6 @@ public class Order {
     }
 
     /**
-     * @return The Name
-     */
-    public String getName() {
-        return Name;
-    }
-
-    /**
-     * @param Name The Name
-     */
-    public void setName(String Name) {
-        this.Name = Name;
-    }
-
-    /**
      * @return The Type
      */
     public String getType() {
@@ -142,20 +119,6 @@ public class Order {
     }
 
     /**
-     * @return The PayloadType
-     */
-    public String getPayloadType() {
-        return PayloadType;
-    }
-
-    /**
-     * @param PayloadType The PayloadType
-     */
-    public void setPayloadType(String PayloadType) {
-        this.PayloadType = PayloadType;
-    }
-
-    /**
      * @return The UserId
      */
     public String getUserId() {
@@ -167,48 +130,6 @@ public class Order {
      */
     public void setUserId(String UserId) {
         this.UserId = UserId;
-    }
-
-    /**
-     * @return The OrderLocation
-     */
-    public Object getOrderLocation() {
-        return OrderLocation;
-    }
-
-    /**
-     * @param OrderLocation The OrderLocation
-     */
-    public void setOrderLocation(Location OrderLocation) {
-        this.OrderLocation = OrderLocation;
-    }
-
-    /**
-     * @return The ETA
-     */
-    public Object getETA() {
-        return ETA;
-    }
-
-    /**
-     * @param ETA The ETA
-     */
-    public void setETA(String ETA) {
-        this.ETA = ETA;
-    }
-
-    /**
-     * @return The ETAMinutes
-     */
-    public Double getETAMinutes() {
-        return ETAMinutes;
-    }
-
-    /**
-     * @param ETAMinutes The ETAMinutes
-     */
-    public void setETAMinutes(Double ETAMinutes) {
-        this.ETAMinutes = ETAMinutes;
     }
 
     /**

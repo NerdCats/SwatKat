@@ -163,18 +163,5 @@ public class User {
         this.EmailConfirmed = EmailConfirmed;
     }
 
-    /**
-     * @return The Profile
-     */
-    public Profile getProfile() {
-        return Profile;
-    }
-
-    /**
-     * @param Profile The Profile
-     */
-    public void setProfile(Profile Profile) {
-        this.Profile = Profile;
-    }
 
 }

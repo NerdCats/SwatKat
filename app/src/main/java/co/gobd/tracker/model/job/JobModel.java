@@ -15,26 +15,14 @@ public class JobModel{
     private Order Order;
     private User User;
     private List<JobTask> Tasks;
-    private String CreateTime;
-    private String ModifiedTime;
-    private Boolean ETAFailed;
-    private String Duration;
-    private String PreferredDeliveryTime;
-    private String InvoiceId;
     private String PaymentMethod;
     private String PaymentStatus;
     private String HRID;
     private String Id;
 
-    public JobModel(){
-
-    }
-
     public JobModel(String name, String state, Order order,
                     User user, List<JobTask> tasks,
-                    String createTime, String modifiedTime, Boolean etaFailed,
-                    String duration, String preferredDeliveryTime,
-                    String invoiceId, String paymentMethod, String paymentStatus,
+                    String paymentMethod, String paymentStatus,
                     String HRID, String id) {
 
         Name = name;
@@ -42,12 +30,6 @@ public class JobModel{
         Order = order;
         User = user;
         Tasks = tasks;
-        CreateTime = createTime;
-        ModifiedTime = modifiedTime;
-        ETAFailed = etaFailed;
-        Duration = duration;
-        PreferredDeliveryTime = preferredDeliveryTime;
-        InvoiceId = invoiceId;
         PaymentMethod = paymentMethod;
         PaymentStatus = paymentStatus;
         this.HRID = HRID;
@@ -108,54 +90,6 @@ public class JobModel{
 
     public void setPaymentMethod(String paymentMethod) {
         PaymentMethod = paymentMethod;
-    }
-
-    public String getInvoiceId() {
-        return InvoiceId;
-    }
-
-    public void setInvoiceId(String invoiceId) {
-        InvoiceId = invoiceId;
-    }
-
-    public String getPreferredDeliveryTime() {
-        return PreferredDeliveryTime;
-    }
-
-    public void setPreferredDeliveryTime(String preferredDeliveryTime) {
-        PreferredDeliveryTime = preferredDeliveryTime;
-    }
-
-    public String getModifiedTime() {
-        return ModifiedTime;
-    }
-
-    public void setModifiedTime(String modifiedTime) {
-        ModifiedTime = modifiedTime;
-    }
-
-    public Boolean getETAFailed(){
-        return ETAFailed;
-    }
-
-    void setETAFailed(Boolean etaFailed){
-        ETAFailed = etaFailed;
-    }
-
-    public String getDuration() {
-        return Duration;
-    }
-
-    public void setDuration(String duration) {
-        Duration = duration;
-    }
-
-    public String getCreateTime() {
-        return CreateTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        CreateTime = createTime;
     }
 
     public co.gobd.tracker.model.job.User getUser() {

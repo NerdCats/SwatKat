@@ -104,13 +104,8 @@ public class OrderDeserializerTest {
 
 
         assertEquals("Please call and confirm before the pick.", order.getNoteToDeliveryMan());
-        assertEquals("Delivery Job for ZuumZuum", order.getName());
         assertEquals("Delivery", order.getType());
-        assertEquals("default", order.getPayloadType());
         assertEquals("5766070ab477aa9971d80429", order.getUserId());
-        assertEquals(null, order.getOrderLocation());
-        assertEquals(null, order.getETA());
-        assertEquals(new Double(0.0), order.getETAMinutes());
         assertEquals("CashOnDelivery", order.getPaymentMethod());
     }
 

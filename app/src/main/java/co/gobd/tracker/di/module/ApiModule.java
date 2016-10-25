@@ -9,7 +9,6 @@ import javax.inject.Singleton;
 import co.gobd.tracker.config.BackendUrl;
 import co.gobd.tracker.model.job.AssignedJob;
 import co.gobd.tracker.model.job.JobModel;
-import co.gobd.tracker.model.job.Profile;
 import co.gobd.tracker.model.job.User;
 import co.gobd.tracker.model.job.order.Order;
 import co.gobd.tracker.model.job.order.OrderCart;
@@ -21,7 +20,6 @@ import co.gobd.tracker.utility.deserializer.AssignedJobDeserializer;
 import co.gobd.tracker.utility.deserializer.JobModelDeserializer;
 import co.gobd.tracker.utility.deserializer.OrderCartDeserializer;
 import co.gobd.tracker.utility.deserializer.OrderDeserializer;
-import co.gobd.tracker.utility.deserializer.ProfileDeserializer;
 import co.gobd.tracker.utility.deserializer.UserDeserializer;
 import dagger.Module;
 import dagger.Provides;
@@ -59,7 +57,6 @@ public class ApiModule {
         gsonBuilder.registerTypeAdapter(JobModel.class, new JobModelDeserializer());
         gsonBuilder.registerTypeAdapter(Order.class, new OrderDeserializer());
         gsonBuilder.registerTypeAdapter(OrderCart.class, new OrderCartDeserializer());
-        gsonBuilder.registerTypeAdapter(Profile.class, new ProfileDeserializer());
         gsonBuilder.registerTypeAdapter(User.class, new UserDeserializer());
         return gsonBuilder.create();
     }

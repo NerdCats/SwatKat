@@ -162,10 +162,7 @@ public class JobModelDeserializerTest {
 
         assertEquals("Delivery Job for ZuumZuum", jobModel.getName());
         assertEquals("IN_PROGRESS", jobModel.getState());
-        assertEquals("2016-05-15T10:56:55.801Z", jobModel.getCreateTime());
-        assertEquals("2016-05-15T10:57:26.293Z", jobModel.getModifiedTime());
         assertEquals(null, jobModel.getPreferredDeliveryTime());
-        assertEquals(null, jobModel.getInvoiceId());
         assertEquals("CashOnDelivery", jobModel.getPaymentMethod());
         assertEquals("Pending", jobModel.getPaymentStatus());
         assertEquals("Job-RZHSRR7B", jobModel.getHRID());

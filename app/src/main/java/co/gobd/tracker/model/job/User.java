@@ -1,31 +1,18 @@
 package co.gobd.tracker.model.job;
 
-import android.os.Parcel;
-
 /**
  * Created by fahad on 5/16/16.
  */
 public class User{
 
     private String UserName;
-    private Profile Profile;
     private String Id;
     private String Type;
     private String PhoneNumber;
     private String Email;
 
-    private User(Parcel in) {
-        UserName = in.readString();
-        Profile = in.readParcelable(Profile.class.getClassLoader());
-        Id = in.readString();
-        Type = in.readString();
-        PhoneNumber = in.readString();
-        Email = in.readString();
-    }
-
-    public User(String userName, Profile profile, String id, String type, String phoneNumber, String email) {
+    public User(String userName, String id, String type, String phoneNumber, String email) {
         UserName = userName;
-        Profile = profile;
         Id = id;
         Type = type;
         PhoneNumber = phoneNumber;
@@ -44,20 +31,6 @@ public class User{
      */
     public void setUserName(String UserName) {
         this.UserName = UserName;
-    }
-
-    /**
-     * @return The Profile
-     */
-    public Profile getProfile() {
-        return Profile;
-    }
-
-    /**
-     * @param Profile The Profile
-     */
-    public void setProfile(Profile Profile) {
-        this.Profile = Profile;
     }
 
     /**
