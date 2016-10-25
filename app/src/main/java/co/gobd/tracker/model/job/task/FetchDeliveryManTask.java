@@ -1,27 +1,12 @@
 package co.gobd.tracker.model.job.task;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import co.gobd.tracker.model.job.Location;
 
 /**
  * Created by fahad on 4/25/16.
  */
-public class FetchDeliveryManTask extends JobTask implements Parcelable {
+public class FetchDeliveryManTask extends JobTask{
 
-    public static final Parcelable.Creator<FetchDeliveryManTask> CREATOR
-            = new Parcelable.Creator<FetchDeliveryManTask>() {
-        @Override
-        public FetchDeliveryManTask createFromParcel(Parcel source) {
-            return new FetchDeliveryManTask(source);
-        }
-
-        @Override
-        public FetchDeliveryManTask[] newArray(int size) {
-            return new FetchDeliveryManTask[size];
-        }
-    };
     private String JobTaskStateString;
     private String State;
     private String Id;
@@ -32,13 +17,6 @@ public class FetchDeliveryManTask extends JobTask implements Parcelable {
         State = state;
         this.Id = Id;
         setType(JobTaskTypes.FETCH_DELIVERYMAN);
-    }
-
-    public FetchDeliveryManTask(Parcel in) {
-        super(in);
-        JobTaskStateString = in.readString();
-        State = in.readString();
-        Id = in.readString();
     }
 
     public String getJobTaskStateString() {
@@ -72,19 +50,5 @@ public class FetchDeliveryManTask extends JobTask implements Parcelable {
                 "JobTaskStateString='" + JobTaskStateString + '\'' +
                 ", State='" + State + '\'' +
                 '}';
-    }
-
-    @Override
-    public int describeContents() {
-        return super.describeContents();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(CLASS_TYPE_FETCH_DELIVERY_MAN_TASK);
-        super.writeToParcel(dest, flags);
-        dest.writeString(JobTaskStateString);
-        dest.writeString(State);
-        dest.writeString(Id);
     }
 }

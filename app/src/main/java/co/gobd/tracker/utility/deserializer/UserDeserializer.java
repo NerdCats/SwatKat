@@ -8,7 +8,6 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
-import co.gobd.tracker.model.job.Profile;
 import co.gobd.tracker.model.job.User;
 
 /**
@@ -25,13 +24,12 @@ public class UserDeserializer implements JsonDeserializer<User> {
         final JsonObject jsonObject = json.getAsJsonObject();
 
         String UserName = jsonObject.get("UserName").getAsString();
-        Profile Profile = context.deserialize(jsonObject.get("Profile"), Profile.class);
         String Id = jsonObject.get("Id").getAsString();
         String Type = jsonObject.get("Type").getAsString();
         String PhoneNumber = (jsonObject.get("PhoneNumber").isJsonNull()) ? null : jsonObject.get("PhoneNumber").getAsString() ;
         String Email = jsonObject.get("Email").getAsString();
 
-        User = new User(UserName, Profile, Id, Type, PhoneNumber, Email);
+        User = new User(UserName, Id, Type, PhoneNumber, Email);
         return User;
     }
 }

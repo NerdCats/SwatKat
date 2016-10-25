@@ -1,66 +1,22 @@
 package co.gobd.tracker.model.job;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * Created by fahad on 5/16/16.
  */
-public class User implements Parcelable {
+public class User{
 
-    public static final Parcelable.Creator<User> CREATOR
-            = new Parcelable.Creator<User>() {
-
-        @Override
-        public User createFromParcel(Parcel source) {
-            return new User(source);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
     private String UserName;
-    private Profile Profile;
     private String Id;
     private String Type;
     private String PhoneNumber;
     private String Email;
 
-    private User(Parcel in) {
-        UserName = in.readString();
-        Profile = in.readParcelable(Profile.class.getClassLoader());
-        Id = in.readString();
-        Type = in.readString();
-        PhoneNumber = in.readString();
-        Email = in.readString();
-    }
-
-    public User(String userName, Profile profile, String id, String type, String phoneNumber, String email) {
+    public User(String userName, String id, String type, String phoneNumber, String email) {
         UserName = userName;
-        Profile = profile;
         Id = id;
         Type = type;
         PhoneNumber = phoneNumber;
         Email = email;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-        dest.writeString(UserName);
-        dest.writeParcelable(Profile, flags);
-        dest.writeString(Id);
-        dest.writeString(Type);
-        dest.writeString(PhoneNumber);
-        dest.writeString(Email);
-
     }
 
     /**
@@ -75,20 +31,6 @@ public class User implements Parcelable {
      */
     public void setUserName(String UserName) {
         this.UserName = UserName;
-    }
-
-    /**
-     * @return The Profile
-     */
-    public Profile getProfile() {
-        return Profile;
-    }
-
-    /**
-     * @param Profile The Profile
-     */
-    public void setProfile(Profile Profile) {
-        this.Profile = Profile;
     }
 
     /**

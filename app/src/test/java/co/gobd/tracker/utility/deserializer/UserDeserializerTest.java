@@ -6,12 +6,10 @@ import com.google.gson.GsonBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
-import co.gobd.tracker.model.job.Profile;
 import co.gobd.tracker.model.job.User;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by fahad on 5/26/2016.
@@ -52,7 +50,6 @@ public class UserDeserializerTest {
         User user = gson.fromJson(json, User.class);
 
         assertEquals("ZuumZuum", user.getUserName());
-        assertEquals(null, user.getProfile());
         assertEquals("572745cc5d437156387b186c", user.getId());
         assertEquals("ENTERPRISE", user.getType());
         assertEquals("", user.getPhoneNumber());

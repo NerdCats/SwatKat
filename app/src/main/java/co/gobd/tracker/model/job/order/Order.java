@@ -1,103 +1,37 @@
 package co.gobd.tracker.model.job.order;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import co.gobd.tracker.model.job.Location;
 
 /**
  * Created by fahad on 5/16/16.
  */
-public class Order implements Parcelable {
+public class Order {
 
-    public static final Parcelable.Creator<Order> CREATOR
-            = new Parcelable.Creator<Order>() {
-        @Override
-        public Order createFromParcel(Parcel source) {
-            return new Order(source);
-        }
-
-        @Override
-        public Order[] newArray(int size) {
-            return new Order[size];
-        }
-    };
     private Location From;
     private Location To;
     private String Description;
     private OrderCart OrderCart;
     private String NoteToDeliveryMan;
-    private String Name;
     private String Type;
-    private String PayloadType;
+    private String Variant;
     private String UserId;
-    private Location OrderLocation;
-    private String ETA;
-    private Double ETAMinutes;
     private Double RequiredChangeFor;
     private String PaymentMethod;
 
-    private Order(Parcel in) {
-        From = in.readParcelable(Location.class.getClassLoader());
-        To = in.readParcelable(Location.class.getClassLoader());
-        Description = in.readString();
-        OrderCart = in.readParcelable(OrderCart.class.getClassLoader());
-        NoteToDeliveryMan = in.readString();
-        Name = in.readString();
-        Type = in.readString();
-        PayloadType = in.readString();
-        UserId = in.readString();
-        OrderLocation = in.readParcelable(Location.class.getClassLoader());
-        ETA = in.readString();
-        ETAMinutes = in.readDouble();
-        RequiredChangeFor = in.readDouble();
-        PaymentMethod = in.readString();
-    }
-
     public Order(Location from, Location to, String description, OrderCart orderCart,
-                 String noteToDeliveryMan, String name, String type,
-                 String payloadType, String userId, Location orderLocation,
-                 String ETA, Double ETAMinutes, Double RequiredChangeFor, String paymentMethod) {
+                 String noteToDeliveryMan, String type, String variant,
+                 String userId, Double RequiredChangeFor, String paymentMethod) {
 
         From = from;
         To = to;
         Description = description;
         OrderCart = orderCart;
         NoteToDeliveryMan = noteToDeliveryMan;
-        Name = name;
         Type = type;
-        PayloadType = payloadType;
+        Variant = variant;
         UserId = userId;
-        OrderLocation = orderLocation;
-        this.ETA = ETA;
-        this.ETAMinutes = ETAMinutes;
         this.RequiredChangeFor = RequiredChangeFor;
         PaymentMethod = paymentMethod;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-        dest.writeParcelable(From, flags);
-        dest.writeParcelable(To, flags);
-        dest.writeString(Description);
-        dest.writeParcelable(OrderCart, flags);
-        dest.writeString(NoteToDeliveryMan);
-        dest.writeString(Name);
-        dest.writeString(Type);
-        dest.writeString(PayloadType);
-        dest.writeString(UserId);
-        dest.writeParcelable(OrderLocation, flags);
-        dest.writeString(ETA);
-        dest.writeDouble(ETAMinutes);
-        dest.writeDouble(RequiredChangeFor);
-        dest.writeString(PaymentMethod);
-
     }
 
     /**
@@ -171,20 +105,6 @@ public class Order implements Parcelable {
     }
 
     /**
-     * @return The Name
-     */
-    public String getName() {
-        return Name;
-    }
-
-    /**
-     * @param Name The Name
-     */
-    public void setName(String Name) {
-        this.Name = Name;
-    }
-
-    /**
      * @return The Type
      */
     public String getType() {
@@ -199,20 +119,6 @@ public class Order implements Parcelable {
     }
 
     /**
-     * @return The PayloadType
-     */
-    public String getPayloadType() {
-        return PayloadType;
-    }
-
-    /**
-     * @param PayloadType The PayloadType
-     */
-    public void setPayloadType(String PayloadType) {
-        this.PayloadType = PayloadType;
-    }
-
-    /**
      * @return The UserId
      */
     public String getUserId() {
@@ -224,48 +130,6 @@ public class Order implements Parcelable {
      */
     public void setUserId(String UserId) {
         this.UserId = UserId;
-    }
-
-    /**
-     * @return The OrderLocation
-     */
-    public Object getOrderLocation() {
-        return OrderLocation;
-    }
-
-    /**
-     * @param OrderLocation The OrderLocation
-     */
-    public void setOrderLocation(Location OrderLocation) {
-        this.OrderLocation = OrderLocation;
-    }
-
-    /**
-     * @return The ETA
-     */
-    public Object getETA() {
-        return ETA;
-    }
-
-    /**
-     * @param ETA The ETA
-     */
-    public void setETA(String ETA) {
-        this.ETA = ETA;
-    }
-
-    /**
-     * @return The ETAMinutes
-     */
-    public Double getETAMinutes() {
-        return ETAMinutes;
-    }
-
-    /**
-     * @param ETAMinutes The ETAMinutes
-     */
-    public void setETAMinutes(Double ETAMinutes) {
-        this.ETAMinutes = ETAMinutes;
     }
 
     /**
