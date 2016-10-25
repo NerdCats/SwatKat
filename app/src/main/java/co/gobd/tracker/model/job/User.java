@@ -1,26 +1,12 @@
 package co.gobd.tracker.model.job;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 /**
  * Created by fahad on 5/16/16.
  */
-public class User implements Parcelable {
+public class User{
 
-    public static final Parcelable.Creator<User> CREATOR
-            = new Parcelable.Creator<User>() {
-
-        @Override
-        public User createFromParcel(Parcel source) {
-            return new User(source);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
     private String UserName;
     private Profile Profile;
     private String Id;
@@ -44,23 +30,6 @@ public class User implements Parcelable {
         Type = type;
         PhoneNumber = phoneNumber;
         Email = email;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-        dest.writeString(UserName);
-        dest.writeParcelable(Profile, flags);
-        dest.writeString(Id);
-        dest.writeString(Type);
-        dest.writeString(PhoneNumber);
-        dest.writeString(Email);
-
     }
 
     /**

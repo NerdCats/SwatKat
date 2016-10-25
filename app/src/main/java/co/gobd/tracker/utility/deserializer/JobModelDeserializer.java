@@ -121,10 +121,10 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
 
         jobModel = new JobModel(Name, State, Order,
-                User, JobServedBy, jobTaskList,
-                CreateTime, ModifiedTime, ETAFailed, CompletionTime, InitiatinTime,
+                User, jobTaskList,
+                CreateTime, ModifiedTime, ETAFailed,
                 Duration ,PreferredDeliveryTime,
-                InvoiceId, PaymentMethod, CancellationReason, Deleted, PaymentStatus,
+                InvoiceId, PaymentMethod, PaymentStatus,
                 HRID, Id);
 
         return jobModel;

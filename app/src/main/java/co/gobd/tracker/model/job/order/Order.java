@@ -1,27 +1,12 @@
 package co.gobd.tracker.model.job.order;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import co.gobd.tracker.model.job.Location;
 
 /**
  * Created by fahad on 5/16/16.
  */
-public class Order implements Parcelable {
+public class Order {
 
-    public static final Parcelable.Creator<Order> CREATOR
-            = new Parcelable.Creator<Order>() {
-        @Override
-        public Order createFromParcel(Parcel source) {
-            return new Order(source);
-        }
-
-        @Override
-        public Order[] newArray(int size) {
-            return new Order[size];
-        }
-    };
     private Location From;
     private Location To;
     private String Description;
@@ -36,23 +21,6 @@ public class Order implements Parcelable {
     private Double ETAMinutes;
     private Double RequiredChangeFor;
     private String PaymentMethod;
-
-    private Order(Parcel in) {
-        From = in.readParcelable(Location.class.getClassLoader());
-        To = in.readParcelable(Location.class.getClassLoader());
-        Description = in.readString();
-        OrderCart = in.readParcelable(OrderCart.class.getClassLoader());
-        NoteToDeliveryMan = in.readString();
-        Name = in.readString();
-        Type = in.readString();
-        PayloadType = in.readString();
-        UserId = in.readString();
-        OrderLocation = in.readParcelable(Location.class.getClassLoader());
-        ETA = in.readString();
-        ETAMinutes = in.readDouble();
-        RequiredChangeFor = in.readDouble();
-        PaymentMethod = in.readString();
-    }
 
     public Order(Location from, Location to, String description, OrderCart orderCart,
                  String noteToDeliveryMan, String name, String type,
@@ -73,31 +41,6 @@ public class Order implements Parcelable {
         this.ETAMinutes = ETAMinutes;
         this.RequiredChangeFor = RequiredChangeFor;
         PaymentMethod = paymentMethod;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-        dest.writeParcelable(From, flags);
-        dest.writeParcelable(To, flags);
-        dest.writeString(Description);
-        dest.writeParcelable(OrderCart, flags);
-        dest.writeString(NoteToDeliveryMan);
-        dest.writeString(Name);
-        dest.writeString(Type);
-        dest.writeString(PayloadType);
-        dest.writeString(UserId);
-        dest.writeParcelable(OrderLocation, flags);
-        dest.writeString(ETA);
-        dest.writeDouble(ETAMinutes);
-        dest.writeDouble(RequiredChangeFor);
-        dest.writeString(PaymentMethod);
-
     }
 
     /**

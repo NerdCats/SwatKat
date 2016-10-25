@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import co.gobd.tracker.model.job.JobModel;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by fahad on 5/26/2016.
@@ -161,14 +161,12 @@ public class JobModelDeserializerTest {
         JobModel jobModel = gson.fromJson(json, JobModel.class);
 
         assertEquals("Delivery Job for ZuumZuum", jobModel.getName());
-        assertEquals(null, jobModel.getJobServedBy());
         assertEquals("IN_PROGRESS", jobModel.getState());
         assertEquals("2016-05-15T10:56:55.801Z", jobModel.getCreateTime());
         assertEquals("2016-05-15T10:57:26.293Z", jobModel.getModifiedTime());
         assertEquals(null, jobModel.getPreferredDeliveryTime());
         assertEquals(null, jobModel.getInvoiceId());
         assertEquals("CashOnDelivery", jobModel.getPaymentMethod());
-        assertEquals(false, jobModel.getDeleted());
         assertEquals("Pending", jobModel.getPaymentStatus());
         assertEquals("Job-RZHSRR7B", jobModel.getHRID());
         assertEquals("573855f707436d6ff0249fe9", jobModel.getId());
