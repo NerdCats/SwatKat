@@ -10,8 +10,10 @@ import java.lang.reflect.Type;
 
 import co.gobd.tracker.model.job.Location;
 import co.gobd.tracker.model.job.Point;
+import co.gobd.tracker.model.job.order.BuyerInfo;
 import co.gobd.tracker.model.job.order.Order;
 import co.gobd.tracker.model.job.order.OrderCart;
+import co.gobd.tracker.model.job.order.SellerInfo;
 import co.gobd.tracker.utility.CheckJson;
 
 /**
@@ -26,6 +28,21 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
 
         final JsonObject jsonObject = json.getAsJsonObject();
 
+        boolean sellerExists = CheckJson.checkJsonKey(jsonObject, "SellerInfo");
+        SellerInfo sellerInfo = null;
+
+        if(sellerExists){
+            sellerInfo = context.deserialize(jsonObject.get("SellerInfo").getAsJsonObject(), SellerInfo.class);
+        }
+
+        boolean buyerExists = CheckJson.checkJsonKey(jsonObject, "SellerInfo");
+        BuyerInfo buyerInfo = null;
+
+        if(buyerExists){
+            buyerInfo = context.deserialize(jsonObject.get("BuyerInfo").getAsJsonObject(), BuyerInfo.class);
+        }
+
+
         Location From = getLocation(jsonObject.get("From").getAsJsonObject());
         Location To = getLocation(jsonObject.get("To").getAsJsonObject());
 
@@ -38,7 +55,6 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
         }
 
         boolean noteExists = CheckJson.checkJsonKey(jsonObject, "NoteToDeliveryMan");
-
         String NoteToDeliveryMan = null;
 
         if(noteExists){
@@ -56,7 +72,7 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
 
         String PaymentMethod = jsonObject.get("PaymentMethod").getAsString();
 
-        order = new Order(From, To, Description, orderCart,
+        order = new Order(sellerInfo, buyerInfo, From, To, Description, orderCart,
                 NoteToDeliveryMan, Type, Variant, UserId,
                 RequiredChangeFor, PaymentMethod);
 

@@ -1,7 +1,5 @@
 package co.gobd.tracker.model.job.order;
 
-import co.gobd.tracker.model.job.Location;
-
 /**
  * Created by fahad on 10/25/16.
  */
@@ -9,7 +7,12 @@ import co.gobd.tracker.model.job.Location;
 public class SellerInfo {
     private String Name;
     private String PhoneNumer;
-    private Location Address;
+    //private Location Address;
+
+    public SellerInfo(String name, String phoneNumer) {
+        Name = name;
+        PhoneNumer = phoneNumer;
+    }
 
     public String getName() {
         return Name;
@@ -25,13 +28,5 @@ public class SellerInfo {
 
     public void setPhoneNumer(String phoneNumer) {
         PhoneNumer = phoneNumer;
-    }
-
-    public Location getAddress() {
-        return Address;
-    }
-
-    public void setAddress(Location address) {
-        Address = address;
     }
 }
