@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -40,6 +41,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import co.gobd.tracker.R;
 import co.gobd.tracker.adapter.JobAdapter;
+import co.gobd.tracker.adapter.OnCallClickListener;
 import co.gobd.tracker.adapter.OnTaskUpdateClickListener;
 import co.gobd.tracker.application.GoAssetApplication;
 import co.gobd.tracker.model.job.JobModel;
@@ -56,7 +58,7 @@ import co.gobd.tracker.utility.ServiceUtility;
 import co.gobd.tracker.utility.SessionManager;
 
 public class MainActivity extends AppCompatActivity
-        implements MainView, OnJobItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, OnTaskUpdateClickListener {
+        implements MainView, OnJobItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, OnTaskUpdateClickListener, OnCallClickListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -314,6 +316,7 @@ public class MainActivity extends AppCompatActivity
         OrderCart orderCart = jobModel.getOrder().getOrderCart();
         String packageDescription = jobModel.getOrder().getDescription();
 
+
         intent.putExtra(Constant.Job.ORDER_CART, orderCart);
         intent.putExtra(Constant.Job.PACKAGE_DESCRIPTION, packageDescription);
         intent.putExtra(Constant.Job.PICKUP_ADDRESS, pickupAddress);
@@ -423,6 +426,18 @@ public class MainActivity extends AppCompatActivity
 
         updateCheckBox(pickUpTaskState, deliveryTaskState);
 
+    }
+
+    @Override
+    public void onCallClick(String phoneNumber){
+
+    }
+
+    @Override
+    public void onCallHQClick(){
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:01735952047"));
+        startActivity(intent);
     }
 
     public void updateCheckBox(String pickUpTaskState, String deliveryTaskState) {

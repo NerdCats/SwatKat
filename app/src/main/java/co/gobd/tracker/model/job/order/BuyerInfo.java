@@ -7,11 +7,11 @@ package co.gobd.tracker.model.job.order;
 public class BuyerInfo {
 
     private String Name;
-    private String PhoneNumer;
+    private String PhoneNumber;
 
-    public BuyerInfo(String name, String phoneNumer) {
+    public BuyerInfo(String name, String phoneNumber) {
         Name = name;
-        PhoneNumer = phoneNumer;
+        PhoneNumber = phoneNumber;
     }
 
     public String getName() {
@@ -22,12 +22,12 @@ public class BuyerInfo {
         Name = name;
     }
 
-    public String getPhoneNumer() {
-        return PhoneNumer;
+    public String getPhoneNumber() {
+        return PhoneNumber;
     }
 
-    public void setPhoneNumer(String phoneNumer) {
-        PhoneNumer = phoneNumer;
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
     }
 
 }

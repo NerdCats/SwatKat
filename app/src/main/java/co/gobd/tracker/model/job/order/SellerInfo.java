@@ -6,12 +6,12 @@ package co.gobd.tracker.model.job.order;
 
 public class SellerInfo {
     private String Name;
-    private String PhoneNumer;
+    private String PhoneNumber;
     //private Location Address;
 
-    public SellerInfo(String name, String phoneNumer) {
+    public SellerInfo(String name, String phoneNumber) {
         Name = name;
-        PhoneNumer = phoneNumer;
+        PhoneNumber = phoneNumber;
     }
 
     public String getName() {
@@ -22,11 +22,11 @@ public class SellerInfo {
         Name = name;
     }
 
-    public String getPhoneNumer() {
-        return PhoneNumer;
+    public String getPhoneNumber() {
+        return PhoneNumber;
     }
 
-    public void setPhoneNumer(String phoneNumer) {
-        PhoneNumer = phoneNumer;
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
     }
 }
