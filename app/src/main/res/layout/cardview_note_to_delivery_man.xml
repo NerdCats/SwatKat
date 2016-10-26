@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:text="@string/note_to_delivery_man"
-            android:textSize="16sp"
+            android:textColor="@color/material_red_500"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView
@@ -28,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title_note"
+            android:textSize="19sp"
             android:text="@string/note_empty"
             tools:text="@string/sample" />
 

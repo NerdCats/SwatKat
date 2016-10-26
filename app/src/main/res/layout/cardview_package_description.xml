@@ -20,13 +20,14 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:text="@string/title_package_description"
-            android:textSize="16sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_package_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="17sp"
             android:layout_below="@+id/tv_title_description"
             android:text="@string/note_empty"
             tools:text="@string/sample" />
