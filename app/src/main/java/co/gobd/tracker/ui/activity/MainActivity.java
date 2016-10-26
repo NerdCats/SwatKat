@@ -338,10 +338,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.fab_toggle_tracking:
                 if (isLocationServiceRunning(LocationService.class)) {
                     stopLocationService();
-                    fabToggleTracking.setImageResource(R.drawable.ic_play_arrow_white_24dp);
+                    fabToggleTracking.setImageResource(R.drawable.ic_play_arrow_white_48dp);
                 } else {
                     startLocationService();
-                    fabToggleTracking.setImageResource(R.drawable.ic_pause_white_24dp);
+                    fabToggleTracking.setImageResource(R.drawable.ic_pause_white_48dp);
                 }
                 break;
         }

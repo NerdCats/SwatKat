@@ -33,7 +33,7 @@
       android:layout_height="wrap_content"
       android:layout_gravity="bottom|end"
       android:layout_margin="16dp"
-      android:src="@drawable/ic_play_arrow_white_24dp"
+      android:src="@drawable/ic_play_arrow_white_48dp"
       app:fabSize="normal"
       app:layout_anchor="@id/rv_joblist"
       app:layout_anchorGravity="bottom|right|end"
