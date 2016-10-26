@@ -5,7 +5,6 @@ import co.gobd.tracker.model.job.Location;
 /**
  * Created by fahad on 10/25/16.
  */
-
 public class SecureDeliveryTask extends JobTask {
 
     private String Id;
