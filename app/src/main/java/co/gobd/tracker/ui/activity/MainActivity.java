@@ -360,9 +360,6 @@ public class MainActivity extends AppCompatActivity
         drawerLayout.closeDrawers();
 
         switch (item.getItemId()) {
-            case R.id.nav_settings:
-                //TODO: Implement Settings activity/fragment
-                break;
             case R.id.nav_logout:
                 logout();
                 break;

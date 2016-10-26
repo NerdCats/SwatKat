@@ -106,7 +106,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/btn_task_update"
                 android:layout_toStartOf="@+id/btn_task_update"
-                android:text="Call" />
+                android:text="Call"
+                android:textStyle="bold"/>
 
             <Button
                 android:id="@+id/btn_task_update"
@@ -116,7 +117,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:text="Update" />
+                android:text="Update"
+                android:textStyle="bold"/>
 
         </RelativeLayout>
 
