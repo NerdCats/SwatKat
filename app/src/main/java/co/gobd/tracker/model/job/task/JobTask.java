@@ -10,6 +10,7 @@ public abstract class JobTask{
     public static final int CLASS_TYPE_FETCH_DELIVERY_MAN_TASK = 1;
     public static final int CLASS_TYPE_PACKAGE_PICKUP_TASK = 2;
     public static final int CLASS_TYPE_DELIVERY_TASK = 3;
+    public static final int CLASS_TYPE_SECURE_DELIVERY = 4;
 
     private String Type;
     private String Name;

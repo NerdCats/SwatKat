@@ -10,4 +10,5 @@ public class JobTaskTypes {
     public static final String PACKAGE_PICKUP = "PackagePickUp";
     public static final String DELIVERY = "Delivery";
     public static final String FETCH_DELIVERYMAN = "FetchDeliveryMan";
+    public static final String SECURE_DELIVERY = "SecureDelivery";
 }
