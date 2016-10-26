@@ -21,6 +21,7 @@ import co.gobd.tracker.model.job.task.FetchDeliveryManTask;
 import co.gobd.tracker.model.job.task.JobTask;
 import co.gobd.tracker.model.job.task.JobTaskTypes;
 import co.gobd.tracker.model.job.task.PackagePickupTask;
+import co.gobd.tracker.utility.CheckJson;
 
 /**
  * Created by fahad on 4/25/16.
@@ -36,7 +37,6 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
 
         List<JobTask> jobTaskList = new ArrayList<>();
         final JsonObject jsonObject = json.getAsJsonObject();
-
 
         String Name = jsonObject.get("Name").getAsString();
         String State = jsonObject.get("State").getAsString();
@@ -107,8 +107,13 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
         JsonObject jsonPoint = jsonObject.get("Point").getAsJsonObject();
 
         String type = jsonPoint.get("type").getAsString();
-        String locality = (jsonObject.get("Locality").isJsonNull()) ?
-                null : jsonObject.get("Locality").getAsString();
+        String locality = null;
+        boolean locExists = CheckJson.checkJsonKey(jsonObject, "Locality");
+
+        if(locExists) {
+            locality = (jsonObject.get("Locality").isJsonNull()) ?
+                    null : jsonObject.get("Locality").getAsString();
+        }
 
         /*JsonElement testObj = (jsonPoint.get("coordinates").isJsonNull()) ?
                 null : jsonPoint.get("coordinates").getAsJsonArray();

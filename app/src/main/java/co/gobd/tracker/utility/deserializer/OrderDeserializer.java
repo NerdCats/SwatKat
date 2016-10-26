@@ -12,6 +12,7 @@ import co.gobd.tracker.model.job.Location;
 import co.gobd.tracker.model.job.Point;
 import co.gobd.tracker.model.job.order.Order;
 import co.gobd.tracker.model.job.order.OrderCart;
+import co.gobd.tracker.utility.CheckJson;
 
 /**
  * Created by fahad on 5/16/16.
@@ -27,10 +28,24 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
 
         Location From = getLocation(jsonObject.get("From").getAsJsonObject());
         Location To = getLocation(jsonObject.get("To").getAsJsonObject());
-        String Description = (jsonObject.get("Description").isJsonNull()) ?
-                null : jsonObject.get("Description").getAsString();
-        String NoteToDeliveryMan = (jsonObject.get("NoteToDeliveryMan").isJsonNull()) ?
-                null : jsonObject.get("NoteToDeliveryMan").getAsString();
+
+        boolean desExists = CheckJson.checkJsonKey(jsonObject, "Description");
+
+        String Description = null;
+        if(desExists) {
+            Description = (jsonObject.get("Description").isJsonNull()) ?
+                    null : jsonObject.get("Description").getAsString();
+        }
+
+        boolean noteExists = CheckJson.checkJsonKey(jsonObject, "NoteToDeliveryMan");
+
+        String NoteToDeliveryMan = null;
+
+        if(noteExists){
+           NoteToDeliveryMan = (jsonObject.get("NoteToDeliveryMan").isJsonNull()) ?
+                    null : jsonObject.get("NoteToDeliveryMan").getAsString();
+        }
+
         OrderCart orderCart = context.deserialize(jsonObject.get("OrderCart").getAsJsonObject(), OrderCart.class);
         String Type = jsonObject.get("Type").getAsString();
         String Variant = jsonObject.get("Variant").getAsString();
@@ -54,9 +69,14 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
         JsonObject jsonPoint = jsonObject.get("Point").getAsJsonObject();
 
         String type = jsonPoint.get("type").getAsString();
-        String locality = (jsonObject.get("Locality").isJsonNull()) ?
-                null : jsonObject.get("Locality").getAsString();
 
+        String locality = null;
+        boolean locExists = CheckJson.checkJsonKey(jsonObject, "Locality");
+
+        if(locExists) {
+            locality = (jsonObject.get("Locality").isJsonNull()) ?
+                    null : jsonObject.get("Locality").getAsString();
+        }
         /*JsonElement testObj = (jsonPoint.get("coordinates").isJsonNull()) ?
                 null : jsonPoint.get("coordinates").getAsJsonArray();
 
