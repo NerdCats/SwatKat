@@ -383,10 +383,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_logout:
                 logout();
                 break;
-            case R.id.nav_about:
+            /*case R.id.nav_about:
                 //TODO: Use About Libraries for hassle free about page
                 // https://github.com/mikepenz/AboutLibraries
-                break;
+                break;*/
         }
 
 
