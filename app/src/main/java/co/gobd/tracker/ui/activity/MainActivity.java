@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -109,11 +110,27 @@ public class MainActivity extends AppCompatActivity
     private boolean isPickupInProgress;
     private boolean isDeliveryInProgress;
 
+    private SwipeRefreshLayout swipeContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mainPresenter.loadAdapterData();
+            }
+        });
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
 
         butterKnifeUnbinder = ButterKnife.bind(this);
 
@@ -393,6 +410,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void stopProgress() {
         progressDialog.dismiss();
+    }
+
+    @Override
+    public void stopSwipRefresh() {
+        swipeContainer.setRefreshing(false);
     }
 
     @Override
