@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
 
                 android:padding="8dp"
-                android:textSize="19sp"
+                android:textSize="17sp"
                 tools:text="ZuumZuum"
                 android:layout_below="@+id/tv_hrid"
                 android:layout_alignParentRight="true"
@@ -49,7 +49,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 tools:text="Job-LW5S3GKW" />
 
@@ -69,7 +69,7 @@
                 android:id="@+id/tv_locality_pickup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="19sp"
+                android:textSize="17sp"
                 android:padding="2dp"
                 android:layout_marginTop="4dp"
                 tools:text="Pickup Banani"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textSize="19sp"
+                android:textSize="17sp"
                 android:padding="2dp"
                 android:layout_marginTop="8dp"
                 android:layout_below="@+id/tv_locality_pickup"
