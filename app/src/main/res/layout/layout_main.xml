@@ -38,9 +38,9 @@
       app:fabSize="normal"
       app:backgroundTint="@color/material_red_500"
       app:layout_anchor="@id/rv_joblist"
-      app:layout_anchorGravity="bottom|left|end"
-      app:layout_behavior="co.gobd.tracker.utility.ScrollAwareFABBehavior"
-      />
+      app:layout_anchorGravity="bottom|left|end"/>
+      <!--app:layout_behavior="co.gobd.tracker.utility.ScrollAwareFABBehavior"-->
+
 
 
 </android.support.design.widget.CoordinatorLayout>
