@@ -4,11 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
+
+  <android.support.v4.widget.SwipeRefreshLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/swipeContainer"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
   <!-- Contents of the screen-->
   <include layout="@layout/layout_main"/>
+  </android.support.v4.widget.SwipeRefreshLayout>
 
   <!-- Navigation drawer -->
   <android.support.design.widget.NavigationView

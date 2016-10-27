@@ -50,6 +50,7 @@ public class MainPresenter {
                         if (assignedJob != null) {
                             jobModelList = assignedJob.getJobModelList();
                             mainView.setJobModelList(jobModelList);
+                            mainView.stopSwipRefresh();
                         }
                     }
 

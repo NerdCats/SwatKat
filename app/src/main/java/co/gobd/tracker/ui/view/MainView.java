@@ -13,6 +13,8 @@ public interface MainView {
     void startProgress();
     void stopProgress();
 
+    void stopSwipRefresh();
+
     void showTaskUpdateSuccessfulMsg();
 
     void showTaskUpdateError();
