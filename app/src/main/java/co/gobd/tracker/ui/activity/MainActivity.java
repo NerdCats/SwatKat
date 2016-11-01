@@ -59,7 +59,8 @@ import co.gobd.tracker.utility.ServiceUtility;
 import co.gobd.tracker.utility.SessionManager;
 
 public class MainActivity extends AppCompatActivity
-        implements MainView, OnJobItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, OnTaskUpdateClickListener, OnCallClickListener {
+        implements MainView, OnJobItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener,
+        OnTaskUpdateClickListener, OnCallClickListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -151,6 +152,7 @@ public class MainActivity extends AppCompatActivity
 
         jobAdapter.setOnJobItemClickListener(this);
         jobAdapter.setOnTaskUpdateClickListener(this);
+        jobAdapter.setOnCallClickListener(this);
 
         setupRecyclerView(jobAdapter);
 
@@ -363,6 +365,9 @@ public class MainActivity extends AppCompatActivity
                     startLocationService();
                     fabToggleTracking.setImageResource(R.drawable.ic_pause_white_48dp);
                 }
+                break;
+            case R.id.btn_call_hq:
+                onCallHQClick();
                 break;
         }
     }

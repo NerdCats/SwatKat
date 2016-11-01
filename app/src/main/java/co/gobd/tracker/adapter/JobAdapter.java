@@ -32,6 +32,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     private OnJobItemClickListener onJobItemClickListener;
 
     private OnTaskUpdateClickListener onTaskUpdateClickListener;
+    private OnCallClickListener onCallClickListener;
 
     public JobAdapter(Context context) {
         jobModelList = new ArrayList<>();
@@ -42,6 +43,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     public void setOnJobItemClickListener(final OnJobItemClickListener onJobItemClickListener) {
         this.onJobItemClickListener = onJobItemClickListener;
     }
+
 
     public void setAdapterData(List<JobModel> jobModelList) {
         this.jobModelList = jobModelList;
@@ -87,6 +89,10 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         this.onTaskUpdateClickListener = onTaskUpdateClickListener;
     }
 
+    public void setOnCallClickListener(OnCallClickListener onCallClickListener){
+        this.onCallClickListener = onCallClickListener;
+    }
+
     public class JobViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView name;
@@ -97,6 +103,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         TextView pickupLocality;
         TextView deliveryLocality;
         Button taskUpdate;
+        Button callHQ;
 
         CardView cardView;
 
@@ -111,6 +118,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             pickupLocality = (TextView) itemView.findViewById(R.id.tv_locality_pickup);
             deliveryLocality = (TextView) itemView.findViewById(R.id.tv_locality_delivery);
             taskUpdate = (Button) itemView.findViewById(R.id.btn_task_update);
+            callHQ = (Button) itemView.findViewById(R.id.btn_call_hq);
 
             taskUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -128,6 +136,13 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
                     onTaskUpdateClickListener.onTaskUpdateClick(jobId, pickupTaskId, deliveryTaskId,
                             pickupTaskState, deliveryTaskState);
+                }
+            });
+
+            callHQ.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View V){
+                    onCallClickListener.onCallHQClick();
                 }
             });
         }
