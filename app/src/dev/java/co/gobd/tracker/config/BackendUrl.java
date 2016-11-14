@@ -16,8 +16,8 @@ public class BackendUrl {
     // Main backend of go fetch
     public static final class TaskCat {
         // Dev
-        public static final String BASE = "http://taskcatdev.azurewebsites.net";
-
+        //public static final String BASE = "http://taskcatdev.azurewebsites.net";
+        public static final String BASE = "http://fetchdev.gobd.co";
         // Path
         public static final String LOGIN = "/token";
         public static final String GET_PROFILE = "/api/Account/Profile";
