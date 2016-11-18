@@ -8,14 +8,12 @@ public class User{
     private String UserName;
     private String Id;
     private String Type;
-    private String PhoneNumber;
     private String Email;
 
-    public User(String userName, String id, String type, String phoneNumber, String email) {
+    public User(String userName, String id, String type, String email) {
         UserName = userName;
         Id = id;
         Type = type;
-        PhoneNumber = phoneNumber;
         Email = email;
     }
 
@@ -59,20 +57,6 @@ public class User{
      */
     public void setType(String Type) {
         this.Type = Type;
-    }
-
-    /**
-     * @return The PhoneNumber
-     */
-    public String getPhoneNumber() {
-        return PhoneNumber;
-    }
-
-    /**
-     * @param PhoneNumber The PhoneNumber
-     */
-    public void setPhoneNumber(String PhoneNumber) {
-        this.PhoneNumber = PhoneNumber;
     }
 
     /**
