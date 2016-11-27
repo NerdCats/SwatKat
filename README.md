@@ -12,4 +12,4 @@ There is also a Call HQ button which will enable them to call HQ from within the
 ------------------------------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------|-------------------------------------------------------------------
 *1. Login Page*                                                   | *2. Job Overview*                                            |*3. Job Details*                                            |*4. Updating A Task*                             
 ![Task Updated](http://i.imgur.com/Z6WPU2j.png "Task Updated")    |![Task Updated](http://i.imgur.com/sIY0UTz.png "Task Updated")|![Sign Up](http://i.imgur.com/gv0gn4z.png "Sign Up")
-*5. Task Updated*                                                 | *6. Another Task Updated                                     |*9. Sign Up*
+*5. Task Updated*                                                 | *6. Another Task Updated*                                    |*9. Sign Up*
