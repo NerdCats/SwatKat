@@ -2,5 +2,5 @@
 
 Asset tracker app for TaskCat
 
-[](http://i.imgur.com/tmmO0BP.png)
+![](http://i.imgur.com/tmmO0BP.png)
 *Login Activity*
