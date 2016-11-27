@@ -1,9 +1,7 @@
 sudo: false
-dist: trusty
+dist: xenial
 jdk:
   - oraclejdk8
-  - oraclejdk7
-  - openjdk7
 language: android
 android:
   components:
