@@ -44,7 +44,7 @@
                 android:textStyle="bold"
                 android:gravity="top|start"
                 android:padding="8dp"
-                android:text="PICKUP"
+                android:text="PICK UP"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
 
@@ -55,7 +55,6 @@
                 android:id="@+id/pickupattempted"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/pickupbtn"
 
                 android:padding="8dp"
                 android:text="Completed : "
