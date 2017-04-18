@@ -54,14 +54,14 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
             Location location;
             switch (type) {
                 case JobTaskTypes.FETCH_DELIVERYMAN:
-                    jobTaskStateString = task.get("JobTaskStateString").getAsString();
+                    jobTaskStateString = "FETCH_DELIVERYMAN";//task.get("JobTaskStateString").getAsString();
                     state = task.get("State").getAsString();
                     id = task.get("id").getAsString();
                     jobTaskList.add(new FetchDeliveryManTask(jobTaskStateString, state, id));
                     break;
 
                 case JobTaskTypes.PACKAGE_PICKUP:
-                    jobTaskStateString = task.get("JobTaskStateString").getAsString();
+                    jobTaskStateString = "PACKAGE_PICKUP"; //task.get("JobTaskStateString").getAsString();
                     state = task.get("State").getAsString();
                     id = task.get("id").getAsString();
                     location = getLocation(task.getAsJsonObject("PickupLocation"));
@@ -70,7 +70,7 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
                     break;
 
                 case JobTaskTypes.DELIVERY:
-                    jobTaskStateString = task.get("JobTaskStateString").getAsString();
+                    jobTaskStateString = "DELIVERY";//task.get("JobTaskStateString").getAsString();
                     state = task.get("State").getAsString();
                     id = task.get("id").getAsString();
                     location = getLocation(task.getAsJsonObject("To"));

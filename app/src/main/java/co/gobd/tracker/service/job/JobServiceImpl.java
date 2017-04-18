@@ -25,8 +25,9 @@ public class JobServiceImpl implements JobService {
     @Override
     public void getAssignedJobList(String bearer, String assetId, String jobStateUpto, final JobCallback callback) {
 
-        Call<AssignedJob> call = jobApi.getAssignedJobs(bearer, assetId, jobStateUpto);
-
+        String appended="(Tasks/any(task: task/State eq 'IN_PROGRESS' and Task/Type eq 'PackagePickUp' and task/AssetRef eq '"+assetId+"'))&pageSize=50&page=0&sortDirection=Desc";
+       // Call<AssignedJob> call = jobApi.getAssignedJobs(bearer, assetId, appended);
+        Call<AssignedJob> call = jobApi.getAssignedJobsOdata(bearer, appended);
         call.enqueue(new Callback<AssignedJob>() {
             @Override
             public void onResponse(Call<AssignedJob> call, Response<AssignedJob> response) {
@@ -40,6 +41,7 @@ public class JobServiceImpl implements JobService {
 
             @Override
             public void onFailure(Call<AssignedJob> call, Throwable t) {
+                Log.getStackTraceString(t);
                 callback.onConnectionError();
             }
         });

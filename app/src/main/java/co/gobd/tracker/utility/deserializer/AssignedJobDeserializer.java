@@ -30,7 +30,7 @@ public class AssignedJobDeserializer implements JsonDeserializer<AssignedJob> {
         List<JobModel> jobModels = new ArrayList<>();
 
         for (int i = 0; i < jsonArray.size(); i++) {
-            JobModel jobModel = context.deserialize(jsonArray.get(i), JobModel.class);
+            JobModel jobModel = context.deserialize(jsonArray.get(i), JobModel.class); //using deserializer of job models
             jobModels.add(jobModel);
         }
 

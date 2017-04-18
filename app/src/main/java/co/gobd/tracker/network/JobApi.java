@@ -17,6 +17,8 @@ import retrofit2.http.Query;
 public interface JobApi {
 
     @GET(BackendUrl.TaskCat.GET_ASSIGNED_JOBS)
+    Call<AssignedJob>getAssignedJobsOdata(@Header("Authorization") String bearer,
+                                           @Query("$filter") String jobStateUpto);
     Call<AssignedJob> getAssignedJobs(@Header("Authorization") String bearer,
                                       @Path("userId") String userId, @Query("jobStateUpto") String jobStateUpto);
 

@@ -16,6 +16,7 @@ import co.gobd.tracker.R;
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.model.job.task.DeliveryTask;
 import co.gobd.tracker.model.job.task.PackagePickupTask;
+import co.gobd.tracker.ui.activity.TasksOverviewActivity;
 import co.gobd.tracker.ui.view.OnJobItemClickListener;
 import co.gobd.tracker.utility.Constant;
 
@@ -92,6 +93,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     public void setOnCallClickListener(OnCallClickListener onCallClickListener){
         this.onCallClickListener = onCallClickListener;
     }
+
+
 
     public class JobViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
