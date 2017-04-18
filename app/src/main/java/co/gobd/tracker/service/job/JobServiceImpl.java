@@ -23,9 +23,9 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void getAssignedJobList(String bearer, String assetId, String jobStateUpto, final JobCallback callback) {
+    public void getAssignedJobList(String bearer, String assetId, String jobStateUpto,String Tasktype, final JobCallback callback) {
 
-        String appended="(Tasks/any(task: task/State eq 'IN_PROGRESS' and Task/Type eq 'PackagePickUp' and task/AssetRef eq '"+assetId+"'))&pageSize=50&page=0&sortDirection=Desc";
+        String appended="(Tasks/any(task: task/State eq 'IN_PROGRESS' and Task/Type eq '"+Tasktype+"' and task/AssetRef eq '"+assetId+"'))&pageSize=50&page=0&sortDirection=Desc";
        // Call<AssignedJob> call = jobApi.getAssignedJobs(bearer, assetId, appended);
         Call<AssignedJob> call = jobApi.getAssignedJobsOdata(bearer, appended);
         call.enqueue(new Callback<AssignedJob>() {
