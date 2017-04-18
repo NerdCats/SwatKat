@@ -74,7 +74,7 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnJobI
     }
     private void setupToolbar() {
         setSupportActionBar(toolbar);
-        
+
 
         getSupportActionBar().setTitle(TaskType);
     }
