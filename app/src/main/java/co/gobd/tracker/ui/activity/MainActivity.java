@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mainPresenter.loadAdapterData();
+             //   mainPresenter.loadAdapterData();
             }
         });
 
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity
 
         jobAdapter = new JobAdapter(context);
         mainPresenter.initialise(this);
-        mainPresenter.loadAdapterData();
+       // mainPresenter.loadAdapterData();
 
         jobAdapter.setOnJobItemClickListener(this);
         jobAdapter.setOnTaskUpdateClickListener(this);
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity
                         if (cbDelivery.isChecked() && isDeliveryInProgress) {
                             mainPresenter.updateTaskStateToCompleted(jobId, deliveryTaskId);
                         }
-                        mainPresenter.loadAdapterData();
+                   //     mainPresenter.loadAdapterData();
                     }
                 })
                 .build();
