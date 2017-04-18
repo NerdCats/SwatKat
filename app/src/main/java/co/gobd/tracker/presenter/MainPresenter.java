@@ -1,5 +1,7 @@
 package co.gobd.tracker.presenter;
 
+import android.util.Log;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -61,7 +63,7 @@ public class MainPresenter {
 
                     @Override
                     public void onConnectionError() {
-
+                        Log.d("err","connectionerror");
                     }
                 });
     }

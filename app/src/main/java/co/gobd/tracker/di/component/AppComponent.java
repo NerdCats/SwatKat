@@ -9,6 +9,8 @@ import co.gobd.tracker.di.module.ServiceModule;
 import co.gobd.tracker.ui.activity.LoginActivity;
 import co.gobd.tracker.ui.activity.MainActivity;
 import co.gobd.tracker.ui.activity.SignUpActivity;
+import co.gobd.tracker.ui.activity.TasksActivity;
+import co.gobd.tracker.ui.activity.TasksOverviewActivity;
 import co.gobd.tracker.ui.service.LocationService;
 import dagger.Component;
 
@@ -28,4 +30,8 @@ public interface AppComponent {
     void inject(MainActivity target);
 
     void inject(SignUpActivity target);
+
+    void inject(TasksOverviewActivity target);
+
+    void inject(TasksActivity target);
 }
