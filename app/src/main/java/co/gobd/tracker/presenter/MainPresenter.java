@@ -40,7 +40,7 @@ public class MainPresenter {
         mainView = this.mainViewWeakReference.get();
     }
 
-    public void loadAdapterData() {
+    /*public void loadAdapterData() {
 
         jobService.getAssignedJobList(sessionManager.getBearer(),
                 sessionManager.getAssetId(),
@@ -66,7 +66,7 @@ public class MainPresenter {
                         Log.d("err","connectionerror");
                     }
                 });
-    }
+    }*/
 
     public List<JobModel> getInProgressedJob() {
         return jobModelList;
