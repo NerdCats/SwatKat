@@ -74,9 +74,10 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnJobI
     }
     private void setupToolbar() {
         setSupportActionBar(toolbar);
-
-if(TaskType.equals("PackagePickUp")) getSupportActionBar().setTitle("Pick Up");
-      else   getSupportActionBar().setTitle(TaskType);
+if(getSupportActionBar()!=null) {
+    if (TaskType.equals("PackagePickUp")) getSupportActionBar().setTitle("Pick Up");
+    else getSupportActionBar().setTitle(TaskType);
+}
     }
     @Override
     public void setJobModelList(List<JobModel> jobModelList) {

@@ -98,10 +98,12 @@ public class TasksOverviewActivity extends AppCompatActivity implements Tasksove
     }
     private void setupToolbar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle("GO! Asset App");
-    }
+       if(getSupportActionBar()!=null) {
+           getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+           getSupportActionBar().setHomeButtonEnabled(true);
+           getSupportActionBar().setTitle("GO! Asset App");
+            }
+       }
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
