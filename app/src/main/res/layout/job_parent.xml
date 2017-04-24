@@ -1,0 +1,66 @@
+<RelativeLayout android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/border_around">
+<ImageView
+    android:layout_width="50dp"
+    android:id="@+id/job_icon"
+    android:src="@mipmap/ic_launcher"
+    android:layout_height="50dp"
+    android:layout_margin="10dp"
+    android:layout_centerVertical="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true" />
+    <TextView
+        android:id="@+id/parent_list_item_job_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:text="Job Title"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/job_icon"
+        android:layout_toEndOf="@+id/job_icon" />
+
+    <TextView
+        android:id="@+id/parent_list_item_job_pickupfrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:padding="6dp"
+        android:textColor="#000000"
+        android:text="Mr. Zamil Haque"
+        android:layout_below="@+id/parent_list_item_job_title"
+        android:layout_toRightOf="@+id/job_icon"
+        android:layout_toEndOf="@+id/job_icon" />
+    <TextView
+        android:id="@+id/parent_list_item_job_pickupcontact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:textColor="#000000"
+
+
+        android:text="01199161625"
+        android:layout_below="@id/parent_list_item_job_pickupfrom"
+        android:layout_toRightOf="@+id/job_icon"
+        android:layout_toEndOf="@+id/job_icon" />
+
+    <ImageView
+        android:id="@+id/parent_list_item_expand_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_arrow_down"
+        android:focusable="false"
+
+
+        android:layout_alignTop="@+id/parent_list_item_job_pickupfrom"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp" />
+
+</RelativeLayout>

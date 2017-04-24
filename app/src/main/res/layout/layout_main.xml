@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.MainActivity"
+    tools:context=".ui.activity.TasksActivity"
 
     >
 
@@ -19,28 +19,16 @@
   </android.support.design.widget.AppBarLayout>
 
 
-
-  <android.support.v7.widget.RecyclerView
-      android:id="@+id/rv_joblist"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior"
-      />
-
-
-  <android.support.design.widget.FloatingActionButton
-      android:id="@+id/fab_toggle_tracking"
-      android:layout_width="wrap_content"
+  <ExpandableListView
+      android:id="@+id/simple_expandable_listview"
+      android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="bottom|end"
-      android:layout_margin="10dp"
-      android:scaleType="center"
-      android:src="@drawable/ic_play_arrow_white_48dp"
-      app:fabSize="normal"
-      app:backgroundTint="@color/material_red_500"
-      app:layout_anchor="@id/rv_joblist"
-      app:layout_anchorGravity="bottom|left|end"
-      app:layout_behavior="co.gobd.tracker.utility.ScrollAwareFABBehavior"/>
+      android:divider="#00ffffff"
+      android:dividerHeight="4dp" >
+  </ExpandableListView>
+
+
+
 
 
 
