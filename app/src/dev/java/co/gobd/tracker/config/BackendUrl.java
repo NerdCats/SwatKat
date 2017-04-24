@@ -16,7 +16,7 @@ public class BackendUrl {
     // Main backend of go fetch
     public static final class TaskCat {
         // Dev
-        public static final String BASE = "http://fetchdev.gobd.co";
+        public static final String BASE = "http://fetchprod.gobd.co";
         //public static final String BASE = "http://fetchdev.gobd.co";
         // Path
         public static final String LOGIN = "/api/auth/token";
