@@ -1,35 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#e4e4e4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     >
 
-    <android.support.design.widget.AppBarLayout
+
+    <include layout="@layout/toolbar"/>
+
+
+    <ExpandableListView
+        android:id="@+id/simple_expandable_listview"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        >
+        android:layout_margin="10dp"
+        android:childDivider="#00000000"
+        android:divider="#00ffffff"
+        android:dividerHeight="7dp"></ExpandableListView>
 
-        <include layout="@layout/toolbar"/>
-
-    </android.support.design.widget.AppBarLayout>
-
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_joblist"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
-
-
-
-
-
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

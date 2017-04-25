@@ -285,4 +285,5 @@
     <color name="material_black">#000000</color>
     <!-- White -->
     <color name="material_white">#FFFFFF</color>
+    <color name="transparent">#00ffffff</color>
 </resources>

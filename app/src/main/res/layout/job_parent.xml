@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/border_around">
 <ImageView
-    android:layout_width="50dp"
+    android:layout_width="60dp"
     android:id="@+id/job_icon"
     android:src="@mipmap/ic_launcher"
-    android:layout_height="50dp"
+    android:layout_height="60dp"
     android:layout_margin="10dp"
     android:layout_centerVertical="true"
     android:layout_alignParentLeft="true"
