@@ -7,7 +7,7 @@ import co.gobd.tracker.model.job.Location;
  */
 public class Order {
 
-    private SellerInfo sellerInfo;
+    private SellerInfo sellerInfo=null;
     private BuyerInfo buyerInfo;
     private Location From;
     private Location To;
@@ -19,10 +19,11 @@ public class Order {
     private String UserId;
     private Double RequiredChangeFor;
     private String PaymentMethod;
+    private String ReferenceInvoice;
 
     public Order(SellerInfo sellerInfo, BuyerInfo buyerInfo, Location from, Location to, String description, OrderCart orderCart,
                  String noteToDeliveryMan, String type, String variant,
-                 String userId, Double RequiredChangeFor, String paymentMethod) {
+                 String userId, Double RequiredChangeFor, String paymentMethod,String ReferenceInvoice) {
 
         this.sellerInfo = sellerInfo;
         this.buyerInfo = buyerInfo;
@@ -36,6 +37,15 @@ public class Order {
         UserId = userId;
         this.RequiredChangeFor = RequiredChangeFor;
         PaymentMethod = paymentMethod;
+        this.ReferenceInvoice=ReferenceInvoice;
+    }
+
+    public String getReferenceInvoice() {
+        return ReferenceInvoice;
+    }
+
+    public void setReferenceInvoice(String referenceInvoice) {
+        ReferenceInvoice = referenceInvoice;
     }
 
     /**
@@ -162,7 +172,17 @@ public class Order {
     public SellerInfo getSellerInfo() {
         return sellerInfo;
     }
+public boolean hasSellerInfo()
+{
+try {
+   String gotvalue= sellerInfo.toString();
+}catch (Exception e)
+{
+    return false;
+}
+return true;
 
+}
     public void setSellerInfo(SellerInfo sellerInfo) {
         this.sellerInfo = sellerInfo;
     }

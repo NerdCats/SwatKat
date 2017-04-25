@@ -71,10 +71,18 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
                 null : jsonObject.get("RequiredChangeFor").getAsDouble();
 
         String PaymentMethod = jsonObject.get("PaymentMethod").getAsString();
+        boolean refExist = CheckJson.checkJsonKey(jsonObject, "ReferenceInvoiceId");
+        String RefInvoice=null;
+        if(refExist)
+        {
+             RefInvoice = (jsonObject.get("ReferenceInvoiceId").isJsonNull()) ?
+                    null : jsonObject.get("ReferenceInvoiceId").getAsString();
+
+        }
 
         order = new Order(sellerInfo, buyerInfo, From, To, Description, orderCart,
                 NoteToDeliveryMan, Type, Variant, UserId,
-                RequiredChangeFor, PaymentMethod);
+                RequiredChangeFor, PaymentMethod,RefInvoice);
 
         return order;
     }
