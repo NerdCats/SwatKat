@@ -64,7 +64,12 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnJobI
     //    jobAdapter.setOnTaskUpdateClickListener(this);
      //   jobAdapter.setOnCallClickListener(this);
 
+        jobView.setGroupIndicator(null);
+        jobView.setChildIndicator(null);
+        jobView.setChildDivider(getResources().getDrawable(R.color.material_blue_grey_50));
+        jobView.setDivider(getResources().getDrawable(R.color.transparent));
 
+     jobView.setDividerHeight(7);
 
         jobView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             int previousItem = -1;
