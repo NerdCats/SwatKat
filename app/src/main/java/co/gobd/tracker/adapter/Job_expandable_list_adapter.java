@@ -34,7 +34,7 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
     String PersonName;
     String Area;
   String items,NoteforAsset;
-    String contact;
+    String contact, Invoice ;
     StringBuilder s;
     public Job_expandable_list_adapter(Context context) {
         this.context = context;
@@ -59,31 +59,32 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
         convertView=null;
         if (expandedListPosition == 0) {
-            final String Invoice = jobModelList.get(listPosition).getOrder().getReferenceInvoice();
-            if (convertView == null) {
-                LayoutInflater layoutInflater = (LayoutInflater) this.context
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = layoutInflater.inflate(R.layout.job_details_with_icon, null);
+              Invoice = jobModelList.get(listPosition).getOrder().getReferenceInvoice();
+            if (Invoice == null) {
+                Invoice="Empty";
             }
-            TextView expandedListTextView = (TextView) convertView
-                    .findViewById(R.id.child_list_item_job_date_text_view);
-            ImageView icon=(ImageView)convertView.findViewById(R.id.child_icon);
-            icon.setImageResource(R.drawable.invoice);
-            expandedListTextView.setText(Invoice);
-            convertView.setTag(jobModelList.get(listPosition));
+                if (convertView == null) {
+                    LayoutInflater layoutInflater = (LayoutInflater) this.context
+                            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    convertView = layoutInflater.inflate(R.layout.job_details_with_icon, null);
+                }
+                TextView expandedListTextView = (TextView) convertView
+                        .findViewById(R.id.child_list_item_job_date_text_view);
+                ImageView icon = (ImageView) convertView.findViewById(R.id.child_icon);
+                icon.setImageResource(R.drawable.invoice);
+                expandedListTextView.setText(Invoice);
 
-        }
+
+            }
+
         if (expandedListPosition == 1) {
              String address = (jobModelList.get(listPosition).getOrder().getFrom().getAddress()).replace('\n',' ');
             //Pattern wikiWordMatcher = Pattern.compile("^(?:\\+?88)?01[15-9]\\d{8}$");
 
 if(contact=="not")
 {
-    Pattern pattern =Pattern.compile("^[+]{1}[8]{2}[01]{1}[0-9]{9}|^[8]{2}[01]{1}[0-9]{9}|^[01]{2}[0-9]{9}");
-    Matcher regexMatcher = pattern.matcher(address);
-    if (regexMatcher.find()) {
-       contact=regexMatcher.group(0);
-    }
+    String[] tokens = address.split(",");
+    contact=tokens[1];
 }
 
 

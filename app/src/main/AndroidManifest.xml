@@ -37,7 +37,9 @@
             android:enabled="true"
             android:exported="false" />
 
-        <activity android:name=".ui.activity.LoginActivity">
+        <activity android:name=".ui.activity.LoginActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,6 +49,7 @@
         <activity
             android:name=".ui.activity.SignUpActivity"
             android:label="@string/label_activity_signup"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ui.activity.LoginActivity" />
         <activity
             android:name=".ui.activity.JobDetailsActivity"
@@ -54,9 +57,11 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.TasksOverviewActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ui.activity.MainActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.activity.TasksActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ui.activity.TasksOverviewActivity"
             android:theme="@style/AppTheme">
         </activity>

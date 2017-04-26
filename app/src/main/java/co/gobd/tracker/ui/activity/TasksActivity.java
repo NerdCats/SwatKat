@@ -74,11 +74,12 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
      jobView.setDividerHeight(7);
 
         jobView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
             int previousItem = -1;
 
             @Override
             public void onGroupExpand(int groupPosition) {
-                jobView.smoothScrollToPosition(groupPosition);
+
                 if(groupPosition != previousItem )
                     jobView.collapseGroup(previousItem );
                 previousItem = groupPosition;
@@ -88,12 +89,15 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
         jobView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Toast.makeText(context,"Group Position "+groupPosition+ "Child position "+childPosition ,Toast.LENGTH_SHORT).show();
+
 
                 if(childPosition==1)
                 {
                     String call= String.valueOf(v.getTag());
-                    onCallClick(call);
+
+                    boolean atleastOneAlpha = call.matches(".*[a-zA-Z]+.*");
+                    if(atleastOneAlpha)Toast.makeText(context,"Phone number not found",Toast.LENGTH_SHORT).show();
+                   else onCallClick(call);
                 }
                 return false;
             }
