@@ -9,12 +9,21 @@ public class User{
     private String Id;
     private String Type;
     private String Email;
-
-    public User(String userName, String id, String type, String email) {
+    private String PhoneNumber;
+    public User(String userName, String id, String type, String email,String phone) {
         UserName = userName;
         Id = id;
         Type = type;
         Email = email;
+        PhoneNumber=phone;
+    }
+
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
     }
 
     /**

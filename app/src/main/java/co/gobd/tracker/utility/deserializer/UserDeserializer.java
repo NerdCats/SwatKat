@@ -27,8 +27,9 @@ public class UserDeserializer implements JsonDeserializer<User> {
         String Id = jsonObject.get("Id").getAsString();
         String Type = jsonObject.get("Type").getAsString();
         String Email = jsonObject.get("Email").getAsString();
+        String PhoneNumber = jsonObject.get("PhoneNumber").getAsString();
 
-        User = new User(UserName, Id, Type, Email);
+        User = new User(UserName, Id, Type, Email,PhoneNumber);
         return User;
     }
 }
