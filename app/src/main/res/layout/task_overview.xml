@@ -42,8 +42,8 @@
 
                     android:layout_height="wrap_content"
                     android:gravity="top|start"
-                    android:padding="8dp"
-                    android:text="EXPRESS DELIVERY"
+                    android:padding="@dimen/paddingforsmalls"
+                    android:text="এক্সপ্রেস ডেলিভারি"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textColor="#ffffff"
                     android:textStyle="bold" />
@@ -56,8 +56,8 @@
                     android:layout_height="wrap_content"
 
 
-                    android:padding="8dp"
-                    android:text="Completed : "
+                    android:padding="@dimen/paddingforsmalls"
+                    android:text="শেষ : "
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="#ffffff" />
 
@@ -66,8 +66,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:padding="8dp"
-                    android:text="Failed :"
+                    android:padding="@dimen/paddingforsmalls"
+                    android:text="হয় নাই :"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="#ffffff" />
 
@@ -87,7 +87,7 @@
                     android:gravity="end|center"
                     android:textColor="@color/material_black"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:text="Attempted Job" />
+                    android:text="১০" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
                     android:gravity="end|center"
                     android:textColor="@color/material_black"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:text="Total Job " />
+                    android:text="১৫ " />
             </LinearLayout>
 
         </LinearLayout>
@@ -122,20 +122,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/shadow_drop">
+
             <TextView
 
+                android:id="@+id/pickupbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/pickupbtn"
 
-                android:textColor="#ffffff"
-                android:textStyle="bold"
                 android:gravity="top|start"
-                android:padding="8dp"
-                android:text="PICK UP"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-
+                android:padding="@dimen/paddingforsmalls"
+                android:text="পিক আপ "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
 
 
             <TextView
@@ -144,8 +143,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:padding="8dp"
-                android:text="Completed : "
+                android:padding="@dimen/paddingforsmalls"
+                android:text="শেষ : "
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#ffffff" />
 
@@ -154,8 +153,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/pickupattempted"
-                android:padding="8dp"
-                android:text="Failed :"
+                android:padding="@dimen/paddingforsmalls"
+                android:text="হয় নাই :"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#ffffff" />
 
@@ -180,7 +179,7 @@
                 android:gravity="center|end"
                 android:textColor="@color/material_black"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text="Attempted Job" />
+                android:text=" ৯" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -196,7 +195,7 @@
                 android:gravity="center|end"
                 android:textColor="@color/material_black"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text="Total Job " />
+                android:text="১০" />
         </LinearLayout>
 
     </LinearLayout>
@@ -224,8 +223,8 @@
                 android:textColor="#ffffff"
                 android:textStyle="bold"
                 android:gravity="top|start"
-                android:padding="8dp"
-                android:text="DELIVERY"
+                android:padding="@dimen/paddingforsmalls"
+                android:text="ডেলিভারি"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
 
@@ -238,8 +237,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/deliverybtn"
 
-                android:padding="8dp"
-                android:text="Completed : "
+                android:padding="@dimen/paddingforsmalls"
+                android:text="শেষ : "
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#ffffff" />
 
@@ -248,8 +247,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/deliveryattempted"
-                android:padding="8dp"
-                android:text="Failed :"
+                android:padding="@dimen/paddingforsmalls"
+                android:text="হয় নাই :"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#ffffff" />
 
@@ -275,7 +274,7 @@
                 android:gravity="center|end"
                 android:textColor="@color/material_black"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text="Attempted Job" />
+                android:text="৫" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -291,7 +290,7 @@
                 android:gravity="center|end"
                 android:textColor="@color/material_black"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text="Total Job " />
+                android:text="৬ " />
         </LinearLayout>
 
     </LinearLayout>
