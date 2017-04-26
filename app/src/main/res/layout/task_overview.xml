@@ -19,6 +19,94 @@
         android:orientation="vertical"
         android:layout_height="match_parent"
         >
+        <LinearLayout
+            android:id="@+id/expresslayout"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:paddingBottom="10dp"
+            android:layout_height="fill_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:background="@drawable/shadow_drop_express">
+
+                <TextView
+
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+
+
+                    android:layout_height="wrap_content"
+                    android:gravity="top|start"
+                    android:padding="8dp"
+                    android:text="EXPRESS DELIVERY"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
+
+
+                <TextView
+
+                    android:id="@+id/exdeliveryattempted"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:padding="8dp"
+                    android:text="Completed : "
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:id="@+id/exdeliveryfailed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:padding="8dp"
+                    android:text="Failed :"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="#ffffff" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:background="#fbfcf9"
+                android:padding="3dp"
+                android:gravity="end|center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end|center"
+                    android:textColor="@color/material_black"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:text="Attempted Job" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end|center"
+                    android:textColor="@color/material_black"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:text=" / " />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end|center"
+                    android:textColor="@color/material_black"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:text="Total Job " />
+            </LinearLayout>
+
+        </LinearLayout>
     <LinearLayout
         android:id="@+id/btn_pickupjobs"
         android:layout_width="match_parent"
@@ -208,93 +296,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/expresslayout"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:weightSum="2"
-        android:paddingBottom="10dp"
-        android:layout_height="fill_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
 
-            android:background="@drawable/shadow_drop_express">
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:gravity="top|start"
-                android:padding="8dp"
-                android:text="EXPRESS DELIVERY"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-
-
-
-            <TextView
-
-                android:id="@+id/exdeliveryattempted"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-
-                android:padding="8dp"
-                android:text="Completed : "
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="#ffffff" />
-
-            <TextView
-                android:id="@+id/exdeliveryfailed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:padding="8dp"
-                android:text="Failed :"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="#ffffff" />
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:background="#fbfcf9"
-            android:padding="3dp"
-            android:gravity="end|center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="end|center"
-                android:textColor="@color/material_black"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text="Attempted Job" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="end|center"
-                android:textColor="@color/material_black"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text=" / " />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="end|center"
-                android:textColor="@color/material_black"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text="Total Job " />
-        </LinearLayout>
-
-    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

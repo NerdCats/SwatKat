@@ -2,13 +2,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:background="#ffffff">
+    android:background="#f6fcff">
     <ImageView
-        android:layout_width="35dp"
+        android:layout_width="30dp"
         android:id="@+id/child_icon"
-        android:layout_height="35dp"
+        android:layout_height="30dp"
         android:scaleType="centerInside"
-        android:layout_marginBottom="10dp"
+
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"

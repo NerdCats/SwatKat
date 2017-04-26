@@ -17,7 +17,6 @@
         android:id="@+id/phone_icon"
         android:layout_height="30dp"
         android:scaleType="centerInside"
-        android:background="@drawable/phone"
         android:layout_margin="5dp"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/child_icon"
