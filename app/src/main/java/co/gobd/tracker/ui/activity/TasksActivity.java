@@ -30,7 +30,7 @@ import co.gobd.tracker.presenter.TasksPresenter;
 import co.gobd.tracker.ui.view.OnJobItemClickListener;
 import co.gobd.tracker.ui.view.TasksView;
 
-public class TasksActivity extends AppCompatActivity implements TasksView,OnJobItemClickListener,OnCallClickListener,OnTaskUpdateClickListener{
+public class TasksActivity extends AppCompatActivity implements TasksView{
     @Inject
     TasksPresenter tasksPresenter;
     @Inject
@@ -76,13 +76,23 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnJobI
 
             @Override
             public void onGroupExpand(int groupPosition) {
+                jobView.smoothScrollToPosition(groupPosition);
                 if(groupPosition != previousItem )
                     jobView.collapseGroup(previousItem );
                 previousItem = groupPosition;
             }
         });
 
-      //  setupNavigationHeaderView(sessionManager.getUsername());
+        jobView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Toast.makeText(context,"Group Position "+groupPosition+ "Child position "+childPosition ,Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+
+        //  setupNavigationHeaderView(sessionManager.getUsername());
 
         //fabToggleTracking.setOnClickListener(this);
     }
@@ -116,23 +126,10 @@ public void onBackPressed()
 {
     super.onBackPressed();
 }
-    @Override
-    public void onCallClick(String phoneNumber) {
 
-    }
 
-    @Override
-    public void onCallHQClick() {
 
-    }
 
-    @Override
-    public void onTaskUpdateClick(String jobId, String pickupTaskId, String deliveryTaskId, String pickUpTaskState, String deliveryTaskState) {
 
-    }
 
-    @Override
-    public void onItemClick(View view, int position, JobModel jobModel) {
-
-    }
 }
