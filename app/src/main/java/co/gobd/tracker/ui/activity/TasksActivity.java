@@ -1,6 +1,8 @@
 package co.gobd.tracker.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,7 +32,7 @@ import co.gobd.tracker.presenter.TasksPresenter;
 import co.gobd.tracker.ui.view.OnJobItemClickListener;
 import co.gobd.tracker.ui.view.TasksView;
 
-public class TasksActivity extends AppCompatActivity implements TasksView{
+public class TasksActivity extends AppCompatActivity implements TasksView,OnCallClickListener{
     @Inject
     TasksPresenter tasksPresenter;
     @Inject
@@ -87,6 +89,12 @@ public class TasksActivity extends AppCompatActivity implements TasksView{
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 Toast.makeText(context,"Group Position "+groupPosition+ "Child position "+childPosition ,Toast.LENGTH_SHORT).show();
+
+                if(childPosition==1)
+                {
+                    String call= String.valueOf(v.getTag());
+                    onCallClick(call);
+                }
                 return false;
             }
         });
@@ -104,8 +112,8 @@ public class TasksActivity extends AppCompatActivity implements TasksView{
     private void setupToolbar() {
         setSupportActionBar(toolbar);
 if(getSupportActionBar()!=null) {
-    if (TaskType.equals("PackagePickUp")) getSupportActionBar().setTitle("Pick Up");
-    else getSupportActionBar().setTitle(TaskType);
+    if (TaskType.equals("PackagePickUp")) getSupportActionBar().setTitle("পিক আপ");
+    else getSupportActionBar().setTitle("ডেলিভারি");
 }
     }
     @Override
@@ -128,8 +136,17 @@ public void onBackPressed()
 }
 
 
+    @Override
+    public void onCallClick(String phoneNumber) {
+        String totalp="tel:";
+        totalp=totalp.concat(phoneNumber);
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse(totalp));
+        startActivity(intent);
+    }
 
+    @Override
+    public void onCallHQClick() {
 
-
-
+    }
 }

@@ -98,10 +98,10 @@ public class TasksOverviewActivity extends AppCompatActivity implements Tasksove
     }
     private void setupToolbar() {
         setSupportActionBar(toolbar);
-       if(getSupportActionBar()!=null) {
+       if(getSupportActionBar()!= null) {
            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
            getSupportActionBar().setHomeButtonEnabled(true);
-           getSupportActionBar().setTitle("GO! Asset App");
+           getSupportActionBar().setTitle("GO! অ্যাসেট অ্যাপ");
             }
        }
     @Override

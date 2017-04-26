@@ -3,7 +3,10 @@ package co.gobd.tracker.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.model.job.JobModel;
@@ -29,6 +34,7 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
     String PersonName;
     String Area;
   String items,NoteforAsset;
+    String contact;
     StringBuilder s;
     public Job_expandable_list_adapter(Context context) {
         this.context = context;
@@ -62,12 +68,26 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
             TextView expandedListTextView = (TextView) convertView
                     .findViewById(R.id.child_list_item_job_date_text_view);
             ImageView icon=(ImageView)convertView.findViewById(R.id.child_icon);
-            icon.setImageResource(R.drawable.receipt);
+            icon.setImageResource(R.drawable.invoice);
             expandedListTextView.setText(Invoice);
+            convertView.setTag(jobModelList.get(listPosition));
 
         }
         if (expandedListPosition == 1) {
-            final String address = (jobModelList.get(listPosition).getOrder().getFrom().getAddress()).replace('\n',' ');
+             String address = (jobModelList.get(listPosition).getOrder().getFrom().getAddress()).replace('\n',' ');
+            //Pattern wikiWordMatcher = Pattern.compile("^(?:\\+?88)?01[15-9]\\d{8}$");
+
+if(contact=="not")
+{
+    Pattern pattern =Pattern.compile("^[+]{1}[8]{2}[01]{1}[0-9]{9}|^[8]{2}[01]{1}[0-9]{9}|^[01]{2}[0-9]{9}");
+    Matcher regexMatcher = pattern.matcher(address);
+    if (regexMatcher.find()) {
+       contact=regexMatcher.group(0);
+    }
+}
+
+
+
             if (convertView == null) {
                 LayoutInflater layoutInflater = (LayoutInflater) this.context
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -76,8 +96,9 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
             TextView expandedListTextView = (TextView) convertView
                     .findViewById(R.id.child_list_item_job_date_text_view);
             ImageView icon=(ImageView)convertView.findViewById(R.id.child_icon);
-            icon.setImageResource(R.drawable.phone);
+            icon.setImageResource(R.drawable.house);
             expandedListTextView.setText(address);
+            convertView.setTag(contact);
 
         }
         if (expandedListPosition == 2) {
@@ -111,7 +132,8 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
 
         }
         if (expandedListPosition == 3) {
-            final String price = jobModelList.get(listPosition).getOrder().getOrderCart().getTotalToPay().toString();
+            final String price = jobModelList.get(listPosition).getOrder().getOrderCart().getTotalToPay().toString().concat(" taka");
+
             if (convertView == null) {
                 LayoutInflater layoutInflater = (LayoutInflater) this.context
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -120,7 +142,7 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
             TextView expandedListTextView = (TextView) convertView
                     .findViewById(R.id.child_list_item_job_date_text_view);
             ImageView icon=(ImageView)convertView.findViewById(R.id.child_icon);
-            icon.setImageResource(R.drawable.change);
+            icon.setImageResource(R.drawable.taka2);
             expandedListTextView.setText(price);
 
 
@@ -184,13 +206,14 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
             boolean exists=jobModelList.get(listPosition).getOrder().hasSellerInfo();
             if(exists){
                 PersonName = jobModelList.get(listPosition).getOrder().getSellerInfo().getName();
-                Area = jobModelList.get(listPosition).getOrder().getFrom().getLocality();
+
+                contact=jobModelList.get(listPosition).getOrder().getSellerInfo().getPhoneNumber();
             }
             else {
                 PersonName=jobModelList.get(listPosition).getUser().getUserName();
-                Area=jobModelList.get(listPosition).getOrder().getFrom().getLocality();
+                contact="not";
             }
-
+        Area=jobModelList.get(listPosition).getOrder().getFrom().getLocality();
         if (convertView == null) {
 
            convertView = LayoutInflater.from(parent.getContext())
@@ -217,6 +240,7 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
 
     @Override
     public boolean isChildSelectable(int listPosition, int expandedListPosition) {
+
         return true;
     }
 
