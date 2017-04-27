@@ -14,10 +14,11 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.HashMap;
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.format.ISODateTimeFormat;
+
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.model.job.JobModel;
@@ -31,13 +32,13 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
 
     private Context context;
     private List<JobModel> jobModelList;
-    String PersonName;
-    String Area;
-  String items,NoteforAsset;
-    String contact, Invoice ;
+    String PersonName,contact, Invoice,Area,items,NoteforAsset,Tasktypefrommain,address;
+
     StringBuilder s;
-    public Job_expandable_list_adapter(Context context) {
+    int days;
+    public Job_expandable_list_adapter(Context context,String task) {
         this.context = context;
+        this.Tasktypefrommain=task;
     }
     public void setAdapterData(List<JobModel> jobModelList) {
         this.jobModelList = jobModelList;
@@ -57,11 +58,11 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int listPosition, final int expandedListPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        convertView=null;
+
         if (expandedListPosition == 0) {
               Invoice = jobModelList.get(listPosition).getOrder().getReferenceInvoice();
             if (Invoice == null) {
-                Invoice="Empty";
+                Invoice="Not Applicable";
             }
                 if (convertView == null) {
                     LayoutInflater layoutInflater = (LayoutInflater) this.context
@@ -78,7 +79,12 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
             }
 
         if (expandedListPosition == 1) {
-             String address = (jobModelList.get(listPosition).getOrder().getFrom().getAddress()).replace('\n',' ');
+
+            if(Tasktypefrommain=="PackagePickUp")
+            {
+                 address = (jobModelList.get(listPosition).getOrder().getFrom().getAddress()).replace('\n',' ');
+            }
+             else address = (jobModelList.get(listPosition).getOrder().getTo().getAddress()).replace('\n',' ');
             //Pattern wikiWordMatcher = Pattern.compile("^(?:\\+?88)?01[15-9]\\d{8}$");
 
 if(contact=="not")
@@ -199,22 +205,44 @@ if(contact=="not")
     public View getGroupView(int listPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
         convertView=null;
+        days=0;
         String listTitle = jobModelList.get(listPosition).getHRID();
+        String timestampfromjob =jobModelList.get(listPosition).getTime();
+        DateTime currentDate=new DateTime();
+
+        DateTime dateTime = ISODateTimeFormat.dateTimeParser().parseDateTime(timestampfromjob);
+
+        long diffInMillis = currentDate.getMillis() - dateTime.getMillis();
+        days = (int) (diffInMillis / (1000*60*60*24));
         PersonName=null;
         Area=null;
+if(Tasktypefrommain=="PackagePickUp") {
 
+    boolean exists = jobModelList.get(listPosition).getOrder().hasSellerInfo();
+    if (exists) {
+        PersonName = jobModelList.get(listPosition).getOrder().getSellerInfo().getName();
 
-            boolean exists=jobModelList.get(listPosition).getOrder().hasSellerInfo();
-            if(exists){
-                PersonName = jobModelList.get(listPosition).getOrder().getSellerInfo().getName();
+        contact = jobModelList.get(listPosition).getOrder().getSellerInfo().getPhoneNumber();
+    } else {
+        PersonName = jobModelList.get(listPosition).getUser().getUserName();
+        contact = "not";
+    }
+    Area = jobModelList.get(listPosition).getOrder().getFrom().getLocality();
+}
 
-                contact=jobModelList.get(listPosition).getOrder().getSellerInfo().getPhoneNumber();
-            }
-            else {
-                PersonName=jobModelList.get(listPosition).getUser().getUserName();
-                contact="not";
-            }
-        Area=jobModelList.get(listPosition).getOrder().getFrom().getLocality();
+else {
+    boolean exists = jobModelList.get(listPosition).getOrder().hasBuyerInfo();
+    if (exists) {
+        PersonName = jobModelList.get(listPosition).getOrder().getBuyerInfo().getName();
+
+        contact = jobModelList.get(listPosition).getOrder().getBuyerInfo().getPhoneNumber();
+    } else {
+        String[] all=jobModelList.get(listPosition).getOrder().getTo().getAddress().split(",");
+        PersonName = all[0];
+        contact = "not";
+    }
+    Area = jobModelList.get(listPosition).getOrder().getTo().getLocality();
+}
         if (convertView == null) {
 
            convertView = LayoutInflater.from(parent.getContext())
@@ -225,6 +253,11 @@ if(contact=="not")
                 .findViewById(R.id.parent_list_item_job_pickupfrom);
         TextView Areaplace = (TextView) convertView
                 .findViewById(R.id.parent_list_item_job_pickupcontact);
+        ImageView flag=(ImageView)convertView.findViewById(R.id.parent_list_item_flag);
+        flag.setImageResource(0);
+        if(days==0)flag.setImageResource(R.drawable.flaggreen);
+        if(days==1)flag.setImageResource(R.drawable.flagyellow);
+        if(days>=2)flag.setImageResource(R.drawable.flagred);
         listTitleTextView.setTypeface(null, Typeface.BOLD);
         listTitleTextView.setText(listTitle);
         ContactPerson.setText(PersonName);
