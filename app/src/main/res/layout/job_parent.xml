@@ -17,7 +17,7 @@
         android:id="@+id/parent_list_item_job_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="6dp"
+        android:padding="@dimen/paddingforjobparenttitle"
         android:textColor="#000000"
         android:textStyle="bold"
         android:text="Job Title"
@@ -29,8 +29,7 @@
         android:id="@+id/parent_list_item_job_pickupfrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:padding="6dp"
+        android:padding="@dimen/paddingforjobparenttitle"
         android:textColor="#000000"
         android:text="Mr. Zamil Haque"
         android:layout_below="@+id/parent_list_item_job_title"
@@ -40,7 +39,7 @@
         android:id="@+id/parent_list_item_job_pickupcontact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="6dp"
+        android:padding="@dimen/paddingforjobparenttitle"
         android:textColor="#000000"
 
 
@@ -50,12 +49,11 @@
         android:layout_toEndOf="@+id/job_icon" />
 
     <ImageView
-        android:id="@+id/parent_list_item_expand_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_arrow_down"
+        android:id="@+id/parent_list_item_flag"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
         android:focusable="false"
-
+        android:scaleType="centerInside"
 
         android:layout_alignTop="@+id/parent_list_item_job_pickupfrom"
         android:layout_alignParentRight="true"

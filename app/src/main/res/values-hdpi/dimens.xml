@@ -6,4 +6,5 @@
     <dimen name="design_fab_size_normal">80dp</dimen>
     <dimen name="design_fab_size_mini">60dp</dimen>
     <dimen name="paddingforsmalls">4dp</dimen>
+    <dimen name="paddingforjobparenttitle">3dp</dimen>
 </resources>
