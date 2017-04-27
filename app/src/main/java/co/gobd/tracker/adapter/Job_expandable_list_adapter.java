@@ -58,7 +58,7 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int listPosition, final int expandedListPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-
+convertView=null;
         if (expandedListPosition == 0) {
               Invoice = jobModelList.get(listPosition).getOrder().getReferenceInvoice();
             if (Invoice == null) {
@@ -80,7 +80,7 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
 
         if (expandedListPosition == 1) {
 
-            if(Tasktypefrommain=="PackagePickUp")
+            if(Tasktypefrommain.equals("PackagePickUp"))
             {
                  address = (jobModelList.get(listPosition).getOrder().getFrom().getAddress()).replace('\n',' ');
             }
@@ -176,6 +176,21 @@ if(contact=="not")
             }
 
         }
+        if (expandedListPosition == 5) {
+
+
+            if (convertView == null) {
+                LayoutInflater layoutInflater = (LayoutInflater) this.context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = layoutInflater.inflate(R.layout.job_details_text, null);
+            }
+            TextView expandedListTextView = (TextView) convertView
+                    .findViewById(R.id.child_list_item_job_date_text_view);
+
+            expandedListTextView.setText("Update Task");
+
+
+        }
 
         return convertView;
     }
@@ -183,7 +198,7 @@ if(contact=="not")
     @Override
     public int getChildrenCount(int listPosition) {
 
-        return 5;
+        return 6;
     }
 
     @Override
@@ -216,7 +231,7 @@ if(contact=="not")
         days = (int) (diffInMillis / (1000*60*60*24));
         PersonName=null;
         Area=null;
-if(Tasktypefrommain=="PackagePickUp") {
+if(Tasktypefrommain.equals("PackagePickUp")) {
 
     boolean exists = jobModelList.get(listPosition).getOrder().hasSellerInfo();
     if (exists) {

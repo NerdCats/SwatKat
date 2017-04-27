@@ -17,6 +17,7 @@
         android:id="@+id/parent_list_item_job_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:padding="@dimen/paddingforjobparenttitle"
         android:textColor="#000000"
         android:textStyle="bold"

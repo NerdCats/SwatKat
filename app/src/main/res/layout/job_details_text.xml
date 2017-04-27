@@ -1,14 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ffffff">
+    android:background="#89ff75">
 
     <TextView
         android:id="@+id/child_list_item_job_date_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:textColor="@color/material_black"
+        android:padding="@dimen/paddingforsmalls"
+        android:textColor="#b40045"
+        android:textStyle="bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
 
