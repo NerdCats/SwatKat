@@ -29,5 +29,8 @@ public class BuyerInfo {
     public void setPhoneNumber(String phoneNumber) {
         PhoneNumber = phoneNumber;
     }
-
+    @Override
+    public String toString() {
+        return Name;
+    }
 }

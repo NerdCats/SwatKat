@@ -57,7 +57,7 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
         TaskType=getIntent().getStringExtra("TaskType");
 
         setupToolbar();
-        job_expandable_list_adapter = new Job_expandable_list_adapter(context);
+        job_expandable_list_adapter = new Job_expandable_list_adapter(context,TaskType);
         tasksPresenter.initialise(this);
         tasksPresenter.setInheritedTasktype(TaskType);
         tasksPresenter.loadAdapterData();
@@ -80,7 +80,9 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
             @Override
             public void onGroupExpand(int groupPosition) {
 
+                jobView.smoothScrollToPosition(groupPosition);
                 if(groupPosition != previousItem )
+
                     jobView.collapseGroup(previousItem );
                 previousItem = groupPosition;
             }

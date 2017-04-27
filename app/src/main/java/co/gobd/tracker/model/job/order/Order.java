@@ -8,7 +8,7 @@ import co.gobd.tracker.model.job.Location;
 public class Order {
 
     private SellerInfo sellerInfo=null;
-    private BuyerInfo buyerInfo;
+    private BuyerInfo buyerInfo=null;
     private Location From;
     private Location To;
     private String Description;
@@ -183,6 +183,17 @@ try {
 return true;
 
 }
+    public boolean hasBuyerInfo()
+    {
+        try {
+            String gotvalue= buyerInfo.toString();
+        }catch (Exception e)
+        {
+            return false;
+        }
+        return true;
+
+    }
     public void setSellerInfo(SellerInfo sellerInfo) {
         this.sellerInfo = sellerInfo;
     }

@@ -89,12 +89,13 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
         String PaymentStatus = jsonObject.get("PaymentStatus").getAsString();
         String HRID = jsonObject.get("HRID").getAsString();
         String Id = jsonObject.get("Id").getAsString();
+        String Timestamp=jsonObject.get("ModifiedTime").getAsString();
 
 
         jobModel = new JobModel(Name, State, Order,
                 User, jobTaskList,
                 PaymentMethod, PaymentStatus,
-                HRID, Id);
+                HRID, Id,Timestamp);
 
         return jobModel;
 
