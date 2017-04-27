@@ -19,11 +19,12 @@ public class JobModel{
     private String PaymentStatus;
     private String HRID;
     private String Id;
+    private String Time;
 
     public JobModel(String name, String state, Order order,
                     User user, List<JobTask> tasks,
                     String paymentMethod, String paymentStatus,
-                    String HRID, String id) {
+                    String HRID, String id,String Times) {
 
         Name = name;
         State = state;
@@ -34,6 +35,8 @@ public class JobModel{
         PaymentStatus = paymentStatus;
         this.HRID = HRID;
         Id = id;
+        Time=Times;
+
     }
 
     public String getName() {
@@ -70,6 +73,14 @@ public class JobModel{
 
     public String getHRID() {
         return HRID;
+    }
+
+    public String getTime() {
+        return Time;
+    }
+
+    public void setTime(String time) {
+        Time = time;
     }
 
     public void setHRID(String HRID) {
