@@ -44,6 +44,9 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
         this.jobModelList = jobModelList;
         notifyDataSetChanged();
     }
+    public List<JobModel> getAdapterData() {
+        return jobModelList;
+    }
     @Override
     public Object getChild(int listPosition, int expandedListPosition) {
         return this.jobModelList.get(listPosition);
@@ -188,7 +191,7 @@ if(contact=="not")
                     .findViewById(R.id.child_list_item_job_date_text_view);
 
             expandedListTextView.setText("Update Task");
-
+            convertView.setTag(listPosition);
 
         }
 
