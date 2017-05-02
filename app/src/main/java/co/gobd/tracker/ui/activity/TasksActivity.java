@@ -1,9 +1,11 @@
 package co.gobd.tracker.ui.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,8 +13,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.util.List;
@@ -42,11 +48,14 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
     ExpandableListView jobView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
+    RadioGroup radioGroup;
     Job_expandable_list_adapter job_expandable_list_adapter;
     private Unbinder unbinder;
     String TaskType;
+    RadioButton rd;
+    String[]Pickup={ "Done","Failed"};
 
+    String[]Delivery={ "Done","Failed","Returned"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +110,10 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
                     if(atleastOneAlpha)Toast.makeText(context,"Phone number not found",Toast.LENGTH_SHORT).show();
                    else onCallClick(call);
                 }
+                if(childPosition==5)
+                {
+                    showServerLayout(TaskType);
+                }
                 return false;
             }
         });
@@ -110,7 +123,52 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
 
         //fabToggleTracking.setOnClickListener(this);
     }
+    @Override
+    public void showServerLayout(String taskType) {
 
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.send_status, null);
+
+        dialogBuilder.setView(dialogView);
+        LinearLayout checkboxholderlayout=(LinearLayout)dialogView.findViewById(R.id.checkboxholder);
+        final LinearLayout lower=(LinearLayout)dialogView.findViewById(R.id.lowerlayout);
+
+        if(TaskType.equals("PackagePickUp"))
+            radioGroup=new RadioGroup(context);
+            for(int i=0;i<Pickup.length;i++)
+            {
+
+                RadioButton checkBox=new RadioButton(context);
+
+                checkBox.setTextColor(getResources().getColor(R.color.material_white));
+                checkBox.setText(Pickup[i]);
+             radioGroup.addView(checkBox,i);
+
+            }
+        checkboxholderlayout.addView(radioGroup);
+        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //do something with edt.getText().toString();
+            }
+        });
+
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                                                  @Override
+                                                  public void onCheckedChanged(RadioGroup group, int checkedId)
+                                                  {
+                                                      rd = (RadioButton) radioGroup.findViewById(checkedId);
+                                                      if(rd.getText().equals("Failed"))
+                                                      {
+                                                          lower.setVisibility(View.VISIBLE);
+                                                      }
+                                                      else lower.setVisibility(View.GONE);
+                                                  }
+                                              }
+        );
+    }
     private void setupRecyclerView(Job_expandable_list_adapter jobAdapter) {
 
         jobView.setAdapter(jobAdapter);

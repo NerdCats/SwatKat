@@ -18,6 +18,6 @@ public interface TasksView {
     void showTaskUpdateSuccessfulMsg();
 
     void showTaskUpdateError();*/
-
+   void showServerLayout(String task);
     void showConnectionError();
 }
