@@ -57,7 +57,7 @@
 
 
                     android:padding="@dimen/paddingforsmalls"
-                    android:text="শেষ : "
+                    android:text="শেষ : ৮ "
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="#ffffff" />
 
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
 
                     android:padding="@dimen/paddingforsmalls"
-                    android:text="হয় নাই :"
+                    android:text="হয় নাই : ২"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="#ffffff" />
 
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
 
                 android:padding="@dimen/paddingforsmalls"
-                android:text="শেষ : "
+                android:text="শেষ : ৫"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#ffffff" />
 
@@ -154,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/pickupattempted"
                 android:padding="@dimen/paddingforsmalls"
-                android:text="হয় নাই :"
+                android:text="হয় নাই : ১"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#ffffff" />
 
@@ -179,7 +179,7 @@
                 android:gravity="center|end"
                 android:textColor="@color/material_black"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text=" ৯" />
+                android:text="৬" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -238,7 +238,7 @@
                 android:layout_below="@+id/deliverybtn"
 
                 android:padding="@dimen/paddingforsmalls"
-                android:text="শেষ : "
+                android:text="শেষ : ৪ "
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#ffffff" />
 
@@ -274,7 +274,7 @@
                 android:gravity="center|end"
                 android:textColor="@color/material_black"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text="৫" />
+                android:text="৪" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -290,7 +290,7 @@
                 android:gravity="center|end"
                 android:textColor="@color/material_black"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text="৬ " />
+                android:text="৮ " />
         </LinearLayout>
 
     </LinearLayout>

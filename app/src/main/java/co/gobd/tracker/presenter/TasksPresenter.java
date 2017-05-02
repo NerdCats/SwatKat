@@ -74,6 +74,7 @@ public class TasksPresenter {
 
                     @Override
                     public void onConnectionError() {
+
                         Log.d("err","connectionerror");
                     }
                 });
@@ -87,27 +88,28 @@ public class TasksPresenter {
         tasksViewWeakReference = null;
     }
 
-    /*public void updateTaskStateToCompleted(String jobId, String taskId) {
+  public void updateTaskStateToCompleted(String jobId, String taskId,String status) {
 
-        UpdateTaskState[] state = {new UpdateTaskState("replace", "State", "COMPLETED")};
+
+        UpdateTaskState[] state = {new UpdateTaskState("replace", "State", status)};
 
         jobService.updateTaskState(sessionManager.getBearer(), jobId, taskId,
                 state, new PatchCallback() {
                     @Override
                     public void onPatchSuccess() {
-                        mainView.showTaskUpdateSuccessfulMsg();
+                        tasksView.showTaskUpdateSuccessfulMsg();
                     }
 
                     @Override
                     public void onPatchFailure() {
-                        mainView.showTaskUpdateError();
+                        tasksView.showTaskUpdateError();
                     }
 
                     @Override
                     public void onConnectionError() {
-                        mainView.showConnectionError();
+                        tasksView.showConnectionError();
                     }
                 });
-    }*/
+    }
 
 }

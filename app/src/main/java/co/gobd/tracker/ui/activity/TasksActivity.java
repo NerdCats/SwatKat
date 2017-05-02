@@ -37,6 +37,7 @@ import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.presenter.TasksPresenter;
 import co.gobd.tracker.ui.view.OnJobItemClickListener;
 import co.gobd.tracker.ui.view.TasksView;
+import co.gobd.tracker.utility.Constant;
 
 public class TasksActivity extends AppCompatActivity implements TasksView,OnCallClickListener{
     @Inject
@@ -49,13 +50,15 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     RadioGroup radioGroup;
+    List<JobModel> jobModelsingle;
     Job_expandable_list_adapter job_expandable_list_adapter;
     private Unbinder unbinder;
-    String TaskType;
-    RadioButton rd;
-    String[]Pickup={ "Done","Failed"};
+    String TaskType, JobId,TaskId,TaskState,Status;
+    RadioButton rd=null;
+    int position;
+    String[]Pickup={ "COMPLETED"};
 
-    String[]Delivery={ "Done","Failed","Returned"};
+    String[]Delivery={ "COMPLETED","FAILED","RETURNED"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +115,7 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
                 }
                 if(childPosition==5)
                 {
+                    position=(int)v.getTag();
                     showServerLayout(TaskType);
                 }
                 return false;
@@ -123,6 +127,15 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
 
         //fabToggleTracking.setOnClickListener(this);
     }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
     @Override
     public void showServerLayout(String taskType) {
 
@@ -134,22 +147,49 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
         LinearLayout checkboxholderlayout=(LinearLayout)dialogView.findViewById(R.id.checkboxholder);
         final LinearLayout lower=(LinearLayout)dialogView.findViewById(R.id.lowerlayout);
 
-        if(TaskType.equals("PackagePickUp"))
-            radioGroup=new RadioGroup(context);
-            for(int i=0;i<Pickup.length;i++)
-            {
 
-                RadioButton checkBox=new RadioButton(context);
+            radioGroup=new RadioGroup(context);
+        if(TaskType.equals("PackagePickUp")) {
+            for (int i = 0; i < Pickup.length; i++) {
+
+                RadioButton checkBox = new RadioButton(context);
 
                 checkBox.setTextColor(getResources().getColor(R.color.material_white));
                 checkBox.setText(Pickup[i]);
-             radioGroup.addView(checkBox,i);
+                radioGroup.addView(checkBox, i);
 
             }
+        }
+        else
+        {
+            for (int i = 0; i < Delivery.length; i++) {
+
+                RadioButton checkBox = new RadioButton(context);
+
+                checkBox.setTextColor(getResources().getColor(R.color.material_white));
+
+                 checkBox.setText(Delivery[i]);
+                radioGroup.addView(checkBox, i);
+
+            }
+        }
         checkboxholderlayout.addView(radioGroup);
         dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //do something with edt.getText().toString();
+                if(rd==null)
+                {
+                    Toast.makeText(context,"Select status first",Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                   jobModelsingle=job_expandable_list_adapter.getAdapterData();
+                    JobId=jobModelsingle.get(position).getId();
+                    if(TaskType.equals("PackagePickUp"))TaskId=jobModelsingle.get(position).getTasks().get(Constant.Task.PACKAGE_PICKUP).getId();
+                    else TaskId=jobModelsingle.get(position).getTasks().get(Constant.Task.DELIVERY).getId();
+                    tasksPresenter.updateTaskStateToCompleted(JobId,TaskId, getStatus());
+                }
+
             }
         });
 
@@ -160,7 +200,8 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
                                                   public void onCheckedChanged(RadioGroup group, int checkedId)
                                                   {
                                                       rd = (RadioButton) radioGroup.findViewById(checkedId);
-                                                      if(rd.getText().equals("Failed"))
+                                                      setStatus(String.valueOf(rd.getText()));
+                                                      if(rd.getText().equals("FAILED")||rd.getText().equals("RETURNED"))
                                                       {
                                                           lower.setVisibility(View.VISIBLE);
                                                       }
@@ -168,6 +209,7 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
                                                   }
                                               }
         );
+
     }
     private void setupRecyclerView(Job_expandable_list_adapter jobAdapter) {
 
@@ -179,6 +221,11 @@ if(getSupportActionBar()!=null) {
     if (TaskType.equals("PackagePickUp")) getSupportActionBar().setTitle("পিক আপ");
     else getSupportActionBar().setTitle("ডেলিভারি");
 }
+    }
+    @Override
+    public void showTaskUpdateSuccessfulMsg() {
+        Toast.makeText(context, R.string.msg_task_update_successful, Toast.LENGTH_SHORT).show();
+
     }
     @Override
     public void setJobModelList(List<JobModel> jobModelList) {
@@ -213,4 +260,9 @@ public void onBackPressed()
     public void onCallHQClick() {
 
     }
+    @Override
+    public void showTaskUpdateError() {
+        Toast.makeText(context, R.string.msg_task_update_error, Toast.LENGTH_SHORT).show();
+    }
+
 }

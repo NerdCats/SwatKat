@@ -13,11 +13,11 @@ public interface TasksView {
    /* void startProgress();
     void stopProgress();
 
-    void stopSwipRefresh();
+    void stopSwipRefresh();*/
 
     void showTaskUpdateSuccessfulMsg();
 
-    void showTaskUpdateError();*/
+    void showTaskUpdateError();
    void showServerLayout(String task);
     void showConnectionError();
 }
