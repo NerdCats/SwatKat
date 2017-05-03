@@ -49,15 +49,17 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
             final String type = task.get("Type").getAsString();
 
             String jobTaskStateString;
-            String state;
-            String id;
+
+            String state,id,asset;
             Location location;
             switch (type) {
                 case JobTaskTypes.FETCH_DELIVERYMAN:
                     jobTaskStateString = "FETCH_DELIVERYMAN";//task.get("JobTaskStateString").getAsString();
                     state = task.get("State").getAsString();
                     id = task.get("id").getAsString();
-                    jobTaskList.add(new FetchDeliveryManTask(jobTaskStateString, state, id));
+                    asset="Office";
+
+
                     break;
 
                 case JobTaskTypes.PACKAGE_PICKUP:
@@ -65,8 +67,8 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
                     state = task.get("State").getAsString();
                     id = task.get("id").getAsString();
                     location = getLocation(task.getAsJsonObject("PickupLocation"));
-
-                    jobTaskList.add(new PackagePickupTask(jobTaskStateString, state, location, id));
+                    asset=task.get("AssetRef").getAsString();
+                    jobTaskList.add(new PackagePickupTask(jobTaskStateString, state, location, id,asset));
                     break;
 
                 case JobTaskTypes.DELIVERY:
@@ -74,8 +76,14 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
                     state = task.get("State").getAsString();
                     id = task.get("id").getAsString();
                     location = getLocation(task.getAsJsonObject("To"));
+                    try {
+                        asset=task.get("AssetRef").getAsString();
+                    }catch (Exception  e)
+                    {
+                        asset=null;
+                    }
 
-                    jobTaskList.add(new DeliveryTask(jobTaskStateString, state, location, id));
+                    jobTaskList.add(new DeliveryTask(jobTaskStateString, state, location, id,asset));
                     break;
 
                 default:
@@ -105,9 +113,9 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
     public Location getLocation(JsonObject jsonObject) {
 
         String address = jsonObject.get("Address").getAsString();
-        JsonObject jsonPoint = jsonObject.get("Point").getAsJsonObject();
+       // JsonObject jsonPoint = jsonObject.get("Point").getAsJsonObject();
 
-        String type = jsonPoint.get("type").getAsString();
+       // String type = jsonPoint.get("type").getAsString();
         String locality = null;
         boolean locExists = CheckJson.checkJsonKey(jsonObject, "Locality");
 
@@ -133,8 +141,8 @@ public class JobModelDeserializer implements JsonDeserializer<JobModel> {
             return location;
         }*/
 
-        Point point = new Point(type, null);
-        Location location = new Location(point, address, locality);
+      //  Point point = new Point(type, null);
+        Location location = new Location( address, locality);
 
         return location;
 
