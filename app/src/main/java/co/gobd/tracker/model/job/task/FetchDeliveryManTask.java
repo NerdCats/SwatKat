@@ -10,15 +10,18 @@ public class FetchDeliveryManTask extends JobTask{
     private String JobTaskStateString;
     private String State;
     private String Id;
-
-    public FetchDeliveryManTask(String jobTaskStateString, String state, String Id) {
+    private String Assigned;
+    public FetchDeliveryManTask(String jobTaskStateString, String state, String Id,String assigned) {
         super(JobTaskTypes.FETCH_DELIVERYMAN, "Fetching Delivery Guy");
         JobTaskStateString = jobTaskStateString;
         State = state;
         this.Id = Id;
+        this.Assigned=assigned;
         setType(JobTaskTypes.FETCH_DELIVERYMAN);
     }
-
+    public String getAssetRefId() {
+        return Assigned;
+    }
     public String getJobTaskStateString() {
         return JobTaskStateString;
     }
@@ -42,6 +45,7 @@ public class FetchDeliveryManTask extends JobTask{
     public Location getLocation() {
         return null;
     }
+
 
 
     @Override

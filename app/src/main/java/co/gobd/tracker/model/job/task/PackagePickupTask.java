@@ -11,14 +11,24 @@ public class PackagePickupTask extends JobTask {
     private String State;
     private Location From;
     private String Id;
+    private String AssetRefId;
 
-    public PackagePickupTask(String jobTaskStateString, String state, Location from, String Id) {
+    public PackagePickupTask(String jobTaskStateString, String state, Location from, String Id,String assetRefId) {
         super(JobTaskTypes.PACKAGE_PICKUP, "Picking Up Package");
         JobTaskStateString = jobTaskStateString;
         State = state;
         From = from;
         this.Id = Id;
+        this.AssetRefId=assetRefId;
         setType(JobTaskTypes.PACKAGE_PICKUP);
+    }
+
+    public String getAssetRefId() {
+        return AssetRefId;
+    }
+
+    public void setAssetRefId(String assetRefId) {
+        AssetRefId = assetRefId;
     }
 
     public String getId(){
@@ -51,6 +61,7 @@ public class PackagePickupTask extends JobTask {
         return "PackagePickupTask{" +
                 "JobTaskStateString='" + JobTaskStateString + '\'' +
                 ", State='" + State + '\'' +
+                ", Asset='" + AssetRefId + '\'' +
                 ", From=" + From +
                 '}';
     }

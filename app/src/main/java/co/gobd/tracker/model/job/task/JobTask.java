@@ -34,6 +34,7 @@ public abstract class JobTask{
 
     public abstract Location getLocation();
     public abstract String getId();
+    public abstract String getAssetRefId();
 
     @Override
     public String toString() {

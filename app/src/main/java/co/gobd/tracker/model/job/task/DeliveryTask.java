@@ -11,13 +11,15 @@ public class DeliveryTask extends JobTask{
     private String State;
     private Location To;
     private String Id;
+    private String AssetRefId;
 
-    public DeliveryTask(String jobTaskStateString, String state, Location to, String Id) {
+    public DeliveryTask(String jobTaskStateString, String state, Location to, String Id,String assetRefId) {
         super(JobTaskTypes.DELIVERY, "Delivering Package");
         JobTaskStateString = jobTaskStateString;
         State = state;
         To = to;
         this.Id = Id;
+        this.AssetRefId=assetRefId;
         setType(JobTaskTypes.DELIVERY);
     }
 
@@ -45,12 +47,20 @@ public class DeliveryTask extends JobTask{
         return To;
     }
 
+    public String getAssetRefId() {
+        return AssetRefId;
+    }
+
+    public void setAssetRefId(String assetRefId) {
+        AssetRefId = assetRefId;
+    }
 
     @Override
     public String toString() {
         return "DeliveryTask{" +
                 "JobTaskStateString='" + JobTaskStateString + '\'' +
                 ", State='" + State + '\'' +
+                ", Asset='" + AssetRefId + '\'' +
                 ", To=" + To +
                 '}';
     }

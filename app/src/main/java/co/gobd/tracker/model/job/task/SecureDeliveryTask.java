@@ -39,6 +39,11 @@ public class SecureDeliveryTask extends JobTask {
         return Id;
     }
 
+    @Override
+    public String getAssetRefId() {
+        return null;
+    }
+
     public Location getLocation(){
         return null;
     }
