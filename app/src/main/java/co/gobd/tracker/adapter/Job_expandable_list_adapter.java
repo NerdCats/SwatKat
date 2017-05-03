@@ -35,7 +35,7 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
     String PersonName,contact, Invoice,Area,items,NoteforAsset,Tasktypefrommain,address, seller;
 
     StringBuilder s;
-    int days;
+    int days,count;
     public Job_expandable_list_adapter(Context context,String task) {
         this.context = context;
         this.Tasktypefrommain=task;
@@ -85,16 +85,12 @@ convertView=null;
 
             if(Tasktypefrommain.equals("PackagePickUp"))
             {
-                 address = (jobModelList.get(listPosition).getOrder().getFrom().getAddress()).replace('\n',' ');
+                 address = (jobModelList.get(listPosition).getTasks().get(1).getLocation().getAddress()).replace('\n',' ');
             }
-             else address = (jobModelList.get(listPosition).getOrder().getTo().getAddress()).replace('\n',' ');
+             else address = (jobModelList.get(listPosition).getTasks().get(count-1).getLocation().getAddress()).replace('\n',' ');
             //Pattern wikiWordMatcher = Pattern.compile("^(?:\\+?88)?01[15-9]\\d{8}$");
 
-if(contact=="not")
-{
-    String[] tokens = address.split(",");
-    contact=tokens[1];
-}
+
 
 
 
@@ -240,14 +236,13 @@ if(Tasktypefrommain.equals("PackagePickUp")) {
     if (exists) {
         PersonName = jobModelList.get(listPosition).getOrder().getSellerInfo().getName();
 
-        contact = jobModelList.get(listPosition).getOrder().getSellerInfo().getPhoneNumber();
+
     } else {
         PersonName = jobModelList.get(listPosition).getUser().getUserName();
-        contact = "not";
-    }
-    Area = jobModelList.get(listPosition).getOrder().getFrom().getLocality();
-}
 
+    }
+    Area = jobModelList.get(listPosition).getTasks().get(1).getLocation().getLocality();
+}
 else {
     boolean exists = jobModelList.get(listPosition).getOrder().hasBuyerInfo();
     if (exists) {
@@ -261,13 +256,14 @@ else {
         }
 
         PersonName=PersonName.concat(" ( "+seller+" )");
-        contact = jobModelList.get(listPosition).getOrder().getBuyerInfo().getPhoneNumber();
+
     } else {
         String[] all=jobModelList.get(listPosition).getOrder().getTo().getAddress().split(",");
         PersonName = all[0];
-        contact = "not";
+
     }
-    Area = jobModelList.get(listPosition).getOrder().getTo().getLocality();
+     count=jobModelList.get(listPosition).getTasks().size();
+    Area = jobModelList.get(listPosition).getTasks().get(count-1).getLocation().getLocality();
 }
         if (convertView == null) {
 
