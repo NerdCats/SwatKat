@@ -53,7 +53,7 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
     List<JobModel> jobModelsingle;
     Job_expandable_list_adapter job_expandable_list_adapter;
     private Unbinder unbinder;
-    String TaskType, JobId,TaskId,TaskState,Status;
+    String TaskType, JobId,TaskId,TaskId2,TaskState,Status;
     RadioButton rd=null;
     int position;
     String[]Pickup={ "COMPLETED"};
@@ -185,8 +185,17 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
 
                    jobModelsingle=job_expandable_list_adapter.getAdapterData();
                     JobId=jobModelsingle.get(position).getId();
-                    if(TaskType.equals("PackagePickUp"))TaskId=jobModelsingle.get(position).getTasks().get(Constant.Task.PACKAGE_PICKUP).getId();
-                    else TaskId=jobModelsingle.get(position).getTasks().get(Constant.Task.DELIVERY).getId();
+                    int count=jobModelsingle.get(position).getTasks().size();
+                    if(TaskType.equals("PackagePickUp"))
+                    {
+                        TaskId=jobModelsingle.get(position).getTasks().get(0).getId();
+                    //    TaskId2=jobModelsingle.get(position).getTasks().get(Constant.Task.PACKAGE_PICKUP).getId();
+                    }
+                    else
+                    {
+                        TaskId=jobModelsingle.get(position).getTasks().get(count-1).getId();
+                        //TaskId2=jobModelsingle.get(position).getTasks().get(Constant.Task.DELIVERY).getId();
+                    }
                     tasksPresenter.updateTaskStateToCompleted(JobId,TaskId, getStatus());
                 }
 
