@@ -33,13 +33,13 @@ public class LocationDeserializer {
 
             Point point = new Point(type, coord);
 
-            Location location = new Location(point, address, locality);
+            Location location = new Location( address, locality);//Location location = new Location(point, address, locality); point is being removed
 
             return location;
         }
 
         Point point = new Point(type, null);
-        Location location = new Location(point, address, locality);
+        Location location = new Location( address, locality);
 
         return location;
 

@@ -33,8 +33,8 @@ public class Constant {
     }
 
     public static class Task {
-        public static final int PACKAGE_PICKUP = 1;
-        public static final int DELIVERY = 2;
+        public static final int PACKAGE_PICKUP = 0;
+        public static final int DELIVERY = 1;
 
         public static final String updateTaskState = "{\"value:\"\"COMPLETED\",\"path\":\"State\",\"op\":\"replace\"}";
 

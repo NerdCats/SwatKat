@@ -9,8 +9,8 @@ public class Location{
     private String Address;
     private String Locality;
 
-    public Location(Point point, String address, String locality) {
-        this.Point = point;
+    public Location( String address, String locality) {
+
         Address = address;
         this.Locality = locality;
     }

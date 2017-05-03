@@ -90,9 +90,9 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
     public Location getLocation(JsonObject jsonObject) {
 
         String address = jsonObject.get("Address").getAsString();
-        JsonObject jsonPoint = jsonObject.get("Point").getAsJsonObject();
+      //  JsonObject jsonPoint = jsonObject.get("Point").getAsJsonObject();
 
-        String type = jsonPoint.get("type").getAsString();
+      //  String type = jsonPoint.get("type").getAsString();
 
         String locality = null;
         boolean locExists = CheckJson.checkJsonKey(jsonObject, "Locality");
@@ -118,8 +118,8 @@ public class OrderDeserializer implements JsonDeserializer<Order> {
             return location;
         }*/
 
-        Point point = new Point(type, null);
-        Location location = new Location(point, address, locality);
+      //  Point point = new Point(type, null);
+        Location location = new Location( address, locality);
 
         return location;
 
