@@ -32,7 +32,7 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
 
     private Context context;
     private List<JobModel> jobModelList;
-    String PersonName,contact, Invoice,Area,items,NoteforAsset,Tasktypefrommain,address;
+    String PersonName,contact, Invoice,Area,items,NoteforAsset,Tasktypefrommain,address, seller;
 
     StringBuilder s;
     int days;
@@ -253,6 +253,14 @@ else {
     if (exists) {
         PersonName = jobModelList.get(listPosition).getOrder().getBuyerInfo().getName();
 
+        try{
+             seller=jobModelList.get(listPosition).getOrder().getSellerInfo().getName();
+        }catch (Exception e)
+        {
+
+        }
+
+        PersonName=PersonName.concat(" ( "+seller+" )");
         contact = jobModelList.get(listPosition).getOrder().getBuyerInfo().getPhoneNumber();
     } else {
         String[] all=jobModelList.get(listPosition).getOrder().getTo().getAddress().split(",");
