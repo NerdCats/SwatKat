@@ -97,6 +97,7 @@ public class TasksPresenter {
                 state, new PatchCallback() {
                     @Override
                     public void onPatchSuccess() {
+                        loadAdapterData();
                         tasksView.showTaskUpdateSuccessfulMsg();
                     }
 
@@ -107,6 +108,7 @@ public class TasksPresenter {
 
                     @Override
                     public void onConnectionError() {
+
                         tasksView.showConnectionError();
                     }
                 });
