@@ -107,11 +107,7 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
 
                 if(childPosition==1)
                 {
-                    String call= String.valueOf(v.getTag());
-
-                    boolean atleastOneAlpha = call.matches(".*[a-zA-Z]+.*");
-                    if(atleastOneAlpha)Toast.makeText(context,"Phone number not found",Toast.LENGTH_SHORT).show();
-                   else onCallClick(call);
+                    onCallHQClick();
                 }
                 if(childPosition==5)
                 {
@@ -210,11 +206,11 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
                                                   {
                                                       rd = (RadioButton) radioGroup.findViewById(checkedId);
                                                       setStatus(String.valueOf(rd.getText()));
-                                                      if(rd.getText().equals("FAILED")||rd.getText().equals("RETURNED"))
+                                                /*      if(rd.getText().equals("FAILED")||rd.getText().equals("RETURNED"))
                                                       {
                                                           lower.setVisibility(View.VISIBLE);
                                                       }
-                                                      else lower.setVisibility(View.GONE);
+                                                      else lower.setVisibility(View.GONE);*/
                                                   }
                                               }
         );
@@ -267,7 +263,9 @@ public void onBackPressed()
 
     @Override
     public void onCallHQClick() {
-
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:01735952047"));
+        startActivity(intent);
     }
     @Override
     public void showTaskUpdateError() {
