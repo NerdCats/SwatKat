@@ -9,6 +9,7 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 
 import co.gobd.tracker.model.job.User;
+import co.gobd.tracker.utility.CheckJson;
 
 /**
  * Created by fahad on 5/17/16.
@@ -27,7 +28,14 @@ public class UserDeserializer implements JsonDeserializer<User> {
         String Id = jsonObject.get("Id").getAsString();
         String Type = jsonObject.get("Type").getAsString();
         String Email = jsonObject.get("Email").getAsString();
-        String PhoneNumber = jsonObject.get("PhoneNumber").getAsString();
+        boolean phonenumberexists = CheckJson.checkJsonKey(jsonObject, "PhoneNumber");
+        String PhoneNumber = null;
+
+        if(phonenumberexists){
+            PhoneNumber = (jsonObject.get("PhoneNumber").isJsonNull()) ?
+                    null : jsonObject.get("PhoneNumber").getAsString();
+        }
+
 
         User = new User(UserName, Id, Type, Email,PhoneNumber);
         return User;
