@@ -21,6 +21,7 @@ import org.joda.time.format.ISODateTimeFormat;
 import java.util.List;
 
 import co.gobd.tracker.R;
+import co.gobd.tracker.model.TagModel;
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.model.job.order.PackageList;
 
@@ -32,7 +33,7 @@ public class Job_expandable_list_adapter extends BaseExpandableListAdapter {
 
     private Context context;
     private List<JobModel> jobModelList;
-    String PersonName,contact, Invoice,Area,items,NoteforAsset,Tasktypefrommain,address, seller;
+    String PersonName,contact, Invoice,Area,items,NoteforAsset,Tasktypefrommain,address, seller,tId,job;
 
     StringBuilder s;
     int days,count;
@@ -187,7 +188,21 @@ convertView=null;
                     .findViewById(R.id.child_list_item_job_date_text_view);
 
             expandedListTextView.setText("Update Task");
-            convertView.setTag(listPosition);
+
+         if(Tasktypefrommain.equals("PackagePickUp"))
+            {
+                tId=jobModelList.get(listPosition).getTasks().get(0).getId();
+                //    TaskId2=jobModelsingle.get(position).getTasks().get(Constant.Task.PACKAGE_PICKUP).getId();
+            }
+            else
+            {
+                tId=jobModelList.get(listPosition).getTasks().get(count-1).getId();
+                //TaskId2=jobModelsingle.get(position).getTasks().get(Constant.Task.DELIVERY).getId();
+            }
+            job=jobModelList.get(listPosition).getId();
+
+            TagModel tagModel=new TagModel(listPosition,tId,job);
+            convertView.setTag(tagModel);
 
         }
 
