@@ -4,15 +4,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ExpandableListView;
@@ -21,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,20 +27,23 @@ import butterknife.Unbinder;
 import co.gobd.tracker.R;
 import co.gobd.tracker.adapter.Job_expandable_list_adapter;
 import co.gobd.tracker.adapter.OnCallClickListener;
-import co.gobd.tracker.adapter.OnTaskUpdateClickListener;
 import co.gobd.tracker.application.GoAssetApplication;
+import co.gobd.tracker.controller.RealmController;
+import co.gobd.tracker.model.TagModel;
+import co.gobd.tracker.model.TaskStatusv2;
 import co.gobd.tracker.model.job.JobModel;
 import co.gobd.tracker.presenter.TasksPresenter;
-import co.gobd.tracker.ui.view.OnJobItemClickListener;
 import co.gobd.tracker.ui.view.TasksView;
-import co.gobd.tracker.utility.Constant;
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 public class TasksActivity extends AppCompatActivity implements TasksView,OnCallClickListener{
     @Inject
     TasksPresenter tasksPresenter;
     @Inject
     Context context;
-
+ArrayList<RealmResults<TaskStatusv2>> taskStatusArrayList=new ArrayList<>();
     @BindView(R.id.simple_expandable_listview)
     ExpandableListView jobView;
     @BindView(R.id.toolbar)
@@ -55,7 +54,10 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
     private Unbinder unbinder;
     String TaskType, JobId,TaskId,TaskId2,TaskState,Status;
     RadioButton rd=null;
+    TagModel tm;
     int position;
+    TaskStatusv2 taskStatus;
+    private Realm realm;
     String[]Pickup={ "COMPLETED"};
 
     String[]Delivery={ "COMPLETED","FAILED","RETURNED"};
@@ -67,6 +69,7 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
         //  overViewPresenter.initialise(this);
         TaskType=getIntent().getStringExtra("TaskType");
+        this.realm = RealmController.with(this).getRealm();
 
         setupToolbar();
         job_expandable_list_adapter = new Job_expandable_list_adapter(context,TaskType);
@@ -74,9 +77,7 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
         tasksPresenter.setInheritedTasktype(TaskType);
         tasksPresenter.loadAdapterData();
 
-    //    jobAdapter.setOnJobItemClickListener(this);
-    //    jobAdapter.setOnTaskUpdateClickListener(this);
-     //   jobAdapter.setOnCallClickListener(this);
+
 
         jobView.setGroupIndicator(null);
         jobView.setChildIndicator(null);
@@ -103,7 +104,7 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
         jobView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-
+                tm= (TagModel)v.getTag();
 
                 if(childPosition==1)
                 {
@@ -111,7 +112,7 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
                 }
                 if(childPosition==5)
                 {
-                    position=(int)v.getTag();
+
                     showServerLayout(TaskType);
                 }
                 return false;
@@ -134,6 +135,8 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
 
     @Override
     public void showServerLayout(String taskType) {
+
+
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
@@ -158,6 +161,9 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
         }
         else
         {
+            taskStatus=RealmController.getInstance().getOneStatus(tm.getJobid());
+            Boolean yes=  taskStatus.getState();
+            if(yes.equals(false))Delivery  = new String[]{"COMPLETED", "FAILED"};
             for (int i = 0; i < Delivery.length; i++) {
 
                 RadioButton checkBox = new RadioButton(context);
@@ -178,21 +184,17 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
                     Toast.makeText(context,"Select status first",Toast.LENGTH_SHORT).show();
                 }
                 else {
-
+                    position=tm.getPosition();
                    jobModelsingle=job_expandable_list_adapter.getAdapterData();
-                    JobId=jobModelsingle.get(position).getId();
+                    JobId=tm.getJobid();
                     int count=jobModelsingle.get(position).getTasks().size();
-                    if(TaskType.equals("PackagePickUp"))
+                    String serverstring=getStatus();
+                    tasksPresenter.updateTaskStateToCompleted(JobId,tm.getTask(), serverstring);
+                    if(serverstring.equals("RETURNED"))
                     {
-                        TaskId=jobModelsingle.get(position).getTasks().get(0).getId();
-                    //    TaskId2=jobModelsingle.get(position).getTasks().get(Constant.Task.PACKAGE_PICKUP).getId();
+                        RealmController.getInstance().Updaterow(tm.getJobid());
                     }
-                    else
-                    {
-                        TaskId=jobModelsingle.get(position).getTasks().get(count-1).getId();
-                        //TaskId2=jobModelsingle.get(position).getTasks().get(Constant.Task.DELIVERY).getId();
-                    }
-                    tasksPresenter.updateTaskStateToCompleted(JobId,TaskId, getStatus());
+
                 }
 
             }
@@ -216,6 +218,32 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
         );
 
     }
+    public void AdddatatoStatus(List<JobModel>jobModelList)
+    {
+        ArrayList<TaskStatusv2>taskStatuses=new ArrayList<>();
+        //int currentSize=RealmController.getInstance().getAllStatus().size();
+        //int finalSize=currentSize+jobModelList.size();
+        for( int i=0;i<jobModelList.size();i++)
+        {
+            TaskStatusv2 taskStatus=new TaskStatusv2();
+            if(RealmController.getInstance().checkIfExists(jobModelList.get(i).getId()))continue;
+           else taskStatus.setTaskId(jobModelList.get(i).getId());//storing common job id
+
+            taskStatuses.add(taskStatus);
+        }
+
+
+        for ( TaskStatusv2 taskStatus1: taskStatuses) {// Persist your data easily
+            realm.beginTransaction();
+
+
+
+    realm.copyToRealmOrUpdate(taskStatus1);
+
+            realm.commitTransaction();
+        }
+
+    }
     private void setupRecyclerView(Job_expandable_list_adapter jobAdapter) {
 
         jobView.setAdapter(jobAdapter);
@@ -236,7 +264,13 @@ if(getSupportActionBar()!=null) {
     public void setJobModelList(List<JobModel> jobModelList) {
         job_expandable_list_adapter.setAdapterData(jobModelList);
         if(jobModelList.size()!=0)
-        {  setupRecyclerView(job_expandable_list_adapter);
+        {
+            if(!TaskType.equals("PackagePickUp"))
+            {
+                AdddatatoStatus(jobModelList);
+            }
+
+          setupRecyclerView(job_expandable_list_adapter);
 
         }
     }

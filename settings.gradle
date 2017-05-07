@@ -1,2 +1,3 @@
+include ':realm-android'
 include ':go-asset'
 project(':go-asset').projectDir = new File('app')
