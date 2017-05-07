@@ -98,7 +98,7 @@ convertView=null;
             if (convertView == null) {
                 LayoutInflater layoutInflater = (LayoutInflater) this.context
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = layoutInflater.inflate(R.layout.job_details_with_icon, null);
+                convertView = layoutInflater.inflate(R.layout.job_details_with_iconfooter, null);
             }
             TextView expandedListTextView = (TextView) convertView
                     .findViewById(R.id.child_list_item_job_date_text_view);

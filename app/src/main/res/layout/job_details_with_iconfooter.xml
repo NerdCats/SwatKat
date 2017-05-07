@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:background="#f6fcff">
+    <ImageView
+        android:layout_width="30dp"
+        android:id="@+id/child_icon"
+        android:layout_height="30dp"
+        android:scaleType="centerInside"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+<TextView
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:gravity="bottom"
+    android:layout_marginEnd="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginStart="28dp"
+    android:layout_marginLeft="28dp"
+    android:layout_below="@id/child_icon"
+    style="@style/Base.TextAppearance.AppCompat.Small"
+    android:text="Call"
+    android:textColor="@color/material_black"/>
+
+    <TextView
+        android:id="@+id/child_list_item_job_date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textColor="@color/material_black"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/child_icon"
+        android:layout_toEndOf="@+id/child_icon"
+        android:text="Crime DateCrime DateCrime DateCrime DateCrime DateCrime DateCrime DateCrime DateCrime DateCrime Date" />
+
+
+</RelativeLayout>
