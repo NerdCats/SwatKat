@@ -1,5 +1,6 @@
 package co.gobd.tracker.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -43,6 +44,7 @@ public class TasksActivity extends AppCompatActivity implements TasksView,OnCall
     TasksPresenter tasksPresenter;
     @Inject
     Context context;
+    ProgressDialog progressDialog;
 ArrayList<RealmResults<TaskStatusv2>> taskStatusArrayList=new ArrayList<>();
     @BindView(R.id.simple_expandable_listview)
     ExpandableListView jobView;
@@ -277,7 +279,8 @@ if(getSupportActionBar()!=null) {
 
     @Override
     public void showConnectionError() {
-
+Toast.makeText(getApplicationContext(),"Please try again",Toast.LENGTH_SHORT
+).show();
     }
 @Override
 public void onBackPressed()
@@ -294,7 +297,23 @@ public void onBackPressed()
         intent.setData(Uri.parse(totalp));
         startActivity(intent);
     }
+    @Override
+    public void startProgress() {
+        progressDialog = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Downloading Jobs... ");
+        progressDialog.show();
+    }
+    @Override
+    public void stopProgress() {
+        progressDialog.dismiss();
 
+    }
+    @Override
+    public void stopProgresswithmessage() {
+        progressDialog.dismiss();
+        Toast.makeText(getApplicationContext(),"Please try again",Toast.LENGTH_SHORT).show();
+    }
     @Override
     public void onCallHQClick() {
         Intent intent = new Intent(Intent.ACTION_DIAL);

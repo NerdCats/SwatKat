@@ -10,10 +10,10 @@ import co.gobd.tracker.model.job.JobModel;
 
 public interface TasksView {
     void setJobModelList(List<JobModel> jobModelList);
-   /* void startProgress();
-    void stopProgress();
+   void startProgress();
+    void stopProgresswithmessage();
 
-    void stopSwipRefresh();*/
+    void stopProgress();
 
     void showTaskUpdateSuccessfulMsg();
 

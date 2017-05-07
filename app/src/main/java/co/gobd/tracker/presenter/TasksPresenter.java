@@ -53,6 +53,7 @@ public class TasksPresenter {
 
 
     public void loadAdapterData() {
+        tasksView.startProgress();
 
         jobService.getAssignedJobList(sessionManager.getBearer(),
                 sessionManager.getAssetId(),Constant.JobTaskState.IN_PROGRESS,getInheritedTasktype(), new JobCallback() {
@@ -61,6 +62,7 @@ public class TasksPresenter {
                     @Override
                     public void onGetJobSuccess(AssignedJob assignedJob) {
                         if (assignedJob != null) {
+                            tasksView.stopProgress();
                             jobModelList = assignedJob.getJobModelList();
                             tasksView.setJobModelList(jobModelList);
 
@@ -69,11 +71,12 @@ public class TasksPresenter {
 
                     @Override
                     public void onGetJobFailure() {
-
+                        tasksView.stopProgresswithmessage();
                     }
 
                     @Override
                     public void onConnectionError() {
+                        tasksView.stopProgresswithmessage();
 
                         Log.d("err","connectionerror");
                     }
