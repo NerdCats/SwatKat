@@ -86,7 +86,7 @@ convertView=null;
 
             if(Tasktypefrommain.equals("PackagePickUp"))
             {
-                 address = (jobModelList.get(listPosition).getTasks().get(1).getLocation().getAddress()).replace('\n',' ');
+                 address = (jobModelList.get(listPosition).getTasks().get(0).getLocation().getAddress()).replace('\n',' ');
             }
              else address = (jobModelList.get(listPosition).getTasks().get(count-1).getLocation().getAddress()).replace('\n',' ');
             //Pattern wikiWordMatcher = Pattern.compile("^(?:\\+?88)?01[15-9]\\d{8}$");
