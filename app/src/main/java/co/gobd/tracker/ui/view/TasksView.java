@@ -12,7 +12,7 @@ public interface TasksView {
     void setJobModelList(List<JobModel> jobModelList);
    void startProgress();
     void stopProgresswithmessage();
-
+     void showEmpty();
     void stopProgress();
 
     void showTaskUpdateSuccessfulMsg();

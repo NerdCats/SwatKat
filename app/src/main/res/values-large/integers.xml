@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="quantity_length">12</integer>
+    <integer name="taskweightlow">2</integer>
+    <integer name="taskweighttop">1</integer>
+</resources>

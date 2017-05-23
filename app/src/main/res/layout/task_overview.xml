@@ -24,14 +24,13 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:weightSum="2"
             android:paddingBottom="10dp"
             android:layout_height="fill_parent">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-
+                android:layout_weight="@integer/taskweighttop"
                 android:background="@drawable/shadow_drop_express">
 
                 <TextView
@@ -44,7 +43,7 @@
                     android:gravity="top|start"
                     android:padding="@dimen/paddingforsmalls"
                     android:text="এক্সপ্রেস ডেলিভারি"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textSize="@dimen/largetext"
                     android:textColor="#ffffff"
                     android:textStyle="bold" />
 
@@ -58,7 +57,7 @@
 
                     android:padding="@dimen/paddingforsmalls"
                     android:text="শেষ :  "
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textSize="@dimen/smalltext"
                     android:textColor="#ffffff" />
 
                 <TextView
@@ -68,7 +67,7 @@
 
                     android:padding="@dimen/paddingforsmalls"
                     android:text="হয় নাই : "
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textSize="@dimen/smalltext"
                     android:textColor="#ffffff" />
 
 
@@ -76,7 +75,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="@integer/taskweightlow"
                 android:background="#fbfcf9"
                 android:padding="3dp"
                 android:gravity="end|center">
@@ -112,7 +111,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:weightSum="2"
+        android:weightSum="3"
         android:paddingBottom="10dp"
         android:layout_height="fill_parent">
 
@@ -121,6 +120,7 @@
             android:id="@+id/pickuplayout"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_weight="@integer/taskweighttop"
             android:background="@drawable/shadow_drop">
 
             <TextView
@@ -132,7 +132,7 @@
                 android:gravity="top|start"
                 android:padding="@dimen/paddingforsmalls"
                 android:text="পিক আপ "
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="@dimen/largetext"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
@@ -145,7 +145,7 @@
 
                 android:padding="@dimen/paddingforsmalls"
                 android:text="শেষ : "
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textSize="@dimen/smalltext"
                 android:textColor="#ffffff" />
 
             <TextView
@@ -155,7 +155,7 @@
                 android:layout_below="@id/pickupattempted"
                 android:padding="@dimen/paddingforsmalls"
                 android:text="হয় নাই : "
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textSize="@dimen/smalltext"
                 android:textColor="#ffffff" />
 
 
@@ -168,7 +168,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="@integer/taskweightlow"
             android:background="#fbfcf9"
             android:gravity="end|center"
             android:padding="5dp">
@@ -206,28 +206,31 @@
         android:orientation="vertical"
         android:layout_weight="1"
         android:paddingBottom="10dp"
-        android:weightSum="2"
+        android:weightSum="3"
 
         android:layout_height="fill_parent">
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/shadow_drop_delivery">
+            android:layout_weight="@integer/taskweighttop"
+            android:background="@drawable/shadow_drop_delivery"
+            android:orientation="vertical">
+
             <TextView
 
+                android:id="@+id/deliverybtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/deliverybtn"
                 android:background="#8BC34A"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
                 android:gravity="top|start"
                 android:padding="@dimen/paddingforsmalls"
                 android:text="ডেলিভারি"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-
+                android:textSize="@dimen/largetext"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
 
 
             <TextView
@@ -239,7 +242,7 @@
 
                 android:padding="@dimen/paddingforsmalls"
                 android:text="শেষ :  "
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textSize="@dimen/smalltext"
                 android:textColor="#ffffff" />
 
             <TextView
@@ -249,21 +252,15 @@
                 android:layout_below="@id/deliveryattempted"
                 android:padding="@dimen/paddingforsmalls"
                 android:text="হয় নাই :"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textSize="@dimen/smalltext"
                 android:textColor="#ffffff" />
 
 
-
-
-
-
-
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="@integer/taskweightlow"
             android:background="#fbfcf9"
             android:gravity="end|center"
             android:padding="5dp">
@@ -292,7 +289,6 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:text="-- " />
         </LinearLayout>
-
     </LinearLayout>
 
 

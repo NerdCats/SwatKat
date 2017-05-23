@@ -189,7 +189,7 @@ ArrayList<RealmResults<TaskStatusv2>> taskStatusArrayList=new ArrayList<>();
                     position=tm.getPosition();
                    jobModelsingle=job_expandable_list_adapter.getAdapterData();
                     JobId=tm.getJobid();
-                    int count=jobModelsingle.get(position).getTasks().size();
+
                     String serverstring=getStatus();
                     tasksPresenter.updateTaskStateToCompleted(JobId,tm.getTask(), serverstring);
                     if(serverstring.equals("RETURNED"))
@@ -275,6 +275,9 @@ if(getSupportActionBar()!=null) {
           setupRecyclerView(job_expandable_list_adapter);
 
         }
+        else {
+            showEmpty();
+        }
     }
 
     @Override
@@ -308,6 +311,10 @@ public void onBackPressed()
     public void stopProgress() {
         progressDialog.dismiss();
 
+    }
+    @Override
+    public void showEmpty() {
+       Toast.makeText(getApplicationContext(),"No jobs available for you this time!",Toast.LENGTH_SHORT).show();
     }
     @Override
     public void stopProgresswithmessage() {
