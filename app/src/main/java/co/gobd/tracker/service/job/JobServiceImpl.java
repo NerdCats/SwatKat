@@ -25,14 +25,14 @@ public class JobServiceImpl implements JobService {
     @Override
     public void getAssignedJobList(String bearer, String assetId, String jobStateUpto,String Tasktype, final JobCallback callback) {
 
-        String appended="(Tasks/any(task: task/State eq '"+jobStateUpto+"' and Task/Type eq '"+Tasktype+"' and task/AssetRef eq '"+assetId+"'))&pageSize=50&page=0&sortDirection=Desc";
+        String appended="(Tasks/any(task: task/State eq '"+jobStateUpto+"' and Task/Type eq '"+Tasktype+"' and task/AssetRef eq '"+assetId+"'))&pageSize=30&page=0&sortDirection=Desc";
        // Call<AssignedJob> call = jobApi.getAssignedJobs(bearer, assetId, appended);
         Call<AssignedJob> call = jobApi.getAssignedJobsOdata(bearer, appended);
         call.enqueue(new Callback<AssignedJob>() {
             @Override
             public void onResponse(Call<AssignedJob> call, Response<AssignedJob> response) {
                 if (response.isSuccess()) {
-                    Log.i(TAG, response.body().toString());
+                    Log.i("Mity", response.body().toString());
                     callback.onGetJobSuccess(response.body());
                 } else {
                     callback.onGetJobFailure();
@@ -42,6 +42,7 @@ public class JobServiceImpl implements JobService {
             @Override
             public void onFailure(Call<AssignedJob> call, Throwable t) {
                 Log.getStackTraceString(t);
+
                 callback.onConnectionError();
             }
         });
@@ -49,10 +50,10 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void updateTaskState(String bearer, String jobId, String taskId, UpdateTaskState[] updateTaskState,
+    public void updateTaskState(String bearer,double lat,double lon, String jobId, String taskId, UpdateTaskState[] updateTaskState,
                                 final PatchCallback callback) {
 
-        Call<Void> call = jobApi.patchTaskState(bearer, jobId, taskId, updateTaskState);
+        Call<Void> call = jobApi.patchTaskState(bearer,lat,lon, jobId, taskId, updateTaskState);
 
         call.enqueue(new Callback<Void>() {
             @Override

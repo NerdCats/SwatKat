@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ExpandableListView;
@@ -16,6 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.model.LatLng;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +39,10 @@ import co.gobd.tracker.controller.RealmController;
 import co.gobd.tracker.model.TagModel;
 import co.gobd.tracker.model.TaskStatusv2;
 import co.gobd.tracker.model.job.JobModel;
+import co.gobd.tracker.model.tracker.LocationModel;
 import co.gobd.tracker.presenter.TasksPresenter;
+import co.gobd.tracker.ui.service.LocationService;
+import co.gobd.tracker.ui.service.LocationServiceEvent;
 import co.gobd.tracker.ui.view.TasksView;
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -58,10 +67,12 @@ ArrayList<RealmResults<TaskStatusv2>> taskStatusArrayList=new ArrayList<>();
     RadioButton rd=null;
     TagModel tm;
     int position;
+     ProgressDialog progress;
     TaskStatusv2 taskStatus;
+    LatLng goBD;
     private Realm realm;
     String[]Pickup={ "COMPLETED"};
-
+    private EventBus bus = EventBus.getDefault();
     String[]Delivery={ "COMPLETED","FAILED","RETURNED"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +81,7 @@ ArrayList<RealmResults<TaskStatusv2>> taskStatusArrayList=new ArrayList<>();
         unbinder = ButterKnife.bind(this);
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
         //  overViewPresenter.initialise(this);
+        bus.register(this);
         TaskType=getIntent().getStringExtra("TaskType");
         this.realm = RealmController.with(this).getRealm();
 
@@ -186,12 +198,14 @@ ArrayList<RealmResults<TaskStatusv2>> taskStatusArrayList=new ArrayList<>();
                     Toast.makeText(context,"Select status first",Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    startLocationService();
+
                     position=tm.getPosition();
                    jobModelsingle=job_expandable_list_adapter.getAdapterData();
                     JobId=tm.getJobid();
 
                     String serverstring=getStatus();
-                    tasksPresenter.updateTaskStateToCompleted(JobId,tm.getTask(), serverstring);
+
                     if(serverstring.equals("RETURNED"))
                     {
                         RealmController.getInstance().Updaterow(tm.getJobid());
@@ -219,6 +233,33 @@ ArrayList<RealmResults<TaskStatusv2>> taskStatusArrayList=new ArrayList<>();
                                               }
         );
 
+    }
+    private void startLocationService() {
+        progress = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        progress.setIndeterminate(true);
+        progress.setMessage("Fetching Location... ");
+        progress.show();
+        Intent intent = new Intent(this, LocationServiceEvent.class);
+        startService(intent);
+    }
+
+    private void stopLocationService() {
+        progress.dismiss();
+        Intent intent = new Intent(this, LocationServiceEvent.class);
+        stopService(intent);
+    }
+    @Subscribe
+    public void onEvent(LocationModel event){
+         goBD=new LatLng(event.getLat(),event.getLon());
+        //  CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(goBD, 16);
+        //  mMap.addMarker(new MarkerOptions().position(goBD).title("Marker in GoBD"));
+        Log.d("Location: ", "Latitude: " + event.getLat() + "Longitude:" + event.getLon());
+
+      //  Toast.makeText(TasksActivity.this,"Location:  56Latitude: " + event.getLat() + "Longitude:" + event.getLon(),Toast.LENGTH_SHORT).show();
+        stopLocationService();
+
+        //mMap.animateCamera(cameraUpdate);
+        tasksPresenter.updateTaskStateToCompleted(JobId,goBD.latitude,goBD.longitude,tm.getTask(), getStatus());
     }
     public void AdddatatoStatus(List<JobModel>jobModelList)
     {

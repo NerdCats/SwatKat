@@ -23,7 +23,7 @@ public interface JobApi {
                                       @Path("userId") String userId, @Query("jobStateUpto") String jobStateUpto);
 
     @PATCH(BackendUrl.TaskCat.PATCH_TASK_STATE)
-    Call<Void> patchTaskState(@Header("Authorization") String bearer, @Path("jobId") String jobId,
+    Call<Void> patchTaskState(@Header("Authorization") String bearer,@Header("Latitude") double lat,@Header("Longitude") double lon, @Path("jobId") String jobId,
                               @Path("taskId") String taskId,
                               @Body UpdateTaskState[] updateTaskState);
 }

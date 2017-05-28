@@ -1,6 +1,7 @@
 package co.gobd.tracker.presenter;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 
 import co.gobd.tracker.model.job.AssignedJob;
 import co.gobd.tracker.model.job.JobModel;
+import co.gobd.tracker.model.job.Location;
 import co.gobd.tracker.model.job.UpdateTaskState;
 import co.gobd.tracker.service.job.JobCallback;
 import co.gobd.tracker.service.job.JobService;
@@ -67,6 +69,7 @@ public class TasksPresenter {
                             tasksView.setJobModelList(jobModelList);
 
                         }
+
                     }
 
                     @Override
@@ -91,12 +94,12 @@ public class TasksPresenter {
         tasksViewWeakReference = null;
     }
 
-  public void updateTaskStateToCompleted(String jobId, String taskId,String status) {
+  public void updateTaskStateToCompleted(String jobId,double lat,double lon, String taskId,String status) {
 
 
         UpdateTaskState[] state = {new UpdateTaskState("replace", "State", status)};
 
-        jobService.updateTaskState(sessionManager.getBearer(), jobId, taskId,
+        jobService.updateTaskState(sessionManager.getBearer(),lat,lon,jobId, taskId,
                 state, new PatchCallback() {
                     @Override
                     public void onPatchSuccess() {
