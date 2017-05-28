@@ -37,6 +37,10 @@
             android:enabled="true"
             android:exported="false" />
 
+        <service
+            android:name=".ui.service.LocationServiceEvent"
+            android:enabled="true"
+            android:exported="false" />
         <activity android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait">
 

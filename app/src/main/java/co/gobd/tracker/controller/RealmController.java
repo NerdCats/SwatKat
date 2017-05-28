@@ -3,8 +3,11 @@ package co.gobd.tracker.controller;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Fragment;
+import android.location.Location;
 
 import co.gobd.tracker.model.TaskStatusv2;
+import co.gobd.tracker.model.tracker.LocationMod;
+import co.gobd.tracker.model.tracker.LocationModel;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -70,9 +73,9 @@ public class RealmController {
     }
 
     //find all objects in the Book.class
-    public RealmResults<TaskStatusv2> getAllStatus() {
+    public RealmResults<LocationMod> getAllLocations() {
 
-        return realm.where(TaskStatusv2.class).findAll();
+        return realm.where(LocationMod.class).distinct("lat","lon");
     }
 
     //query a single item with the given id

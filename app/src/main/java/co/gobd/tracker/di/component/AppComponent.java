@@ -12,6 +12,7 @@ import co.gobd.tracker.ui.activity.SignUpActivity;
 import co.gobd.tracker.ui.activity.TasksActivity;
 import co.gobd.tracker.ui.activity.TasksOverviewActivity;
 import co.gobd.tracker.ui.service.LocationService;
+import co.gobd.tracker.ui.service.LocationServiceEvent;
 import dagger.Component;
 
 /**
@@ -24,6 +25,7 @@ public interface AppComponent {
     void inject(GoAssetApplication target);
 
     void inject(LocationService target);
+    void inject(LocationServiceEvent target);
 
     void inject(LoginActivity target);
 
