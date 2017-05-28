@@ -78,7 +78,7 @@ public class MainPresenter {
 
     public void updateTaskStateToCompleted(String jobId, String taskId) {
 
-        UpdateTaskState[] state = {new UpdateTaskState("replace", "State", "COMPLETED")};
+      /*  UpdateTaskState[] state = {new UpdateTaskState("replace", "State", "COMPLETED")};
 
         jobService.updateTaskState(sessionManager.getBearer(), jobId, taskId,
                 state, new PatchCallback() {
@@ -97,6 +97,6 @@ public class MainPresenter {
                         mainView.showConnectionError();
                     }
                 });
+    }*/
     }
-
 }

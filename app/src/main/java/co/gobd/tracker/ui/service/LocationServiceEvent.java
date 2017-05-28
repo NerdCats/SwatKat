@@ -1,12 +1,5 @@
 package co.gobd.tracker.ui.service;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -24,22 +17,26 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+
 import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
 import co.gobd.tracker.R;
 import co.gobd.tracker.application.GoAssetApplication;
-import co.gobd.tracker.controller.RealmController;
 import co.gobd.tracker.model.tracker.LocationMod;
 import co.gobd.tracker.model.tracker.LocationModel;
-import co.gobd.tracker.service.tracker.TrackerCallback;
 import co.gobd.tracker.service.tracker.TrackerService;
 import co.gobd.tracker.ui.activity.MainActivity;
 import co.gobd.tracker.utility.SessionManager;
 import io.realm.Realm;
 
-public class LocationService extends Service
+public class LocationServiceEvent extends Service
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
@@ -47,7 +44,7 @@ public class LocationService extends Service
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
             UPDATE_INTERVAL_IN_MILLISECONDS / 2;
 
-    private static final String LOG_TAG = LocationService.class.getSimpleName();
+    private static final String LOG_TAG = LocationServiceEvent.class.getSimpleName();
     public static Location mCurrentLocation;
     @Inject
     TrackerService trackerService;
@@ -58,19 +55,17 @@ public class LocationService extends Service
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
 
-    private Realm realm;
-    LocationMod locationMod;
-    private Boolean loc=true;
     SharedPreferences prefs;
+    private EventBus bus = EventBus.getDefault();
     @Override
     public void onCreate() {
         // Injects the dependency
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
 
         buildGoogleApiClient();
-        this.realm = Realm.getDefaultInstance();
         mGoogleApiClient.connect();
-         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+
     }
 
     @Override
@@ -107,7 +102,7 @@ public class LocationService extends Service
         mGoogleApiClient.disconnect();
         String message = "Location service stopped";
         Log.i(LOG_TAG, message);
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
     protected void startLocationUpdates() {
 
@@ -173,19 +168,10 @@ public class LocationService extends Service
     @Override
     public void onLocationChanged(Location location) {
         LocationModel event = null;
-        double distance=mCurrentLocation.distanceTo(location);
-            loc= prefs.getBoolean("locationstored", true);
-        if (distance>10||loc) {
             mCurrentLocation = location;
-            realm.beginTransaction();
-            locationMod = realm.createObject(LocationMod.class);
-            locationMod.setLat(String.valueOf(mCurrentLocation.getLatitude()));
-            locationMod.setLon(String.valueOf(mCurrentLocation.getLongitude()));
-            realm.commitTransaction();
-            Log.d("Inserted","loc");
             String assetId = sessionManager.getAssetId();
             String name = sessionManager.getUsername();
-
+            event=new LocationModel(mCurrentLocation.getLatitude(),mCurrentLocation.getLongitude());
        /* trackerService.sendLocation(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude(),
                 assetId, name, new TrackerCallback() {
 
@@ -204,11 +190,10 @@ public class LocationService extends Service
                         Toast.makeText(context, R.string.message_connection_error, Toast.LENGTH_SHORT).show();
                     }
                 });*/
-
-
-            prefs.edit().putBoolean("locationstored", false).apply();
+            bus.post(event);
+        onDestroy();
             Log.d("Inserted","ex");
         }
 
     }
-}
+

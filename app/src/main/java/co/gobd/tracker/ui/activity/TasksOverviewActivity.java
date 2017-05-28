@@ -12,12 +12,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -29,8 +39,15 @@ import butterknife.Unbinder;
 import co.gobd.tracker.R;
 import co.gobd.tracker.adapter.JobAdapter;
 import co.gobd.tracker.application.GoAssetApplication;
+import co.gobd.tracker.controller.RealmController;
+import co.gobd.tracker.model.TaskStatusv2;
+import co.gobd.tracker.model.tracker.LocationMod;
+import co.gobd.tracker.model.tracker.LocationModel;
+import co.gobd.tracker.ui.service.LocationService;
 import co.gobd.tracker.ui.view.TasksoverView;
 import co.gobd.tracker.utility.SessionManager;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by Mr. Maps on 4/17/2017.
@@ -56,17 +73,22 @@ public class TasksOverviewActivity extends AppCompatActivity implements Tasksove
     @BindView(R.id.navigation_view)
     NavigationView navigationView;
 
-
+    private EventBus bus = EventBus.getDefault();
     private ActionBarDrawerToggle drawerToggle;
     private Unbinder unbinder;
-
+  RealmResults<LocationMod>list;
+    String s;
+    private Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
+
         ((GoAssetApplication) getApplication()).getComponent().inject(this);
        //  overViewPresenter.initialise(this);
+        this.realm = RealmController.with(TasksOverviewActivity.this).getRealm();
+
         setupToolbar();
 
         setupNavigationDrawer();
@@ -75,6 +97,14 @@ public class TasksOverviewActivity extends AppCompatActivity implements Tasksove
         setupNavigationHeaderView(sessionManager.getUsername());
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+    @Override
+    protected void onDestroy() {
+        // Unregister
+        bus.unregister(this);
+        super.onDestroy();
+    }
+
     private void setupNavigationHeaderView(String assetName) {
         View headerLayout = navigationView.getHeaderView(0);
         TextView tvAssetName = ButterKnife.findById(headerLayout, R.id.nav_header_asset_name);
@@ -92,9 +122,32 @@ public class TasksOverviewActivity extends AppCompatActivity implements Tasksove
 
                 break;
             case R.id.expresslayout:
-                Toast.makeText(this,"Express",Toast.LENGTH_SHORT).show();
+                list=RealmController.getInstance().getAllLocations();
+                int k=list.size();
+                StringBuffer path = new StringBuffer();
+
+                for(int i=0;i<list.size();i++)
+                {
+                    String lat= String.valueOf(list.get(i).getLat());
+                    String lon= String.valueOf(list.get(i).getLon());
+                    s =null;
+                    s=lat+','+lon;
+                    path.append(s).append('|');
+                }
+                path.deleteCharAt(path.length()-1);
+                Log.d("path",path.toString());
+                Toast.makeText(this,"path "+path.toString(),Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+    private void startLocationService() {
+        Intent intent = new Intent(this, LocationService.class);
+        startService(intent);
+    }
+
+    private void stopLocationService() {
+        Intent intent = new Intent(this, LocationService.class);
+        stopService(intent);
     }
     private void setupToolbar() {
         setSupportActionBar(toolbar);
@@ -118,7 +171,11 @@ public class TasksOverviewActivity extends AppCompatActivity implements Tasksove
 
         switch (item.getItemId()) {
             case R.id.nav_logout:
+                stopLocationService();
                 logout();
+                break;
+            case R.id.nav_track:
+                startLocationService();
                 break;
             /*case R.id.nav_about:
                 //TODO: Use About Libraries for hassle free about page
@@ -149,6 +206,7 @@ public class TasksOverviewActivity extends AppCompatActivity implements Tasksove
         return new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open,
                 R.string.drawer_close);
     }
+
 
 
 

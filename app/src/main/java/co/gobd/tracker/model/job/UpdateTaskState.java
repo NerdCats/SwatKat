@@ -8,11 +8,16 @@ public class UpdateTaskState {
     private String value;
     private String path;
 
+
+
     public UpdateTaskState(String op, String path, String value) {
         this.op = op;
         this.path = path;
         this.value = value;
+
     }
+
+
 
     public String getOp() {
         return op;
