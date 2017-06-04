@@ -235,7 +235,7 @@ ArrayList<RealmResults<TaskStatusv2>> taskStatusArrayList=new ArrayList<>();
 
     }
     private void startLocationService() {
-        progress = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        progress = new ProgressDialog(TasksActivity.this, R.style.AppTheme_Dark_Dialog);
         progress.setIndeterminate(true);
         progress.setMessage("Fetching Location... ");
         progress.show();
@@ -343,7 +343,7 @@ public void onBackPressed()
     }
     @Override
     public void startProgress() {
-        progressDialog = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        progressDialog = new ProgressDialog(TasksActivity.this, R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Downloading Jobs... ");
         progressDialog.show();
